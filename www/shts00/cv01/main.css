@@ -1,0 +1,19 @@
+.business-card {
+    display: flex;
+    flex-flow: row wrap;
+    max-width: 400px;
+    border: 2px solid salmon;
+    padding: 20px;
+}
+.bc-name  {
+    font-size: 1.5em;
+    padding-bottom: 5%;
+    font-weight: bold;
+}
+.bc-img img {
+    width: 200px;
+}
+h1 {
+    font-weight: bold;
+    font-size: 24px;
+}
