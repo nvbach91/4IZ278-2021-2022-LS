@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+body,
+html {
+	margin: 0;
+	padding: 0;
+	max-width: 100%;
+	font-family: "Montserrat", sans-serif;
+}
+
+.card {
+	width: 500px;
+	height: 250px;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	background-color: #4caf50;
+	padding: 30px;
+	border-radius: 25px;
+	margin: 0 auto;
+	margin-top: 50px;
+	-webkit-box-shadow: 5px 5px 15px 6px rgba(0, 0, 0, 0.43);
+	box-shadow: 5px 5px 15px 6px rgba(0, 0, 0, 0.43);
+	color: white;
+	position: relative;
+	overflow: hidden;
+}
+.card img {
+	width: 150px;
+	margin: 0 0 0 50px;
+}
+
+h1 {
+	font-size: 30px;
+	margin: 0;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+h3 {
+	font-size: 16px;
+	margin: 10px 0;
+	font-weight: 400;
+}
+
+a {
+	font-size: 16px;
+	text-decoration: none;
+	color: white;
+	display: block;
+	margin: 10px 0;
+}
+
+.main-info {
+	margin: 0 50px 0 50px;
+}
+
+.back {
+	background-color: #333;
+}
+
+.back h1:nth-of-type(2) {
+	color: #4caf50;
+}
+
+.detail-info {
+	border-left: solid 2px #4caf50;
+	padding-left: 20px;
+}
+
+.object {
+	position: absolute;
+	background-color: #333;
+	width: 300px;
+	height: 150px;
+}
+
+.left {
+	top: 0;
+	left: -150px;
+	transform: rotate(-55deg);
+}
+
+.right {
+	display: none;
+}
+
+.detail-info i {
+	font-size: 16px;
+	margin-right: 8px;
+}
