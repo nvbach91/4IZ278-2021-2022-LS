@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+
+.business-card {
+    width: 450px;
+    height: 210px;
+    background-color: pink;
+    padding: 20px;
+}
+
+.bc-name {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.bc-availability {
+    color: darkgrey;
+}
+
+.left {
+    float: left;
+    width: 40%;
+}
+
+.left .bc-img img{
+    width: 80%;
+}
+
+.right {
+    float: right;
+    width: 60%;
+}
