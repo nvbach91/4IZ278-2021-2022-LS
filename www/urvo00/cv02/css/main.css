@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.business-card {
+    padding: 30px;
+    background-color: pink;
+    max-width: 600px;
+    margin: 20px auto;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.bc-name {
+    line-height: 1.2em;
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+.bc-company {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.bc-address {
+    font-weight: bold;
+}
