@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+   font-family:Arial, Helvetica, sans-serif;
+   margin:auto;
+   max-width: 500px;
+   text-align: center;
+}
+
+.business-card {
+    width: 500px;
+    height: 350px;
+    background-color: rgb(136, 204, 204);
+    padding: 20px;
+}
+
+.business-card:hover{
+    background-color: rgb(68, 146, 146);
+    transition: 0.5s;
+}
+
+.business-card a{
+    text-decoration: none;
+}
+
+
+.bc-name{
+    font-size: 28px;
+}
+
+.bc-logo img {
+    width: 200px;
+    height: auto;
+}
+
+.bc-available{
+    padding-top: 10px;
+    font-weight: 400;
+}
