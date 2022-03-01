@@ -1,0 +1,52 @@
+body {
+    padding: 20px;
+    margin: 0;
+}
+
+.card__container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.card__container .card:not(:last-child) {
+    margin-right: 20px;
+}
+
+.card {
+    transition: .2s box-shadow ease-in-out;
+    padding: 25px;
+    border-radius: 15px;
+    background-color: #f2f2f2;
+    border: 1px solid #e8e8e8;
+    width: 400px;
+    flex-shrink: 0;
+    margin-bottom: 20px;
+}
+
+.card .card__section:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.card .card__section .card__section__item:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+.card .card__section .card__section__item.card__section__item--name {
+    font-size: 2em;
+}
+
+.card .card__section .card__section__item.card__section__item--position {
+    font-size: 1.5em;
+}
+
+.card .card__section .card__section__item.card__section__item--company {
+    font-size: 0.8em;
+}
+
+.card .card__section .card__section__item.card__section__item--status.card__section__item--opened {
+    color: green;
+}
+
+.card .card__section .card__section__item.card__section__item--status.card__section__item--not-opened {
+    color: darkgrey;
+}
