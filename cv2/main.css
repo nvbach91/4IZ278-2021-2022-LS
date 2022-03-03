@@ -1,0 +1,14 @@
+.my-card{
+    padding-top: 30px;
+    background-color: lightblue;
+    width: 400px;
+    height: 200px;
+    text-align: center;
+    margin: 10px;
+    
+}
+.bc-name{
+
+    font-size: 40px;
+}
+
