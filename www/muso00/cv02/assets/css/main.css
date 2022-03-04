@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.business-card {
+    width: 480px;
+    height: 230px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.clear {
+    clear: both;
+}
+
+.bc-text-content div {
+    padding: 2px;
+}
+
+.bc-image img {
+    height: 180px;
+    float: left;
+    border-radius: 5px;
+}
+
+.bc-name {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.bc-available {
+    color: grey;
+}
+
+.bc-position, .bc-age {
+    display: inline;
+}
+
+.bc-text-content {
+    float: left;
+    margin-left: 25px;
+}
+
+.contact a {
+    color: black;
+    transition: background-color 0.2s ease-in, padding 0.2s ease-in, color;
+}
+
+a:hover {
+    color: white;
+    background-color: red;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.headline {
+    color: white;
+    text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+.headline:hover {
+    color: red;
+    text-shadow: none;
+}
