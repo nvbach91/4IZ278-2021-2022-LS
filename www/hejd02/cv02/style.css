@@ -1,0 +1,26 @@
+* {
+    font-family: 'Arial', sans-serif;
+}
+
+.human {
+    margin: 50px auto;
+    border-radius: 10px;
+    background-color: #d7d7d7;
+    width: 500px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+img {
+    flex: 0 0 20%;
+}
+.info {
+    padding-left: 15px;
+    flex: 0 0 80%;
+}
+
+p {
+    font-size: 12px;
+}
