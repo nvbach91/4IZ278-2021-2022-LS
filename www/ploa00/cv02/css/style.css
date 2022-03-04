@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+.business-card {
+  width: 500px;
+  height: 280px;
+  background-color: pink;
+  padding: 20px;
+  margin: 20px;
+  font-family: "Dosis", sans-serif;
+  border-radius: 5px;
+}
+
+.bc-avatar img {
+  width: 150px;
+  height: 150px;
+  float: left;
+  border-radius: 5px;
+}
+
+.bc-content {
+  float: left;
+  margin-left: 25px;
+}
+
+.bc-name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.bc-phone a {
+  color: black;
+}
+
+.bc-email a {
+  color: black;
+}
+
+.bc-website a {
+  color: black;
+}
+
+.business-card:hover {
+  opacity: 0.8;
+}
