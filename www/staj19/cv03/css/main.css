@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+img {
+  width: 100px;
+  margin: 20px auto;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form div {
+  display: block;
+  margin: 20px;
+}
+form div>* {
+  display: block;
+}
+form input,
+form select {
+  padding: 5px 10px;
+  width: 100%;
+}
+form .danger,
+form .danger input {
+  color: red;
+}
+form .danger input {
+  border-color: red;
+  border-style: solid;
+  outline-color: red;
+}
+.success p {
+  background: lightgreen;
+  padding: 20px 10px;
+}
