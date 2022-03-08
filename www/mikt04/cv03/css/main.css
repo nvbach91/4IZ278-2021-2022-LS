@@ -1,0 +1,37 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1{
+    text-align: center;
+}
+
+.registration{
+    display: flex;
+    justify-content: center;
+}
+
+.reg-form{
+    text-align: center;
+    background-color: aquamarine;
+    margin-bottom: 20px;
+    padding-left: 35px;
+    padding-right: 35px;
+}
+
+.panes{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.error{
+    color: red;
+}
+
+footer {
+    text-align: center;
+}
