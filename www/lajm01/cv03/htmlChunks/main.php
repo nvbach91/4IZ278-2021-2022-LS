@@ -98,7 +98,7 @@
         </div>
         <div>
             <label for="card_count">* Card count:</label>
-            <input value="<?php echo $card_count ?>" name="card_count" type="number">
+            <input value="<?php echo $card_count ?>" name="card_count">
         </div>
         <input type="submit" value="odeslat">
     </form>
