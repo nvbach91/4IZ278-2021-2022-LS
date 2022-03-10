@@ -11,7 +11,8 @@
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $avatar = $_POST['avatar'];
-
+    $deckname = $_POST['deckname'];
+    $cards = $_POST['cards'];
     
     
 
@@ -35,10 +36,20 @@
     if (!filter_var($avatar, FILTER_VALIDATE_URL)){
         array_push($errors, 'Wrong avatar url');
     }
+    
+    if (strlen($deckname) < 3) {
+        array_push($errors, 'Wrong deckname');
+    }   
+    
+    
+    if(!preg_match('/^[1-9][0-9]?$|^100$/',$cards)){
+        array_push($errors, 'Wrong number of cards choose: 1-100');
+    }
     if (!count($errors)){
         header('Location: ./registration-success.php');
         exit();
     }
+    
 }
 
     ?>
@@ -76,6 +87,14 @@
             <div class="form-group">
                 <label>Avatar URL*</label>
                 <input class="form-control" name="avatar" value="<?php echo isset($avatar) ? $avatar : '' ?>">
+            </div>
+            <div class="form-group">
+                <label>Deck name*</label>
+                <input class="form-control" name="deckname" value="<?php echo isset($deckname) ? $deckname : '' ?>" >
+            </div>
+            <div class="form-group">
+                <label>Number of cards*</label>
+                <input class="form-control" name="cards" type="number"  value="<?php echo isset($cards) ? $cards : '' ?>" >
             </div>
             <div class="clear"></div>
             <button class="btn btn-primary" type="submit">Submit</button>
