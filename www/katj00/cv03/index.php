@@ -37,7 +37,7 @@ if (!empty($_POST)) {
         array_push($error_array, "Package name must be at least 3 chars long");
     }
 
-    if ($numCards < 3) {
+    if ($numCards < 12) {
         array_push($error_array, "Number of cards in package must be at least 12");
     }
 }
@@ -122,7 +122,7 @@ if (!empty($_POST)) {
                 Amount of cards:
             </label>
             <div class="form-field__input">
-                <input id="num_cards" name="numCards" value="<?php echo $numCards ?? '' ?>" type="number" required>
+                <input id="num_cards" name="numCards" value="<?php echo $numCards ?? 12 ?>" type="number" required>
             </div>
         </div>
         <button type="submit">Send form</button>
