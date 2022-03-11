@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.reg-success {
+    text-align: center;
+    background-color: rgb(133, 202, 133);
+    color: rgb(0, 128, 0);
+    padding: 10px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    width: 400px;
+}
+
+form div {
+    display: block;
+    margin: 20px;
+}
+
+form div>* {
+    display: block;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid silver;
+}
+
+form button {
+    margin: 0 auto;
+    display: block;
+}
+
+form label {
+    padding-bottom: 2px;
+}
+
+.decription {
+    color: rgb(187, 187, 187);
+}
+
+form button {
+    padding: 10px;
+    width: 120px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: white;
+    transition: background-color 0.2s ease-in, color 0.2s;
+
+}
+
+form button:hover {
+    background-color: rgb(133, 202, 133);
+    color: white;
+}
+
+form form button:active {
+    background-color: rgb(91, 136, 91);
+    color: white;
+}
+
+.error-container {
+    border-radius: 5px;
+    color: red;
+    padding: 5px;
+}
+
+.error {
+    margin: 0;
+}
+
+.mandatory {
+    color: red;
+}
