@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    color: #20202f;
+    font-family: 'Courier New', monospace;
+}
+
+.form-area {
+    margin: 50px;
+}
+
+.clear {
+    margin: 25px;
+}
+
+.img-con {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
