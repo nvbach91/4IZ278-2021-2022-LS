@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+
+}
+
+body{
+   font-family:Arial, Helvetica, sans-serif;
+   margin:auto;
+   max-width: 500px;
+   text-align: center;
+   
+}
+
+.form-group{
+    
+    margin:auto;
+    justify-content: space-between;
+    display: flex;
+    height: 35px;
+    margin-bottom: 10px;
+}
+
+.form-group label{
+    margin: auto 0;
+}
+
+.form-group input{
+    width: 50%;
+    border-radius: 5px;
+    border-style: dotted;
+}
+
+.button, .button-return {
+    width: 140px;
+    height: 45px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    margin-top: 10px;
+    cursor:pointer;
+}
+  
+  .button:hover {
+    background-color: #aee52e;
+    box-shadow: 0px 15px 20px rgba(98, 229, 46, 0.4);
+    color: #fff;
+}
+
+  .button-return:hover {
+    background-color: #000000;
+    box-shadow: 0px 15px 20px rgba(117, 117, 117, 0.4);
+    color: #fff;
+}
+
+  .registration, .login{
+      padding-top: 20px;
+}
+
+
+  .success{
+      padding-bottom: 20px;
+      color:#aee52e;
+      font-size: 20px;
+}
+
+
+  .errors{
+      padding-bottom: 20px;
+      font-size: 20px;
+      color:rgb(59, 172, 166);
+}
+
+  .usercard{
+      border-radius: 10px;
+      border: 1px solid gray;
+      padding: 20px 0;
+      font-size: 20px;
+      margin: 20px auto;
+      width: 300px;
+}
