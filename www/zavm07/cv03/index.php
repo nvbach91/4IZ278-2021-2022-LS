@@ -27,7 +27,21 @@
         array_push($errors,'Invalid avatar link');
     }
 
+    $file = file_get_contents('users.db');
+    $lines = explode("\n",$file);
+    foreach ($lines as $line){
+        $credentials = explode(";",$line);
+        if($credentials[2]===$email){
+            array_push($errors,"Email ".$email." has been already registered");
+            break;
+        }
+    }
+
+
+
     if (!count($errors)){
+        $userRecord = implode(";",[$name,$gender,$email,$phone,$avatar]);
+        file_put_contents('users.db',$userRecord.PHP_EOL,FILE_APPEND);
         header('Location: ./registration_successful.php');
         exit();
     }
@@ -46,9 +60,9 @@
         <div class="form-group">
             <label for="gender">Gender*</label>
             <select class="form-control" name="gender">
-                <option <?php echo(isset($gender)&& $gender==="m" ? "selected" : "")?> value="m">Male</option>
-                <option <?php echo(isset($gender)&& $gender==="f" ? "selected" : "")?>value="f">Female</option>
-                <option <?php echo(isset($gender)&& $gender==="o" ? "selected" : "")?>value="o">Other</option>
+                <option <?php echo(isset($gender)&& $gender==="m" ? 'selected' : "")?> value="m">Male</option>
+                <option <?php echo(isset($gender)&& $gender==="f" ? 'selected' : "")?>value="f">Female</option>
+                <option <?php echo(isset($gender)&& $gender==="o" ? 'selected' : "")?>value="o">Other</option>
             </select>
         </div>
         <div class="form-group">
