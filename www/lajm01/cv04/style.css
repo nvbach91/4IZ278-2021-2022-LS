@@ -1,0 +1,53 @@
+*{
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+div::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+.errors{
+    color:red;
+}
+form{
+    width: 650px;
+    margin: auto;
+    background: burlywood;
+    padding: 20px;
+}
+
+form div:not(.errors) label{
+    width: 300px;
+    float:left;
+}
+
+form div:not(.errors) input{
+    width: 300px;
+    float:left;
+}
+
+input[type="submit"]{
+    width: 100px !important;
+    height: 30px;
+    background: coral;
+    border: none;
+    margin: auto !important;
+    text-align: center;
+    display: block;
+    margin-top: 10px !important;
+    cursor: pointer;
+    float: unset !important;
+}
+
+form img{
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+.success{
+    color:green;
+}

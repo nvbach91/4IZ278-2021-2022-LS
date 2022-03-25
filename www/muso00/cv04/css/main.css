@@ -1,0 +1,150 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0 auto;
+    font-size: 16px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.success-msg {
+    text-align: center;
+    background-color: rgb(133, 202, 133);
+    color: rgb(0, 128, 0);
+    padding: 15px;
+    margin-top: 0px;
+    font-size: 17px;
+    font-weight: normal;
+    width: 100%;
+}
+
+.clear {
+    clear:both;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    width: 400px;
+}
+
+form div {
+    display: block;
+    margin: 20px;
+}
+
+form div>* {
+    display: block;
+}
+
+form input, form select {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid silver;
+}
+
+form label {
+    padding-bottom: 2px;
+}
+
+.description {
+    color: rgb(187, 187, 187);
+}
+
+.button {
+    margin: 0 auto;
+    display: block;
+    padding: 10px;
+    width: 120px;
+    border-radius: 20px;
+    border: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: white;
+    transition: background-color 0.2s ease-in, color 0.2s;
+    text-align: center;
+
+}
+
+div.button {
+    width: 180px;
+
+}
+
+.button:hover {
+    background-color: rgb(133, 202, 133);
+    color: white;
+}
+
+.button:active {
+    background-color: rgb(91, 136, 91);
+    color: white;
+}
+
+.error-container {
+    border-radius: 5px;
+    color: red;
+    padding: 5px;
+}
+
+.error {
+    margin: 0;
+}
+
+.mandatory {
+    color: red;
+}
+/*
+.go-to-login {
+    margin-top: 10px;
+}*/
+
+.index-page {
+    text-align: center;
+}
+
+.index-page>div {
+    margin: 20px;
+}
+
+.index-page div div:nth-child(2) {
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.register {
+    font-size: 9pt;
+    color: grey;
+    margin-top: 0px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.register:hover {
+    color: black;
+}
+
+.user-info td {
+    border: 1px grey solid;
+    padding: 10px;
+}
+
+.user-info {
+    border: 2px black solid;
+}
+
+.user-info {
+    width: 600px;
+    text-align: center;
+    padding: 10px;
+}
