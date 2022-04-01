@@ -1,55 +1,61 @@
 <?php
-session_start();
+
 require 'db.php';
-$ids = @$_SESSION['cart'];
+require 'user_required.php'; // pristup jen pro prihlaseneho uzivatele
+
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+$products = [];
+$ids = $_SESSION['cart'];
+
 if (is_array($ids) && count($ids)) {
-    # retezec s otazniky pro predani seznamu ids
-    # pocet otazniku = pocet prvku v poli ids
-    # pokud mam treba v ids 1,2,3, vrati mi ?,?,?
     $question_marks = str_repeat('?,', count($ids) - 1) . '?';
-    
-    $stmt = $db->prepare("SELECT * FROM goods WHERE id IN ($question_marks) ORDER BY name");
-    # array values - setrepeme pole aby bylo indexovane od 0, jen kvuli dotazu, jinak neprojde
+
+    $stmt = $db->prepare("SELECT * FROM products WHERE id IN (${question_marks}) ORDER BY name");
+    // array_values - vrati poled indexovane od 0, napr [42, 47, 63, 12, 44]
     $stmt->execute(array_values($ids));
-    $goods = $stmt->fetchAll();
-    
-    
-    $stmt_sum = $db->prepare("SELECT SUM(price) FROM goods WHERE id IN ($question_marks)");
-    # array values - setrepeme pole aby bylo indexovane od 0, jen kvuli dotazu, jinak neprojde
+    $products = $stmt->fetchAll();
+
+    $stmt_sum = $db->prepare("SELECT SUM(price) FROM products WHERE id IN (${question_marks})");
     $stmt_sum->execute(array_values($ids));
     $sum = $stmt_sum->fetchColumn();
 }
+
 ?>
 
-
-
-<?php include './incl/header.php' ?>
-<?php include './incl/navbar.php' ?>
+<?php require __DIR__ . '/incl/header.php' ?>
 <main class="container">
     <h1>My shopping cart</h1>
-    Total goods selected: <?= @count($goods) ?>
+    Total products selected: <?php echo count($products); ?>
     <br><br>
-    <a href="index.php">Back to the mangos!</a>
+    <a href="index.php">Back to the products</a>
     <br><br>
-    <?php if(@$goods): ?>
-    <div class="products">
-        <?php foreach($goods as $row): ?>
-        <div class="card product" style="width: calc(100% / 3)">
-            <img class="card-img-top" src="https://via.placeholder.com/300x150" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"><?php echo $row['name'] ?></h5>
-                <div class="card-subtitle"><?php echo $row['price'] ?></div>
-                <div class="card-text"><?php echo $row['description'] ?></div>
-                <form action="remove-item.php" method="POST">
-                    <input class="d-none" name="id" value="<?php echo $row['id'] ?>">
-                    <button type="submit" class="btn btn-danger">Remove</button>
-                </form>
+    <?php if ($products): ?>
+        <div class="products">
+            <div class="product">
+                <div></div>
+                <div>Name</div>
+                <div>Price</div>
+                <div>Description</div>
+                <div>&nbsp;</div>
             </div>
+            <?php foreach ($products as $product): ?>
+            <div class="product">
+                <div><a href='remove.php?id=<?php echo $product['id']; ?>'>Remove</a></div>
+                <div><?php echo $product['name']; ?></div>
+                <div><?php echo $product['price']; ?></div>
+                <div><?php echo substr($product['description'], 0, 50) . '...'; ?></div>
+                <div>&nbsp;</div>
+            </div>
+            <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
-    </div>
+        <br>
+        <div>Total: <strong><?php echo $sum; ?></strong></div>
     <?php else: ?>
-    <h5>No goods yet</h5>
+        <div>No products yet</div>
     <?php endif; ?>
 </main>
-<?php require './incl/footer.php'; ?>
+<div style="margin-bottom: 600px"></div>
+<?php require __DIR__ . '/incl/footer.php' ?>
