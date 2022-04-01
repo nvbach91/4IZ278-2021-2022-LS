@@ -1,0 +1,31 @@
+*{
+    box-sizing: border-box;
+}
+
+p {
+    margin: 0px;
+}
+
+.business-card {
+    width: 500px;
+    background-color: darkgrey;
+}
+
+.bc-avatar {
+    width: 100px;
+}
+
+.bc-company {
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.bc-name {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.bc-title {
+    font-weight: bold;
+    font-size: 18px;
+}
