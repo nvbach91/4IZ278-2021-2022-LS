@@ -4,7 +4,11 @@ session_start();
 require 'db.php';
 # session pole pro kosik
 if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
+    $_SESSION['cart'] = [
+        // ['id' => 1, 'name' => 'PC', 'price' => 500, 'quantity' => 2]
+        // ['id' => 1, 'name' => 'PC', 'price' => 500, 'quantity' => 2]
+        // ['id' => 1, 'name' => 'PC', 'price' => 500, 'quantity' => 2]
+    ];
 }
 $sql = "SELECT * FROM goods WHERE id = :id";
 $stmt = $db->prepare($sql);
