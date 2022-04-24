@@ -1,0 +1,16 @@
+// This file includes everything which is mandatory in Bootstrap
+// for each domain with own variables included to rewrite
+// the base
+
+@import "variables"; // own variables to rewrite bootstrap's
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+
+// Helpers
+@import "~bootstrap/scss/helpers";
+
+// Utilities
+@import "~bootstrap/scss/utilities/api";
