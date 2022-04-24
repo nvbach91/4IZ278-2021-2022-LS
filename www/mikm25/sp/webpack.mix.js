@@ -11,7 +11,18 @@ const mix = require('laravel-mix');
  |
  */
 
+// Application
+
 mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
-    ]);
+    ])
+  .version();
+
+// Landing page
+
+mix.js('resources/js/landing-page.js', 'public/js')
+  .postCss('resources/css/landing-page.css', 'public/css', [
+      //
+  ])
+  .version();
