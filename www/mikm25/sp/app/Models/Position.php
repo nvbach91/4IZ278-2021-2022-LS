@@ -77,7 +77,7 @@ class Position extends Model
 
     public function getIsValidAttribute(): bool
     {
-        $now = Carbon::now();
+        $now = Carbon::now()->startOfDay();
 
         if ($this->valid_from instanceof Carbon && $this->valid_from->greaterThan($now)) {
             return false;
