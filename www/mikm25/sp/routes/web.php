@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LandingPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LandingPageController::class, 'index']);
+Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
+
+Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
+    Route::get('register', [RegisterController::class, 'index'])->name('register');
+});

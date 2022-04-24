@@ -19,27 +19,16 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
-    /**
-     * The controller namespace for the application.
-     *
-     * When present, controller route declarations will automatically be prefixed with this namespace.
-     *
-     * @var string|null
-     */
-    // protected $namespace = 'App\\Http\\Controllers';
-
     public function boot(): void
     {
         $this->configureRateLimiting();
 
-        $this->routes(function () {
+        $this->routes(static function (): void {
             Route::prefix('api')
                 ->middleware('api')
-                ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
-                ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
     }
