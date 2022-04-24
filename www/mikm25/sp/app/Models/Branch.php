@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
+ * @property-read string $translated_name
+ *
  * @property-read list<Position> $positions
  */
 class Branch extends Model
@@ -28,6 +30,11 @@ class Branch extends Model
     protected $casts = [
         'name' => 'string'
     ];
+
+    public function getTranslatedNameAttribute(): string
+    {
+        return __("branches.$this->name");
+    }
 
     public function positions(): HasMany
     {
