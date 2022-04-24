@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class {{ class }} extends Seeder
+class BranchesSeeder extends Seeder
 {
     public function run(): void
     {
