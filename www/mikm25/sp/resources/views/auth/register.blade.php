@@ -9,6 +9,7 @@
         <div class="card-body">
             <h1 class="h5 card-title">{{ __('pages.auth.register') }}</h1>
             <form action="{{ route('auth.register.submit') }}" method="post">
+                @include('common.status')
                 @include('common.forms.errors')
                 {{ csrf_field() }}
 

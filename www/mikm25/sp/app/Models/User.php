@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Builders\UserBuilder;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Hash;
  *
  * @property-read list<Tag> $tags
  * @property-read list<Position> $positions
+ *
+ * @method static UserBuilder query()
  */
 class User extends Authenticatable
 {
@@ -68,5 +71,10 @@ class User extends Authenticatable
     public function positions(): HasMany
     {
         return $this->hasMany(Position::class, 'fk_user_id', 'id');
+    }
+
+    public function newEloquentBuilder($query): UserBuilder
+    {
+        return new UserBuilder($query);
     }
 }

@@ -21,6 +21,7 @@ class RegisterRequest extends FormRequest
             'lastname' => 'required|string',
             'email' => [
                 'required',
+                'string',
                 'email',
                 new Unique(User::class, 'email')
             ],

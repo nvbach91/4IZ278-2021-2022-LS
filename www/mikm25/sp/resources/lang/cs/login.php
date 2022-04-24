@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'submit' => 'Přihlásit se'
+    'submit' => 'Přihlásit se',
+    'remember_me' => 'Pamatovat si mě'
 ];
