@@ -20,3 +20,8 @@ mix.sass('resources/css/app.scss', 'public/css').version();
 
 mix.js('resources/js/landing-page.js', 'public/js').version();
 mix.sass('resources/css/landing-page.scss', 'public/css').version();
+
+// Auth
+
+mix.js('resources/js/auth.js', 'public/js').version();
+mix.sass('resources/css/auth.scss', 'public/css').version();
