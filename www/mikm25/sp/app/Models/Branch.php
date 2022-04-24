@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
+ * @see Branch::getTranslatedNameAttribute()
  * @property-read string $translated_name
  *
  * @property-read list<Position> $positions
