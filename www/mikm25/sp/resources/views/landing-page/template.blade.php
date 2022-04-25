@@ -5,5 +5,5 @@
 @endpush
 
 @push('scripts')
-    <script src="{{ mix('/js/landing-page.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('/js/landing-page.js') }}"></script>
 @endpush

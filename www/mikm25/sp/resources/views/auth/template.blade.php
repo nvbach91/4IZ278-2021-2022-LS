@@ -5,7 +5,7 @@
 @endpush
 
 @push('scripts')
-    <script src="{{ mix('/js/auth.js') }}"></script>
+    <script type="text/javascript" src="{{ mix('/js/auth.js') }}"></script>
 @endpush
 
 @section('content')

@@ -1,3 +1,7 @@
+// Import Popper and Bootstrap JS
+import '@popperjs/core';
+import 'bootstrap';
+
 window._ = require('lodash');
 
 /**
