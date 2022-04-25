@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-md">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded-2 mt-2">
+        <nav class="navbar navbar-expand-md navbar-light bg-light rounded-2 mt-2">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ route('landing-page') }}">
                     {{ config('app.name') }}
@@ -22,8 +22,8 @@
                             <a class="nav-link disabled">Disabled</a>
                         </li>
                     </ul>
-                    <div>
-                        <a href="{{ route('auth.login') }}" class="btn">
+                    <div class="d-grid gap-1 d-md-block">
+                        <a href="{{ route('auth.login') }}" class="btn btn-light me-lg-2">
                            {{ __('pages.auth.login') }}
                         </a>
                         <a href="{{ route('auth.register') }}" class="btn btn-primary">
