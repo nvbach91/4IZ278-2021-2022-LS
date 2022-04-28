@@ -1,4 +1,4 @@
-@extends('app.template')
+@extends('templates.app')
 
 @section('title')
     {{ __('pages.dashboard') }}

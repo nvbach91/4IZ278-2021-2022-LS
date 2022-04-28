@@ -1,4 +1,4 @@
-@extends('landing-page.template')
+@extends('templates.landing-page')
 
 @section('content')
     <div class="container-md">

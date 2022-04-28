@@ -1,4 +1,4 @@
-@extends('auth.template')
+@extends('templates.auth')
 
 @section('title')
     {{ __('pages.auth.login') }}
