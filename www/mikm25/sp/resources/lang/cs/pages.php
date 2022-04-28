@@ -3,7 +3,9 @@
 return [
     'auth' => [
         'register' => 'Registrace',
-        'login' => 'Přihlášení'
+        'login' => 'Přihlášení',
     ],
-    'dashboard' => 'Přehled'
+    'app' => [
+        'dashboard' => 'Přehled',
+    ],
 ];

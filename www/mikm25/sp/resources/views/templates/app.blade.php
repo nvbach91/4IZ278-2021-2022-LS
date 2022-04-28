@@ -7,3 +7,15 @@
 @push('scripts')
     <script type="text/javascript" src="{{ mix('/js/app.js') }}"></script>
 @endpush
+
+@section('content')
+    <main id="app">
+        @include('app.template.sidebar')
+        <section id="app-content">
+            <div class="container-fluid">
+                @include('app.template.navbar')
+                @yield('app-content')
+            </div>
+        </section>
+    </main>
+@endsection
