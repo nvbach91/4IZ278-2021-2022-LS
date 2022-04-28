@@ -13,8 +13,6 @@
             </li>
         @endforeach
 
-        <hr>
-
         <li class="nav-item">
             <a class="nav-link rounded-2" href="#" id="logout-btn">
                 <i class="bi bi-box-arrow-left"></i> {{ __('pages.app.logout') }}
