@@ -9,6 +9,9 @@ return [
         ],
         'login' => [
             'error' => 'Email nebo heslo není správné.'
+        ],
+        'logout' => [
+            'success' => 'Úspěšně jste byl odhlášen.'
         ]
     ]
 ];

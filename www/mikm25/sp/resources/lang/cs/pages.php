@@ -7,5 +7,6 @@ return [
     ],
     'app' => [
         'dashboard' => 'Přehled',
+        'logout' => 'Odhlásit se'
     ],
 ];

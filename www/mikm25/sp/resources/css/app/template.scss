@@ -34,6 +34,10 @@ body {
   overflow-y: scroll;
 
   padding: $spacer * .75 0 $spacer * .75 $spacer * .75;
+
+  ul.nav .nav-link.active {
+    background-color: $blue-100;
+  }
 }
 
 #app-content {
