@@ -7,19 +7,11 @@
     </div>
     <div class="d-flex align-items-center mt-1 mt-lg-0">
         <div class="dropdown">
-            <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="create-object-dropdown"
+            <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="create-entity-dropdown"
                     data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-plus"></i>
             </button>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="create-object-dropdown">
-                <li>
-                    <a class="dropdown-item" href="#">
-                        <i class="bi bi-plus"></i> Uživatel
-                    </a>
-                </li>
-                <li>
-                    <hr class="dropdown-divider border-0">
-                </li>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="create-entity-dropdown">
                 <li>
                     <a class="dropdown-item" href="#">
                         <i class="bi bi-plus"></i> Nová pozice
@@ -28,22 +20,14 @@
             </ul>
         </div>
         <div class="dropdown ms-2">
-            <button class="btn btn-light btn-sm dropdown-toggle d-flex-centered" type="button" id="entity-switcher"
+            <button class="btn btn-light btn-sm dropdown-toggle d-flex-centered" type="button" id="user-dropdown"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="max-w-125 text-truncate">Změna entity</span>
+                <span class="max-w-125 text-truncate">{{ auth()->user()->full_name }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="entity-switcher">
                 <li>
-                    <a class="dropdown-item" href="#">
-                        <i class="bi bi-plus"></i> Uživatel
-                    </a>
-                </li>
-                <li>
-                    <hr class="dropdown-divider border-0">
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        <i class="bi bi-plus"></i> Nová pozice
+                    <a class="dropdown-item logout-btn" href="#">
+                        <i class="bi bi-box-arrow-left"></i> {{ __('pages.app.logout') }}
                     </a>
                 </li>
             </ul>

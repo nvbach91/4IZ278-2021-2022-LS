@@ -11,7 +11,7 @@ class RegisterRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return ! auth('web')->check();
     }
 
     public function rules(): array
@@ -23,9 +23,9 @@ class RegisterRequest extends FormRequest
                 'required',
                 'string',
                 'email',
-                new Unique(User::class, 'email')
+                new Unique(User::class, 'email'),
             ],
-            'phone' => 'required|string',
+            'phone' => 'nullable|string',
             'password' => [
                 'required',
                 'string',
@@ -51,9 +51,9 @@ class RegisterRequest extends FormRequest
         return (string) $this->input('email');
     }
 
-    public function getPhone(): string
+    public function getPhone(): ?string
     {
-        return (string) $this->input('phone');
+        return $this->filled('phone') ? (string) $this->input('phone') : null;
     }
 
     public function getPassword(): string

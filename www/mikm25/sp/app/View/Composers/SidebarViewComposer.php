@@ -10,13 +10,19 @@ class SidebarViewComposer
 
     public function compose(View $view): void
     {
+        $request = request();
+
         $view->with('pages', [
             'app.dashboard' => [
                 'text' => __('pages.app.dashboard'),
                 'icon' => 'bi bi-house',
+                'active' => $request->is('app/dashboard*')
+            ],
+            'app.positions.index' => [
+                'text' => __('pages.app.positions'),
+                'icon' => 'bi bi-briefcase',
+                'active' => $request->is('app/positions*')
             ],
         ]);
-
-        $view->with('currentRoute', request()->route()->getName());
     }
 }

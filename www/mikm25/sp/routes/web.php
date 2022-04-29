@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\PositionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,4 +39,8 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
 
 Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth:web'], static function (): void {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::group(['prefix' => 'positions', 'as' => 'positions.'], static function (): void {
+        Route::get('/', [PositionController::class, 'index'])->name('index');
+    });
 });

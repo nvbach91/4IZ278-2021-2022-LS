@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Hash;
  * @see User::setPasswordAttribute()
  * @property string $password
  *
+ * @see User::getFullNameAttribute()
+ * @property-read string $full_name
+ *
  * @property-read list<Tag> $tags
  * @property-read list<Position> $positions
  *
@@ -61,6 +64,11 @@ class User extends Authenticatable
     public function setPasswordAttribute(string $password): void
     {
         $this->attributes['password'] = Hash::make($password);
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        return "$this->firstname $this->lastname";
     }
 
     public function tags(): HasMany

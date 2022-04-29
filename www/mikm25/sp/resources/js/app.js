@@ -1,6 +1,8 @@
 require('./bootstrap')
 
-document.getElementById('logout-btn').addEventListener('click', (e) => {
-  e.preventDefault()
-  document.getElementById('logout-form').submit()
+document.querySelectorAll('.logout-btn').forEach(e => {
+  e.addEventListener('click', (e) => {
+    e.preventDefault()
+    document.getElementById('logout-form').submit()
+  })
 })

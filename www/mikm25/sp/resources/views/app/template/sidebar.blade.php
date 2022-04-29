@@ -7,14 +7,14 @@
             @endif
 
             <li class="nav-item">
-                <a class="nav-link rounded-2 {{ ($page['activeRoute'] ?? $route) === $currentRoute ? 'active' : '' }}" href="{{ route($route) }}">
+                <a class="nav-link rounded-2 {{ $page['active'] ? 'active' : '' }}" href="{{ route($route) }}">
                     <i class="{{ $page['icon'] }}"></i> {{ $page['text'] }}
                 </a>
             </li>
         @endforeach
 
         <li class="nav-item">
-            <a class="nav-link rounded-2" href="#" id="logout-btn">
+            <a class="nav-link rounded-2 logout-btn" href="#">
                 <i class="bi bi-box-arrow-left"></i> {{ __('pages.app.logout') }}
             </a>
         </li>

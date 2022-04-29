@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'to_app' => 'Aplikace'
+    'to_app' => 'Do aplikace'
 ];

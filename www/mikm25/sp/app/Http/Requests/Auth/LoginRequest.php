@@ -8,7 +8,7 @@ class LoginRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;
+        return ! auth('web')->check();
     }
 
     public function rules(): array
@@ -16,7 +16,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => 'required|string|email',
             'password' => 'required|string',
-            'remember_me' => 'nullable|boolean'
+            'remember_me' => 'nullable|boolean',
         ];
     }
 
@@ -32,6 +32,6 @@ class LoginRequest extends FormRequest
 
     public function rememberMe(): bool
     {
-        return $this->has('remember_me') && $this->input('remember_me');
+        return $this->filled('remember_me') && $this->input('remember_me');
     }
 }
