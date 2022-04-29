@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Builders\PositionBuilder;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,6 +35,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Branch $branch
  * @property-read list<PositionClick> $clicks
  * @property-read list<PositionReaction> $reactions
+ *
+ * @method static PositionBuilder query()
  */
 class Position extends Model
 {
@@ -120,5 +123,10 @@ class Position extends Model
     public function reactions(): HasMany
     {
         return $this->hasMany(PositionReaction::class, 'reaction_id', 'id');
+    }
+
+    public function newEloquentBuilder($query): PositionBuilder
+    {
+        return new PositionBuilder($query);
     }
 }
