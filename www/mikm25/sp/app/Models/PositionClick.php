@@ -19,7 +19,7 @@ class PositionClick extends Model
 {
     use HasFactory;
 
-    protected $table = 'position_click';
+    protected $table = 'position_clicks';
 
     protected $fillable = [
         'position_id'

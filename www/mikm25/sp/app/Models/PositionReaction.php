@@ -19,7 +19,7 @@ class PositionReaction extends Model
 {
     use HasFactory;
 
-    protected $table = 'position_reaction';
+    protected $table = 'position_reactions';
 
     protected $fillable = [
         'position_id'

@@ -3,12 +3,17 @@
 namespace Database\Factories;
 
 use App\Models\Branch;
+use App\Models\Position;
+use App\Models\PositionClick;
+use App\Models\PositionReaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PositionFactory extends Factory
 {
+    protected $model = Position::class;
+
     public function definition(): array
     {
         /** @var Branch $branch */
@@ -20,7 +25,7 @@ class PositionFactory extends Factory
         return [
             'user_id' => $user->id,
             'branch_id' => $branch->id,
-            'name' => $this->faker->words(4),
+            'name' => $this->faker->words(4, true),
             'salary_from' => rand(500, 60000),
             'salary_to' => static function (array $attributes): int {
                 return rand($attributes['salary_from'], $attributes['salary_from'] + 50000);
@@ -39,6 +44,19 @@ class PositionFactory extends Factory
             ]),
             'min_practice_length' => null,
         ];
+    }
+
+    public function configure(): self
+    {
+        return $this->afterCreating(static function (Position $position): void {
+            PositionClick::factory()->count(rand(10, 50))->create([
+                'position_id' => $position->id
+            ]);
+
+            PositionReaction::factory()->count(rand(10, 50))->create([
+                'position_id' => $position->id
+            ]);
+        });
     }
 
     public function invalidPast(): self
