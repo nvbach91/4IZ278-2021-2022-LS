@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property-read int $id
- * @property int $fk_user_id
- * @property int $fk_branch_id
+ * @property int $user_id
+ * @property int $branch_id
  * @property string $name
  * @property int|null $salary_from
  * @property int|null $salary_to
@@ -23,8 +24,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $company_name
  * @property string $company_size
  * @property int|null $min_practice_length
- * @property int $clicked_times
- * @property int $reacted_times
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
@@ -33,6 +32,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  *
  * @property-read User $user
  * @property-read Branch $branch
+ * @property-read list<PositionClick> $clicks
+ * @property-read list<PositionReaction> $reactions
  */
 class Position extends Model
 {
@@ -41,8 +42,8 @@ class Position extends Model
     protected $table = 'positions';
 
     protected $fillable = [
-        'fk_user_id',
-        'fk_branch_id',
+        'user_id',
+        'branch_id',
         'name',
         'salary_from',
         'salary_to',
@@ -59,8 +60,8 @@ class Position extends Model
     ];
 
     protected $casts = [
-        'fk_user_id' => 'integer',
-        'fk_branch_id' => 'integer',
+        'user_id' => 'integer',
+        'branch_id' => 'integer',
         'name' => 'string',
         'salary_from' => 'integer',
         'salary_to' => 'integer',
@@ -93,21 +94,31 @@ class Position extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'fk_user_id', 'id', 'user');
+        return $this->belongsTo(User::class, 'user_id', 'id', 'user');
     }
 
     public function branch(): BelongsTo
     {
-        return $this->belongsTo(Branch::class, 'fk_branch_id', 'id', 'branch');
+        return $this->belongsTo(Branch::class, 'branch_id', 'id', 'branch');
     }
 
     public function skills(): BelongsToMany
     {
-        return $this->belongsToMany(Skill::class, 'position_skills', 'fk_skill_id', 'fk_position_id', 'id', 'id', 'skills');
+        return $this->belongsToMany(Skill::class, 'position_skills', 'skill_id', 'position_id', 'id', 'id', 'skills');
     }
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'position_tags', 'fk_tag_id', 'fk_position_id', 'id', 'id', 'tags');
+        return $this->belongsToMany(Tag::class, 'position_tags', 'tag_id', 'position_id', 'id', 'id', 'tags');
+    }
+
+    public function clicks(): HasMany
+    {
+        return $this->hasMany(PositionClick::class, 'position_id', 'id');
+    }
+
+    public function reactions(): HasMany
+    {
+        return $this->hasMany(PositionReaction::class, 'reaction_id', 'id');
     }
 }

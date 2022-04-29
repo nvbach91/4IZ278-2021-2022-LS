@@ -31,6 +31,6 @@ class Skill extends Model
 
     public function positions(): BelongsToMany
     {
-        return $this->belongsToMany(Position::class, 'position_skills', 'fk_position_id', 'fk_skill_id', 'id', 'id', 'positions');
+        return $this->belongsToMany(Position::class, 'position_skills', 'position_id', 'skill_id', 'id', 'id', 'positions');
     }
 }

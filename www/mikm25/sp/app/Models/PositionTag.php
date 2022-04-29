@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property-read int $id
- * @property int $fk_position_id
- * @property int $fk_tag_id
+ * @property int $position_id
+ * @property int $tag_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
@@ -20,12 +20,12 @@ class PositionTag extends Model
     protected $table = 'position_tags';
 
     protected $fillable = [
-        'fk_position_id',
-        'fk_tag_id',
+        'position_id',
+        'tag_id',
     ];
 
     protected $casts = [
-        'fk_position_id' => 'integer',
-        'fk_tag_id' => 'integer',
+        'position_id' => 'integer',
+        'tag_id' => 'integer',
     ];
 }

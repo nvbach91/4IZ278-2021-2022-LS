@@ -5,27 +5,32 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read int $id
  * @property int $position_id
- * @property int $skill_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ *
+ * @property-read Position $position
  */
-class PositionSkill extends Model
+class PositionReaction extends Model
 {
     use HasFactory;
 
-    protected $table = 'position_skills';
+    protected $table = 'position_reaction';
 
     protected $fillable = [
-        'position_id',
-        'skill_id',
+        'position_id'
     ];
 
     protected $casts = [
-        'position_id' => 'integer',
-        'skill_id' => 'integer',
+        'position_id'
     ];
+
+    public function position(): BelongsTo
+    {
+        return $this->belongsTo(Position::class, 'position_id', 'id', 'position');
+    }
 }

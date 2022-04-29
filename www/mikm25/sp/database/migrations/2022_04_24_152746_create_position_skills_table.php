@@ -10,23 +10,23 @@ class CreatePositionSkillsTable extends Migration
     {
         Schema::create('position_skills', static function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('fk_position_id');
-            $table->foreignId('fk_skill_id');
+            $table->foreignId('position_id');
+            $table->foreignId('skill_id');
             $table->timestamps();
 
-            $table->foreign('fk_position_id')
+            $table->foreign('position_id')
                 ->references('id')
                 ->on('positions')
                 ->onDelete('CASCADE')
                 ->onUpdate('RESTRICT');
 
-            $table->foreign('fk_skill_id')
+            $table->foreign('skill_id')
                 ->references('id')
                 ->on('skills')
                 ->onDelete('CASCADE')
                 ->onUpdate('RESTRICT');
 
-            $table->unique(['fk_position_id', 'fk_skill_id']);
+            $table->unique(['position_id', 'skill_id']);
         });
     }
 

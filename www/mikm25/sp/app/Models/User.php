@@ -73,12 +73,12 @@ class User extends Authenticatable
 
     public function tags(): HasMany
     {
-        return $this->hasMany(Tag::class, 'fk_user_id', 'id');
+        return $this->hasMany(Tag::class, 'user_id', 'id');
     }
 
     public function positions(): HasMany
     {
-        return $this->hasMany(Position::class, 'fk_user_id', 'id');
+        return $this->hasMany(Position::class, 'user_id', 'id');
     }
 
     public function newEloquentBuilder($query): UserBuilder

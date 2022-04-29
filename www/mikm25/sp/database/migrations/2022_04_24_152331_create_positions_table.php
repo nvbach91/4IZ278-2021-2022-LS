@@ -10,8 +10,8 @@ class CreatePositionsTable extends Migration
     {
         Schema::create('positions', static function (Blueprint $table): void {
             $table->id();
-            $table->foreignId('fk_user_id');
-            $table->foreignId('fk_branch_id');
+            $table->foreignId('user_id');
+            $table->foreignId('branch_id');
             $table->string('name');
             $table->integer('salary_from')->nullable();
             $table->integer('salary_to')->nullable();
@@ -28,16 +28,14 @@ class CreatePositionsTable extends Migration
                 'above_100',
             ])->nullable();
             $table->unsignedSmallInteger('min_practice_length')->nullable();
-            $table->integer('clicked_times')->default(0);
-            $table->integer('reacted_times')->default(0);
             $table->timestamps();
 
-            $table->foreign('fk_branch_id')
+            $table->foreign('branch_id')
                 ->references('id')
                 ->on('branches')
                 ->onDelete('RESTRICT')
                 ->onUpdate('RESTRICT');
-            $table->foreign('fk_user_id')
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('CASCADE')

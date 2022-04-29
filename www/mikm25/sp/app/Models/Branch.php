@@ -39,6 +39,6 @@ class Branch extends Model
 
     public function positions(): HasMany
     {
-        return $this->hasMany(Position::class, 'fk_branch_id', 'id');
+        return $this->hasMany(Position::class, 'branch_id', 'id');
     }
 }

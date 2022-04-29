@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property-read int $id
- * @property int $fk_user_id
+ * @property int $user_id
  * @property string $name
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -25,22 +25,22 @@ class Tag extends Model
     protected $table = 'tags';
 
     protected $fillable = [
-        'fk_user_id',
+        'user_id',
         'name',
     ];
 
     protected $casts = [
-        'fk_user_id' => 'integer',
+        'user_id' => 'integer',
         'name' => 'string',
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'fk_user_id', 'id', 'user');
+        return $this->belongsTo(User::class, 'user_id', 'id', 'user');
     }
 
     public function positions(): BelongsToMany
     {
-        return $this->belongsToMany(Position::class, 'position_tags', 'fk_position_id', 'fk_tag_id', 'id', 'id', 'positions');
+        return $this->belongsToMany(Position::class, 'position_tags', 'position_id', 'tag_id', 'id', 'id', 'positions');
     }
 }
