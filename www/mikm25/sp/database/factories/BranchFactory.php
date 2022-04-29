@@ -1,15 +1,15 @@
 <?php
 
-namespace {{ factoryNamespace }};
+namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class {{ factory }}Factory extends Factory
+class BranchFactory extends Factory
 {
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->unique()->lexify('??????')
         ];
     }
 }
