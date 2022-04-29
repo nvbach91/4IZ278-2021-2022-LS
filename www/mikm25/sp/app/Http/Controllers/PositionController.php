@@ -10,4 +10,9 @@ class PositionController extends Controller
     {
         return view('app.position.index');
     }
+
+    public function create(): string
+    {
+        return view('app.position.create');
+    }
 }

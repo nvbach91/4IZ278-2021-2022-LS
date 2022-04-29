@@ -13,8 +13,8 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="create-entity-dropdown">
                 <li>
-                    <a class="dropdown-item" href="#">
-                        <i class="bi bi-plus"></i> Nová pozice
+                    <a class="dropdown-item" href="{{ route('app.positions.create') }}">
+                        <i class="bi bi-plus"></i> {{ __('pages.app.positions_create') }}
                     </a>
                 </li>
             </ul>

@@ -1,17 +1,17 @@
 @extends('templates.app')
 
 @section('title')
-    {{ __('pages.app.positions') }}
+    {{ __('pages.app.positions_create') }}
 @endsection
 
 @section('breadcrumbs')
-    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('app.positions.index') }}
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('app.positions.create') }}
 @endsection
 
 @section('app-content')
     <div class="row">
         <div class="col">
-            TODO seznam pozic
+            TODO vytvoření pozice
         </div>
     </div>
 @endsection

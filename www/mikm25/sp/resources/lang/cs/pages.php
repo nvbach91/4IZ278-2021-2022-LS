@@ -8,6 +8,7 @@ return [
     'app' => [
         'dashboard' => 'Přehled',
         'logout' => 'Odhlásit se',
-        'positions' => 'Pozice'
+        'positions' => 'Pozice',
+        'positions_create' => 'Nová pozice',
     ],
 ];

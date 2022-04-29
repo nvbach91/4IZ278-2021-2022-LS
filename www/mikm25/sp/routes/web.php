@@ -42,5 +42,6 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth:web'], st
 
     Route::group(['prefix' => 'positions', 'as' => 'positions.'], static function (): void {
         Route::get('/', [PositionController::class, 'index'])->name('index');
+        Route::get('/create', [PositionController::class, 'create'])->name('create');
     });
 });
