@@ -23,12 +23,18 @@
                         </li>
                     </ul>
                     <div class="d-grid gap-1 d-md-block">
-                        <a href="{{ route('auth.login') }}" class="btn btn-light me-lg-2">
-                           {{ __('pages.auth.login') }}
-                        </a>
-                        <a href="{{ route('auth.register') }}" class="btn btn-primary">
-                            {{ __('pages.auth.register') }}
-                        </a>
+                        @if(auth('web')->check())
+                            <a href="{{ route('app.dashboard') }}" class="btn btn-primary me-lg-2">
+                                {{ __('landing-page.to_app') }}
+                            </a>
+                        @else
+                            <a href="{{ route('auth.login') }}" class="btn btn-light me-lg-2">
+                                {{ __('pages.auth.login') }}
+                            </a>
+                            <a href="{{ route('auth.register') }}" class="btn btn-primary">
+                                {{ __('pages.auth.register') }}
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

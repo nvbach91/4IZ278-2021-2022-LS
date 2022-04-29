@@ -1,8 +1,8 @@
 <nav aria-label="breadcrumb" class="mb-3 d-flex justify-content-between flex-column align-items-start flex-lg-row align-items-lg-center">
     <div class="d-flex">
-        <span class="h5 me-3 mb-0">
+        <a href="{{ route('landing-page') }}" class="h5 me-3 mb-0">
             {{ config('app.name') }}
-        </span>
+        </a>
         @yield('breadcrumbs')
     </div>
     <div class="d-flex align-items-center mt-1 mt-lg-0">
