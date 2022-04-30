@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\User\ResendEmailVerificationMail;
 use App\Mail\User\UserRegisteredMail;
 use App\Models\EmailVerification;
 use App\Models\User;
@@ -30,5 +31,17 @@ Route::group(['prefix' => 'user'], static function (): void {
         ]);
 
         return new UserRegisteredMail($user, $emailVerification);
+    });
+
+    Route::get('resend-verification-link', static function () {
+        /** @var User $user */
+        $user = User::factory()->make();
+
+        /** @var EmailVerification $emailVerification */
+        $emailVerification = EmailVerification::factory()->make([
+            'user_id' => $user->id,
+        ]);
+
+        return new ResendEmailVerificationMail($user, $emailVerification);
     });
 });
