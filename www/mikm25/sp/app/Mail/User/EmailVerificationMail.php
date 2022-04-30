@@ -37,14 +37,7 @@ class EmailVerificationMail extends Mailable
     {
         return $this->markdown('mails.user.email-verification', [
             'user' => $this->user,
-            'verificationLink' => $this->getVerificationLink(),
-        ]);
-    }
-
-    private function getVerificationLink(): string
-    {
-        return route('auth.email-verification.verify', [
-            'token' => $this->verification->token,
+            'verificationLink' => $this->verification->verification_link,
         ]);
     }
 }

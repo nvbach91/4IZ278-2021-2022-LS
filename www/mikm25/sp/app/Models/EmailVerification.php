@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read bool $is_valid
  * @see EmailVerification::getIsUsableAttribute()
  * @property-read bool $is_usable
+ * @see EmailVerification::getVerificationLinkAttribute()
+ * @property-read string $verification_link
  *
  * @property-read User $user
  *
@@ -48,6 +50,7 @@ class EmailVerification extends Model
     protected $appends = [
         'is_valid',
         'is_usable',
+        'verification_link',
     ];
 
     protected $casts = [
@@ -67,6 +70,13 @@ class EmailVerification extends Model
     public function getIsUsableAttribute(): bool
     {
         return $this->is_valid && ! $this->used;
+    }
+
+    public function getVerificationLinkAttribute(): string
+    {
+        return route('auth.email-verification.verify', [
+            'token' => $this->token
+        ]);
     }
 
     public function user(): BelongsTo

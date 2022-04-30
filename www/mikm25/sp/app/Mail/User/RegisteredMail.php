@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\URL;
 
 class RegisteredMail extends Mailable
 {
@@ -38,16 +37,7 @@ class RegisteredMail extends Mailable
     {
         return $this->markdown('mails.user.registered', [
             'user' => $this->user,
-            'verificationLink' => $this->getVerificationLink(),
+            'verificationLink' => $this->verification->verification_link,
         ]);
-    }
-
-    private function getVerificationLink(): string
-    {
-        return URL::temporarySignedRoute(
-            'auth.email-verification.verify',
-            $this->verification->valid_until,
-            ['token' => $this->verification->token]
-        );
     }
 }

@@ -37,14 +37,7 @@ class ForgottenPasswordMail extends Mailable
     {
         return $this->markdown('mails.user.forgotten-password', [
             'user' => $this->user,
-            'resetLink' => $this->getPasswordResetLink(),
-        ]);
-    }
-
-    private function getPasswordResetLink(): string
-    {
-        return route('auth.password-reset.form', [
-            'token' => $this->passwordReset->token,
+            'resetLink' => $this->passwordReset->password_reset_link,
         ]);
     }
 }

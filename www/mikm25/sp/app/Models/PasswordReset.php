@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read bool $is_valid
  * @see PasswordReset::getIsUsableAttribute()
  * @property-read bool $is_usable
+ * @see PasswordReset::getPasswordResetLinkAttribute()
+ * @property-read string $password_reset_link
  *
  * @property-read User $user
  *
@@ -48,6 +50,7 @@ class PasswordReset extends Model
     protected $appends = [
         'is_valid',
         'is_usable',
+        'password_reset_link',
     ];
 
     protected $casts = [
@@ -67,6 +70,13 @@ class PasswordReset extends Model
     public function getIsUsableAttribute(): bool
     {
         return $this->is_valid && ! $this->used;
+    }
+
+    public function getPasswordResetLinkAttribute(): string
+    {
+        return route('auth.password-reset.form', [
+            'token' => $this->token,
+        ]);
     }
 
     public function user(): BelongsTo
