@@ -13,7 +13,7 @@ class LogoutController extends Controller
         auth('web')->logout();
 
         return redirect()->route('auth.login')->with('status', [
-            'success' => __('status.auth.logout.success')
+            'success' => __('status.auth.logout.success'),
         ]);
     }
 }

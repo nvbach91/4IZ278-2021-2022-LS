@@ -25,11 +25,11 @@ class Branch extends Model
     protected $table = 'branches';
 
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     protected $casts = [
-        'name' => 'string'
+        'name' => 'string',
     ];
 
     public function getTranslatedNameAttribute(): string

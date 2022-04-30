@@ -16,7 +16,7 @@ class RepositoryServiceProvider extends ServiceProvider implements DeferrablePro
      */
     private $repositories = [
         UserRepositoryInterface::class => UserRepository::class,
-        EmailVerificationRepositoryInterface::class => EmailVerificationRepository::class
+        EmailVerificationRepositoryInterface::class => EmailVerificationRepository::class,
     ];
 
     public function register(): void

@@ -14,8 +14,8 @@ class DashboardController extends Controller
             'dashboards' => [
                 new MonthlyPositionsDashboard(),
                 new MonthlyPositionClicksDashboard(),
-                new MonthlyPositionReactionsDashboard()
-            ]
+                new MonthlyPositionReactionsDashboard(),
+            ],
         ]);
     }
 }

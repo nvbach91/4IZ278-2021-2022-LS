@@ -17,7 +17,7 @@ class RegisterService
         $user->password = $request->getPassword();
         $user->phone_number = $request->getPhone();
 
-        if (!$user->save()) {
+        if (! $user->save()) {
             return null;
         }
 

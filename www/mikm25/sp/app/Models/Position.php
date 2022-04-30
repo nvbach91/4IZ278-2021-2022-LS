@@ -63,7 +63,7 @@ class Position extends Model
     ];
 
     protected $appends = [
-        'is_valid'
+        'is_valid',
     ];
 
     protected $casts = [

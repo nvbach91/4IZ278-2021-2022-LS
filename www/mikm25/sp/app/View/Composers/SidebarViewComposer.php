@@ -16,12 +16,12 @@ class SidebarViewComposer
             'app.dashboard' => [
                 'text' => __('pages.app.dashboard'),
                 'icon' => 'bi bi-house',
-                'active' => $request->is('app/dashboard*')
+                'active' => $request->is('app/dashboard*'),
             ],
             'app.positions.index' => [
                 'text' => __('pages.app.positions'),
                 'icon' => 'bi bi-briefcase',
-                'active' => $request->is('app/positions*')
+                'active' => $request->is('app/positions*'),
             ],
         ]);
     }

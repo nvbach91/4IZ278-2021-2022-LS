@@ -22,11 +22,11 @@ class PositionClick extends Model
     protected $table = 'position_clicks';
 
     protected $fillable = [
-        'position_id'
+        'position_id',
     ];
 
     protected $casts = [
-        'position_id'
+        'position_id',
     ];
 
     public function position(): BelongsTo

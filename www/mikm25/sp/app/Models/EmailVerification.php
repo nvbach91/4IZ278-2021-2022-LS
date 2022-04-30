@@ -42,7 +42,7 @@ class EmailVerification extends Model
     ];
 
     protected $attributes = [
-        'used' => false
+        'used' => false,
     ];
 
     protected $appends = [

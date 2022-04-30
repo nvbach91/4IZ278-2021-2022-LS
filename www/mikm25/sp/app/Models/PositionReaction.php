@@ -22,11 +22,11 @@ class PositionReaction extends Model
     protected $table = 'position_reactions';
 
     protected $fillable = [
-        'position_id'
+        'position_id',
     ];
 
     protected $casts = [
-        'position_id'
+        'position_id',
     ];
 
     public function position(): BelongsTo

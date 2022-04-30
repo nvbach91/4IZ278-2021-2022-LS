@@ -4,7 +4,6 @@ namespace App\Mail\User;
 
 use App\Models\EmailVerification;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;

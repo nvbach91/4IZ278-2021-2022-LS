@@ -17,7 +17,7 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             // Append flash message
             session()->flash('status', [
-                'danger' => __('status.auth.unauthenticated')
+                'danger' => __('status.auth.unauthenticated'),
             ]);
 
             return route('auth.login');
