@@ -13,16 +13,21 @@ return [
             'action' => 'Potvrdit emailovou adresu',
         ],
 
-        'resend_email_verification' => [
+        'email_verification' => [
             'subject' => 'Potvrzení emailové adresy do systému :appName',
             'line1' => 'pro ověření své emailové adresy použijte tlačítko níže.',
             'action' => 'Potvrdit emailovou adresu',
         ],
 
         'forgotten_password' => [
-            'subject' => 'Obnovení hesla do systému :appName',
+            'subject' => 'Zapomenuté heslo do systému :appName',
             'line1' => 'pro nastavení nového hesla použijte tlačítko níže. Pokud jste o nastavení hesla nežádali, můžete tento email ignorovat.',
             'action' => 'Nastavit nové heslo',
         ],
+
+        'password_reset' => [
+            'subject' => 'Změna hesla v systému :appName',
+            'line1' => 'Vaše heslo do aplikace bylo změněno. Pokud jste si v poslední době heslo neměnil, neprodleně kontaktujte podporu na email :supportEmail.'
+        ]
     ],
 ];

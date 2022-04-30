@@ -7,8 +7,9 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\URL;
 
-class ResendEmailVerificationMail extends Mailable
+class RegisteredMail extends Mailable
 {
     use Queueable;
     use SerializesModels;
@@ -28,14 +29,14 @@ class ResendEmailVerificationMail extends Mailable
         $this->user = $user;
         $this->verification = $verification;
 
-        $this->subject = __('mails.user.resend_email_verification.subject', [
+        $this->subject = __('mails.user.registered.subject', [
             'appName' => config('app.name'),
         ]);
     }
 
     public function build(): self
     {
-        return $this->markdown('mails.user.resend-email-verification', [
+        return $this->markdown('mails.user.registered', [
             'user' => $this->user,
             'verificationLink' => $this->getVerificationLink(),
         ]);
@@ -43,8 +44,10 @@ class ResendEmailVerificationMail extends Mailable
 
     private function getVerificationLink(): string
     {
-        return route('auth.email-verification.verify', [
-            'token' => $this->verification->token,
-        ]);
+        return URL::temporarySignedRoute(
+            'auth.email-verification.verify',
+            $this->verification->valid_until,
+            ['token' => $this->verification->token]
+        );
     }
 }

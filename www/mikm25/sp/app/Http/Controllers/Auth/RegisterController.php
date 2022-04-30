@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Notifications\User\UserRegisteredNotification;
+use App\Notifications\User\RegisteredNotification;
 use App\Repositories\EmailVerification\EmailVerificationRepositoryInterface;
 use App\Services\Auth\RegisterService;
 use Illuminate\Http\RedirectResponse;
@@ -49,7 +49,7 @@ class RegisterController extends Controller
 
         $emailVerification = $this->verificationRepository->createForUser($user);
 
-        $user->notify(new UserRegisteredNotification($emailVerification));
+        $user->notify(new RegisteredNotification($emailVerification));
 
         return redirect()
             ->route('auth.login', ['email' => $user->email])

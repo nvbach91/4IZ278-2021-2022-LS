@@ -30,7 +30,7 @@
                         {{ __('pages.auth.login') }}
                     </a>
                     <button type="submit" class="btn btn-primary">
-                        {{ __('common.buttons..send') }}
+                        {{ __('common.buttons.send') }}
                     </button>
                 </div>
             </form>

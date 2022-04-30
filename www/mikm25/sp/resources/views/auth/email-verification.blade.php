@@ -1,13 +1,13 @@
 @extends('templates.auth')
 
 @section('title')
-    {{ __('pages.auth.resend_email_verification') }}
+    {{ __('pages.auth.email_verification') }}
 @endsection
 
 @section('card')
     <div class="card">
         <div class="card-header">
-            {{ __('pages.auth.resend_email_verification') }}
+            {{ __('pages.auth.email_verification') }}
         </div>
         <div class="card-body">
             <form action="{{ route('auth.email-verification.resend') }}" method="post">

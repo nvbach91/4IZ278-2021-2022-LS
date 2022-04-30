@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\ForgottenPasswordRequest;
-use App\Http\Requests\Auth\PasswordResetRequest;
-use App\Notifications\User\SendPasswordResetNotification;
+use App\Http\Requests\Auth\ForgottenPasswordSendRequest;
+use App\Notifications\User\ForgottenPasswordNotification;
 use App\Repositories\PasswordReset\PasswordResetRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class ForgottenPasswordController extends Controller
 {
@@ -31,12 +29,12 @@ class ForgottenPasswordController extends Controller
         $this->passwordResetRepository = $passwordResetRepository;
     }
 
-    public function showForm(): string
+    public function form(): string
     {
         return view('auth.forgotten-password');
     }
 
-    public function sendLink(ForgottenPasswordRequest $request): RedirectResponse
+    public function send(ForgottenPasswordSendRequest $request): RedirectResponse
     {
         $user = $this->userRepository->getUserByEmail($request->getEmail());
 
@@ -48,54 +46,10 @@ class ForgottenPasswordController extends Controller
 
         $passwordReset = $this->passwordResetRepository->createForUser($user);
 
-        $user->notify(new SendPasswordResetNotification($passwordReset));
+        $user->notify(new ForgottenPasswordNotification($passwordReset));
 
         return redirect()->route('auth.forgotten-password.form')->with('status', [
             'success' => __('status.auth.forgotten_password.success'),
-        ]);
-    }
-
-    public function setupForm(Request $request): string
-    {
-        if (! $request->filled('token')) {
-            return redirect()->route('auth.login')->with('status', [
-                'danger' => __('status.auth.forgotten_password.invalid_url'),
-            ]);
-        }
-
-        $token = (string) $request->get('token');
-
-        $passwordReset = $this->passwordResetRepository->getLatest();
-
-        if ($passwordReset === null || $passwordReset->token !== $token || ! $passwordReset->is_usable) {
-            return redirect()->route('auth.login')->with('status', [
-                'danger' => __('status.auth.forgotten_password.invalid_url'),
-            ]);
-        }
-
-        return view('auth.forgotten-password-reset', [
-            'token' => $passwordReset->token,
-        ]);
-    }
-
-    public function reset(PasswordResetRequest $request, string $token): RedirectResponse
-    {
-        $passwordReset = $this->passwordResetRepository->getByToken($token);
-
-        if ($passwordReset === null || ! $passwordReset->is_usable) {
-            return redirect()->route('auth.login')->with('status', [
-                'danger' => __('status.auth.forgotten_password.invalid_url'),
-            ]);
-        }
-
-        $this->userRepository->resetPassword($passwordReset->user, $request->getPassword());
-
-        $this->passwordResetRepository->markAsUsed($passwordReset);
-
-        // TODO send reset password notification
-
-        return redirect()->route('auth.login')->with('status', [
-            'success' => __('status.auth.forgotten_password.reset_success'),
         ]);
     }
 }

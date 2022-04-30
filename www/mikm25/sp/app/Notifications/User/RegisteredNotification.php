@@ -2,27 +2,25 @@
 
 namespace App\Notifications\User;
 
-use App\Mail\User\PasswordResetMail;
-use App\Mail\User\ResendEmailVerificationMail;
+use App\Mail\User\RegisteredMail;
 use App\Models\EmailVerification;
-use App\Models\PasswordReset;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 
-class SendPasswordResetNotification extends Notification implements ShouldQueue
+class RegisteredNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     /**
-     * @var PasswordReset
+     * @var EmailVerification
      */
-    private $passwordReset;
+    private $verification;
 
-    public function __construct(PasswordReset $passwordReset)
+    public function __construct(EmailVerification $verification)
     {
-        $this->passwordReset = $passwordReset;
+        $this->verification = $verification;
     }
 
     public function via(User $notifiable): array
@@ -30,9 +28,9 @@ class SendPasswordResetNotification extends Notification implements ShouldQueue
         return ['mail'];
     }
 
-    public function toMail(User $notifiable): PasswordResetMail
+    public function toMail(User $notifiable): RegisteredMail
     {
-        return (new PasswordResetMail($notifiable, $this->passwordReset))
+        return (new RegisteredMail($notifiable, $this->verification))
             ->to($notifiable->email);
     }
 

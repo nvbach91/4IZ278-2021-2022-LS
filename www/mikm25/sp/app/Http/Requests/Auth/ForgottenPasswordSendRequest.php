@@ -4,7 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResendEmailVerificationRequest extends FormRequest
+class ForgottenPasswordSendRequest extends FormRequest
 {
     public function authorize(): bool
     {

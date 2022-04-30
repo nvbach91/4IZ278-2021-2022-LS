@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Http\Requests\Traits\WithPasswordData;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
 class PasswordResetRequest extends FormRequest
 {
+    use WithPasswordData;
+
     public function authorize(): bool
     {
         return ! auth('web')->check();
@@ -14,17 +16,7 @@ class PasswordResetRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
-            'password' => [
-                'required',
-                'string',
-                'confirmed',
-                app()->environment('local')
-                    ? Password::min(5) // for easy testing
-                    : Password::min(9)->numbers()->mixedCase()->letters()->symbols(),
-            ],
-            'password_confirmation' => 'required|string',
-        ];
+        return $this->getPasswordRules();
     }
 
     public function getPassword(): string

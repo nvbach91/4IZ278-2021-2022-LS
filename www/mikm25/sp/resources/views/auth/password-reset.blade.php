@@ -1,16 +1,16 @@
 @extends('templates.auth')
 
 @section('title')
-    {{ __('pages.auth.forgotten_password') }}
+    {{ __('pages.auth.password_reset') }}
 @endsection
 
 @section('card')
     <div class="card">
         <div class="card-header">
-            {{ __('pages.auth.forgotten_password') }}
+            {{ __('pages.auth.password_reset') }}
         </div>
         <div class="card-body">
-            <form action="{{ route('auth.forgotten-password.reset', ['token' => $token]) }}" method="post">
+            <form action="{{ route('auth.password-reset.reset', ['token' => $token]) }}" method="post">
                 @include('common.status')
                 @include('common.forms.errors')
                 {{ csrf_field() }}

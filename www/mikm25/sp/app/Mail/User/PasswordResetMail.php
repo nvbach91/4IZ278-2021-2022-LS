@@ -2,7 +2,6 @@
 
 namespace App\Mail\User;
 
-use App\Models\PasswordReset;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -18,33 +17,19 @@ class PasswordResetMail extends Mailable
      */
     private $user;
 
-    /**
-     * @var PasswordReset
-     */
-    private $passwordReset;
-
-    public function __construct(User $user, PasswordReset $passwordReset)
+    public function __construct(User $user)
     {
         $this->user = $user;
-        $this->passwordReset = $passwordReset;
 
-        $this->subject = __('mails.user.forgotten_password.subject', [
+        $this->subject = __('mails.user.password_reset.subject', [
             'appName' => config('app.name'),
         ]);
     }
 
     public function build(): self
     {
-        return $this->markdown('mails.user.forgotten-password', [
+        return $this->markdown('mails.user.password-reset', [
             'user' => $this->user,
-            'resetLink' => $this->getForgottenPasswordLink(),
-        ]);
-    }
-
-    private function getForgottenPasswordLink(): string
-    {
-        return route('auth.forgotten-password.reset.form', [
-            'token' => $this->passwordReset->token,
         ]);
     }
 }

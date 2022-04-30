@@ -1,7 +1,7 @@
 <?php
 
-use App\Mail\User\ResendEmailVerificationMail;
-use App\Mail\User\UserRegisteredMail;
+use App\Mail\User\EmailVerificationMail;
+use App\Mail\User\RegisteredMail;
 use App\Models\EmailVerification;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +30,7 @@ Route::group(['prefix' => 'user'], static function (): void {
             'user_id' => $user->id,
         ]);
 
-        return new UserRegisteredMail($user, $emailVerification);
+        return new RegisteredMail($user, $emailVerification);
     });
 
     Route::get('resend-verification-link', static function () {
@@ -42,6 +42,6 @@ Route::group(['prefix' => 'user'], static function (): void {
             'user_id' => $user->id,
         ]);
 
-        return new ResendEmailVerificationMail($user, $emailVerification);
+        return new EmailVerificationMail($user, $emailVerification);
     });
 });

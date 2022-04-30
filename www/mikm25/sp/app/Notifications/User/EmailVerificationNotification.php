@@ -2,14 +2,14 @@
 
 namespace App\Notifications\User;
 
-use App\Mail\User\ResendEmailVerificationMail;
+use App\Mail\User\EmailVerificationMail;
 use App\Models\EmailVerification;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 
-class ResendEmailVerificationNotification extends Notification implements ShouldQueue
+class EmailVerificationNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -28,9 +28,9 @@ class ResendEmailVerificationNotification extends Notification implements Should
         return ['mail'];
     }
 
-    public function toMail(User $notifiable): ResendEmailVerificationMail
+    public function toMail(User $notifiable): EmailVerificationMail
     {
-        return (new ResendEmailVerificationMail($notifiable, $this->verification))
+        return (new EmailVerificationMail($notifiable, $this->verification))
             ->to($notifiable->email);
     }
 

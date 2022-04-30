@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\ResendEmailVerificationRequest;
-use App\Notifications\User\ResendEmailVerificationNotification;
+use App\Http\Requests\Auth\EmailVerificationResendRequest;
+use App\Notifications\User\EmailVerificationNotification;
 use App\Repositories\EmailVerification\EmailVerificationRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
@@ -30,27 +30,27 @@ class EmailVerificationController extends Controller
         $this->verificationRepository = $verificationRepository;
     }
 
-    public function resendForm(): string
+    public function form(): string
     {
-        return view('auth.resend-email-verification');
+        return view('auth.email-verification');
     }
 
-    public function resend(ResendEmailVerificationRequest $request): RedirectResponse
+    public function resend(EmailVerificationResendRequest $request): RedirectResponse
     {
         $user = $this->userRepository->getUserByEmail($request->getEmail());
 
         if ($user === null || $user->is_email_verified) {
-            return redirect()->route('auth.email-verification.resend.form')->with('status', [
-                'success' => __('status.auth.resend_email_verification.success'),
+            return redirect()->route('auth.email-verification.form')->with('status', [
+                'success' => __('status.auth.email_verification.resend_success'),
             ]);
         }
 
         $verification = $this->verificationRepository->createForUser($user);
 
-        $user->notify(new ResendEmailVerificationNotification($verification));
+        $user->notify(new EmailVerificationNotification($verification));
 
-        return redirect()->route('auth.email-verification.resend.form')->with('status', [
-            'success' => __('status.auth.resend_email_verification.success'),
+        return redirect()->route('auth.email-verification.form')->with('status', [
+            'success' => __('status.auth.email_verification.resend_success'),
         ]);
     }
 

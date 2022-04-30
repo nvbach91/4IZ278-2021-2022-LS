@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\ForgottenPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
@@ -33,18 +34,19 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
         Route::post('login', [LoginController::class, 'login'])->name('login.submit');
 
         Route::group(['prefix' => 'email-verification', 'as' => 'email-verification.'], static function (): void {
-            Route::get('verify', [EmailVerificationController::class, 'verify'])->name('verify');
-
-            Route::get('/', [EmailVerificationController::class, 'resendForm'])->name('resend.form');
+            Route::get('/', [EmailVerificationController::class, 'form'])->name('form');
             Route::post('resend', [EmailVerificationController::class, 'resend'])->name('resend');
+            Route::get('verify', [EmailVerificationController::class, 'verify'])->name('verify');
         });
 
         Route::group(['prefix' => 'forgotten-password', 'as' => 'forgotten-password.'], static function (): void {
-            Route::get('/', [ForgottenPasswordController::class, 'showForm'])->name('form');
-            Route::post('send-link', [ForgottenPasswordController::class, 'sendLink'])->name('send');
+            Route::get('/', [ForgottenPasswordController::class, 'form'])->name('form');
+            Route::post('send', [ForgottenPasswordController::class, 'send'])->name('send');
+        });
 
-            Route::get('reset', [ForgottenPasswordController::class, 'setupForm'])->name('reset.form');
-            Route::post('reset/{token}', [ForgottenPasswordController::class, 'reset'])->name('reset')
+        Route::group(['prefix' => 'password-reset', 'as' => 'password-reset.'], static function (): void {
+            Route::get('/', [PasswordResetController::class, 'form'])->name('form');
+            Route::post('reset/{token}', [PasswordResetController::class, 'reset'])->name('reset')
                 ->whereUuid('token');
         });
     });

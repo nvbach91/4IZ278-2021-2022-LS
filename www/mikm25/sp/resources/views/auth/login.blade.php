@@ -24,7 +24,7 @@
                            class="form-control @error('email') is-invalid @enderror"
                            name="email" required autocomplete="email">
                     <small class="text-muted">
-                        {{ __('login.verification_link_help') }} <a href="{{ route('auth.email-verification.resend.form') }}">{{ __('common.click_here') }}</a>
+                        {{ __('login.verification_link_help') }} <a href="{{ route('auth.email-verification.form') }}">{{ __('common.click_here') }}</a>
                     </small>
                     @include('common.forms.error', ['field' => 'email'])
                 </div>
@@ -47,7 +47,7 @@
                         </label>
                     </div>
 
-                    <a href="{{ route('auth.forgotten-password.form') }}">{{ __('login.forgot_password') }}</a>
+                    <a href="{{ route('auth.forgotten-password.form') }}">{{ __('login.forgotten_password') }}</a>
                 </div>
 
                 <div class="d-flex justify-content-between">

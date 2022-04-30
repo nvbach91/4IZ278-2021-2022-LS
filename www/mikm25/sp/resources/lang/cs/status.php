@@ -18,14 +18,15 @@ return [
         'email_verification' => [
             'success' => 'Emailová adresa byla úspěšně potvrzena. Nyní se můžete přihlásit.',
             'invalid_url' => 'Odkaz pro ověření emailové adresy není platný.',
-        ],
-        'resend_email_verification' => [
-            'success' => 'Pokud zadaný email v systému existuje a nebyl ještě ověřen, přijde na něj odkaz pro verifikaci emailové adresy.',
+            'resend_success' => 'Pokud zadaný email v systému existuje a nebyl ještě ověřen, přijde na něj odkaz pro verifikaci emailové adresy.',
         ],
         'forgotten_password' => [
             'success' => 'Pokud zadaný email v systému existuje, přijde na něj odkaz pro nastavení nového hesla.',
             'invalid_url' => 'Odkaz pro nastavení nového hesla není platný.',
-            'reset_success' => 'Heslo bylo úspěšně obnoveno.',
         ],
+        'password_reset' => [
+            'invalid_url' => 'Odkaz pro nastavení nového hesla není platný.',
+            'success' => 'Heslo bylo úspěšně obnoveno.',
+        ]
     ],
 ];
