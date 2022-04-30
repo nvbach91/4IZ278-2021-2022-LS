@@ -31,7 +31,12 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
         Route::get('login', [LoginController::class, 'index'])->name('login');
         Route::post('login', [LoginController::class, 'login'])->name('login.submit');
 
-        Route::get('verify-email', [EmailVerificationController::class, 'verify'])->name('email-verification');
+        Route::group(['prefix' => 'email-verification', 'as' => 'email-verification.'], static function (): void {
+            Route::get('verify', [EmailVerificationController::class, 'verify'])->name('verify');
+
+            Route::get('resend', [EmailVerificationController::class, 'resendForm'])->name('resend.form');
+            Route::post('resend', [EmailVerificationController::class, 'resend'])->name('resend');
+        });
     });
 
     // Guarded logout route

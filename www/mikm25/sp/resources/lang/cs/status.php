@@ -18,6 +18,9 @@ return [
         'email_verification' => [
             'success' => 'Emailová adresa byla úspěšně potvrzena. Nyní se můžete přihlásit.',
             'invalid_url' => 'Odkaz pro ověření emailové adresy není platný.'
-        ]
+        ],
+        'resend_email_verification' => [
+            'success' => 'Pokud zadaný email v systému existuje a nebyl ještě ověřen, přijde na něj odkaz pro verifikaci emailové adresy.',
+        ],
     ]
 ];

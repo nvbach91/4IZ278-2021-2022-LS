@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ResendEmailVerificationRequest;
+use App\Notifications\User\ResendEmailVerificationNotification;
 use App\Repositories\EmailVerification\EmailVerificationRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +15,7 @@ class EmailVerificationController extends Controller
     /**
      * @var UserRepositoryInterface
      */
-    private $repository;
+    private $userRepository;
 
     /**
      * @var EmailVerificationRepositoryInterface
@@ -21,11 +23,35 @@ class EmailVerificationController extends Controller
     private $verificationRepository;
 
     public function __construct(
-        UserRepositoryInterface $repository,
+        UserRepositoryInterface $userRepository,
         EmailVerificationRepositoryInterface $verificationRepository
     ) {
-        $this->repository = $repository;
+        $this->userRepository = $userRepository;
         $this->verificationRepository = $verificationRepository;
+    }
+
+    public function resendForm(): string
+    {
+        return view('auth.resend-verification');
+    }
+
+    public function resend(ResendEmailVerificationRequest $request): RedirectResponse
+    {
+        $user = $this->userRepository->getUserByEmail($request->getEmail());
+
+        if ($user === null || $user->is_email_verified) {
+            return redirect()->route('auth.email-verification.resend.form')->with('status', [
+                'success' => __('status.auth.resend_email_verification.success'),
+            ]);
+        }
+
+        $verification = $this->verificationRepository->createForUser($user);
+
+        $user->notify(new ResendEmailVerificationNotification($verification));
+
+        return redirect()->route('auth.email-verification.resend.form')->with('status', [
+            'success' => __('status.auth.resend_email_verification.success'),
+        ]);
     }
 
     public function verify(Request $request): RedirectResponse
@@ -48,7 +74,7 @@ class EmailVerificationController extends Controller
 
         $this->verificationRepository->markAsUsed($verification);
 
-        $this->repository->verifyEmail($verification->user);
+        $this->userRepository->verifyEmail($verification->user);
 
         return redirect()->route('auth.login', [
             'email' => $verification->user->email,

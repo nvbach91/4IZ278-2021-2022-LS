@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\URL;
 
-class UserRegisteredMail extends Mailable
+class ResendEmailVerificationMail extends Mailable
 {
     use Queueable;
     use SerializesModels;
@@ -29,14 +29,14 @@ class UserRegisteredMail extends Mailable
         $this->user = $user;
         $this->verification = $verification;
 
-        $this->subject = __('mails.user.registered.subject', [
+        $this->subject = __('mails.user.resend_email_verification.subject', [
             'appName' => config('app.name'),
         ]);
     }
 
     public function build(): self
     {
-        return $this->markdown('mails.user.registered', [
+        return $this->markdown('mails.user.resend-email-verification', [
             'user' => $this->user,
             'verificationLink' => $this->getVerificationLink(),
         ]);

@@ -6,8 +6,10 @@
 
 @section('card')
     <div class="card">
+        <div class="card-header">
+            {{ __('pages.auth.login') }}
+        </div>
         <div class="card-body">
-            <h1 class="h5 card-title">{{ __('pages.auth.login') }}</h1>
             <form action="{{ route('auth.login.submit') }}" method="post">
                 @include('common.status')
                 @include('common.forms.errors')
@@ -21,6 +23,9 @@
                     <input type="email" value="{{ old('email', $emailHint) }}" id="email"
                            class="form-control @error('email') is-invalid @enderror"
                            name="email" required autocomplete="email">
+                    <small class="text-muted">
+                        {{ __('login.verification_link_help') }} <a href="{{ route('auth.email-verification.resend.form') }}">{{ __('common.click_here') }}</a>
+                    </small>
                     @include('common.forms.error', ['field' => 'email'])
                 </div>
                 <div class="mb-3">
@@ -34,11 +39,15 @@
                     @include('common.forms.error', ['field' => 'password'])
                 </div>
 
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="remember_me" value="0" id="remember-me">
-                    <label class="form-check-label" for="remember-me">
-                        {{ __('login.remember_me') }}
-                    </label>
+                <div class="d-flex mb-3 justify-content-between">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="remember_me" value="0" id="remember-me">
+                        <label class="form-check-label" for="remember-me">
+                            {{ __('login.remember_me') }}
+                        </label>
+                    </div>
+
+                    <a href="#">{{ __('login.forgot_password') }}</a>
                 </div>
 
                 <div class="d-flex justify-content-between">
