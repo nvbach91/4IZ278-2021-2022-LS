@@ -30,7 +30,7 @@
                         {{ __('pages.auth.login') }}
                     </a>
                     <button type="submit" class="btn btn-primary">
-                        {{ __('email-verification.submit') }}
+                        {{ __('common.buttons.send') }}
                     </button>
                 </div>
             </form>

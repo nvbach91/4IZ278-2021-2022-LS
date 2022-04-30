@@ -45,7 +45,7 @@
                         {{ __('pages.auth.login') }}
                     </a>
                     <button type="submit" class="btn btn-primary">
-                        {{ __('forgotten-password.submit') }}
+                        {{ __('common.buttons.change') }}
                     </button>
                 </div>
             </form>
