@@ -20,9 +20,10 @@
                     <th>{{ __('models.position.salary_from') }}</th>
                     <th>{{ __('models.position.salary_to') }}</th>
                     <th>{{ __('models.position.external_url') }}</th>
-                    <th>{{ __('models.position.valid_from') }}</th>
-                    <th>{{ __('models.position.valid_until') }}</th>
+                    <th>{{ __('models.position.valid') }}</th>
                     <th>{{ __('models.position.company_name') }}</th>
+                    <th>{{ __('models.position.clicks') }}</th>
+                    <th>{{ __('models.position.reactions') }}</th>
                     <th>{{ __('tables.actions') }}</th>
                 </tr>
                 </thead>
@@ -41,9 +42,16 @@
                                 </a>
                             @endif
                         </td>
-                        <td>{{ $position->valid_from->format('Y-m-d') }}</td>
-                        <td>{{ $position->valid_until->format('Y-m-d') }}</td>
+                        <td>
+                            @if($position->is_valid)
+                                <span class="text-success">{{ __('common.yes') }}</span>
+                            @else
+                                <span class="text-danger">{{ __('common.no') }}</span>
+                            @endif
+                        </td>
                         <td>{{ $position->company_name }}</td>
+                        <td>{{ $position->clicks_count }}</td>
+                        <td>{{ $position->reactions_count }}</td>
                         <td>
                             <a href="#" class="btn btn-sm btn-primary">
                                 {{ __('common.buttons.detail') }}

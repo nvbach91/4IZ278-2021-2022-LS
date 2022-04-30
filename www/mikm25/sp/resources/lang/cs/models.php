@@ -23,8 +23,11 @@ return [
         'workplace_address' => 'Adresa pracoviště',
         'valid_from' => 'Platnost od',
         'valid_until' => 'Platnost do',
+        'valid' => 'Platná',
         'company_name' => 'Název společnosti',
         'company_size' => 'Velikost pozice',
         'min_practice_length' => 'Minimální praxe',
+        'clicks' => 'Počet kliknutí',
+        'reactions' => 'Počet reakcí'
     ]
 ];

@@ -14,4 +14,7 @@ return [
         'detail' => 'Detail'
     ],
     'link' => 'Odkaz',
+
+    'yes' => 'Ano',
+    'no' => 'Ne'
 ];
