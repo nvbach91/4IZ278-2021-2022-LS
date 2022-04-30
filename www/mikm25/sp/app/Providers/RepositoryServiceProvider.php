@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\EmailVerification\EmailVerificationRepository;
 use App\Repositories\EmailVerification\EmailVerificationRepositoryInterface;
+use App\Repositories\PasswordReset\PasswordResetRepository;
+use App\Repositories\PasswordReset\PasswordResetRepositoryInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Contracts\Support\DeferrableProvider;
@@ -17,6 +19,7 @@ class RepositoryServiceProvider extends ServiceProvider implements DeferrablePro
     private $repositories = [
         UserRepositoryInterface::class => UserRepository::class,
         EmailVerificationRepositoryInterface::class => EmailVerificationRepository::class,
+        PasswordResetRepositoryInterface::class => PasswordResetRepository::class,
     ];
 
     public function register(): void

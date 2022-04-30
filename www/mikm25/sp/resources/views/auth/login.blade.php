@@ -47,7 +47,7 @@
                         </label>
                     </div>
 
-                    <a href="#">{{ __('login.forgot_password') }}</a>
+                    <a href="{{ route('auth.forgotten-password.form') }}">{{ __('login.forgot_password') }}</a>
                 </div>
 
                 <div class="d-flex justify-content-between">

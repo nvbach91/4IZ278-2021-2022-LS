@@ -4,7 +4,8 @@ return [
     'auth' => [
         'register' => 'Registrace',
         'login' => 'Přihlášení',
-        'email_verification' => 'Potvrzení emailové adresy',
+        'resend_email_verification' => 'Potvrzení emailové adresy',
+        'forgotten_password' => 'Zapomenuté heslo'
     ],
     'app' => [
         'dashboard' => 'Přehled',

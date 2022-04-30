@@ -33,6 +33,7 @@ use Illuminate\Support\Facades\Hash;
  * @property-read list<Tag> $tags
  * @property-read list<Position> $positions
  * @property-read list<EmailVerification> $email_verifications
+ * @property-read list<PasswordReset> $password_resets
  *
  * @method static UserBuilder query()
  */
@@ -88,6 +89,11 @@ class User extends Authenticatable
     public function emailVerifications(): HasMany
     {
         return $this->hasMany(EmailVerification::class, 'user_id', 'id');
+    }
+
+    public function passwordResets(): HasMany
+    {
+        return $this->hasMany(PasswordReset::class, 'user_id', 'id');
     }
 
     public function positions(): HasMany

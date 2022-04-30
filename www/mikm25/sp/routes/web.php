@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Auth\ForgottenPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -34,8 +35,17 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
         Route::group(['prefix' => 'email-verification', 'as' => 'email-verification.'], static function (): void {
             Route::get('verify', [EmailVerificationController::class, 'verify'])->name('verify');
 
-            Route::get('resend', [EmailVerificationController::class, 'resendForm'])->name('resend.form');
+            Route::get('/', [EmailVerificationController::class, 'resendForm'])->name('resend.form');
             Route::post('resend', [EmailVerificationController::class, 'resend'])->name('resend');
+        });
+
+        Route::group(['prefix' => 'forgotten-password', 'as' => 'forgotten-password.'], static function (): void {
+            Route::get('/', [ForgottenPasswordController::class, 'showForm'])->name('form');
+            Route::post('send-link', [ForgottenPasswordController::class, 'sendLink'])->name('send');
+
+            Route::get('reset', [ForgottenPasswordController::class, 'setupForm'])->name('reset.form');
+            Route::post('reset/{token}', [ForgottenPasswordController::class, 'reset'])->name('reset')
+                ->whereUuid('token');
         });
     });
 

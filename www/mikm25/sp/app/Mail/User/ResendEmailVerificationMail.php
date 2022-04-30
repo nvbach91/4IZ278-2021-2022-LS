@@ -7,7 +7,6 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\URL;
 
 class ResendEmailVerificationMail extends Mailable
 {
@@ -44,10 +43,8 @@ class ResendEmailVerificationMail extends Mailable
 
     private function getVerificationLink(): string
     {
-        return URL::temporarySignedRoute(
-            'auth.email-verification.verify',
-            $this->verification->valid_until,
-            ['token' => $this->verification->token]
-        );
+        return route('auth.email-verification.verify', [
+            'token' => $this->verification->token,
+        ]);
     }
 }

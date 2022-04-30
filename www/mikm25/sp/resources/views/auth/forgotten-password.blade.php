@@ -1,16 +1,16 @@
 @extends('templates.auth')
 
 @section('title')
-    {{ __('pages.auth.register') }}
+    {{ __('pages.auth.forgotten_password') }}
 @endsection
 
 @section('card')
     <div class="card">
         <div class="card-header">
-            {{ __('pages.auth.email_verification') }}
+            {{ __('pages.auth.forgotten_password') }}
         </div>
         <div class="card-body">
-            <form action="{{ route('auth.email-verification.resend') }}" method="post">
+            <form action="{{ route('auth.forgotten-password.send') }}" method="post">
                 @include('common.status')
                 @include('common.forms.errors')
                 {{ csrf_field() }}
@@ -30,7 +30,7 @@
                         {{ __('pages.auth.login') }}
                     </a>
                     <button type="submit" class="btn btn-primary">
-                        {{ __('email-verification.submit') }}
+                        {{ __('forgotten-password.submit') }}
                     </button>
                 </div>
             </form>

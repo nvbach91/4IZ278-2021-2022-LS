@@ -32,7 +32,7 @@ class EmailVerificationController extends Controller
 
     public function resendForm(): string
     {
-        return view('auth.resend-verification');
+        return view('auth.resend-email-verification');
     }
 
     public function resend(ResendEmailVerificationRequest $request): RedirectResponse
@@ -56,7 +56,7 @@ class EmailVerificationController extends Controller
 
     public function verify(Request $request): RedirectResponse
     {
-        if (! $request->hasValidSignature() || ! $request->filled('token')) {
+        if (! $request->filled('token')) {
             return redirect()->route('auth.login')->with('status', [
                 'danger' => __('status.auth.email_verification.invalid_url'),
             ]);

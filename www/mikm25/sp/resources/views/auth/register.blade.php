@@ -65,7 +65,7 @@
                            name="password" required
                            autocomplete="new-password">
                     <small class="text-muted">
-                        {{ __('register.password_hint', ['min' => 8]) }}
+                        {{ __('register.password_hint', ['min' => 9]) }}
                     </small>
                     @include('common.forms.error', ['field' => 'password'])
                 </div>

@@ -22,4 +22,12 @@ class UserRepository implements UserRepositoryInterface
 
         return $user;
     }
+
+    public function resetPassword(User $user, string $password): User
+    {
+        $user->password = $password;
+        $user->save();
+
+        return $user;
+    }
 }
