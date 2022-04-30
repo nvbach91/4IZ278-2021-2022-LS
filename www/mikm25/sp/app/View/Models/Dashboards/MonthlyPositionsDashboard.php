@@ -14,7 +14,7 @@ class MonthlyPositionsDashboard implements DashboardInterface
 
     public function getCount(): ?int
     {
-        return once(static function (): ?int {
+        return once(static function (): int {
             return Position::query()
                 ->ofUserId(auth('web')->user()->id)
                 ->whereDate('created_at', '>=', Carbon::now()->startOfMonth()->startOfDay())
