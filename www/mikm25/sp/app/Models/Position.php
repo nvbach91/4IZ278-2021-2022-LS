@@ -126,7 +126,7 @@ class Position extends Model
 
     public function reactions(): HasMany
     {
-        return $this->hasMany(PositionReaction::class, 'reaction_id', 'id');
+        return $this->hasMany(PositionReaction::class, 'position_id', 'id');
     }
 
     public function newEloquentBuilder($query): PositionBuilder

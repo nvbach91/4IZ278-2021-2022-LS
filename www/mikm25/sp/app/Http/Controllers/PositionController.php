@@ -9,8 +9,12 @@ class PositionController extends Controller
     public function index(): string
     {
         $positions = Position::query()
+            ->withCount([
+                'clicks',
+                'reactions',
+            ])
             ->ofUserId(auth('web')->user()->id)
-            ->paginate(50);
+            ->paginate(15);
 
         return view('app.position.index', [
             'positions' => $positions
