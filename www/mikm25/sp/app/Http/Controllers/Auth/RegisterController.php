@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Notifications\User\UserRegisteredNotification;
+use App\Repositories\EmailVerification\EmailVerificationRepositoryInterface;
 use App\Services\Auth\RegisterService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,15 +17,23 @@ class RegisterController extends Controller
      */
     private $service;
 
-    public function __construct(RegisterService $service)
-    {
+    /**
+     * @var EmailVerificationRepositoryInterface
+     */
+    private $verificationRepository;
+
+    public function __construct(
+        RegisterService $service,
+        EmailVerificationRepositoryInterface $verificationRepository
+    ) {
         $this->service = $service;
+        $this->verificationRepository = $verificationRepository;
     }
 
     public function index(Request $request): string
     {
         return view('auth.register', [
-            'emailHint' => $request->get('email')
+            'emailHint' => $request->get('email'),
         ]);
     }
 
@@ -33,14 +43,18 @@ class RegisterController extends Controller
 
         if ($user === null) {
             return redirect()->back()->withInput()->with('status', [
-                'danger' => __('status.auth.register.error')
+                'danger' => __('status.auth.register.error'),
             ]);
         }
+
+        $emailVerification = $this->verificationRepository->createForUser($user);
+
+        $user->notify(new UserRegisteredNotification($emailVerification));
 
         return redirect()
             ->route('auth.login', ['email' => $user->email])
             ->with('status', [
-                'success' => __('status.auth.register.success')
+                'success' => __('status.auth.register.success'),
             ]);
     }
 }

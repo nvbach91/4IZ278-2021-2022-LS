@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -29,15 +30,17 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
 
         Route::get('login', [LoginController::class, 'index'])->name('login');
         Route::post('login', [LoginController::class, 'login'])->name('login.submit');
+
+        Route::get('verify-email', [EmailVerificationController::class, 'verify'])->name('email-verification');
     });
 
     // Guarded logout route
     Route::post('logout', [LogoutController::class, 'logout'])
-        ->middleware('auth:web')
+        ->middleware(['auth:web', 'verified'])
         ->name('logout');
 });
 
-Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth:web'], static function (): void {
+Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'verified']], static function (): void {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::group(['prefix' => 'positions', 'as' => 'positions.'], static function (): void {

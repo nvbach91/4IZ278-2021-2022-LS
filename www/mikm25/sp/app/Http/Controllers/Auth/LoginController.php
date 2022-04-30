@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Repositories\User\UserRepositoryInterface;
 use App\Services\Auth\LoginService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,9 +16,17 @@ class LoginController extends Controller
      */
     private $service;
 
-    public function __construct(LoginService $service)
-    {
+    /**
+     * @var UserRepositoryInterface
+     */
+    private $repository;
+
+    public function __construct(
+        LoginService $service,
+        UserRepositoryInterface $repository
+    ) {
         $this->service = $service;
+        $this->repository = $repository;
     }
 
     public function index(Request $request): string
@@ -29,12 +38,28 @@ class LoginController extends Controller
 
     public function login(LoginRequest $request): RedirectResponse
     {
-        if (! $this->service->loginWithRequest($request)) {
+        $user = $this->repository->getUserByEmail($request->getEmail());
+
+        if ($user === null) {
             return redirect()->back()->withInput()->with('status', [
-                'danger' => __('status.auth.login.error'),
+                'danger' => __('status.auth.login.error_credentials'),
             ]);
         }
 
-        return redirect()->route('app.dashboard');
+        if (! $user->is_email_verified) {
+            return redirect()->back()->withInput()->with('status', [
+                'danger' => __('status.auth.login.error_unverified'),
+            ]);
+        }
+
+        if (! $this->service->login($user, $request->getPassword(), $request->rememberMe())) {
+            return redirect()->back()->withInput()->with('status', [
+                'danger' => __('status.auth.login.error_credentials'),
+            ]);
+        }
+
+        return redirect()->route('app.dashboard')->with('status', [
+            'danger' => __('status.auth.login.success'),
+        ]);
     }
 }

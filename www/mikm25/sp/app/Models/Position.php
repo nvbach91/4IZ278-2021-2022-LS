@@ -29,7 +29,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon $updated_at
  *
  * @see Position::getIsValidAttribute()
- * @property-read boolean $is_valid
+ * @property-read bool $is_valid
  *
  * @property-read User $user
  * @property-read Branch $branch
@@ -60,6 +60,10 @@ class Position extends Model
         'min_practice_length',
         'clicked_times',
         'reacted_times',
+    ];
+
+    protected $appends = [
+        'is_valid'
     ];
 
     protected $casts = [

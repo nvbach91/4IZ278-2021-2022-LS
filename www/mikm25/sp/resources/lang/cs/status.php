@@ -8,10 +8,16 @@ return [
             'error' => 'Při registraci nastala chyba.'
         ],
         'login' => [
-            'error' => 'Email nebo heslo není správné.'
+            'error_credentials' => 'Email nebo heslo není správné.',
+            'error_unverified' => 'Nejdříve musíte potvrdit svou emailovou adresu.',
+            'success' => 'Přihlášení proběhlo úspěšně.'
         ],
         'logout' => [
             'success' => 'Úspěšně jste byl odhlášen.'
+        ],
+        'email_verification' => [
+            'success' => 'Emailová adresa byla úspěšně potvrzena. Nyní se můžete přihlásit.',
+            'invalid_url' => 'Odkaz pro ověření emailové adresy není platný.'
         ]
     ]
 ];

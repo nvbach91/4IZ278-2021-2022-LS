@@ -27,8 +27,12 @@ use Illuminate\Support\Facades\Hash;
  * @see User::getFullNameAttribute()
  * @property-read string $full_name
  *
+ * @see User::getIsEmailVerifiedAttribute()
+ * @property-read bool $is_email_verified
+ *
  * @property-read list<Tag> $tags
  * @property-read list<Position> $positions
+ * @property-read list<EmailVerification> $email_verifications
  *
  * @method static UserBuilder query()
  */
@@ -71,9 +75,19 @@ class User extends Authenticatable
         return "$this->firstname $this->lastname";
     }
 
+    public function getIsEmailVerifiedAttribute(): bool
+    {
+        return ! empty($this->email_verified_at);
+    }
+
     public function tags(): HasMany
     {
         return $this->hasMany(Tag::class, 'user_id', 'id');
+    }
+
+    public function emailVerifications(): HasMany
+    {
+        return $this->hasMany(EmailVerification::class, 'user_id', 'id');
     }
 
     public function positions(): HasMany
