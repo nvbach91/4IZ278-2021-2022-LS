@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Constants\PositionTabConstants;
+use App\Http\Requests\Positions\PositionStoreRequest;
+use App\Models\Branch;
 use App\Models\Position;
 use App\View\Models\Dashboards\MonthlyClicksDashboard;
 use App\View\Models\Dashboards\MonthlyReactionsDashboard;
+use Illuminate\Http\RedirectResponse;
 
 class PositionController extends Controller
 {
@@ -26,7 +29,9 @@ class PositionController extends Controller
 
     public function create(): string
     {
-        return view('app.position.create');
+        return view('app.position.create', [
+            'branches' => Branch::query()->get()
+        ]);
     }
 
     public function detail(Position $position, string $tab)
@@ -55,5 +60,10 @@ class PositionController extends Controller
             'position' => $position,
             'activeTab' => $tab,
         ]);
+    }
+
+    public function store(PositionStoreRequest $request): RedirectResponse
+    {
+        dd($request->all());
     }
 }

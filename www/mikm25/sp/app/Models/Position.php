@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property-read int $id
+ *
  * @property int $user_id
  * @property int $branch_id
  * @property string $name
@@ -22,8 +23,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $workplace_address
  * @property Carbon|null $valid_from
  * @property Carbon|null $valid_until
- * @property string $company_name
- * @property string $company_size
  * @property int|null $min_practice_length
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -35,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Branch $branch
  * @property-read list<PositionClick> $clicks
  * @property-read list<PositionReaction> $reactions
+ * @property-read Company|null $company null company means private job listing
  *
  * @method static PositionBuilder query()
  */
@@ -55,8 +55,6 @@ class Position extends Model
         'workplace_address',
         'valid_from',
         'valid_until',
-        'company_name',
-        'company_size',
         'min_practice_length',
         'clicked_times',
         'reacted_times',
@@ -77,8 +75,6 @@ class Position extends Model
         'workplace_address' => 'string',
         'valid_from' => 'date',
         'valid_until' => 'date',
-        'company_name' => 'string',
-        'company_size' => 'string',
         'min_practice_length' => 'integer',
         'clicked_times' => 'integer',
         'reacted_times' => 'integer',
@@ -127,6 +123,11 @@ class Position extends Model
     public function reactions(): HasMany
     {
         return $this->hasMany(PositionReaction::class, 'position_id', 'id');
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id', 'company');
     }
 
     public function newEloquentBuilder($query): PositionBuilder

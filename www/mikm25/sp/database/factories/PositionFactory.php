@@ -35,13 +35,6 @@ class PositionFactory extends Factory
             'workplace_address' => $this->faker->address,
             'valid_from' => Carbon::now()->subDays(5),
             'valid_until' => Carbon::now()->addDays(5),
-            'company_name' => $this->faker->company,
-            'company_size' => $this->faker->randomElement([
-                'bellow_10',
-                '10_to_50',
-                '50_to_100',
-                'above_100',
-            ]),
             'min_practice_length' => null,
         ];
     }

@@ -11,7 +11,7 @@ return [
         'email' => 'E-mail',
         'phone' => 'Telefonní číslo',
         'password' => 'Heslo',
-        'password_confirm' => 'Potvrzení hesla'
+        'password_confirm' => 'Potvrzení hesla',
     ],
     'position' => [
         'branch' => 'Obor',
@@ -24,10 +24,15 @@ return [
         'valid_from' => 'Platnost od',
         'valid_until' => 'Platnost do',
         'valid' => 'Platná',
-        'company_name' => 'Název společnosti',
-        'company_size' => 'Velikost pozice',
         'min_practice_length' => 'Minimální praxe',
         'clicks' => 'Počet kliknutí',
-        'reactions' => 'Počet reakcí'
-    ]
+        'reactions' => 'Počet reakcí',
+    ],
+    'company' => [
+        'name' => 'Název společnosti',
+        'size' => 'Počet zaměstnanců',
+        'url' => 'Web',
+        'address' => 'Adresa sídla',
+        'contact_email' => 'Kontaktní emailová adresa',
+    ],
 ];

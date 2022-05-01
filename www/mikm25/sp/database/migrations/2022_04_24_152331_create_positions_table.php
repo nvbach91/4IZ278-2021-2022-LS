@@ -12,6 +12,7 @@ class CreatePositionsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('branch_id');
+            $table->foreignId('company_id')->nullable();
             $table->string('name');
             $table->integer('salary_from')->nullable();
             $table->integer('salary_to')->nullable();
@@ -20,13 +21,6 @@ class CreatePositionsTable extends Migration
             $table->string('workplace_address');
             $table->date('valid_from')->nullable();
             $table->date('valid_until')->nullable();
-            $table->string('company_name');
-            $table->enum('company_size', [
-                'bellow_10',
-                '10_to_50',
-                '50_to_100',
-                'above_100',
-            ])->nullable();
             $table->unsignedSmallInteger('min_practice_length')->nullable();
             $table->timestamps();
 
@@ -39,6 +33,11 @@ class CreatePositionsTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('CASCADE')
+                ->onUpdate('RESTRICT');
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('companies')
+                ->onDelete('SET NULL')
                 ->onUpdate('RESTRICT');
         });
     }

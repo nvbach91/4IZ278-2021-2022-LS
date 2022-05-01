@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property-read int $id
+ *
  * @property int $user_id
  * @property string $name
  * @property Carbon $created_at

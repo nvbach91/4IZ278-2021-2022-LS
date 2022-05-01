@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 /**
  * @property-read int $id
+ *
  * @property string $firstname
  * @property string $lastname
  * @property string $email
@@ -32,6 +33,7 @@ use Illuminate\Support\Facades\Hash;
  *
  * @property-read list<Tag> $tags
  * @property-read list<Position> $positions
+ * @property-read list<Company> $companies
  * @property-read list<EmailVerification> $email_verifications
  * @property-read list<PasswordReset> $password_resets
  *
@@ -99,6 +101,11 @@ class User extends Authenticatable
     public function positions(): HasMany
     {
         return $this->hasMany(Position::class, 'user_id', 'id');
+    }
+
+    public function companies(): HasMany
+    {
+        return $this->hasMany(Company::class, 'user_id', 'id');
     }
 
     public function newEloquentBuilder($query): UserBuilder

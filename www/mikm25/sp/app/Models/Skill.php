@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property-read int $id
+ *
  * @property string $name
  * @property Carbon $created_at
  * @property Carbon $updated_at

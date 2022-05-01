@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Http\Requests\Traits\WithPasswordData;
+use App\Http\Requests\Traits\WithPasswordRules;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PasswordResetRequest extends FormRequest
 {
-    use WithPasswordData;
+    use WithPasswordRules;
 
     public function authorize(): bool
     {

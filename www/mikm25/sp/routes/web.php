@@ -68,5 +68,6 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
             ->name('detail')
             ->where('position', '[0-9]+')
             ->where('tab', implode('|', PositionTabConstants::getTabs()));
+        Route::post('/', [PositionController::class, 'store'])->name('store');
     });
 });

@@ -2,14 +2,14 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Http\Requests\Traits\WithPasswordData;
+use App\Http\Requests\Traits\WithPasswordRules;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Unique;
 
 class RegisterRequest extends FormRequest
 {
-    use WithPasswordData;
+    use WithPasswordRules;
 
     public function authorize(): bool
     {
@@ -19,15 +19,16 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return array_merge([
-            'firstname' => 'required|string',
-            'lastname' => 'required|string',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'email' => [
                 'required',
                 'string',
                 'email',
+                'max:255',
                 new Unique(User::class, 'email'),
             ],
-            'phone' => 'nullable|string',
+            'phone' => 'nullable|string|max:255',
         ], $this->getPasswordRules());
     }
 

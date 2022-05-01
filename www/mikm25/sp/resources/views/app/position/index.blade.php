@@ -1,3 +1,13 @@
+<?php
+
+use App\Models\Position;
+
+/**
+ * @var list<Position> $positions
+ */
+
+?>
+
 @extends('templates.app')
 
 @section('title')
@@ -21,7 +31,6 @@
                     <th>{{ __('models.position.salary_to') }}</th>
                     <th>{{ __('models.position.external_url') }}</th>
                     <th>{{ __('models.position.valid') }}</th>
-                    <th>{{ __('models.position.company_name') }}</th>
                     <th>{{ __('models.position.clicks') }}</th>
                     <th>{{ __('models.position.reactions') }}</th>
                     <th>{{ __('tables.actions') }}</th>
@@ -50,7 +59,6 @@
                                 <span class="text-danger">{{ __('common.no') }}</span>
                             @endif
                         </td>
-                        <td>{{ $position->company_name }}</td>
                         <td>{{ $position->clicks_count }}</td>
                         <td>{{ $position->reactions_count }}</td>
                         <td>

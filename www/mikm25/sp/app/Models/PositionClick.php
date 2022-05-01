@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read int $id
+ *
  * @property int $position_id
  * @property Carbon $created_at
  * @property Carbon $updated_at

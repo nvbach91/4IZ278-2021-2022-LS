@@ -23,6 +23,7 @@
                     <input type="text" value="{{ old('firstname') }}" id="firstname"
                            class="form-control @error('firstname') is-invalid @enderror"
                            name="firstname" required
+                           maxlength="255"
                            autocomplete="given-name">
                     @include('common.forms.error', ['field' => 'firstname'])
                 </div>
@@ -34,6 +35,7 @@
                     <input type="text" value="{{ old('lastname') }}" id="lastname"
                            class="form-control @error('lastname') is-invalid @enderror" name="lastname"
                            required
+                           maxlength="255"
                            autocomplete="family-name">
                     @include('common.forms.error', ['field' => 'lastname'])
                 </div>
@@ -44,6 +46,7 @@
                     </label>
                     <input type="email" value="{{ old('email', $emailHint) }}" id="email"
                            class="form-control @error('email') is-invalid @enderror"
+                           maxlength="255"
                            name="email" required autocomplete="email">
                     @include('common.forms.error', ['field' => 'email'])
                 </div>
@@ -53,6 +56,7 @@
                     </label>
                     <input type="tel" value="{{ old('phone') }}" id="phone"
                            class="form-control @error('phone') is-invalid @enderror" name="phone"
+                           maxlength="255"
                            autocomplete="tel">
                     @include('common.forms.error', ['field' => 'phone'])
                 </div>

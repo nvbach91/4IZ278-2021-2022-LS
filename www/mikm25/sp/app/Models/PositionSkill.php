@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property-read int $id
+ *
  * @property int $position_id
  * @property int $skill_id
  * @property Carbon $created_at

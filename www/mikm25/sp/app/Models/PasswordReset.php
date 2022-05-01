@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read int $id
+ *
  * @property string $token
  * @property int $user_id
  * @property bool $used
@@ -19,8 +20,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @see PasswordReset::getIsValidAttribute()
  * @property-read bool $is_valid
+ *
  * @see PasswordReset::getIsUsableAttribute()
  * @property-read bool $is_usable
+ *
  * @see PasswordReset::getPasswordResetLinkAttribute()
  * @property-read string $password_reset_link
  *

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property-read int $id
+ *
  * @property string $token
  * @property int $user_id
  * @property bool $used
@@ -19,8 +20,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @see EmailVerification::getIsValidAttribute()
  * @property-read bool $is_valid
+ *
  * @see EmailVerification::getIsUsableAttribute()
  * @property-read bool $is_usable
+ *
  * @see EmailVerification::getVerificationLinkAttribute()
  * @property-read string $verification_link
  *

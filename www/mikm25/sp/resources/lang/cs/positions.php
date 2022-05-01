@@ -9,7 +9,10 @@ return [
         ],
         'sections' => [
             'company' => 'Společnost',
-            'general' => 'Obecné informace',
+            'general' => 'Základní informace',
+            'salary' => 'Plat',
+            'validity' => 'Platnost',
+            'content' => 'Obsah',
         ],
     ],
 ];

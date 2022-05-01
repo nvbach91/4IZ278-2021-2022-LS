@@ -4,7 +4,7 @@ namespace App\Http\Requests\Traits;
 
 use Illuminate\Validation\Rules\Password;
 
-trait WithPasswordData
+trait WithPasswordRules
 {
     protected function getPasswordRules(): array
     {
