@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Attributes\CompanySizeAttribute;
+use App\Models\Builders\CompanyBuilder;
 use App\Models\Casts\CompanySizeCast;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -24,6 +25,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property-read list<Position> $positions
  * @property-read User $user
+ *
+ * @method static CompanyBuilder query()
  */
 class Company extends Model
 {
@@ -57,5 +60,10 @@ class Company extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id', 'user');
+    }
+
+    public function newEloquentBuilder($query): CompanyBuilder
+    {
+        return new CompanyBuilder($query);
     }
 }

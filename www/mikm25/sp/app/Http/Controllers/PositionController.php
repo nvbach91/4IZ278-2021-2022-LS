@@ -67,6 +67,7 @@ class PositionController extends Controller
 
     public function store(PositionStoreRequest $request): RedirectResponse
     {
+        dd($request->all());
         return redirect()->back()->withInput();
     }
 }

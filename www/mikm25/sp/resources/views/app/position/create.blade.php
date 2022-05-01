@@ -44,6 +44,7 @@ use App\Models\Branch;
                         </label>
                         <input type="text" id="workplace-address" name="workplace_address"
                                value="{{ old('workplace_address') }}"
+                               maxlength="255"
                                class="form-control @error('workplace_address') is-invalid @enderror" required>
                         @include('common.forms.error', ['field' => 'workplace_address'])
                     </div>
@@ -122,7 +123,7 @@ use App\Models\Branch;
                     </h2>
                     <div class="form-check form-switch ms-3">
                         <input class="form-check-input" {{ old('with_company', true) ? 'checked' : '' }}
-                        type="checkbox" role="switch" id="company-checkbox" name="with_company">
+                               type="checkbox" role="switch" id="company-checkbox" name="with_company">
                         <label class="form-check-label" for="company-checkbox"></label>
                     </div>
                 </div>
@@ -134,6 +135,7 @@ use App\Models\Branch;
                         </label>
                         <input type="hidden" name="company[id]" value="{{ old('company.id') }}" id="company-id">
                         <input type="text" id="company-name" name="company[name]" value="{{ old('company.name') }}"
+                               maxlength="255"
                                class="form-control @error('company.name') is-invalid @enderror" required>
                         <small class="text-muted">
                             {{ __('positions.create.company_hint') }}
@@ -158,6 +160,7 @@ use App\Models\Branch;
                             {{ __('models.company.url') }}
                         </label>
                         <input type="url" id="company-url" name="company[url]" value="{{ old('company.url') }}"
+                               maxlength="255"
                                class="form-control @error('company.url') is-invalid @enderror">
                         @include('common.forms.error', ['field' => 'company.url'])
                     </div>
@@ -166,6 +169,7 @@ use App\Models\Branch;
                             {{ __('models.company.address') }}
                         </label>
                         <input type="text" id="company-address" name="company[address]"
+                               maxlength="255"
                                value="{{ old('company.address') }}"
                                class="form-control @error('company.address') is-invalid @enderror">
                         @include('common.forms.error', ['field' => 'company.address'])
@@ -175,6 +179,7 @@ use App\Models\Branch;
                             {{ __('models.company.contact_email') }}
                         </label>
                         <input type="email" id="company-contact-email" name="company[contact_email]"
+                               maxlength="255"
                                value="{{ old('company.contact_email') }}"
                                class="form-control @error('company.contact_email') is-invalid @enderror">
                         @include('common.forms.error', ['field' => 'company.contact_email'])
@@ -188,6 +193,7 @@ use App\Models\Branch;
                             {{ __('models.position.external_url') }}
                         </label>
                         <input type="url" id="external-url" name="external_url" value="{{ old('external_url') }}"
+                               maxlength="255"
                                class="form-control @error('external_url') is-invalid @enderror">
                         <small class="text-muted">
                             {{ __('positions.create.external_url_hint') }}
