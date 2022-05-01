@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Branch;
+use App\Models\Company;
 use App\Models\Position;
 use App\Models\PositionClick;
 use App\Models\PositionReaction;
@@ -22,8 +23,12 @@ class PositionFactory extends Factory
         /** @var User $user */
         $user = User::query()->inRandomOrder()->first() ?? User::factory()->create();
 
+        /** @var Company $company */
+        $company = Company::query()->inRandomOrder()->first() ?? Company::factory()->create();
+
         return [
             'user_id' => $user->id,
+            'company_id' => $company->id,
             'branch_id' => $branch->id,
             'name' => $this->faker->words(4, true),
             'salary_from' => rand(500, 60000),
@@ -35,7 +40,7 @@ class PositionFactory extends Factory
             'workplace_address' => $this->faker->address,
             'valid_from' => Carbon::now()->subDays(5),
             'valid_until' => Carbon::now()->addDays(5),
-            'min_practice_length' => null,
+            'min_practice_length' => rand(0, 10),
         ];
     }
 

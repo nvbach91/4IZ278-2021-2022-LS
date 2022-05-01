@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\App;
 
+use App\Models\Company;
 use App\Models\Position;
 use Illuminate\Console\Command;
 
@@ -24,6 +25,8 @@ class AppTestCommand extends Command
 
     public function handle(): int
     {
+        Company::factory()->count(20)->create();
+
         Position::factory()->count(50)->create();
 
         return 0;

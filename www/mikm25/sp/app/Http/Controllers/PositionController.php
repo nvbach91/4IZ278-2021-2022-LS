@@ -30,13 +30,16 @@ class PositionController extends Controller
     public function create(): string
     {
         return view('app.position.create', [
-            'branches' => Branch::query()->get()
+            'branches' => Branch::query()->get(),
         ]);
     }
 
     public function detail(Position $position, string $tab)
     {
-        $position->load('branch');
+        $position->load([
+            'branch',
+            'company',
+        ]);
 
         if ($tab === PositionTabConstants::TAB_DETAIL) {
             return view('app.position.detail.tab-detail', [
