@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Casts\CompanySizeCast;
 use App\Models\Attributes\CompanySizeAttribute;
+use App\Models\Casts\CompanySizeCast;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

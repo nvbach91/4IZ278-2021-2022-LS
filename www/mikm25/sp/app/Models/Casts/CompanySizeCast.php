@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Casts;
+namespace App\Models\Casts;
 
 use App\Models\Attributes\CompanySizeAttribute;
 use App\Models\Company;
