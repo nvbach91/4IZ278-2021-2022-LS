@@ -11,10 +11,22 @@ return [
         'submit' => 'Potvrdit',
         'change' => 'Změnit',
         'setup' => 'Nastavit',
-        'detail' => 'Detail'
+        'detail' => 'Detail',
     ],
     'link' => 'Odkaz',
-
     'yes' => 'Ano',
-    'no' => 'Ne'
+    'no' => 'Ne',
+    'dashboards' => [
+        'previous_month' => 'Minulý měsíc:',
+
+        'monthly_positions' => [
+            'title' => 'Nové pozice tento měsíc',
+        ],
+        'monthly_position_clicks' => [
+            'title' => 'Počet kliknutí tento měsíc',
+        ],
+        'monthly_position_reactions' => [
+            'title' => 'Počet reakcí tento měsíc',
+        ],
+    ],
 ];

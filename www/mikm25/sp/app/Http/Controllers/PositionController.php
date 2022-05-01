@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Constants\PositionTabConstants;
 use App\Models\Position;
+use App\View\Models\Dashboards\MonthlyClicksDashboard;
+use App\View\Models\Dashboards\MonthlyReactionsDashboard;
 
 class PositionController extends Controller
 {
@@ -42,6 +44,10 @@ class PositionController extends Controller
             return view('app.position.detail.tab-statistics', [
                 'position' => $position,
                 'activeTab' => $tab,
+                'dashboards' => [
+                    new MonthlyClicksDashboard($position),
+                    new MonthlyReactionsDashboard($position),
+                ],
             ]);
         }
 

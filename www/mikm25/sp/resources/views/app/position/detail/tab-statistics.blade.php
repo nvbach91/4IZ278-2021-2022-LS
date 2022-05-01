@@ -12,8 +12,10 @@ use App\Models\Position;
 
 @section('position-content')
     <div class="row">
-        <div class="col">
-            TODO STATISTICS
-        </div>
+        @foreach($dashboards as $dashboard)
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-3 mb-lg-0">
+                @include('app.common.dashboard', ['dashboard' => $dashboard])
+            </div>
+        @endforeach
     </div>
 @endsection

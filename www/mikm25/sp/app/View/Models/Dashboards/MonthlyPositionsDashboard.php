@@ -10,7 +10,7 @@ class MonthlyPositionsDashboard implements DashboardInterface, HasPreviousValue
 {
     public function getTitle(): string
     {
-        return __('dashboard.dashboards.monthly_positions.title');
+        return __('common.dashboards.monthly_positions.title');
     }
 
     public function getCount(): ?int
@@ -37,6 +37,6 @@ class MonthlyPositionsDashboard implements DashboardInterface, HasPreviousValue
 
     public function getPreviousText(): string
     {
-        return __('dashboard.dashboards.previous_month');
+        return __('common.dashboards.previous_month');
     }
 }
