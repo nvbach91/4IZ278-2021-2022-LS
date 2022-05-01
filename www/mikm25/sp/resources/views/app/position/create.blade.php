@@ -73,13 +73,13 @@ use App\Models\Branch;
                         <label for="salary-from" class="form-label">
                             {{ __('models.position.salary_from') }}
                         </label>
-                        <input type="number" id="salary-from" name="salary_from" class="form-control" step="1000">
+                        <input type="number" id="salary-from" name="salary_from" class="form-control" step="1000" min="0">
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <label for="salary-to" class="form-label">
                             {{ __('models.position.salary_to') }}
                         </label>
-                        <input type="number" id="salary-to" name="salary_to" class="form-control" step="1000">
+                        <input type="number" id="salary-to" name="salary_to" class="form-control" step="1000" min="0">
                     </div>
                 </div>
 
@@ -92,7 +92,7 @@ use App\Models\Branch;
                         <label class="form-check-label" for="company-checkbox"></label>
                     </div>
                 </div>
-                <div class="row g-3 mb-3">
+                <div class="row g-3 mb-3" id="company-section">
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <label for="company-name" class="form-label">
                             {{ __('models.company.name') }}
@@ -138,7 +138,7 @@ use App\Models\Branch;
                         <label for="min-practice-length" class="form-label">
                             {{ __('models.position.min_practice_length') }}
                         </label>
-                        <input type="number" id="min-practice-length" name="min_practice_length" class="form-control" step="1">
+                        <input type="number" id="min-practice-length" name="min_practice_length" class="form-control" step="1" min="0">
                     </div>
                     <div class="col-12">
                         <label for="content" class="form-label">
@@ -151,3 +151,7 @@ use App\Models\Branch;
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    @include('common.forms.tinymce', ['id' => 'content'])
+@endpush

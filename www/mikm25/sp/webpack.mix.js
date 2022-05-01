@@ -11,6 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
+// TinyMCE
+
+mix.copyDirectory('vendor/tinymce/tinymce', 'public/js/tinymce');
+mix.copy('resources/js/tinymce/langs/cs.js', 'public/js/tinymce/langs');
+
 // Application
 
 mix.js('resources/js/app.js', 'public/js').version();
