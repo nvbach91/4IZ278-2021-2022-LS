@@ -19,7 +19,7 @@ class SidebarViewComposer
                 'active' => $request->is('app/dashboard*'),
             ],
             'app.positions.index' => [
-                'text' => __('pages.app.positions'),
+                'text' => __('pages.app.positions.index'),
                 'icon' => 'bi bi-briefcase',
                 'active' => $request->is('app/positions*'),
             ],

@@ -6,12 +6,15 @@ return [
         'login' => 'Přihlášení',
         'email_verification' => 'Potvrzení emailové adresy',
         'forgotten_password' => 'Zapomenuté heslo',
-        'password_reset' => 'Nastavení nového hesla'
+        'password_reset' => 'Nastavení nového hesla',
     ],
     'app' => [
         'dashboard' => 'Přehled',
         'logout' => 'Odhlásit se',
-        'positions' => 'Pozice',
-        'positions_create' => 'Nová pozice',
+        'positions' => [
+            'index' => 'Pozice',
+            'create' => 'Nová pozice',
+            'detail' => 'Detail pozice :positionName',
+        ],
     ],
 ];

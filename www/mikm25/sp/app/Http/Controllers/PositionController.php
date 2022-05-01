@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\PositionTabConstants;
 use App\Models\Position;
 
 class PositionController extends Controller
@@ -17,12 +18,36 @@ class PositionController extends Controller
             ->paginate(15);
 
         return view('app.position.index', [
-            'positions' => $positions
+            'positions' => $positions,
         ]);
     }
 
     public function create(): string
     {
         return view('app.position.create');
+    }
+
+    public function detail(Position $position, string $tab)
+    {
+        $position->load('branch');
+
+        if ($tab === PositionTabConstants::TAB_DETAIL) {
+            return view('app.position.detail.tab-detail', [
+                'position' => $position,
+                'activeTab' => $tab,
+            ]);
+        }
+
+        if ($tab === PositionTabConstants::TAB_STATISTICS) {
+            return view('app.position.detail.tab-statistics', [
+                'position' => $position,
+                'activeTab' => $tab,
+            ]);
+        }
+
+        return view('app.position.detail.tab-log', [
+            'position' => $position,
+            'activeTab' => $tab,
+        ]);
     }
 }

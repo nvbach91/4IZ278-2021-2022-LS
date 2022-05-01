@@ -1,7 +1,7 @@
 @extends('templates.app')
 
 @section('title')
-    {{ __('pages.app.positions_create') }}
+    {{ __('pages.app.positions.create') }}
 @endsection
 
 @section('breadcrumbs')
