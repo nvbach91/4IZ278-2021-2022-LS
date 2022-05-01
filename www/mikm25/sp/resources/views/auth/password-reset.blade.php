@@ -41,9 +41,14 @@
                     @include('common.forms.error', ['field' => 'password_confirmation'])
                 </div>
                 <div class="d-flex justify-content-between">
-                    <a href="{{ route('auth.login') }}" class="btn btn-secondary">
-                        {{ __('pages.auth.login') }}
-                    </a>
+                    <div>
+                        <a href="{{ route('landing-page') }}" class="btn btn-light">
+                            <i class="bi bi-house"></i>
+                        </a>
+                        <a href="{{ route('auth.login') }}" class="btn btn-light">
+                            {{ __('pages.auth.login') }}
+                        </a>
+                    </div>
                     <button type="submit" class="btn btn-primary">
                         {{ __('common.buttons.change') }}
                     </button>

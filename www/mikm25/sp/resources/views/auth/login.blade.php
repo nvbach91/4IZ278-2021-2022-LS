@@ -51,9 +51,14 @@
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <a href="{{ route('auth.register') }}" class="btn btn-secondary">
-                        {{ __('pages.auth.register') }}
-                    </a>
+                    <div>
+                        <a href="{{ route('landing-page') }}" class="btn btn-light">
+                            <i class="bi bi-house"></i>
+                        </a>
+                        <a href="{{ route('auth.register') }}" class="btn btn-light">
+                            {{ __('pages.auth.register') }}
+                        </a>
+                    </div>
                     <button type="submit" class="btn btn-primary">
                         {{ __('login.submit') }}
                     </button>
