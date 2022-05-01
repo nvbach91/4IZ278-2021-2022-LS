@@ -4,7 +4,6 @@ namespace App\View\Models\Dashboards;
 
 use App\Models\Position;
 use App\View\Models\Dashboards\Concerns\HasPreviousValue;
-use Carbon\Carbon;
 
 class MonthlyPositionsDashboard implements DashboardInterface, HasPreviousValue
 {
@@ -18,8 +17,7 @@ class MonthlyPositionsDashboard implements DashboardInterface, HasPreviousValue
         return once(static function (): int {
             return Position::query()
                 ->ofUserId(auth('web')->user()->id)
-                ->whereDate('created_at', '>=', Carbon::now()->startOfMonth()->startOfDay())
-                ->whereDate('created_at', '<=', Carbon::now()->endOfMonth()->endOfDay())
+                ->fromCurrentMonth()
                 ->count();
         });
     }
@@ -29,8 +27,7 @@ class MonthlyPositionsDashboard implements DashboardInterface, HasPreviousValue
         return once(static function (): int {
             return Position::query()
                 ->ofUserId(auth('web')->user()->id)
-                ->whereDate('created_at', '>=', Carbon::now()->subMonth()->startOfMonth()->startOfDay())
-                ->whereDate('created_at', '<=', Carbon::now()->subMonth()->endOfMonth()->endOfDay())
+                ->fromLastMonth()
                 ->count();
         });
     }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 /**
  * @mixin Builder
  */
-trait OfIdTrait
+trait WithIdQuery
 {
     public function ofId(int $id): self
     {

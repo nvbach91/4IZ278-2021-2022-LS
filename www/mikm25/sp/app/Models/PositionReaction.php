@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Builders\PositionReactionBuilder;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,6 +15,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon $updated_at
  *
  * @property-read Position $position
+ *
+ * @method static PositionReactionBuilder query()
  */
 class PositionReaction extends Model
 {
@@ -32,5 +35,10 @@ class PositionReaction extends Model
     public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class, 'position_id', 'id', 'position');
+    }
+
+    public function newEloquentBuilder($query): PositionReactionBuilder
+    {
+        return new PositionReactionBuilder($query);
     }
 }

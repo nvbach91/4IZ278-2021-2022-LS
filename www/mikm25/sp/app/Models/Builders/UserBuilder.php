@@ -2,12 +2,12 @@
 
 namespace App\Models\Builders;
 
-use App\Models\Builders\Traits\OfIdTrait;
+use App\Models\Builders\Traits\WithIdQuery;
 use Illuminate\Database\Eloquent\Builder;
 
 class UserBuilder extends Builder
 {
-    use OfIdTrait;
+    use WithIdQuery;
 
     public function ofEmail(string $email): self
     {

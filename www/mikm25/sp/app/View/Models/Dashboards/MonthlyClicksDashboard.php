@@ -6,7 +6,6 @@ use App\Models\Builders\PositionBuilder;
 use App\Models\Position;
 use App\Models\PositionClick;
 use App\View\Models\Dashboards\Concerns\HasPreviousValue;
-use Carbon\Carbon;
 
 class MonthlyClicksDashboard implements DashboardInterface, HasPreviousValue
 {
@@ -36,8 +35,7 @@ class MonthlyClicksDashboard implements DashboardInterface, HasPreviousValue
                             return $query->ofId($this->position->id);
                         });
                 })
-                ->whereDate('created_at', '>=', Carbon::now()->startOfMonth()->startOfDay())
-                ->whereDate('created_at', '<=', Carbon::now()->endOfMonth()->endOfDay())
+                ->fromCurrentMonth()
                 ->count();
         });
     }
@@ -53,8 +51,7 @@ class MonthlyClicksDashboard implements DashboardInterface, HasPreviousValue
                             return $query->ofId($this->position->id);
                         });
                 })
-                ->whereDate('created_at', '>=', Carbon::now()->subMonth()->startOfMonth()->startOfDay())
-                ->whereDate('created_at', '<=', Carbon::now()->subMonth()->endOfMonth()->endOfDay())
+                ->fromLastMonth()
                 ->count();
         });
     }
