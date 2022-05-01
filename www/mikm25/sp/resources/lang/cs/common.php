@@ -12,6 +12,7 @@ return [
         'change' => 'Změnit',
         'setup' => 'Nastavit',
         'detail' => 'Detail',
+        'create' => 'Vytvořit',
     ],
     'link' => 'Odkaz',
     'yes' => 'Ano',

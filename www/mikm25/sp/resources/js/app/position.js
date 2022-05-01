@@ -1,6 +1,6 @@
 document.getElementById('company-checkbox').addEventListener('change', (e) => {
   const companySection = document.getElementById('company-section')
-  const inputs = [].slice.call(companySection.getElementsByTagName('input'))
+  const inputs = [].slice.call(companySection.querySelectorAll('input,select'))
 
   if (e.target.checked) {
     companySection.classList.remove('d-none')

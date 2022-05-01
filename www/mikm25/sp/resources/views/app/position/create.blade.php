@@ -50,7 +50,7 @@ use App\Models\Branch;
                             @include('common.forms.required')
                         </label>
                         <select name="branch" id="branch" class="form-control @error('branch') is-invalid @enderror" required>
-                            <option>{{ __('positions.selects.branch_empty') }}</option>
+                            <option value="">{{ __('positions.selects.branch_empty') }}</option>
                             @foreach($branches as $branch)
                                 <option value="{{ $branch->id }}">{{ $branch->translated_name }}</option>
                             @endforeach
@@ -100,7 +100,7 @@ use App\Models\Branch;
                         {{ __('positions.detail.sections.company') }}
                     </h2>
                     <div class="form-check form-switch ms-3">
-                        <input class="form-check-input" checked type="checkbox" role="switch" id="company-checkbox">
+                        <input class="form-check-input" checked type="checkbox" role="switch" id="company-checkbox" name="with_company">
                         <label class="form-check-label" for="company-checkbox"></label>
                     </div>
                 </div>
@@ -110,6 +110,7 @@ use App\Models\Branch;
                             {{ __('models.company.name') }}
                             @include('common.forms.required')
                         </label>
+                        <input type="hidden" name="company.id" id="company-id">
                         <input type="text" id="company-name" name="company[name]" class="form-control @error('company.name') is-invalid @enderror" required>
                         <small class="text-muted">
                             {{ __('positions.create.company_hint') }}
@@ -121,7 +122,7 @@ use App\Models\Branch;
                             {{ __('models.company.size') }}
                         </label>
                         <select name="company[size]" id="company-size" class="form-control @error('company.size') is-invalid @enderror">
-                            <option>{{ __('companies.selects.size_empty') }}</option>
+                            <option value="">{{ __('companies.selects.size_empty') }}</option>
                             @foreach(\App\Models\Attributes\CompanySizeAttribute::getAllSizes() as $key => $size)
                                 <option value="{{ $key }}">{{ $size->getTranslatedSize() }}</option>
                             @endforeach
@@ -176,6 +177,16 @@ use App\Models\Branch;
                         </label>
                         <textarea name="content" id="content" class="@error('content') is-invalid @enderror"></textarea>
                         @include('common.forms.error', ['field' => 'content'])
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('common.buttons.create') }}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
