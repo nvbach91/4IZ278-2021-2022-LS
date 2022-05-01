@@ -27,6 +27,7 @@ return [
         'min_practice_length' => 'Minimální praxe',
         'clicks' => 'Počet kliknutí',
         'reactions' => 'Počet reakcí',
+        'tags' => 'Tagy'
     ],
     'company' => [
         'name' => 'Název společnosti',

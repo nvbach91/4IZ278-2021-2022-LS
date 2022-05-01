@@ -1,3 +1,5 @@
+import Tags from "bootstrap5-tags";
+
 document.getElementById('company-checkbox').addEventListener('change', (e) => {
   const companySection = document.getElementById('company-section')
   const inputs = [].slice.call(companySection.querySelectorAll('input,select'))
@@ -17,3 +19,4 @@ document.getElementById('company-checkbox').addEventListener('change', (e) => {
 
 document.getElementById('company-checkbox').dispatchEvent(new Event('change'))
 
+Tags.init('#tags')

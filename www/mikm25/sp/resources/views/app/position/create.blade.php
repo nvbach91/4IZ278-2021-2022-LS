@@ -52,7 +52,7 @@ use App\Models\Branch;
                             {{ __('models.position.branch') }}
                             @include('common.forms.required')
                         </label>
-                        <select name="branch" id="branch" class="form-control @error('branch') is-invalid @enderror"
+                        <select name="branch" id="branch" class="form-select @error('branch') is-invalid @enderror"
                                 required>
                             <option value="" {{ empty(old('branch')) ? 'selected' : '' }}>{{ __('positions.selects.branch_empty') }}</option>
                             @foreach($branches as $branch)
@@ -60,6 +60,19 @@ use App\Models\Branch;
                             @endforeach
                         </select>
                         @include('common.forms.error', ['field' => 'branch'])
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <label for="tags" class="form-label">
+                            {{ __('models.position.tags') }}
+                        </label>
+                        <select name="tags[]" id="tags" class="form-select @error('tags') is-invalid @enderror"
+                                data-max="5" data-selected="{{ implode(',', old('tags', [])) }}" data-allow-new="true"
+                                data-allow-clear="true" multiple>
+                            @foreach(old('tags', []) as $tag)
+                                <option value="{{ $tag }}">{{ $tag }}</option>
+                            @endforeach
+                        </select>
+                        @include('common.forms.error', ['field' => 'tags'])
                     </div>
                 </div>
 
@@ -132,7 +145,7 @@ use App\Models\Branch;
                             {{ __('models.company.size') }}
                         </label>
                         <select name="company[size]" id="company-size"
-                                class="form-control @error('company.size') is-invalid @enderror">
+                                class="form-select @error('company.size') is-invalid @enderror">
                             <option value="" {{ empty(old('company.size')) ? 'selected' : '' }}>{{ __('companies.selects.size_empty') }}</option>
                             @foreach(\App\Models\Attributes\CompanySizeAttribute::getAllSizes() as $key => $size)
                                 <option value="{{ $key }}" {{ old('company.size') === $key ? 'selected' : '' }}>{{ $size->getTranslatedSize() }}</option>
