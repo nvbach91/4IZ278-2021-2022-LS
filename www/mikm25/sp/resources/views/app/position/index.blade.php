@@ -37,7 +37,7 @@ use App\Models\Position;
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($positions as $position)
+                @forelse($positions as $position)
                     <tr>
                         <td>{{ $position->id }}</td>
                         <td>{{ $position->name }}</td>
@@ -68,7 +68,16 @@ use App\Models\Position;
                             </a>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="10">
+                            {{ __('positions.index.empty') }}
+                            <a href="{{ route('app.positions.create') }}" class="btn btn-sm btn-primary">
+                                {{ __('positions.buttons.create') }}
+                            </a>
+                        </td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
         </div>

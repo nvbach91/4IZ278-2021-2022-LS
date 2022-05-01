@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Casts\CompanySizeCast;
+use App\Models\Attributes\CompanySizeAttribute;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property int $user_id ID of user which the company belongs to
  * @property string $name
- * @property string|null $size
+ * @property CompanySizeAttribute|null $size
  * @property string|null $url
  * @property string|null $address
  * @property string|null $contact_email
@@ -41,7 +43,7 @@ class Company extends Model
     protected $casts = [
         'user_id' => 'integer',
         'name' => 'string',
-        'size' => 'string',
+        'size' => CompanySizeCast::class,
         'url' => 'string',
         'address' => 'string',
         'contact_email' => 'string',
