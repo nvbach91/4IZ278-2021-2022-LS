@@ -105,11 +105,6 @@ class Position extends Model
         return $this->belongsTo(Branch::class, 'branch_id', 'id', 'branch');
     }
 
-    public function skills(): BelongsToMany
-    {
-        return $this->belongsToMany(Skill::class, 'position_skills', 'skill_id', 'position_id', 'id', 'id', 'skills');
-    }
-
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'position_tags', 'tag_id', 'position_id', 'id', 'id', 'tags');
