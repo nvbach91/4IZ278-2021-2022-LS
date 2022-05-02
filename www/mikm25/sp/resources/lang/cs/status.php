@@ -29,4 +29,9 @@ return [
             'success' => 'Heslo bylo úspěšně obnoveno.',
         ]
     ],
+    'positions' => [
+        'create' => [
+            'success' => 'Pozice byla úspěšně vytvořena.'
+        ]
+    ]
 ];

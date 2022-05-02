@@ -6,12 +6,30 @@ use App\Constants\PositionTabConstants;
 use App\Http\Requests\Positions\PositionStoreRequest;
 use App\Models\Branch;
 use App\Models\Position;
+use App\Services\Company\CompanyService;
+use App\Services\Position\PositionService;
 use App\View\Models\Dashboards\MonthlyClicksDashboard;
 use App\View\Models\Dashboards\MonthlyReactionsDashboard;
 use Illuminate\Http\RedirectResponse;
 
 class PositionController extends Controller
 {
+    /**
+     * @var PositionService
+     */
+    private $positionService;
+
+    /**
+     * @var CompanyService
+     */
+    private $companyService;
+
+    public function __construct(PositionService $positionService, CompanyService $companyService)
+    {
+        $this->positionService = $positionService;
+        $this->companyService = $companyService;
+    }
+
     public function index(): string
     {
         $positions = Position::query()
@@ -67,7 +85,21 @@ class PositionController extends Controller
 
     public function store(PositionStoreRequest $request): RedirectResponse
     {
-        dd($request->toDTO());
-        return redirect()->back()->withInput();
+        $positionStoreDTO = $request->toDTO();
+
+        if ($positionStoreDTO->hasCompany()) {
+            $company = $this->companyService->store($positionStoreDTO->company);
+        } else {
+            $company = null;
+        }
+
+        $position = $this->positionService->store($positionStoreDTO, $company);
+
+        return redirect()->route('app.positions.detail', [
+            'position' => $position->id,
+            'tab' => PositionTabConstants::TAB_DETAIL,
+        ])->with('status', [
+            'success' => __('status.positions.create.success'),
+        ]);
     }
 }

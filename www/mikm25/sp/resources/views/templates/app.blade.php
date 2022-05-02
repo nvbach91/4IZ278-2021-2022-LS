@@ -14,6 +14,7 @@
         <section id="app-content">
             <div class="container-fluid">
                 @include('app.template.navbar')
+                @include('common.status')
                 @yield('app-content')
             </div>
         </section>

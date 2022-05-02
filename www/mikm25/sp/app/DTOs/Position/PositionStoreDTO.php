@@ -30,4 +30,9 @@ class PositionStoreDTO extends DataTransferObject
     public $minPracticeLength;
     /** @var string */
     public $content;
+
+    public function hasCompany(): bool
+    {
+        return $this->company !== null;
+    }
 }

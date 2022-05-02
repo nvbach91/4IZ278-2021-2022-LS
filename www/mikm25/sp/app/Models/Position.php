@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @property int $user_id
  * @property int $branch_id
+ * @property int|null $company_id
  * @property string $name
  * @property int|null $salary_from
  * @property int|null $salary_to
@@ -47,6 +48,7 @@ class Position extends Model
     protected $fillable = [
         'user_id',
         'branch_id',
+        'company_id',
         'name',
         'salary_from',
         'salary_to',
@@ -56,8 +58,6 @@ class Position extends Model
         'valid_from',
         'valid_until',
         'min_practice_length',
-        'clicked_times',
-        'reacted_times',
     ];
 
     protected $appends = [
@@ -67,6 +67,7 @@ class Position extends Model
     protected $casts = [
         'user_id' => 'integer',
         'branch_id' => 'integer',
+        'company_id' => 'integer',
         'name' => 'string',
         'salary_from' => 'integer',
         'salary_to' => 'integer',
@@ -76,8 +77,6 @@ class Position extends Model
         'valid_from' => 'date',
         'valid_until' => 'date',
         'min_practice_length' => 'integer',
-        'clicked_times' => 'integer',
-        'reacted_times' => 'integer',
     ];
 
     public function getIsValidAttribute(): bool
@@ -107,7 +106,7 @@ class Position extends Model
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'position_tags', 'tag_id', 'position_id', 'id', 'id', 'tags');
+        return $this->belongsToMany(Tag::class, 'position_tags', 'position_id', 'tag_id', 'id', 'id', 'tags');
     }
 
     public function clicks(): HasMany

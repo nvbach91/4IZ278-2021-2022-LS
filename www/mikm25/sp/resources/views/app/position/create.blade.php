@@ -122,7 +122,7 @@ use App\Models\Branch;
                         {{ __('positions.detail.sections.company') }}
                     </h2>
                     <div class="form-check form-switch ms-3">
-                        <input class="form-check-input" {{ old('with_company', true) ? 'checked' : '' }}
+                        <input class="form-check-input" {{ old('with_company', false) ? 'checked' : '' }}
                                type="checkbox" role="switch" id="company-checkbox" name="with_company">
                         <label class="form-check-label" for="company-checkbox"></label>
                     </div>
