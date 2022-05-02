@@ -59,7 +59,7 @@ class LoginController extends Controller
         }
 
         return redirect()->route('app.dashboard')->with('status', [
-            'danger' => __('status.auth.login.success'),
+            'success' => __('status.auth.login.success'),
         ]);
     }
 }

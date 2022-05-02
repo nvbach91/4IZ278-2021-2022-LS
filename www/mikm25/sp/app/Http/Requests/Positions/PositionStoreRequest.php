@@ -23,6 +23,8 @@ class PositionStoreRequest extends FormRequest
     {
         $userId = auth()->user()->id;
 
+        $today = Carbon::now()->format('Y-m-d');
+
         return [
             'name' => 'required|string|max:255',
             'workplace_address' => 'required|string|max:255',
@@ -33,7 +35,7 @@ class PositionStoreRequest extends FormRequest
             ],
             'tags' => 'nullable|array|max:5',
             'tags.*' => 'nullable|string|max:30',
-            'valid_from' => 'nullable|date|before:valid_until',
+            'valid_from' => "nullable|date|before:valid_until|gte:$today",
             'valid_until' => 'nullable|date|after:valid_from',
             'salary_from' => 'nullable|integer|lte:salary_to|gte:0',
             'salary_to' => 'nullable|integer|gte:salary_from|gte:0',
