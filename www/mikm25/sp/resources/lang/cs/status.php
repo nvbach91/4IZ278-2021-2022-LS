@@ -32,6 +32,9 @@ return [
     'positions' => [
         'create' => [
             'success' => 'Pozice byla úspěšně vytvořena.'
+        ],
+        'update' => [
+            'success' => 'Pozice byla úspěšně upravena.'
         ]
     ],
     'companies' => [

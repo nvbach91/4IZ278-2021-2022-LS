@@ -4,27 +4,18 @@ namespace App\Services\Company;
 
 use App\DTOs\Company\CompanyDTO;
 use App\Models\Company;
+use App\Models\User;
 
 class CompanyService
 {
-    public function store(CompanyDTO $companyDTO): Company
+    public function storeOrUpdate(CompanyDTO $companyDTO, ?Company $company = null): Company
     {
-        $company = new Company();
+        $company = $company ?? new Company();
 
-        $company->user_id = auth('web')->user()->id;
-        $company->name = $companyDTO->name;
-        $company->size = $companyDTO->size;
-        $company->url = $companyDTO->url;
-        $company->address = $companyDTO->address;
-        $company->contact_email = $companyDTO->contactEmail;
+        /** @var User $user */
+        $user = auth('web')->user();
 
-        $company->save();
-
-        return $company;
-    }
-
-    public function update(Company $company, CompanyDTO $companyDTO): Company
-    {
+        $company->user_id = $user->id;
         $company->name = $companyDTO->name;
         $company->size = $companyDTO->size;
         $company->url = $companyDTO->url;

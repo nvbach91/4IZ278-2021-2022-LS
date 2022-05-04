@@ -70,6 +70,10 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
             ->where('position', '[0-9]+')
             ->where('tab', implode('|', PositionTabConstants::getTabs()));
         Route::post('/', [PositionController::class, 'store'])->name('store');
+        Route::get('/{position}/edit', [PositionController::class, 'edit'])->name('edit')
+            ->where('position', '[0-9]+');
+        Route::post('/{position}', [PositionController::class, 'update'])->name('update')
+            ->where('position', '[0-9]+');
     });
 
     Route::group(['prefix' => 'companies', 'as' => 'companies.'], static function (): void {

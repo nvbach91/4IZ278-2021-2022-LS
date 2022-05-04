@@ -31,6 +31,16 @@ Breadcrumbs::for('app.positions.show', static function (BreadcrumbTrail $trail):
     ]));
 });
 
+Breadcrumbs::for('app.positions.edit', static function (BreadcrumbTrail $trail): void {
+    /** @var Position $position */
+    $position = request()->route('position');
+
+    $trail->parent('app.positions.index');
+    $trail->push(__('pages.app.positions.edit', ['positionName' => $position->title_name]), route('app.positions.edit', [
+        'position' => $position->id,
+    ]));
+});
+
 Breadcrumbs::for('app.companies.index', static function (BreadcrumbTrail $trail): void {
     $trail->push(__('pages.app.companies.index'), route('app.companies.index'));
 });

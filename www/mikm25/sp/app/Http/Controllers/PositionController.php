@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constants\PositionTabConstants;
 use App\Http\Requests\Position\PositionStoreRequest;
+use App\Http\Requests\Position\PositionUpdateRequest;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Position;
@@ -54,7 +55,7 @@ class PositionController extends Controller
 
         return view('app.position.create', [
             'branches' => $branches,
-            'companies' => $companies
+            'companies' => $companies,
         ]);
     }
 
@@ -91,13 +92,46 @@ class PositionController extends Controller
 
     public function store(PositionStoreRequest $request): RedirectResponse
     {
-        $position = $this->positionService->store($request->toDTO());
+        $position = $this->positionService->storeOrUpdate($request->toDTO());
 
         return redirect()->route('app.positions.show', [
             'position' => $position->id,
             'tab' => PositionTabConstants::TAB_DETAIL,
         ])->with('status', [
             'success' => __('status.positions.create.success'),
+        ]);
+    }
+
+    public function edit(Position $position): string
+    {
+        $position->load([
+            'branch',
+            'company',
+        ]);
+
+        $companies = Company::query()
+            ->ofUserId(auth('web')->user()->id)
+            ->get();
+
+        $branches = Branch::query()
+            ->get();
+
+        return view('app.position.edit', [
+            'position' => $position,
+            'branches' => $branches,
+            'companies' => $companies,
+        ]);
+    }
+
+    public function update(Position $position, PositionUpdateRequest $request): RedirectResponse
+    {
+        $position = $this->positionService->storeOrUpdate($request->toDTO(), $position);
+
+        return redirect()->route('app.positions.show', [
+            'position' => $position->id,
+            'tab' => PositionTabConstants::TAB_DETAIL,
+        ])->with('status', [
+            'success' => __('status.positions.update.success'),
         ]);
     }
 }

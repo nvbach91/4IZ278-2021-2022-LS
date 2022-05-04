@@ -15,6 +15,7 @@ return [
             'index' => 'Pozice',
             'create' => 'Nová pozice',
             'show' => 'Detail pozice :positionName',
+            'edit' => 'Editace pozice :positionName'
         ],
         'companies' => [
             'index' => 'Společnosti',

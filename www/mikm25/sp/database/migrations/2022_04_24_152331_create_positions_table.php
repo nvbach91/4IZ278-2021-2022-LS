@@ -14,6 +14,7 @@ class CreatePositionsTable extends Migration
             $table->foreignId('branch_id');
             $table->foreignId('company_id')->nullable();
             $table->string('name');
+            $table->string('slug', 400)->unique();
             $table->integer('salary_from')->nullable();
             $table->integer('salary_to')->nullable();
             $table->string('external_url', 400)->nullable();

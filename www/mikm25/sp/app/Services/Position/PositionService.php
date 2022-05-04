@@ -5,16 +5,18 @@ namespace App\Services\Position;
 use App\DTOs\Position\PositionDTO;
 use App\Models\Position;
 use App\Models\Tag;
+use App\Models\User;
 
 class PositionService
 {
-    public function store(PositionDTO $positionStoreDTO): Position
+    public function storeOrUpdate(PositionDTO $positionStoreDTO, ?Position $position = null): Position
     {
-        $position = new Position();
+        $position = $position ?? new Position();
 
-        $userId = auth('web')->user()->id;
+        /** @var User $user */
+        $user = auth('web')->user();
 
-        $position->user_id = $userId;
+        $position->user_id = $user->id;
         $position->branch_id = $positionStoreDTO->branchId;
         $position->company_id = $positionStoreDTO->company;
         $position->name = $positionStoreDTO->name;
@@ -35,7 +37,7 @@ class PositionService
             foreach ($positionStoreDTO->tags as $tag) {
                 /** @var Tag $tag */
                 $tag = Tag::query()->firstOrCreate([
-                    'user_id' => $userId,
+                    'user_id' => $user->id,
                     'name' => $tag,
                 ]);
 

@@ -41,7 +41,7 @@ class CompanyController extends Controller
 
     public function store(CompanyStoreRequest $request): RedirectResponse
     {
-        $this->companyService->store($request->toDTO());
+        $this->companyService->storeOrUpdate($request->toDTO());
 
         return redirect()->route('app.companies.index')->with('status', [
             'success' => __('status.companies.create.success'),
@@ -64,7 +64,7 @@ class CompanyController extends Controller
 
     public function update(Company $company, CompanyUpdateRequest $request): RedirectResponse
     {
-        $company = $this->companyService->update($company, $request->toDTO());
+        $company = $this->companyService->storeOrUpdate($request->toDTO(), $company);
 
         return redirect()->route('app.companies.show', [
             'company' => $company->id,

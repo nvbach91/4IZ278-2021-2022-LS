@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
@@ -18,6 +19,7 @@ use Illuminate\Support\Str;
  * @property int $branch_id
  * @property int|null $company_id
  * @property string $name
+ * @property string $slug
  * @property int|null $salary_from
  * @property int|null $salary_to
  * @property string|null $external_url
@@ -37,8 +39,9 @@ use Illuminate\Support\Str;
  *
  * @property-read User $user
  * @property-read Branch $branch
- * @property-read list<PositionClick> $clicks
- * @property-read list<PositionReaction> $reactions
+ * @property-read Collection|list<Tag> $tags
+ * @property-read Collection|list<PositionClick> $clicks
+ * @property-read Collection|list<PositionReaction> $reactions
  * @property-read Company|null $company null company means private job listing
  *
  * @property-read int|null $clicks_count
