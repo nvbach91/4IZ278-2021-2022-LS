@@ -33,6 +33,8 @@ use Illuminate\Support\Str;
  * @property-read list<Position> $positions
  * @property-read User $user
  *
+ * @property-read int|null $positions_count
+ *
  * @method static CompanyBuilder query()
  */
 class Company extends Model

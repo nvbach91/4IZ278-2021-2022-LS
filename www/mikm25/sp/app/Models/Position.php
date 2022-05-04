@@ -37,6 +37,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read list<PositionReaction> $reactions
  * @property-read Company|null $company null company means private job listing
  *
+ * @property-read int|null $clicks_count
+ * @property-read int|null $reactions_count
+ *
  * @method static PositionBuilder query()
  */
 class Position extends Model
