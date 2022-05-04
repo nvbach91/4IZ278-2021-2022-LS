@@ -25,7 +25,7 @@ Breadcrumbs::for('app.positions.show', static function (BreadcrumbTrail $trail):
     $tab = (string) request()->route('tab');
 
     $trail->parent('app.positions.index');
-    $trail->push(__('pages.app.positions.show', ['positionName' => $position->name]), route('app.positions.show', [
+    $trail->push(__('pages.app.positions.show', ['positionName' => $position->title_name]), route('app.positions.show', [
         'position' => $position->id,
         'tab' => $tab,
     ]));

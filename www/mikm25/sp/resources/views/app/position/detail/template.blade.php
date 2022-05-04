@@ -11,7 +11,7 @@ use App\Models\Position;
 @extends('templates.app')
 
 @section('title')
-    {{ __('pages.app.positions.show', ['positionName' => $position->name]) }}
+    {{ __('pages.app.positions.show', ['positionName' => $position->title_name]) }}
 @endsection
 
 @section('breadcrumbs')

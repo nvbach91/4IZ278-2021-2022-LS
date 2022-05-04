@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 /**
  * @property-read int $id
@@ -30,6 +31,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @see Position::getIsValidAttribute()
  * @property-read bool $is_valid
+ *
+ * @see Position::getTitleNameAttribute()
+ * @property-read string $title_name
  *
  * @property-read User $user
  * @property-read Branch $branch
@@ -95,6 +99,11 @@ class Position extends Model
         }
 
         return true;
+    }
+
+    public function getTitleNameAttribute(): string
+    {
+        return Str::limit($this->name, 25);
     }
 
     public function user(): BelongsTo
