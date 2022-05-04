@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Constants\PositionTabConstants;
-use App\Http\Requests\Positions\PositionStoreRequest;
+use App\Http\Requests\Position\PositionStoreRequest;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Position;

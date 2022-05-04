@@ -4,7 +4,7 @@ namespace App\DTOs\Company;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
-class CompanyStoreDTO extends DataTransferObject
+class CompanyDTO extends DataTransferObject
 {
     /** @var string */
     public $name;

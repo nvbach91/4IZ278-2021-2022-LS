@@ -2,13 +2,13 @@
 
 namespace App\Services\Position;
 
-use App\DTOs\Position\PositionStoreDTO;
+use App\DTOs\Position\PositionDTO;
 use App\Models\Position;
 use App\Models\Tag;
 
 class PositionService
 {
-    public function store(PositionStoreDTO $positionStoreDTO): Position
+    public function store(PositionDTO $positionStoreDTO): Position
     {
         $position = new Position();
 

@@ -37,6 +37,9 @@ return [
     'companies' => [
         'create' => [
             'success' => 'Společnost byla úspěšně vytvořena.'
+        ],
+        'update' => [
+            'success' => 'Společnost byla úspěšně upravena.'
         ]
     ]
 ];

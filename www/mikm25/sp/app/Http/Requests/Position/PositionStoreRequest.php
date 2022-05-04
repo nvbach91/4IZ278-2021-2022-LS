@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Positions;
+namespace App\Http\Requests\Position;
 
-use App\DTOs\Position\PositionStoreDTO;
+use App\DTOs\Position\PositionDTO;
 use App\Models\Branch;
 use App\Models\Company;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Exists;
+use function auth;
 
 class PositionStoreRequest extends FormRequest
 {
@@ -45,14 +46,14 @@ class PositionStoreRequest extends FormRequest
         ];
     }
 
-    public function toDTO(): PositionStoreDTO
+    public function toDTO(): PositionDTO
     {
         // remove all empty tags and cast them to string
         $tags = array_map(static function ($value): string {
             return (string) $value;
         }, array_filter($this->input('tags', [])));
 
-        return new PositionStoreDTO([
+        return new PositionDTO([
             'name' => (string) $this->input('name'),
             'workplaceAddress' => (string) $this->input('workplace_address'),
             'branchId' => (int) $this->input('branch'),

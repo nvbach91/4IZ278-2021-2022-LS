@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\Position;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
@@ -37,4 +38,24 @@ Breadcrumbs::for('app.companies.index', static function (BreadcrumbTrail $trail)
 Breadcrumbs::for('app.companies.create', static function (BreadcrumbTrail $trail): void {
     $trail->parent('app.companies.index');
     $trail->push(__('pages.app.companies.create'), route('app.companies.create'));
+});
+
+Breadcrumbs::for('app.companies.show', static function (BreadcrumbTrail $trail): void {
+    /** @var Company $company */
+    $company = request()->route('company');
+
+    $trail->parent('app.companies.index');
+    $trail->push(__('pages.app.companies.show', ['companyName' => $company->title_name]), route('app.companies.show', [
+        'company' => $company->id,
+    ]));
+});
+
+Breadcrumbs::for('app.companies.edit', static function (BreadcrumbTrail $trail): void {
+    /** @var Company $company */
+    $company = request()->route('company');
+
+    $trail->parent('app.companies.index');
+    $trail->push(__('pages.app.companies.edit', ['companyName' => $company->title_name]), route('app.companies.edit', [
+        'company' => $company->id,
+    ]));
 });

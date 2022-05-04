@@ -80,5 +80,7 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
         Route::post('/', [CompanyController::class, 'store'])->name('store');
         Route::get('/{company}/edit', [CompanyController::class, 'edit'])->name('edit')
             ->where('company', '[0-9]+');
+        Route::post('/{company}', [CompanyController::class, 'update'])->name('update')
+            ->where('company', '[0-9]+');
     });
 });

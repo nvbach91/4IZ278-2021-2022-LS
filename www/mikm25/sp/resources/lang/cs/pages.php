@@ -19,7 +19,8 @@ return [
         'companies' => [
             'index' => 'Společnosti',
             'create' => 'Nová společnost',
-            'show' => 'Detail společnost :companyName'
+            'show' => 'Detail společnost :companyName',
+            'edit' => 'Editace společnosti :companyName'
         ]
     ],
 ];

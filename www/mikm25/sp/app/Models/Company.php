@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 /**
  * @property-read int $id
@@ -25,6 +26,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @see Company::getSelectNameAttribute()
  * @property-read string $select_name
+ *
+ * @see Company::getTitleNameAttribute()
+ * @property-read string $title_name
  *
  * @property-read list<Position> $positions
  * @property-read User $user
@@ -58,6 +62,11 @@ class Company extends Model
     public function getSelectNameAttribute(): string
     {
         return "$this->id - $this->name";
+    }
+
+    public function getTitleNameAttribute(): string
+    {
+        return Str::limit($this->name, 25);
     }
 
     public function positions(): HasMany

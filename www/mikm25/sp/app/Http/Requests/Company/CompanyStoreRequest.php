@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Companies;
+namespace App\Http\Requests\Company;
 
-use App\DTOs\Company\CompanyStoreDTO;
+use App\DTOs\Company\CompanyDTO;
 use App\Models\Attributes\CompanySizeAttribute;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\In;
+use function auth;
 
 class CompanyStoreRequest extends FormRequest
 {
@@ -29,9 +30,9 @@ class CompanyStoreRequest extends FormRequest
         ];
     }
 
-    public function toDTO(): CompanyStoreDTO
+    public function toDTO(): CompanyDTO
     {
-        return new CompanyStoreDTO([
+        return new CompanyDTO([
             'name' => (string) $this->input('name'),
             'size' => $this->filled('size')
                 ? (string) $this->input('size')

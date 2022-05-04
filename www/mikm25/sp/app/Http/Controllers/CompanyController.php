@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Companies\CompanyStoreRequest;
+use App\Http\Requests\Company\CompanyStoreRequest;
+use App\Http\Requests\Company\CompanyUpdateRequest;
 use App\Models\Company;
 use App\Services\Company\CompanyService;
 use Illuminate\Http\RedirectResponse;
@@ -23,13 +24,13 @@ class CompanyController extends Controller
     {
         $companies = Company::query()
             ->withCount([
-                'positions'
+                'positions',
             ])
             ->ofUserId(auth('web')->user()->id)
             ->paginate(15);
 
         return view('app.company.index', [
-            'companies' => $companies
+            'companies' => $companies,
         ]);
     }
 
@@ -43,17 +44,32 @@ class CompanyController extends Controller
         $this->companyService->store($request->toDTO());
 
         return redirect()->route('app.companies.index')->with('status', [
-           'success' => __('status.companies.create.success')
+            'success' => __('status.companies.create.success'),
         ]);
     }
 
     public function show(Company $company): string
     {
-        return view('app.company.create');
+        return view('app.company.show', [
+            'company' => $company
+        ]);
     }
 
     public function edit(Company $company): string
     {
-        return view('');
+        return view('app.company.edit', [
+            'company' => $company
+        ]);
+    }
+
+    public function update(Company $company, CompanyUpdateRequest $request): RedirectResponse
+    {
+        $company = $this->companyService->update($company, $request->toDTO());
+
+        return redirect()->route('app.companies.show', [
+            'company' => $company->id,
+        ])->with('status', [
+            'success' => __('status.companies.update.success'),
+        ]);
     }
 }

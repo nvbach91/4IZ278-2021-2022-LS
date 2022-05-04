@@ -13,6 +13,7 @@ return [
         'setup' => 'Nastavit',
         'detail' => 'Detail',
         'create' => 'Vytvořit',
+        'edit' => 'Editovat',
     ],
     'link' => 'Odkaz',
     'yes' => 'Ano',

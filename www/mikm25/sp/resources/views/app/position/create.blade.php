@@ -24,7 +24,6 @@ use App\Models\Company;
     <div class="row">
         <div class="col">
             <form action="{{ route('app.positions.store') }}" method="post">
-                @include('common.status')
                 @include('common.forms.errors')
                 {{ csrf_field() }}
 

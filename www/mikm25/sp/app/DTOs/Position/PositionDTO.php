@@ -4,7 +4,7 @@ namespace App\DTOs\Position;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
-class PositionStoreDTO extends DataTransferObject
+class PositionDTO extends DataTransferObject
 {
     /** @var string */
     public $name;
