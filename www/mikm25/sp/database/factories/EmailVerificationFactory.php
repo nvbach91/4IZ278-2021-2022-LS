@@ -15,7 +15,7 @@ class EmailVerificationFactory extends Factory
 
         return [
             'token' => Str::uuid(),
-            'user_id' => $user->id
+            'user_id' => $user->id,
         ];
     }
 }

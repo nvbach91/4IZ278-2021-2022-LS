@@ -21,7 +21,7 @@ class PositionClickFactory extends Factory
         return [
             'position_id' => $position->id,
             'created_at' => $created,
-            'updated_at' => $created
+            'updated_at' => $created,
         ];
     }
 }

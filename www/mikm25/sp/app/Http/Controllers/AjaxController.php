@@ -19,7 +19,7 @@ class AjaxController extends Controller
         $user = auth('web')->user();
 
         $tags = Tag::query()
-            ->when(!empty($query), static function (TagBuilder $builder) use ($query): TagBuilder {
+            ->when(! empty($query), static function (TagBuilder $builder) use ($query): TagBuilder {
                 return $builder->searchByQuery($query);
             })
             ->ofUserId($user->id)

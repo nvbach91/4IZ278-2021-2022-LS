@@ -78,7 +78,7 @@ class EmailVerification extends Model
     public function getVerificationLinkAttribute(): string
     {
         return route('auth.email-verification.verify', [
-            'token' => $this->token
+            'token' => $this->token,
         ]);
     }
 

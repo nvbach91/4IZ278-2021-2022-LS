@@ -32,13 +32,6 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
-    protected function configureRateLimiting(): void
-    {
-        RateLimiter::for('api', static function (Request $request): Limit {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
-        });
-    }
-
     private function bootModelBinding(): void
     {
         Route::bind('position', static function ($value): ?Position {
@@ -65,6 +58,13 @@ class RouteServiceProvider extends ServiceProvider
                 ->first();
 
             return $company;
+        });
+    }
+
+    protected function configureRateLimiting(): void
+    {
+        RateLimiter::for('api', static function (Request $request): Limit {
+            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
     }
 }

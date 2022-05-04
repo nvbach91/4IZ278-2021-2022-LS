@@ -21,14 +21,13 @@ class CompanySizeAttribute
         $this->size = $size;
     }
 
-    public function getSize(): string
+    public static function of(string $size): self
     {
-        return $this->size;
-    }
+        if (! array_key_exists($size, self::getAllSizes())) {
+            throw new InvalidArgumentException("Undefined company size $size given.");
+        }
 
-    public function getTranslatedSize(): string
-    {
-        return __("companies.sizes.$this->size");
+        return new self($size);
     }
 
     /**
@@ -42,15 +41,6 @@ class CompanySizeAttribute
             self::SIZE_100_TO_200 => new self(self::SIZE_100_TO_200),
             self::SIZE_200_UPPER => new self(self::SIZE_200_UPPER),
         ];
-    }
-
-    public static function of(string $size): self
-    {
-        if (! array_key_exists($size, self::getAllSizes())) {
-            throw new InvalidArgumentException("Undefined company size $size given.");
-        }
-
-        return new self($size);
     }
 
     public static function toFifty(): self
@@ -71,5 +61,15 @@ class CompanySizeAttribute
     public static function twoHundredUpper(): self
     {
         return new self(self::SIZE_200_UPPER);
+    }
+
+    public function getSize(): string
+    {
+        return $this->size;
+    }
+
+    public function getTranslatedSize(): string
+    {
+        return __("companies.sizes.$this->size");
     }
 }

@@ -51,14 +51,14 @@ class CompanyController extends Controller
     public function show(Company $company): string
     {
         return view('app.company.show', [
-            'company' => $company
+            'company' => $company,
         ]);
     }
 
     public function edit(Company $company): string
     {
         return view('app.company.edit', [
-            'company' => $company
+            'company' => $company,
         ]);
     }
 

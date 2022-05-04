@@ -27,7 +27,7 @@ class SidebarViewComposer
                 'text' => __('pages.app.companies.index'),
                 'icon' => 'bi bi-shop-window',
                 'active' => $request->is('app/companies*'),
-            ]
+            ],
         ]);
     }
 }

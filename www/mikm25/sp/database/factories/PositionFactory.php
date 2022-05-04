@@ -48,11 +48,11 @@ class PositionFactory extends Factory
     {
         return $this->afterCreating(static function (Position $position): void {
             PositionClick::factory()->count(rand(10, 50))->create([
-                'position_id' => $position->id
+                'position_id' => $position->id,
             ]);
 
             PositionReaction::factory()->count(rand(10, 50))->create([
-                'position_id' => $position->id
+                'position_id' => $position->id,
             ]);
         });
     }
