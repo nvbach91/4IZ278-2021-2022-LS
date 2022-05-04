@@ -14,7 +14,12 @@ return [
         'positions' => [
             'index' => 'Pozice',
             'create' => 'Nová pozice',
-            'detail' => 'Detail pozice :positionName',
+            'show' => 'Detail pozice :positionName',
         ],
+        'companies' => [
+            'index' => 'Společnosti',
+            'create' => 'Nová společnost',
+            'show' => 'Detail společnost :companyName'
+        ]
     ],
 ];

@@ -10,4 +10,9 @@ class CompanyBuilder extends Builder
 {
     use WithIdQuery;
     use WithUserIdQuery;
+
+    public function searchByQuery(string $query): self
+    {
+        return $this->where('name', 'like', "%$query%");
+    }
 }

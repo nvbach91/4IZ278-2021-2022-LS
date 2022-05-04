@@ -17,15 +17,24 @@ Breadcrumbs::for('app.positions.create', static function (BreadcrumbTrail $trail
     $trail->push(__('pages.app.positions.create'), route('app.positions.create'));
 });
 
-Breadcrumbs::for('app.positions.detail', static function (BreadcrumbTrail $trail): void {
+Breadcrumbs::for('app.positions.show', static function (BreadcrumbTrail $trail): void {
     /** @var Position $position */
     $position = request()->route('position');
 
     $tab = (string) request()->route('tab');
 
     $trail->parent('app.positions.index');
-    $trail->push(__('pages.app.positions.detail', ['positionName' => $position->name]), route('app.positions.detail', [
+    $trail->push(__('pages.app.positions.show', ['positionName' => $position->name]), route('app.positions.show', [
         'position' => $position->id,
         'tab' => $tab,
     ]));
+});
+
+Breadcrumbs::for('app.companies.index', static function (BreadcrumbTrail $trail): void {
+    $trail->push(__('pages.app.companies.index'), route('app.companies.index'));
+});
+
+Breadcrumbs::for('app.companies.create', static function (BreadcrumbTrail $trail): void {
+    $trail->parent('app.companies.index');
+    $trail->push(__('pages.app.companies.create'), route('app.companies.create'));
 });

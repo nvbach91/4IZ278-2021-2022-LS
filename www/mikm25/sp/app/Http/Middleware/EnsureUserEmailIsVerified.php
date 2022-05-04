@@ -28,7 +28,7 @@ class EnsureUserEmailIsVerified
             }
 
             // Logout user!
-            auth()->logout();
+            auth('web')->logout();
 
             return redirect()->route('auth.login')->with('status', [
                 'danger' => __('status.auth.login.error_unverified'),

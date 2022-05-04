@@ -11,11 +11,11 @@ use App\Models\Position;
 @extends('templates.app')
 
 @section('title')
-    {{ __('pages.app.positions.detail', ['positionName' => $position->name]) }}
+    {{ __('pages.app.positions.show', ['positionName' => $position->name]) }}
 @endsection
 
 @section('breadcrumbs')
-    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('app.positions.detail') }}
+    {{ \Diglactic\Breadcrumbs\Breadcrumbs::render('app.positions.show') }}
 @endsection
 
 @section('app-content')
@@ -29,19 +29,19 @@ use App\Models\Position;
             <ul class="nav nav-pills">
                 <li class="nav-item">
                     <a class="nav-link {{ $activeTab === \App\Constants\PositionTabConstants::TAB_DETAIL ? 'active' : '' }}"
-                       href="{{ route('app.positions.detail', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_DETAIL]) }}">
+                       href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_DETAIL]) }}">
                         {{ __('positions.detail.tabs.detail') }}
                     </a>
                 </li>
                 <li class="nav-item ms-2">
                     <a class="nav-link {{ $activeTab === \App\Constants\PositionTabConstants::TAB_STATISTICS ? 'active' : '' }}"
-                       href="{{ route('app.positions.detail', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_STATISTICS]) }}">
+                       href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_STATISTICS]) }}">
                         {{ __('positions.detail.tabs.statistics') }}
                     </a>
                 </li>
                 <li class="nav-item ms-2">
                     <a class="nav-link {{ $activeTab === \App\Constants\PositionTabConstants::TAB_LOG ? 'active' : '' }}"
-                       href="{{ route('app.positions.detail', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_LOG]) }}">
+                       href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_LOG]) }}">
                         {{ __('positions.detail.tabs.log') }}
                     </a>
                 </li>

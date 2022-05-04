@@ -23,7 +23,7 @@ class LoginService
             return false;
         }
 
-        auth()->login($user, $rememberMe);
+        auth('web')->login($user, $rememberMe);
 
         return true;
     }

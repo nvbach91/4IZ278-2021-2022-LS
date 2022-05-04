@@ -3,21 +3,20 @@
 namespace App\Services\Position;
 
 use App\DTOs\Position\PositionStoreDTO;
-use App\Models\Company;
 use App\Models\Position;
 use App\Models\Tag;
 
 class PositionService
 {
-    public function store(PositionStoreDTO $positionStoreDTO, ?Company $company): Position
+    public function store(PositionStoreDTO $positionStoreDTO): Position
     {
         $position = new Position();
 
-        $userId = auth()->user()->id;
+        $userId = auth('web')->user()->id;
 
         $position->user_id = $userId;
         $position->branch_id = $positionStoreDTO->branchId;
-        $position->company_id = $company instanceof Company ? $company->id : null;
+        $position->company_id = $positionStoreDTO->company;
         $position->name = $positionStoreDTO->name;
         $position->salary_from = $positionStoreDTO->salaryFrom;
         $position->salary_to = $positionStoreDTO->salaryTo;

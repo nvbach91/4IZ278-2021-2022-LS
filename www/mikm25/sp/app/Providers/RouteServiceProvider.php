@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Company;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -51,6 +52,19 @@ class RouteServiceProvider extends ServiceProvider
                 ->first();
 
             return $position;
+        });
+
+        Route::bind('company', static function ($value): ?Company {
+            /** @var User $user */
+            $user = auth('web')->user();
+
+            /** @var Company|null $company */
+            $company = Company::query()
+                ->ofId((int) $value)
+                ->ofUserId($user->id)
+                ->first();
+
+            return $company;
         });
     }
 }

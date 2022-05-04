@@ -1,9 +1,11 @@
 <?php
 
 use App\Models\Branch;
+use App\Models\Company;
 
 /**
  * @var list<Branch> $branches
+ * @var list<Company> $companies
  */
 
 ?>
@@ -63,10 +65,10 @@ use App\Models\Branch;
                         @include('common.forms.error', ['field' => 'branch'])
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <label for="tags" class="form-label">
+                        <label for="position-tags" class="form-label">
                             {{ __('models.position.tags') }}
                         </label>
-                        <select name="tags[]" id="tags" class="form-select @error('tags') is-invalid @enderror"
+                        <select name="tags[]" id="position-tags" class="form-select @error('tags') is-invalid @enderror"
                                 data-max="5" data-selected="{{ implode(',', old('tags', [])) }}" data-allow-new="true"
                                 data-allow-clear="true" multiple>
                             @foreach(old('tags', []) as $tag)
@@ -117,72 +119,25 @@ use App\Models\Branch;
                     </div>
                 </div>
 
-                <div class="d-flex align-items-center">
-                    <h2>
-                        {{ __('positions.detail.sections.company') }}
-                    </h2>
-                    <div class="form-check form-switch ms-3">
-                        <input class="form-check-input" {{ old('with_company', false) ? 'checked' : '' }}
-                               type="checkbox" role="switch" id="company-checkbox" name="with_company">
-                        <label class="form-check-label" for="company-checkbox"></label>
-                    </div>
-                </div>
-                <div class="row g-3 mb-3" id="company-section">
+                <h2>{{ __('positions.detail.sections.company') }}</h2>
+                <div class="row g-3 mb-3">
                     <div class="col-lg-4 col-md-6 col-sm-12">
-                        <label for="company-name" class="form-label">
-                            {{ __('models.company.name') }}
-                            @include('common.forms.required')
+                        <label for="company" class="form-label">
+                            {{ __('models.position.company') }}
                         </label>
-                        <input type="hidden" name="company[id]" value="{{ old('company.id') }}" id="company-id">
-                        <input type="text" id="company-name" name="company[name]" value="{{ old('company.name') }}"
-                               maxlength="255"
-                               class="form-control @error('company.name') is-invalid @enderror" required>
-                        <small class="text-muted">
-                            {{ __('positions.create.company_hint') }}
-                        </small>
-                        @include('common.forms.error', ['field' => 'company.name'])
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <label for="company-size" class="form-label">
-                            {{ __('models.company.size') }}
-                        </label>
-                        <select name="company[size]" id="company-size"
-                                class="form-select @error('company.size') is-invalid @enderror">
-                            <option value="" {{ empty(old('company.size')) ? 'selected' : '' }}>{{ __('companies.selects.size_empty') }}</option>
-                            @foreach(\App\Models\Attributes\CompanySizeAttribute::getAllSizes() as $key => $size)
-                                <option value="{{ $key }}" {{ old('company.size') === $key ? 'selected' : '' }}>{{ $size->getTranslatedSize() }}</option>
+                        <select name="company" id="company" class="form-select @error('company') is-invalid @enderror">
+                            <option value="" {{ empty(old('company')) ? 'selected' : '' }}>{{ __('positions.selects.company_empty') }}</option>
+                            @foreach($companies as $company)
+                                <option value="{{ $company->id }}" {{ old('company') == $company->id ? 'selected' : '' }}>{{ $company->select_name }}</option>
                             @endforeach
                         </select>
-                        @include('common.forms.error', ['field' => 'company.size'])
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <label for="company-url" class="form-label">
-                            {{ __('models.company.url') }}
-                        </label>
-                        <input type="url" id="company-url" name="company[url]" value="{{ old('company.url') }}"
-                               maxlength="255"
-                               class="form-control @error('company.url') is-invalid @enderror">
-                        @include('common.forms.error', ['field' => 'company.url'])
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <label for="company-address" class="form-label">
-                            {{ __('models.company.address') }}
-                        </label>
-                        <input type="text" id="company-address" name="company[address]"
-                               maxlength="255"
-                               value="{{ old('company.address') }}"
-                               class="form-control @error('company.address') is-invalid @enderror">
-                        @include('common.forms.error', ['field' => 'company.address'])
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12">
-                        <label for="company-contact-email" class="form-label">
-                            {{ __('models.company.contact_email') }}
-                        </label>
-                        <input type="email" id="company-contact-email" name="company[contact_email]"
-                               maxlength="255"
-                               value="{{ old('company.contact_email') }}"
-                               class="form-control @error('company.contact_email') is-invalid @enderror">
-                        @include('common.forms.error', ['field' => 'company.contact_email'])
+                        <small class="text-muted">
+                            {{ __('positions.create.company_hint') }}
+                            <a href="{{ route('app.companies.create') }}">
+                                {{ __('common.buttons.create') }}
+                            </a>
+                        </small>
+                        @include('common.forms.error', ['field' => 'company'])
                     </div>
                 </div>
 

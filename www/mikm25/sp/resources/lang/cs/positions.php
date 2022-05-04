@@ -22,10 +22,11 @@ return [
         'empty' => 'Prozatím jste nevytvořili žádnou pozici.',
     ],
     'create' => [
-        'company_hint' => 'Pokud chcete použít již existující společnost, začněte psát její název a vyberte danou pozici z nabídky.',
-        'external_url_hint' => 'Tento odkaz se v detailu nabídky na hlavní stránce zobrazí jako tlačítko.'
+        'external_url_hint' => 'Tento odkaz se v detailu nabídky na hlavní stránce zobrazí jako tlačítko.',
+        'company_hint' => 'Nemáte žádnou společnost?'
     ],
     'selects' => [
         'branch_empty' => 'Zvolte obor',
+        'company_empty' => 'Zvolte společnost',
     ],
 ];

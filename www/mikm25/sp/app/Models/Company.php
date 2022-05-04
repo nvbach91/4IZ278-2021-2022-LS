@@ -23,6 +23,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
+ * @see Company::getSelectNameAttribute()
+ * @property-read string $select_name
+ *
  * @property-read list<Position> $positions
  * @property-read User $user
  *
@@ -51,6 +54,11 @@ class Company extends Model
         'address' => 'string',
         'contact_email' => 'string',
     ];
+
+    public function getSelectNameAttribute(): string
+    {
+        return "$this->id - $this->name";
+    }
 
     public function positions(): HasMany
     {

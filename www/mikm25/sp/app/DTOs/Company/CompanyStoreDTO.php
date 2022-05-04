@@ -1,13 +1,11 @@
 <?php
 
-namespace App\DTOs\Position;
+namespace App\DTOs\Company;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
-class PositionStoreCompanyDTO extends DataTransferObject
+class CompanyStoreDTO extends DataTransferObject
 {
-    /** @var int|null */
-    public $id;
     /** @var string */
     public $name;
     /** @var string|null */

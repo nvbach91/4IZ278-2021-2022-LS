@@ -23,6 +23,11 @@ class SidebarViewComposer
                 'icon' => 'bi bi-briefcase',
                 'active' => $request->is('app/positions*'),
             ],
+            'app.companies.index' => [
+                'text' => __('pages.app.companies.index'),
+                'icon' => 'bi bi-shop-window',
+                'active' => $request->is('app/companies*'),
+            ]
         ]);
     }
 }

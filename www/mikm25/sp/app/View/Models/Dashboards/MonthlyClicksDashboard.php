@@ -30,7 +30,7 @@ class MonthlyClicksDashboard implements DashboardInterface, HasPreviousValue
             return PositionClick::query()
                 ->whereHas('position', function (PositionBuilder $query): PositionBuilder {
                     return $query
-                        ->ofUserId(auth()->user()->id)
+                        ->ofUserId(auth('web')->user()->id)
                         ->when(! empty($this->position), function (PositionBuilder $query): PositionBuilder {
                             return $query->ofId($this->position->id);
                         });
@@ -46,7 +46,7 @@ class MonthlyClicksDashboard implements DashboardInterface, HasPreviousValue
             return PositionClick::query()
                 ->whereHas('position', function (PositionBuilder $query): PositionBuilder {
                     return $query
-                        ->ofUserId(auth()->user()->id)
+                        ->ofUserId(auth('web')->user()->id)
                         ->when(! empty($this->position), function (PositionBuilder $query): PositionBuilder {
                             return $query->ofId($this->position->id);
                         });

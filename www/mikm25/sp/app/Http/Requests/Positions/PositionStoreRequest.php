@@ -2,27 +2,22 @@
 
 namespace App\Http\Requests\Positions;
 
-use App\DTOs\Position\PositionStoreCompanyDTO;
 use App\DTOs\Position\PositionStoreDTO;
-use App\Models\Attributes\CompanySizeAttribute;
 use App\Models\Branch;
 use App\Models\Company;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Exists;
-use Illuminate\Validation\Rules\In;
 
 class PositionStoreRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return auth()->check();
+        return auth('web')->check();
     }
 
     public function rules(): array
     {
-        $userId = auth()->user()->id;
-
         $today = Carbon::now()->format('Y-m-d');
 
         return [
@@ -39,60 +34,19 @@ class PositionStoreRequest extends FormRequest
             'valid_until' => 'nullable|date|after:valid_from',
             'salary_from' => 'nullable|integer|lte:salary_to|gte:0',
             'salary_to' => 'nullable|integer|gte:salary_from|gte:0',
-            'with_company' => 'required|boolean',
-            'company.id' => [
+            'company' => [
                 'nullable',
                 'integer',
-                (new Exists(Company::class, 'id'))->where('user_id', $userId),
+                (new Exists(Company::class, 'id'))->where('user_id', auth('web')->check()),
             ],
-            'company.name' => 'required_if:with_company,1|nullable|string|max:255',
-            'company.size' => [
-                'nullable',
-                'string',
-                new In(array_keys(CompanySizeAttribute::getAllSizes())),
-            ],
-            'company.url' => 'nullable|string|url|max:255',
-            'company.address' => 'nullable|string|max:255',
-            'company.contact_email' => 'nullable|string|email|max:255',
             'external_url' => 'nullable|string|url|max:255',
             'min_practice_length' => 'nullable|integer|gte:0',
             'content' => 'required|string',
         ];
     }
 
-    protected function prepareForValidation(): void
-    {
-        $this->merge([
-            // company switch workaround
-            'with_company' => $this->has('with_company'),
-        ]);
-    }
-
     public function toDTO(): PositionStoreDTO
     {
-        if ($this->boolean('with_company')) {
-            $companyDTO = new PositionStoreCompanyDTO([
-                'id' => $this->filled('company.id')
-                    ? (int) $this->input('company.id')
-                    : null,
-                'name' => (string) $this->input('company.name'),
-                'size' => $this->filled('company.size')
-                    ? (string) $this->input('company.size')
-                    : null,
-                'url' => $this->filled('company.url')
-                    ? (string) $this->input('company.url')
-                    : null,
-                'address' => $this->filled('company.address')
-                    ? (string) $this->input('company.address')
-                    : null,
-                'contactEmail' => $this->filled('company.contact_email')
-                    ? (string) $this->input('company.contact_email')
-                    : null,
-            ]);
-        } else {
-            $companyDTO = null;
-        }
-
         // remove all empty tags and cast them to string
         $tags = array_map(static function ($value): string {
             return (string) $value;
@@ -115,7 +69,9 @@ class PositionStoreRequest extends FormRequest
             'salaryTo' => $this->filled('salary_to')
                 ? (int) $this->input('salary_to')
                 : null,
-            'company' => $companyDTO,
+            'company' => $this->filled('company')
+                ? (int) $this->input('company')
+                : null,
             'externalUrl' => $this->filled('external_url')
                 ? (string) $this->input('external_url')
                 : null,

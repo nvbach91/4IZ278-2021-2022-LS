@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PositionController;
@@ -64,10 +65,20 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
     Route::group(['prefix' => 'positions', 'as' => 'positions.'], static function (): void {
         Route::get('/', [PositionController::class, 'index'])->name('index');
         Route::get('/create', [PositionController::class, 'create'])->name('create');
-        Route::get('/{position}/{tab}', [PositionController::class, 'detail'])
-            ->name('detail')
+        Route::get('/{position}/{tab}', [PositionController::class, 'show'])
+            ->name('show')
             ->where('position', '[0-9]+')
             ->where('tab', implode('|', PositionTabConstants::getTabs()));
         Route::post('/', [PositionController::class, 'store'])->name('store');
+    });
+
+    Route::group(['prefix' => 'companies', 'as' => 'companies.'], static function (): void {
+        Route::get('/', [CompanyController::class, 'index'])->name('index');
+        Route::get('/create', [CompanyController::class, 'create'])->name('create');
+        Route::get('/{company}', [CompanyController::class, 'show'])->name('show')
+            ->where('company', '[0-9]+');
+        Route::post('/', [CompanyController::class, 'store'])->name('store');
+        Route::get('/{company}/edit', [CompanyController::class, 'edit'])->name('edit')
+            ->where('company', '[0-9]+');
     });
 });

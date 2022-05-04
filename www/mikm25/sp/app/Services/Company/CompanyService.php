@@ -2,16 +2,16 @@
 
 namespace App\Services\Company;
 
-use App\DTOs\Position\PositionStoreCompanyDTO;
+use App\DTOs\Company\CompanyStoreDTO;
 use App\Models\Company;
 
 class CompanyService
 {
-    public function store(PositionStoreCompanyDTO $companyDTO): Company
+    public function store(CompanyStoreDTO $companyDTO): Company
     {
         $company = new Company();
 
-        $company->user_id = auth()->user()->id;
+        $company->user_id = auth('web')->user()->id;
         $company->name = $companyDTO->name;
         $company->size = $companyDTO->size;
         $company->url = $companyDTO->url;

@@ -22,7 +22,7 @@ class PositionStoreDTO extends DataTransferObject
     public $salaryFrom;
     /** @var int|null */
     public $salaryTo;
-    /** @var \App\DTOs\Position\PositionStoreCompanyDTO|null */
+    /** @var int|null */
     public $company;
     /** @var string|null */
     public $externalUrl;
@@ -30,9 +30,4 @@ class PositionStoreDTO extends DataTransferObject
     public $minPracticeLength;
     /** @var string */
     public $content;
-
-    public function hasCompany(): bool
-    {
-        return $this->company !== null;
-    }
 }

@@ -27,12 +27,11 @@ use App\Models\Position;
                     <th>{{ __('models.id') }}</th>
                     <th>{{ __('models.position.name') }}</th>
                     <th>{{ __('models.position.branch') }}</th>
-                    <th>{{ __('models.position.salary_from') }}</th>
-                    <th>{{ __('models.position.salary_to') }}</th>
+                    <th>{{ __('models.position.company') }}</th>
                     <th>{{ __('models.position.external_url') }}</th>
                     <th>{{ __('models.position.valid') }}</th>
-                    <th>{{ __('models.position.clicks') }}</th>
-                    <th>{{ __('models.position.reactions') }}</th>
+                    <th>{{ __('models.position.clicks_count') }}</th>
+                    <th>{{ __('models.position.reactions_count') }}</th>
                     <th>{{ __('tables.actions') }}</th>
                 </tr>
                 </thead>
@@ -42,8 +41,13 @@ use App\Models\Position;
                         <td>{{ $position->id }}</td>
                         <td>{{ $position->name }}</td>
                         <td>{{ $position->branch->translated_name }}</td>
-                        <td>{{ $position->salary_from }}</td>
-                        <td>{{ $position->salary_to }}</td>
+                        <td>
+                            @if(!empty($position->company))
+                                <a href="{{ route('app.companies.show', ['company' => $position->company->id]) }}" title="{{ $position->company->name }}">
+                                    {{ \Illuminate\Support\Str::limit($position->company->name, 20) }}
+                                </a>
+                            @endif
+                        </td>
                         <td>
                             @if(!empty($position->external_url))
                                 <a href="{{ $position->external_url }}" target="_blank"
@@ -62,7 +66,7 @@ use App\Models\Position;
                         <td>{{ $position->clicks_count }}</td>
                         <td>{{ $position->reactions_count }}</td>
                         <td>
-                            <a href="{{ route('app.positions.detail', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_DETAIL]) }}"
+                            <a href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_DETAIL]) }}"
                                class="btn btn-sm btn-primary">
                                 {{ __('common.buttons.detail') }}
                             </a>

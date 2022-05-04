@@ -30,4 +30,5 @@ return [
             'title' => 'Počet reakcí tento měsíc',
         ],
     ],
+    'searching' => 'Hledání...'
 ];

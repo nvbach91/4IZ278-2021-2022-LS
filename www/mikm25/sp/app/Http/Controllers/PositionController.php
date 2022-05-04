@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Constants\PositionTabConstants;
 use App\Http\Requests\Positions\PositionStoreRequest;
 use App\Models\Branch;
+use App\Models\Company;
 use App\Models\Position;
-use App\Services\Company\CompanyService;
 use App\Services\Position\PositionService;
 use App\View\Models\Dashboards\MonthlyClicksDashboard;
 use App\View\Models\Dashboards\MonthlyReactionsDashboard;
@@ -19,15 +19,9 @@ class PositionController extends Controller
      */
     private $positionService;
 
-    /**
-     * @var CompanyService
-     */
-    private $companyService;
-
-    public function __construct(PositionService $positionService, CompanyService $companyService)
+    public function __construct(PositionService $positionService)
     {
         $this->positionService = $positionService;
-        $this->companyService = $companyService;
     }
 
     public function index(): string
@@ -36,6 +30,10 @@ class PositionController extends Controller
             ->withCount([
                 'clicks',
                 'reactions',
+            ])
+            ->with([
+                'branch',
+                'company',
             ])
             ->ofUserId(auth('web')->user()->id)
             ->paginate(15);
@@ -47,12 +45,20 @@ class PositionController extends Controller
 
     public function create(): string
     {
+        $companies = Company::query()
+            ->ofUserId(auth('web')->user()->id)
+            ->get();
+
+        $branches = Branch::query()
+            ->get();
+
         return view('app.position.create', [
-            'branches' => Branch::query()->get(),
+            'branches' => $branches,
+            'companies' => $companies
         ]);
     }
 
-    public function detail(Position $position, string $tab)
+    public function show(Position $position, string $tab)
     {
         $position->load([
             'branch',
@@ -85,17 +91,9 @@ class PositionController extends Controller
 
     public function store(PositionStoreRequest $request): RedirectResponse
     {
-        $positionStoreDTO = $request->toDTO();
+        $position = $this->positionService->store($request->toDTO());
 
-        if ($positionStoreDTO->hasCompany()) {
-            $company = $this->companyService->store($positionStoreDTO->company);
-        } else {
-            $company = null;
-        }
-
-        $position = $this->positionService->store($positionStoreDTO, $company);
-
-        return redirect()->route('app.positions.detail', [
+        return redirect()->route('app.positions.show', [
             'position' => $position->id,
             'tab' => PositionTabConstants::TAB_DETAIL,
         ])->with('status', [

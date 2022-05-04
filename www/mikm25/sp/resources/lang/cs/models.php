@@ -25,9 +25,10 @@ return [
         'valid_until' => 'Platnost do',
         'valid' => 'Platná',
         'min_practice_length' => 'Minimální praxe',
-        'clicks' => 'Počet kliknutí',
-        'reactions' => 'Počet reakcí',
-        'tags' => 'Tagy'
+        'clicks_count' => 'Počet kliknutí',
+        'reactions_count' => 'Počet reakcí',
+        'tags' => 'Tagy',
+        'company' => 'Společnost'
     ],
     'company' => [
         'name' => 'Název společnosti',
@@ -35,5 +36,6 @@ return [
         'url' => 'Web',
         'address' => 'Adresa sídla',
         'contact_email' => 'Kontaktní emailová adresa',
+        'positions_count' => 'Počet pozic'
     ],
 ];

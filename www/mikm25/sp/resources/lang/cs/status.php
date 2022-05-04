@@ -33,5 +33,10 @@ return [
         'create' => [
             'success' => 'Pozice byla úspěšně vytvořena.'
         ]
+    ],
+    'companies' => [
+        'create' => [
+            'success' => 'Společnost byla úspěšně vytvořena.'
+        ]
     ]
 ];
