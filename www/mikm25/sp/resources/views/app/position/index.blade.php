@@ -44,7 +44,7 @@ use App\Models\Position;
                         <td>
                             @if(!empty($position->company))
                                 <a href="{{ route('app.companies.show', ['company' => $position->company->id]) }}" title="{{ $position->company->name }}">
-                                    {{ \Illuminate\Support\Str::limit($position->company->name, 20) }}
+                                    {{ $position->company->name }}
                                 </a>
                             @endif
                         </td>
