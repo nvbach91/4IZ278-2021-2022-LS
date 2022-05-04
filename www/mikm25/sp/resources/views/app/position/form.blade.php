@@ -70,8 +70,16 @@ $positionContent = old('content', isset($position) ? $position->content : null);
                 {{ __('models.position.tags') }}
             </label>
             <select name="tags[]" id="position-tags" class="form-select @error('tags') is-invalid @enderror"
-                    data-max="5" data-selected="{{ implode(',', $positionTags) }}" data-allow-new="true"
-                    data-allow-clear="true" multiple>
+                    data-server="{{ route('app.ajax.search-tags') }}"
+                    data-value-field="name"
+                    data-label-field="name"
+                    data-live-server="true"
+                    data-debounce-time="300"
+                    data-max="5"
+                    data-selected="{{ implode(',', $positionTags) }}"
+                    data-allow-new="true"
+                    data-allow-clear="true"
+                    multiple>
                 @foreach($positionTags as $tag)
                     <option value="{{ $tag }}">{{ $tag }}</option>
                 @endforeach

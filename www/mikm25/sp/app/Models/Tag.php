@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Builders\TagBuilder;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  *
  * @property-read User $user
  * @property-read list<Position> $positions
+ *
+ * @method static TagBuilder query()
  */
 class Tag extends Model
 {
@@ -43,5 +46,10 @@ class Tag extends Model
     public function positions(): BelongsToMany
     {
         return $this->belongsToMany(Position::class, 'position_tags', 'position_id', 'tag_id', 'id', 'id', 'positions');
+    }
+
+    public function newEloquentBuilder($query): TagBuilder
+    {
+        return new TagBuilder($query);
     }
 }

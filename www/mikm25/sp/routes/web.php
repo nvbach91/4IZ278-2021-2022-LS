@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants\PositionTabConstants;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\ForgottenPasswordController;
 use App\Http\Controllers\Auth\LoginController;
@@ -86,5 +87,9 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
             ->where('company', '[0-9]+');
         Route::post('/{company}', [CompanyController::class, 'update'])->name('update')
             ->where('company', '[0-9]+');
+    });
+
+    Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], static function (): void {
+        Route::get('/search-tags', [AjaxController::class, 'searchTags'])->name('search-tags');
     });
 });
