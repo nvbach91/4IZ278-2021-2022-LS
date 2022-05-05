@@ -71,7 +71,7 @@ use App\Models\Position;
                                 {{ __('common.buttons.detail') }}
                             </a>
                             <a href="{{ route('app.positions.edit', ['position' => $position->id]) }}"
-                               class="btn btn-sm btn-secondary">
+                               class="btn btn-sm btn-light ms-1">
                                 {{ __('common.buttons.edit') }}
                             </a>
                         </td>

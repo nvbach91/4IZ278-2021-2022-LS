@@ -50,6 +50,10 @@ class CompanyController extends Controller
 
     public function show(Company $company): string
     {
+        $company->loadCount([
+            'positions'
+        ]);
+
         return view('app.company.show', [
             'company' => $company,
         ]);

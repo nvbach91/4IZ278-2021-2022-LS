@@ -186,11 +186,22 @@ $positionContent = old('content', isset($position) ? $position->content : null);
 
     <div class="row">
         <div class="col">
-            <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">
-                    {{ isset($position) ? __('common.buttons.save') : __('common.buttons.create') }}
-                </button>
-            </div>
+            @if(isset($position))
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_DETAIL]) }}" class="btn btn-light">
+                        {{ __('common.buttons.detail') }}
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('common.buttons.save') }}
+                    </button>
+                </div>
+            @else
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('common.buttons.create') }}
+                    </button>
+                </div>
+            @endif
         </div>
     </div>
 </form>

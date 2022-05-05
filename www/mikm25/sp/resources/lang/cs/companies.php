@@ -4,6 +4,10 @@ return [
     'buttons' => [
         'create' => 'Vytvořit společnost',
     ],
+    'sections' => [
+        'general' => 'Základní informace',
+        'statistics' => 'Statistiky',
+    ],
     'sizes' => [
         'to_50' => 'Do 50 zaměstnanců',
         '50_to_100' => 'Od 50 do 100 zaměstnanců',
@@ -15,6 +19,6 @@ return [
         'name_search' => 'Zadejete text k vyhledání...',
     ],
     'index' => [
-        'empty' => 'Prozatím jste nevytvořili žádnou společnost.'
-    ]
+        'empty' => 'Prozatím jste nevytvořili žádnou společnost.',
+    ],
 ];

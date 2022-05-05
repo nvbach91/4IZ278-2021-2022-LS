@@ -55,7 +55,7 @@ use App\Models\Company;
                                 {{ __('common.buttons.detail') }}
                             </a>
                             <a href="{{ route('app.companies.edit', ['company' => $company->id]) }}"
-                               class="btn btn-sm btn-secondary">
+                               class="btn btn-sm btn-light ms-1">
                                 {{ __('common.buttons.edit') }}
                             </a>
                         </td>

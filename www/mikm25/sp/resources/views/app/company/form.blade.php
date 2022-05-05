@@ -78,11 +78,22 @@ $companyContactEmail = old('contact_email', isset($company) ? $company->contact_
 
     <div class="row">
         <div class="col">
-            <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">
-                    {{ isset($company) ? __('common.buttons.save') : __('common.buttons.create') }}
-                </button>
-            </div>
+            @if(isset($company))
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('app.companies.show', ['company' => $company->id]) }}" class="btn btn-light">
+                        {{ __('common.buttons.detail') }}
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('common.buttons.save') }}
+                    </button>
+                </div>
+            @else
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('common.buttons.create') }}
+                    </button>
+                </div>
+            @endif
         </div>
     </div>
 </form>

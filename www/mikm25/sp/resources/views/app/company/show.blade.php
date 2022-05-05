@@ -41,6 +41,9 @@ use App\Models\Company;
             <table class="table table-borderless">
                 <tbody>
                 <tr>
+                    <td colspan="2"><b>{{ __('companies.sections.general') }}</b></td>
+                </tr>
+                <tr>
                     <td>{{ __('models.id') }}</td>
                     <td>{{ $company->id }}</td>
                 </tr>
@@ -79,6 +82,13 @@ use App\Models\Company;
                             -
                         @endif
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><b>{{ __('companies.sections.statistics') }}</b></td>
+                </tr>
+                <tr>
+                    <td>{{ __('models.company.positions_count') }}</td>
+                    <td>{{ $company->positions_count }}</td>
                 </tr>
                 </tbody>
             </table>
