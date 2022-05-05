@@ -8,7 +8,6 @@ return [
         'tabs' => [
             'detail' => 'Detail',
             'statistics' => 'Statistika',
-            'log' => 'Log',
         ],
         'sections' => [
             'company' => 'Společnost',

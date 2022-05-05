@@ -5,7 +5,7 @@
         </a>
         @yield('breadcrumbs')
     </div>
-    <div class="d-flex align-items-center mt-2 mt-lg-0">
+    <div class="d-flex align-items-center mt-4 mt-lg-0">
         <div class="dropdown">
             <button class="btn btn-light btn-sm dropdown-toggle" type="button" id="create-entity-dropdown"
                     data-bs-toggle="dropdown" aria-expanded="false">

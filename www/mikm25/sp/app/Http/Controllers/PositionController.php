@@ -73,20 +73,13 @@ class PositionController extends Controller
             ]);
         }
 
-        if ($tab === PositionTabConstants::TAB_STATISTICS) {
-            return view('app.position.detail.tab-statistics', [
-                'position' => $position,
-                'activeTab' => $tab,
-                'dashboards' => [
-                    new MonthlyClicksDashboard($position),
-                    new MonthlyReactionsDashboard($position),
-                ],
-            ]);
-        }
-
-        return view('app.position.detail.tab-log', [
+        return view('app.position.detail.tab-statistics', [
             'position' => $position,
             'activeTab' => $tab,
+            'dashboards' => [
+                new MonthlyClicksDashboard($position),
+                new MonthlyReactionsDashboard($position),
+            ],
         ]);
     }
 

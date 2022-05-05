@@ -39,12 +39,6 @@ use App\Models\Position;
                         {{ __('positions.detail.tabs.statistics') }}
                     </a>
                 </li>
-                <li class="nav-item ms-2">
-                    <a class="nav-link {{ $activeTab === \App\Constants\PositionTabConstants::TAB_LOG ? 'active' : '' }}"
-                       href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_LOG]) }}">
-                        {{ __('positions.detail.tabs.log') }}
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
