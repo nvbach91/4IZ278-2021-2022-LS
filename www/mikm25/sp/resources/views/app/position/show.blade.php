@@ -39,6 +39,12 @@ use App\Models\Position;
                         {{ __('positions.detail.tabs.statistics') }}
                     </a>
                 </li>
+                <li class="nav-item ms-2">
+                    <a class="nav-link"
+                       href="{{ route('app.positions.edit', ['position' => $position->id]) }}">
+                        <i class="bi bi-pen"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

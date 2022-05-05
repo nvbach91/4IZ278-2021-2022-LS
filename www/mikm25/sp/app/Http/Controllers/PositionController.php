@@ -67,13 +67,13 @@ class PositionController extends Controller
         ]);
 
         if ($tab === PositionTabConstants::TAB_DETAIL) {
-            return view('app.position.detail.tab-detail', [
+            return view('app.position.tabs.detail', [
                 'position' => $position,
                 'activeTab' => $tab,
             ]);
         }
 
-        return view('app.position.detail.tab-statistics', [
+        return view('app.position.tabs.statistics', [
             'position' => $position,
             'activeTab' => $tab,
             'dashboards' => [

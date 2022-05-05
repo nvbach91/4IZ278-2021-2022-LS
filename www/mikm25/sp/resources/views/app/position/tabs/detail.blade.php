@@ -8,7 +8,7 @@ use App\Models\Position;
 
 ?>
 
-@extends('app.position.detail.template')
+@extends('app.position.show')
 
 @section('position-content')
     <div class="row mb-2">
