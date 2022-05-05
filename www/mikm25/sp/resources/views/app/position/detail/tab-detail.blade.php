@@ -100,7 +100,11 @@ use App\Models\Position;
                     </tr>
                     <tr>
                         <td>{{ __('models.company.name') }}</td>
-                        <td>{{ $position->company->name }}</td>
+                        <td>
+                            <a href="{{ route('app.companies.show', ['company' => $position->company->id]) }}">
+                                {{ $position->company->name }}
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <td>{{ __('models.company.size') }}</td>
@@ -108,7 +112,13 @@ use App\Models\Position;
                     </tr>
                     <tr>
                         <td>{{ __('models.company.url') }}</td>
-                        <td>{{ $position->company->url ?? '-' }}</td>
+                        <td>
+                            @if(!empty($position->company->url))
+                                <a href="{{ $position->company->url }}" target="_blank">{{ $position->company->url }}</a>
+                            @else
+                                -
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <td>{{ __('models.company.address') }}</td>
