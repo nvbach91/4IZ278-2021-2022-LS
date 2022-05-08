@@ -1,4 +1,4 @@
-<?php
+@php
 
 use App\Models\Branch;
 use App\Models\Company;
@@ -23,7 +23,7 @@ $positionExternalUrl = old('external_url', isset($position) ? $position->externa
 $positionMinPracticeLength = old('min_practice_length', isset($position) ? $position->min_practice_length : null);
 $positionContent = old('content', isset($position) ? $position->content : null);
 
-?>
+@endphp
 
 <form action="{{ isset($position) ? route('app.positions.update', ['position' => $position->id]) : route('app.positions.store') }}" method="post">
     @include('common.forms.errors')

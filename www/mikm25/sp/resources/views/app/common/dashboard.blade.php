@@ -1,4 +1,4 @@
-<?php
+@php
 
 use App\View\Models\Dashboards\DashboardInterface;
 
@@ -6,7 +6,7 @@ use App\View\Models\Dashboards\DashboardInterface;
  * @var DashboardInterface $dashboard
  */
 
-?>
+@endphp
 
 <div class="card border-0 bg-light">
     <div class="card-body">

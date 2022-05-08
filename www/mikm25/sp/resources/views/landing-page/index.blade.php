@@ -1,4 +1,4 @@
-<?php
+@php
 
 use App\Models\Position;
 
@@ -6,7 +6,7 @@ use App\Models\Position;
  * @var list<Position> $positions
  */
 
-?>
+@endphp
 
 @extends('templates.landing-page')
 

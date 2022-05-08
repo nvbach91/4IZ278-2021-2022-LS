@@ -1,4 +1,4 @@
-<?php
+@php
 
 use App\Models\Branch;
 use App\Models\Company;
@@ -8,7 +8,7 @@ use App\Models\Company;
  * @var list<Company> $companies
  */
 
-?>
+@endphp
 
 @extends('templates.app')
 

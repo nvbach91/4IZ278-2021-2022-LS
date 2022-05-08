@@ -1,4 +1,4 @@
-<?php
+@php
 
 use App\Models\Company;
 
@@ -14,7 +14,7 @@ $companyUrl = old('url', isset($company) ? $company->url : null);
 $companyAddress = old('address', isset($company) ? $company->address : null);
 $companyContactEmail = old('contact_email', isset($company) ? $company->contact_email : null);
 
-?>
+@endphp
 
 <form action="{{ isset($company) ? route('app.companies.update', ['company' => $company->id]) : route('app.companies.store') }}"
       method="post">

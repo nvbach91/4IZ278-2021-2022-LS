@@ -1,4 +1,4 @@
-<?php
+@php
 
 use App\Models\Position;
 
@@ -6,7 +6,7 @@ use App\Models\Position;
  * @var Position $position
  */
 
-?>
+@endphp
 
 @extends('templates.app')
 

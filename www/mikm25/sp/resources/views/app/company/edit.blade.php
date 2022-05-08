@@ -1,4 +1,4 @@
-<?php
+@php
 
 use App\Models\Company;
 
@@ -6,7 +6,7 @@ use App\Models\Company;
  * @var Company $company
  */
 
-?>
+@endphp
 
 @extends('templates.app')
 
