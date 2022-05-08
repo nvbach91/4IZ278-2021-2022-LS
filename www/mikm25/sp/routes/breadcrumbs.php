@@ -6,16 +6,26 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 Breadcrumbs::for('app.dashboard', static function (BreadcrumbTrail $trail): void {
-    $trail->push(__('pages.app.dashboard'), route('app.dashboard'));
+    /** @var string $title */
+    $title = __('pages.app.dashboard');
+
+    $trail->push($title, route('app.dashboard'));
 });
 
 Breadcrumbs::for('app.positions.index', static function (BreadcrumbTrail $trail): void {
-    $trail->push(__('pages.app.positions.index'), route('app.positions.index'));
+    /** @var string $title */
+    $title = __('pages.app.positions.index');
+
+    $trail->push($title, route('app.positions.index'));
 });
 
 Breadcrumbs::for('app.positions.create', static function (BreadcrumbTrail $trail): void {
     $trail->parent('app.positions.index');
-    $trail->push(__('pages.app.positions.create'), route('app.positions.create'));
+
+    /** @var string $title */
+    $title = __('pages.app.positions.create');
+
+    $trail->push($title, route('app.positions.create'));
 });
 
 Breadcrumbs::for('app.positions.show', static function (BreadcrumbTrail $trail): void {
@@ -25,7 +35,11 @@ Breadcrumbs::for('app.positions.show', static function (BreadcrumbTrail $trail):
     $tab = (string) request()->route('tab');
 
     $trail->parent('app.positions.index');
-    $trail->push(__('pages.app.positions.show', ['positionName' => $position->title_name]), route('app.positions.show', [
+
+    /** @var string $title */
+    $title = __('pages.app.positions.show', ['positionName' => $position->title_name]);
+
+    $trail->push($title, route('app.positions.show', [
         'position' => $position->id,
         'tab' => $tab,
     ]));
@@ -36,18 +50,29 @@ Breadcrumbs::for('app.positions.edit', static function (BreadcrumbTrail $trail):
     $position = request()->route('position');
 
     $trail->parent('app.positions.index');
-    $trail->push(__('pages.app.positions.edit', ['positionName' => $position->title_name]), route('app.positions.edit', [
+
+    /** @var string $title */
+    $title = __('pages.app.positions.edit', ['positionName' => $position->title_name]);
+
+    $trail->push($title, route('app.positions.edit', [
         'position' => $position->id,
     ]));
 });
 
 Breadcrumbs::for('app.companies.index', static function (BreadcrumbTrail $trail): void {
-    $trail->push(__('pages.app.companies.index'), route('app.companies.index'));
+    /** @var string $title */
+    $title = __('pages.app.companies.index');
+
+    $trail->push($title, route('app.companies.index'));
 });
 
 Breadcrumbs::for('app.companies.create', static function (BreadcrumbTrail $trail): void {
     $trail->parent('app.companies.index');
-    $trail->push(__('pages.app.companies.create'), route('app.companies.create'));
+
+    /** @var string $title */
+    $title = __('pages.app.companies.create');
+
+    $trail->push($title, route('app.companies.create'));
 });
 
 Breadcrumbs::for('app.companies.show', static function (BreadcrumbTrail $trail): void {
@@ -55,7 +80,11 @@ Breadcrumbs::for('app.companies.show', static function (BreadcrumbTrail $trail):
     $company = request()->route('company');
 
     $trail->parent('app.companies.index');
-    $trail->push(__('pages.app.companies.show', ['companyName' => $company->title_name]), route('app.companies.show', [
+
+    /** @var string $title */
+    $title = __('pages.app.companies.show', ['companyName' => $company->title_name]);
+
+    $trail->push($title, route('app.companies.show', [
         'company' => $company->id,
     ]));
 });
@@ -65,7 +94,11 @@ Breadcrumbs::for('app.companies.edit', static function (BreadcrumbTrail $trail):
     $company = request()->route('company');
 
     $trail->parent('app.companies.index');
-    $trail->push(__('pages.app.companies.edit', ['companyName' => $company->title_name]), route('app.companies.edit', [
+
+    /** @var string $title */
+    $title = __('pages.app.companies.edit', ['companyName' => $company->title_name]);
+
+    $trail->push($title, route('app.companies.edit', [
         'company' => $company->id,
     ]));
 });

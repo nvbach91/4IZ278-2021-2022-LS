@@ -28,9 +28,12 @@ class ForgottenPasswordMail extends Mailable
         $this->user = $user;
         $this->passwordReset = $passwordReset;
 
-        $this->subject = __('mails.user.forgotten_password.subject', [
+        /** @var string $subject */
+        $subject = __('mails.user.forgotten_password.subject', [
             'appName' => config('app.name'),
         ]);
+
+        $this->subject = $subject;
     }
 
     public function build(): self

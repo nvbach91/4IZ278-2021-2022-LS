@@ -28,9 +28,12 @@ class RegisteredMail extends Mailable
         $this->user = $user;
         $this->verification = $verification;
 
-        $this->subject = __('mails.user.registered.subject', [
+        /** @var string $subject */
+        $subject = __('mails.user.registered.subject', [
             'appName' => config('app.name'),
         ]);
+
+        $this->subject = $subject;
     }
 
     public function build(): self

@@ -5,6 +5,7 @@ namespace App\Http\Requests\Position;
 use App\DTOs\Position\PositionDTO;
 use App\Models\Branch;
 use App\Models\Company;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Exists;
@@ -20,6 +21,9 @@ class PositionStoreRequest extends FormRequest
     public function rules(): array
     {
         $today = Carbon::now()->format('Y-m-d');
+
+        /** @var User $user */
+        $user = auth('web')->user();
 
         return [
             'name' => 'required|string|max:255',
@@ -38,7 +42,7 @@ class PositionStoreRequest extends FormRequest
             'company' => [
                 'nullable',
                 'integer',
-                (new Exists(Company::class, 'id'))->where('user_id', auth('web')->check()),
+                (new Exists(Company::class, 'id'))->where('user_id', $user->id),
             ],
             'external_url' => 'nullable|string|url|max:255',
             'min_practice_length' => 'nullable|integer|gte:0',

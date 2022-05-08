@@ -35,7 +35,10 @@ class Branch extends Model
 
     public function getTranslatedNameAttribute(): string
     {
-        return __("branches.$this->name");
+        /** @var string $translated */
+        $translated = __("branches.$this->name");
+
+        return $translated;
     }
 
     public function positions(): HasMany

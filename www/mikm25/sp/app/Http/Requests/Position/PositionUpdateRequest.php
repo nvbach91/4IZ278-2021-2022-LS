@@ -18,9 +18,16 @@ class PositionUpdateRequest extends PositionStoreRequest
 
         /** @var Position $position */
         $position = $this->route('position');
-
         $position->loadMissing('company');
 
-        return $user->id === $position->user_id && $position->company->user_id === $user->id;
+        if ($user->id !== $position->user_id) {
+            return false;
+        }
+
+        if (! empty($position->company) && $position->company->user_id !== $user->id) {
+            return false;
+        }
+
+        return true;
     }
 }

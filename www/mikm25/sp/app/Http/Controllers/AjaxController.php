@@ -13,13 +13,14 @@ class AjaxController extends Controller
 {
     public function searchTags(SearchTagRequest $request): JsonResponse
     {
-        $query = $request->getQuery();
-
         /** @var User $user */
         $user = auth('web')->user();
 
         $tags = Tag::query()
-            ->when(! empty($query), static function (TagBuilder $builder) use ($query): TagBuilder {
+            ->when(! empty($request->getQuery()), static function (TagBuilder $builder) use ($request): TagBuilder {
+                /** @var string $query */
+                $query = $request->getQuery();
+
                 return $builder->searchByQuery($query);
             })
             ->ofUserId($user->id)

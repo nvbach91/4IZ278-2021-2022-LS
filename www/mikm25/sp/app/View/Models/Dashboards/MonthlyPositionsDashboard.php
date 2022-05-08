@@ -3,20 +3,27 @@
 namespace App\View\Models\Dashboards;
 
 use App\Models\Position;
+use App\Models\User;
 use App\View\Models\Dashboards\Concerns\HasPreviousValue;
 
 class MonthlyPositionsDashboard implements DashboardInterface, HasPreviousValue
 {
     public function getTitle(): string
     {
-        return __('common.dashboards.monthly_positions.title');
+        /** @var string $title */
+        $title = __('common.dashboards.monthly_positions.title');
+
+        return $title;
     }
 
     public function getCount(): ?int
     {
         return once(static function (): int {
+            /** @var User $user */
+            $user = auth('web')->user();
+
             return Position::query()
-                ->ofUserId(auth('web')->user()->id)
+                ->ofUserId($user->id)
                 ->fromCurrentMonth()
                 ->count();
         });
@@ -25,8 +32,11 @@ class MonthlyPositionsDashboard implements DashboardInterface, HasPreviousValue
     public function getPreviousCount(): ?int
     {
         return once(static function (): int {
+            /** @var User $user */
+            $user = auth('web')->user();
+
             return Position::query()
-                ->ofUserId(auth('web')->user()->id)
+                ->ofUserId($user->id)
                 ->fromLastMonth()
                 ->count();
         });
@@ -34,6 +44,9 @@ class MonthlyPositionsDashboard implements DashboardInterface, HasPreviousValue
 
     public function getPreviousText(): string
     {
-        return __('common.dashboards.previous_month');
+        /** @var string $previousText */
+        $previousText = __('common.dashboards.previous_month');
+
+        return $previousText;
     }
 }

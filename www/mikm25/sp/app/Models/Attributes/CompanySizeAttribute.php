@@ -70,6 +70,9 @@ class CompanySizeAttribute
 
     public function getTranslatedSize(): string
     {
-        return __("companies.sizes.$this->size");
+        /** @var string $translated */
+        $translated = __("companies.sizes.$this->size");
+
+        return $translated;
     }
 }

@@ -28,9 +28,12 @@ class EmailVerificationMail extends Mailable
         $this->user = $user;
         $this->verification = $verification;
 
-        $this->subject = __('mails.user.email_verification.subject', [
+        /** @var string $subject */
+        $subject = __('mails.user.email_verification.subject', [
             'appName' => config('app.name'),
         ]);
+
+        $this->subject = $subject;
     }
 
     public function build(): self

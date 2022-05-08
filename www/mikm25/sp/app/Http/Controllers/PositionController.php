@@ -8,6 +8,7 @@ use App\Http\Requests\Position\PositionUpdateRequest;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Position;
+use App\Models\User;
 use App\Services\Position\PositionService;
 use App\View\Models\Dashboards\MonthlyClicksDashboard;
 use App\View\Models\Dashboards\MonthlyReactionsDashboard;
@@ -27,6 +28,9 @@ class PositionController extends Controller
 
     public function index(): string
     {
+        /** @var User $user */
+        $user = auth('web')->user();
+
         $positions = Position::query()
             ->withCount([
                 'clicks',
@@ -36,7 +40,7 @@ class PositionController extends Controller
                 'branch',
                 'company',
             ])
-            ->ofUserId(auth('web')->user()->id)
+            ->ofUserId($user->id)
             ->paginate(15);
 
         return view('app.position.index', [
@@ -46,8 +50,11 @@ class PositionController extends Controller
 
     public function create(): string
     {
+        /** @var User $user */
+        $user = auth('web')->user();
+
         $companies = Company::query()
-            ->ofUserId(auth('web')->user()->id)
+            ->ofUserId($user->id)
             ->get();
 
         $branches = Branch::query()
@@ -59,7 +66,7 @@ class PositionController extends Controller
         ]);
     }
 
-    public function show(Position $position, string $tab)
+    public function show(Position $position, string $tab): string
     {
         $position->load([
             'branch',
@@ -97,13 +104,16 @@ class PositionController extends Controller
 
     public function edit(Position $position): string
     {
+        /** @var User $user */
+        $user = auth('web')->user();
+
         $position->load([
             'branch',
             'company',
         ]);
 
         $companies = Company::query()
-            ->ofUserId(auth('web')->user()->id)
+            ->ofUserId($user->id)
             ->get();
 
         $branches = Branch::query()

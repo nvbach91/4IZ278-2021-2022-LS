@@ -5,6 +5,7 @@ namespace App\View\Models\Dashboards;
 use App\Models\Builders\PositionBuilder;
 use App\Models\Position;
 use App\Models\PositionReaction;
+use App\Models\User;
 use App\View\Models\Dashboards\Concerns\HasPreviousValue;
 
 class MonthlyReactionsDashboard implements DashboardInterface, HasPreviousValue
@@ -21,7 +22,10 @@ class MonthlyReactionsDashboard implements DashboardInterface, HasPreviousValue
 
     public function getTitle(): string
     {
-        return __('common.dashboards.monthly_position_reactions.title');
+        /** @var string $title */
+        $title = __('common.dashboards.monthly_position_reactions.title');
+
+        return $title;
     }
 
     public function getCount(): ?int
@@ -29,10 +33,16 @@ class MonthlyReactionsDashboard implements DashboardInterface, HasPreviousValue
         return once(function (): int {
             return PositionReaction::query()
                 ->whereHas('position', function (PositionBuilder $query): PositionBuilder {
+                    /** @var User $user */
+                    $user = auth('web')->user();
+
                     return $query
-                        ->ofUserId(auth('web')->user()->id)
+                        ->ofUserId($user->id)
                         ->when(! empty($this->position), function (PositionBuilder $query): PositionBuilder {
-                            return $query->ofId($this->position->id);
+                            /** @var Position $position */
+                            $position = $this->position;
+
+                            return $query->ofId($position->id);
                         });
                 })
                 ->fromCurrentMonth()
@@ -45,10 +55,16 @@ class MonthlyReactionsDashboard implements DashboardInterface, HasPreviousValue
         return once(function (): int {
             return PositionReaction::query()
                 ->whereHas('position', function (PositionBuilder $query): PositionBuilder {
+                    /** @var User $user */
+                    $user = auth('web')->user();
+
                     return $query
-                        ->ofUserId(auth('web')->user()->id)
+                        ->ofUserId($user->id)
                         ->when(! empty($this->position), function (PositionBuilder $query): PositionBuilder {
-                            return $query->ofId($this->position->id);
+                            /** @var Position $position */
+                            $position = $this->position;
+
+                            return $query->ofId($position->id);
                         });
                 })
                 ->fromLastMonth()
@@ -58,6 +74,9 @@ class MonthlyReactionsDashboard implements DashboardInterface, HasPreviousValue
 
     public function getPreviousText(): string
     {
-        return __('common.dashboards.previous_month');
+        /** @var string $previousText */
+        $previousText = __('common.dashboards.previous_month');
+
+        return $previousText;
     }
 }

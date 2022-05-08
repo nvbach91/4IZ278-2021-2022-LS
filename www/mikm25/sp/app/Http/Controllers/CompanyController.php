@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Company\CompanyStoreRequest;
 use App\Http\Requests\Company\CompanyUpdateRequest;
 use App\Models\Company;
+use App\Models\User;
 use App\Services\Company\CompanyService;
 use Illuminate\Http\RedirectResponse;
 
@@ -22,11 +23,14 @@ class CompanyController extends Controller
 
     public function index(): string
     {
+        /** @var User $user */
+        $user = auth('web')->user();
+
         $companies = Company::query()
             ->withCount([
                 'positions',
             ])
-            ->ofUserId(auth('web')->user()->id)
+            ->ofUserId($user->id)
             ->paginate(15);
 
         return view('app.company.index', [

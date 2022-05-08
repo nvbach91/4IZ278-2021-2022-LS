@@ -21,9 +21,12 @@ class PasswordResetMail extends Mailable
     {
         $this->user = $user;
 
-        $this->subject = __('mails.user.password_reset.subject', [
+        /** @var string $subject */
+        $subject = __('mails.user.password_reset.subject', [
             'appName' => config('app.name'),
         ]);
+
+        $this->subject = $subject;
     }
 
     public function build(): self
