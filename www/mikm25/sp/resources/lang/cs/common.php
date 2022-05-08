@@ -14,6 +14,8 @@ return [
         'detail' => 'Detail',
         'create' => 'Vytvořit',
         'edit' => 'Editovat',
+        'delete' => 'Odstranit',
+        'close' => 'Zavřít',
     ],
     'link' => 'Odkaz',
     'yes' => 'Ano',
@@ -31,5 +33,5 @@ return [
             'title' => 'Počet reakcí tento měsíc',
         ],
     ],
-    'searching' => 'Hledání...'
+    'searching' => 'Hledání...',
 ];

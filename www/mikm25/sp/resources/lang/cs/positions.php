@@ -28,4 +28,10 @@ return [
         'branch_empty' => 'Zvolte obor',
         'company_empty' => 'Zvolte společnost',
     ],
+    'modals' => [
+        'delete' => [
+            'title' => 'Odstranit pozici',
+            'text' => 'Chystáte se odstranit pozici. Všechny data budou ztracena. Opravdu to chcete udělat?'
+        ]
+    ]
 ];

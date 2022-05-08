@@ -35,6 +35,9 @@ return [
         ],
         'update' => [
             'success' => 'Pozice byla úspěšně upravena.'
+        ],
+        'delete' => [
+            'success' => 'Pozice :positionName byla úspěšně odstraněna.'
         ]
     ],
     'companies' => [

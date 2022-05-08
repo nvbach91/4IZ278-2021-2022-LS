@@ -43,7 +43,8 @@ use App\Models\Position;
                         <td>{{ $position->branch->translated_name }}</td>
                         <td>
                             @if(!empty($position->company))
-                                <a href="{{ route('app.companies.show', ['company' => $position->company->id]) }}" title="{{ $position->company->name }}">
+                                <a href="{{ route('app.companies.show', ['company' => $position->company->id]) }}"
+                                   title="{{ $position->company->name }}">
                                     {{ $position->company->name }}
                                 </a>
                             @endif
@@ -74,6 +75,10 @@ use App\Models\Position;
                                class="btn btn-sm btn-light ms-1">
                                 {{ __('common.buttons.edit') }}
                             </a>
+                            <a href="#" class="btn btn-sm btn-danger ms-1" data-bs-toggle="modal"
+                               data-bs-target="#position-delete-modal" data-bs-form-action="{{ route('app.positions.delete', ['position' => $position->id]) }}">
+                                <i class="bi bi-trash"></i>
+                            </a>
                         </td>
                     </tr>
                 @empty
@@ -91,4 +96,6 @@ use App\Models\Position;
         </div>
     </div>
     {{ $positions->links() }}
+
+    @include('app.position.modals.delete')
 @endsection

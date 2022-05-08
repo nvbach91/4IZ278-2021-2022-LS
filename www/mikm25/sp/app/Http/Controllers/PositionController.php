@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Constants\PositionTabConstants;
+use App\Http\Requests\Position\PositionDeleteRequest;
 use App\Http\Requests\Position\PositionStoreRequest;
 use App\Http\Requests\Position\PositionUpdateRequest;
 use App\Models\Branch;
@@ -135,6 +136,17 @@ class PositionController extends Controller
             'tab' => PositionTabConstants::TAB_DETAIL,
         ])->with('status', [
             'success' => __('status.positions.update.success'),
+        ]);
+    }
+
+    public function delete(Position $position, PositionDeleteRequest $request): RedirectResponse
+    {
+        $position->delete();
+
+        return redirect()->route('app.positions.index')->with('status', [
+            'success' => __('status.positions.delete.success', [
+                'positionName' => $position->name,
+            ]),
         ]);
     }
 }
