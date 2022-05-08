@@ -46,6 +46,9 @@ return [
         ],
         'update' => [
             'success' => 'Společnost byla úspěšně upravena.'
-        ]
+        ],
+        'delete' => [
+            'success' => 'Společnost :companyName byla úspěšně odstraněna.'
+        ],
     ]
 ];

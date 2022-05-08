@@ -21,4 +21,10 @@ return [
     'index' => [
         'empty' => 'Prozatím jste nevytvořili žádnou společnost.',
     ],
+    'modals' => [
+        'delete' => [
+            'title' => 'Odstranit společnost',
+            'text' => 'Chystáte se odstranit společnost. Všechny data a napojení na pozice budou ztracena. Opravdu to chcete udělat?'
+        ]
+    ]
 ];

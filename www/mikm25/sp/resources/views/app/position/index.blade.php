@@ -47,6 +47,8 @@ use App\Models\Position;
                                    title="{{ $position->company->name }}">
                                     {{ $position->company->name }}
                                 </a>
+                            @else
+                                -
                             @endif
                         </td>
                         <td>
@@ -55,6 +57,8 @@ use App\Models\Position;
                                    title="{{ $position->external_url }}">
                                     {{ __('common.link') }}
                                 </a>
+                            @else
+                                -
                             @endif
                         </td>
                         <td>
@@ -96,6 +100,5 @@ use App\Models\Position;
         </div>
     </div>
     {{ $positions->links() }}
-
     @include('app.position.modals.delete')
 @endsection

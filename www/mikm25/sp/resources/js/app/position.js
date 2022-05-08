@@ -6,7 +6,7 @@ if (positionTags !== null) {
   Tags.init('#position-tags')
 }
 
-let positionDeleteModal = document.getElementById('position-delete-modal')
+const positionDeleteModal = document.getElementById('position-delete-modal')
 
 if (positionDeleteModal !== null) {
   positionDeleteModal.addEventListener('show.bs.modal', e => {

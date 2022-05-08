@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Company\CompanyDeleteRequest;
 use App\Http\Requests\Company\CompanyStoreRequest;
 use App\Http\Requests\Company\CompanyUpdateRequest;
 use App\Models\Company;
@@ -78,6 +79,17 @@ class CompanyController extends Controller
             'company' => $company->id,
         ])->with('status', [
             'success' => __('status.companies.update.success'),
+        ]);
+    }
+
+    public function delete(Company $company, CompanyDeleteRequest $request): RedirectResponse
+    {
+        $company->delete();
+
+        return redirect()->route('app.companies.index')->with('status', [
+            'success' => __('status.companies.delete.success', [
+                'companyName' => $company->name
+            ]),
         ]);
     }
 }

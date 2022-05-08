@@ -114,6 +114,9 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
         Route::patch('/{company}', [CompanyController::class, 'update'])
             ->name('update')
             ->where('company', '[0-9]+');
+        Route::delete('/{company}', [CompanyController::class, 'delete'])
+            ->name('delete')
+            ->where('company', '[0-9]+');
     });
 
     Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], static function (): void {

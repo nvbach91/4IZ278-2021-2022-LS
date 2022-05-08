@@ -38,16 +38,26 @@ use App\Models\Company;
                     <tr>
                         <td>{{ $company->id }}</td>
                         <td>{{ $company->name }}</td>
-                        <td>{{ !empty($company->size) ? $company->size->getTranslatedSize() : null }}</td>
+                        <td>{{ !empty($company->size) ? $company->size->getTranslatedSize() : '-' }}</td>
                         <td>
                             @if(!empty($company->url))
                                 <a href="{{ $company->url }}" target="_blank"
                                    title="{{ $company->url }}">
                                     {{ __('common.link') }}
                                 </a>
+                            @else
+                                -
                             @endif
                         </td>
-                        <td>{{ $company->contact_email }}</td>
+                        <td>
+                            @if(!empty($company->contact_email))
+                                <a href="mailto:{{ $company->contact_email }}" title="{{ $company->contact_email }}">
+                                    {{ $company->contact_email }}
+                                </a>
+                            @else
+                                -
+                            @endif
+                        </td>
                         <td>{{ $company->positions_count }}</td>
                         <td>
                             <a href="{{ route('app.companies.show', ['company' => $company->id]) }}"
@@ -57,6 +67,10 @@ use App\Models\Company;
                             <a href="{{ route('app.companies.edit', ['company' => $company->id]) }}"
                                class="btn btn-sm btn-light ms-1">
                                 {{ __('common.buttons.edit') }}
+                            </a>
+                            <a href="#" class="btn btn-sm btn-danger ms-1" data-bs-toggle="modal"
+                               data-bs-target="#company-delete-modal" data-bs-form-action="{{ route('app.companies.delete', ['company' => $company->id]) }}">
+                                <i class="bi bi-trash"></i>
                             </a>
                         </td>
                     </tr>
@@ -75,4 +89,5 @@ use App\Models\Company;
         </div>
     </div>
     {{ $companies->links() }}
+    @include('app.company.modals.delete')
 @endsection

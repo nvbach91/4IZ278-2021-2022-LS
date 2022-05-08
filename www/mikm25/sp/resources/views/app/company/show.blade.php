@@ -33,6 +33,15 @@ use App\Models\Company;
                         <i class="bi bi-pen"></i>
                     </a>
                 </li>
+                <li class="nav-item ms-2">
+                    <a class="nav-link text-danger"
+                       data-bs-toggle="modal"
+                       data-bs-target="#company-delete-modal"
+                       data-bs-form-action="{{ route('app.companies.delete', ['company' => $company->id]) }}"
+                       href="#">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -94,4 +103,5 @@ use App\Models\Company;
             </table>
         </div>
     </div>
+    @include('app.company.modals.delete')
 @endsection
