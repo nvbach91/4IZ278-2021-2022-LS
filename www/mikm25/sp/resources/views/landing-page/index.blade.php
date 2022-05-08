@@ -1,3 +1,13 @@
+<?php
+
+use App\Models\Position;
+
+/**
+ * @var list<Position> $positions
+ */
+
+?>
+
 @extends('templates.landing-page')
 
 @section('content')
@@ -11,18 +21,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbar-toggle">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
-                        </li>
-                    </ul>
-                    <div class="d-grid gap-1 d-md-block">
+                    <div class="ms-auto d-grid gap-1 d-md-block">
                         @if(auth('web')->check())
                             <a href="{{ route('app.dashboard') }}" class="btn btn-primary me-lg-2">
                                 {{ __('landing-page.to_app') }}
@@ -39,5 +38,34 @@
                 </div>
             </div>
         </nav>
+
+        <div class="row mt-4">
+            <div class="col">
+                <div class="card border-0 bg-light p-5">
+                    <h1>Najděte si práci, co vás bude bavit!</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                @foreach($positions as $position)
+                    <div class="card border-0 bg-light p-1 mb-2">
+                        <div class="card-body d-flex justify-content-between">
+                            <div class="flex-grow-1 me-2">
+                                <h5 class="card-title">
+                                    {{ $position->name }}
+                                </h5>
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-primary">
+                                    Detail
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 @endsection
