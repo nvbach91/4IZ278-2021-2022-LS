@@ -6,7 +6,6 @@ use App\DTOs\Company\CompanyDTO;
 use App\Models\Attributes\CompanySizeAttribute;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\In;
-use function auth;
 
 class CompanyStoreRequest extends FormRequest
 {

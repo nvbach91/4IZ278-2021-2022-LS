@@ -7,6 +7,7 @@
 /public/mix-manifest.json
 /storage/*.key
 /vendor
+phpcs.cache
 /phpstan
 .env
 .env.backup

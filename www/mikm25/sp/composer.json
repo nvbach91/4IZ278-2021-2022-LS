@@ -25,7 +25,8 @@
         "nunomaduro/larastan": "^1.0",
         "php-parallel-lint/php-console-highlighter": "^1.0",
         "php-parallel-lint/php-parallel-lint": "^1.3",
-        "phpunit/phpunit": "^9.5.10"
+        "phpunit/phpunit": "^9.5.10",
+        "squizlabs/php_codesniffer": "^3.6"
     },
     "autoload": {
         "psr-4": {
@@ -54,7 +55,8 @@
             "@php artisan key:generate --ansi"
         ],
         "phpstan": "./vendor/bin/phpstan analyse --memory-limit=2G -c phpstan.neon",
-        "phplint": "./vendor/bin/parallel-lint --colors --exclude .git --exclude vendor --exclude stubs --exclude storage --exclude resources --exclude public --exclude phpstan --exclude node_modules --exclude bootrstrap/cache ."
+        "phplint": "./vendor/bin/parallel-lint --colors --exclude .git --exclude vendor --exclude stubs --exclude storage --exclude resources --exclude public --exclude phpstan --exclude node_modules --exclude bootrstrap/cache .",
+        "phpcs": "vendor/bin/phpcs --standard=coding-standard.xml"
     },
     "extra": {
         "laravel": {
