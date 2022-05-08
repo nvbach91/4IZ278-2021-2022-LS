@@ -45,8 +45,18 @@ use App\Models\Position;
                         <i class="bi bi-pen"></i>
                     </a>
                 </li>
+                <li class="nav-item ms-2">
+                    <a class="nav-link text-danger"
+                       data-bs-toggle="modal"
+                       data-bs-target="#position-delete-modal"
+                       data-bs-form-action="{{ route('app.positions.delete', ['position' => $position->id]) }}"
+                       href="#">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
     @yield('position-content')
+    @include('app.position.modals.delete')
 @endsection
