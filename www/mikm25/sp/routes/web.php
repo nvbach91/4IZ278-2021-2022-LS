@@ -90,7 +90,7 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
         Route::get('/{position}/edit', [PositionController::class, 'edit'])
             ->name('edit')
             ->where('position', '[0-9]+');
-        Route::post('/{position}', [PositionController::class, 'update'])
+        Route::patch('/{position}', [PositionController::class, 'update'])
             ->name('update')
             ->where('position', '[0-9]+');
         Route::delete('/{position}', [PositionController::class, 'delete'])
@@ -111,7 +111,7 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
         Route::get('/{company}/edit', [CompanyController::class, 'edit'])
             ->name('edit')
             ->where('company', '[0-9]+');
-        Route::post('/{company}', [CompanyController::class, 'update'])
+        Route::patch('/{company}', [CompanyController::class, 'update'])
             ->name('update')
             ->where('company', '[0-9]+');
     });

@@ -29,6 +29,10 @@ $positionContent = old('content', isset($position) ? $position->content : null);
     @include('common.forms.errors')
     {{ csrf_field() }}
 
+    @isset($position)
+        @method('patch')
+    @endisset
+
     <h2>{{ __('positions.detail.sections.general') }}</h2>
     <div class="row g-3 mb-3">
         <div class="col-lg-4 col-md-6 col-sm-12">
