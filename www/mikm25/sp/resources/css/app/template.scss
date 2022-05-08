@@ -35,8 +35,11 @@ body {
 
   padding: $spacer * .75 0 $spacer * .75 $spacer * .75;
 
-  ul.nav .nav-link.active {
-    background-color: $blue-100;
+  ul.nav .nav-link {
+    &.active, &:hover {
+      background-color: $primary;
+      color: $white;
+    }
   }
 }
 
