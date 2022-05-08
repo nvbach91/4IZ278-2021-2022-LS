@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
         @hasSection('title')
-            {{ config('app.name') }} | @yield('title')
+             @yield('title') - {{ config('app.name') }}
         @else
             {{ config('app.name') }}
         @endif
