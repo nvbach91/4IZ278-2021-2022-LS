@@ -47,6 +47,15 @@ class RouteServiceProvider extends ServiceProvider
             return $position;
         });
 
+        Route::bind('slugPosition', static function ($value): ?Position {
+            /** @var Position|null $position */
+            $position = Position::query()
+                ->ofSlug((string) $value)
+                ->first();
+
+            return $position;
+        });
+
         Route::bind('company', static function ($value): ?Company {
             /** @var User $user */
             $user = auth('web')->user();

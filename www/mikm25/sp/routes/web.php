@@ -28,6 +28,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LandingPageController::class, 'index'])
     ->name('landing-page');
 
+Route::get('/{slugPosition}', [LandingPageController::class, 'showPosition'])
+    ->where('slugPosition', '[a-zA-Z0-9\-]+')
+    ->name('landing-page.position');
+
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
     // Guest routes
     Route::group(['middleware' => 'guest:web'], static function (): void {

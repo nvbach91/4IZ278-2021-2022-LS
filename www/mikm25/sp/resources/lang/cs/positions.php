@@ -15,7 +15,9 @@ return [
             'salary' => 'Plat',
             'validity' => 'Platnost',
             'content' => 'Obsah',
+            'preview' => 'Náhled'
         ],
+        'detail_link_hint' => 'Odkaz na detail se zobrazí až bude pozice platná.'
     ],
     'index' => [
         'empty' => 'Prozatím jste nevytvořili žádnou pozici.',

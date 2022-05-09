@@ -14,8 +14,17 @@ class PositionObserver
         // is created
         if (! $position->exists || $position->isDirty('name')) {
             do {
-                $position->slug = Str::slug($position->name) . "-" . Str::random(4);
+                $position->slug = $this->getSlug($position);
             } while (Position::query()->ofSlug($position->slug)->exists());
         }
+    }
+
+    private function getSlug(Position $position): string
+    {
+        $slug = Str::slug($position->name);
+
+        $random = Str::random(6);
+
+        return "$slug-$random";
     }
 }

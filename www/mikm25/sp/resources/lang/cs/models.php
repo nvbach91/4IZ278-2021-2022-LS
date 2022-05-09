@@ -28,7 +28,8 @@ return [
         'clicks_count' => 'Počet kliknutí',
         'reactions_count' => 'Počet reakcí',
         'tags' => 'Tagy',
-        'company' => 'Společnost'
+        'company' => 'Společnost',
+        'detail_link' => 'Odkaz na úvodní stránku'
     ],
     'company' => [
         'name' => 'Název společnosti',

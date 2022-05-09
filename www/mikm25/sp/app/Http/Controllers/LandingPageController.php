@@ -20,4 +20,9 @@ class LandingPageController extends Controller
             'positions' => $positions
         ]);
     }
+
+    public function showPosition(Position $position): string
+    {
+        return "$position->name";
+    }
 }

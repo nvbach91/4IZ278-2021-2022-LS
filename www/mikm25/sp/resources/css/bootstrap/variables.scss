@@ -3,3 +3,13 @@
 // Alerts
 
 $alert-border-width: O;
+
+// New utils
+
+$utilities: map-merge($utilities, (
+  "position": (
+    responsive: true,
+    property: position,
+    values: static relative absolute fixed sticky
+  ),
+));

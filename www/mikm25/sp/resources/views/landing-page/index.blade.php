@@ -58,8 +58,8 @@ use App\Models\Position;
                                 </h5>
                             </div>
                             <div>
-                                <a href="#" class="btn btn-primary">
-                                    Detail
+                                <a href="{{ route('landing-page.position', ['slugPosition' => $position->slug]) }}" class="btn btn-primary">
+                                    {{ __('common.buttons.detail') }}
                                 </a>
                             </div>
                         </div>
