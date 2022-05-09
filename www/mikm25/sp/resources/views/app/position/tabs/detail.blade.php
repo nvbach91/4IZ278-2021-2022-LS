@@ -19,7 +19,7 @@ use App\Models\Position;
                 </div>
                 <div class="card-body p-4">
                     {!! $position->content !!}
-                </div>git
+                </div>
             </div>
         </div>
         <div class="col-xl-4 col-lg-6 col-md-12 mb-md-3 order-0 order-lg-1">
