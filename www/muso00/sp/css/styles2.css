@@ -1,0 +1,106 @@
+h1 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.form {
+    max-width: 512px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btn-submit {
+    width: 120px;
+}
+
+.form .link-secondary:hover {
+    color: red;
+}
+
+.inner-btn {
+    color: orange;
+    text-decoration: none;
+    border: orange 1px solid;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 14pt;
+    transition: 0.15s ease-in background-color, 0.15s ease-in color;
+}
+
+.inner-btn:hover {
+    background-color: orange;
+    color: white;
+}
+
+.index-container p {
+    padding-bottom: 20px;
+}
+
+.form-label {
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+.form-passwd {
+margin-top: 10px;
+}
+
+.btn-acc {
+    transition: color 0.3s;
+}
+
+.btn-acc:hover {
+    color: red;
+}
+
+.acc-logged, .acc-logged + span{
+    color: rgb(133, 202, 133);
+} 
+
+.form-profile {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.link-warning:hover {
+    color: black;
+}
+
+body { 
+    padding-top: 66px; 
+}
+
+.product-image {
+    max-height: 300px;
+    width: auto;
+}
+
+.btn-profile {
+    width: 150px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.itm-img {
+    max-height: 350px;
+    width: auto;
+}
+
+.card-body p {
+    height: 70px;
+}
+
+.card-footer a {
+    width: 150px;
+}
+
+.itm-title{
+    margin-left: 50px;
+} 
+
+.btn-toolbar a {
+    width: 100px;
+}
