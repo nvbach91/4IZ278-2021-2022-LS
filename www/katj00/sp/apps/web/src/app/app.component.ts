@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'project-management-root',
+  selector: 'pm-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })

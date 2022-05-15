@@ -1,0 +1,6 @@
+tui-root {
+  height: 100vh;
+}
+.wrapper {
+  @apply bg-pm-200 dark:bg-pm-900 text-pm-900 dark:text-pm-200 w-full h-full;
+}

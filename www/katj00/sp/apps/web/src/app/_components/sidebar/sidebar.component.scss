@@ -1,0 +1,20 @@
+nav {
+  @apply flex flex-1 w-[auto] px-2 h-full;
+  .sidebar__route {
+    @apply h-auto;
+    .sidebar__route-icon {
+      @apply text-xl leading-8 font-cousine font-black relative;
+      transition: 0.3s;
+    }
+  }
+
+  ul {
+    @apply list-none;
+    li {
+      @apply font-cousine text-lg mb-2 ml-4;
+      &.sidebar__active {
+        @apply font-black;
+      }
+    }
+  }
+}

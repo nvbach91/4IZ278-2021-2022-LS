@@ -1,11 +1,13 @@
 {
   "projectType": "application",
   "sourceRoot": "apps/web/src",
-  "prefix": "project-management",
+  "prefix": "pm",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/web",
         "index": "apps/web/src/index.html",
@@ -13,8 +15,20 @@
         "polyfills": "apps/web/src/polyfills.ts",
         "tsConfig": "apps/web/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/web/src/favicon.ico", "apps/web/src/assets"],
-        "styles": ["apps/web/src/styles.scss"],
+        "assets": [
+          "apps/web/src/favicon.ico",
+          "apps/web/src/assets",
+          {
+            "glob": "**/*",
+            "input": "node_modules/@taiga-ui/icons/src",
+            "output": "assets/taiga-ui/icons"
+          }
+        ],
+        "styles": [
+          "node_modules/@taiga-ui/core/styles/taiga-ui-global.less",
+          "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
+          "apps/web/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -57,7 +71,8 @@
           "browserTarget": "web:build:production"
         },
         "development": {
-          "browserTarget": "web:build:development"
+          "browserTarget": "web:build:development",
+          "proxyConfig": "apps/web/proxy.conf.json"
         }
       },
       "defaultConfiguration": "development"
@@ -71,15 +86,32 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/web/**/*.ts", "apps/web/**/*.html"]
+        "lintFilePatterns": [
+          "apps/web/**/*.ts",
+          "apps/web/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/web"],
+      "outputs": [
+        "coverage/apps/web"
+      ],
       "options": {
         "jestConfig": "apps/web/jest.config.ts",
         "passWithNoTests": true
+      }
+    },
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/web/**/*.css"
+        ],
+        "formatter": "compact"
       }
     }
   },

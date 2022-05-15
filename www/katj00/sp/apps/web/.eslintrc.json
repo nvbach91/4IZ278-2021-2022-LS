@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "project-management",
+            "prefix": "pm",
             "style": "kebab-case"
           }
         ]

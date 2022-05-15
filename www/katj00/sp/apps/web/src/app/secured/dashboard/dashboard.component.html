@@ -1,0 +1,15 @@
+<!--<div class="dashboard__container">-->
+<div class="dashboard__container" *rxLet="projectTree$; let loaded; rxSuspense: loader">
+  <main class="dashboard__main-content">
+    <router-outlet></router-outlet>
+  </main>
+  <div class="dashboard__right-panel">
+    <pm-navbar [user]="user$"></pm-navbar>
+    <pm-sidebar [projectTree]="projectTree$"></pm-sidebar>
+    <pm-activity-log></pm-activity-log>
+  </div>
+</div>
+<ng-template #loader>
+  <ui-loading>
+  </ui-loading>
+</ng-template>

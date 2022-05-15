@@ -1,0 +1,9 @@
+.dashboard__container {
+  @apply flex h-full w-full px-4 py-2;
+  .dashboard__main-content {
+    @apply flex flex-1;
+  }
+  .dashboard__right-panel {
+    @apply flex flex-col basis-1/4;
+  }
+}

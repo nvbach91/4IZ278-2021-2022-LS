@@ -1,0 +1,13 @@
+<!--<tui-scrollbar>-->
+  <nav>
+    <div class="sidebar__route">
+      <span class="sidebar__route-icon" #activeRouteIcon>&gt;</span>
+    </div>
+    <ul>
+      <li *rxFor="let item of projectTree$" [routerLink]="'/projects/' + item.name" [attr.data-name]="item.name"
+          routerLinkActive="sidebar__active">{{item.name}}
+      </li>
+    </ul>
+  </nav>
+<!--</tui-scrollbar>-->
+<!---->
