@@ -1,0 +1,22 @@
+{
+    "projectType": "application",
+    "sourceRoot": "apps/api",
+    "prefix": "project-management",
+    "targets": {
+        "require": {
+            "executor": "@nrwl/workspace:run-commands",
+            "options": {
+                "command": "composer require",
+                "cwd": "apps/api"
+            }
+        },
+        "serve": {
+            "executor": "@nrwl/workspace:run-commands",
+            "options": {
+                "command": "composer start --dev --verbose",
+                "cwd": "apps/api"
+            }
+        }
+    },
+    "tags": []
+}

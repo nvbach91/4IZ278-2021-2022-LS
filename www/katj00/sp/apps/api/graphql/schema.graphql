@@ -1,0 +1,71 @@
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    "Find a single user by an identifying attribute."
+    me: User @guard
+    projectTree: [Project!] @guard
+
+}
+
+
+type Mutation {
+    synchronize: SynchronizeResult! @guard
+}
+
+"Reference of 3rd party account of a person who utilizes this application."
+type User {
+    "Unique primary key."
+    id: ID!
+
+    "Non-unique name."
+    node_id: ID!
+
+    "Unique email address."
+    email: String!
+
+    name: String!
+
+    username: String!
+
+    avatar_url: String!
+
+    projects: [Project!]! @hasMany(relation: "projects" type: CONNECTION)
+
+    "When the account reference was created."
+    created_at: DateTime!
+
+    "When the account reference was updated."
+    updated_at: DateTime!
+}
+
+type SynchronizeResult {
+    timestamp: DateTime!
+}
+
+"Account of a person who utilizes this application."
+type Project {
+    "Unique primary key."
+    id: ID!
+
+    "Non-unique name."
+    node_id: String!
+
+    name: String!
+
+    owner_id: String!
+
+    visible: Boolean!
+
+    pushed_at: DateTime!
+
+    "When the account reference was created."
+    created_at: DateTime!
+
+    "When the account reference was updated."
+    updated_at: DateTime!
+}
+
+
