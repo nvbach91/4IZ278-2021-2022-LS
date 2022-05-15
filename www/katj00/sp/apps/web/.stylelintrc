@@ -1,0 +1,10 @@
+{
+  "extends": ["../../.stylelintrc"],
+  "ignoreFiles": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["**/*.scss", "**/*.css"],
+      "rules": {}
+    }
+  ]
+}
