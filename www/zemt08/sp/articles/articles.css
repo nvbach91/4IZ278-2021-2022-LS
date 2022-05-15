@@ -1,0 +1,144 @@
+.articles-list {
+	width: 80%;
+	max-width: 1500px;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin: 0 auto;
+}
+
+.articles-list article {
+	width: calc(30% - 30px);
+	max-width: 400px;
+	text-align: center;
+	position: relative;
+	margin: 15px;
+	cursor: pointer;
+}
+
+.articles-list img {
+	width: 100%;
+	object-fit: cover;
+	/* aspect-ratio: 6 / 5; */
+	border-radius: 8px;
+}
+
+.articles-list h3 {
+	color: var(--main-color);
+	font-size: 28px;
+	font-weight: 700;
+	text-align: left;
+	margin: 15px 8px;
+}
+
+.articles-list p {
+	font-size: 18px;
+	text-align: left;
+	margin: 0px 8px;
+}
+
+.articles-list div {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	/* aspect-ratio: 6 / 5; */
+	border-radius: 8px;
+	background: radial-gradient(circle, rgba(0, 121, 112, 0.8) 0%, rgba(0, 63, 57, 0.8) 100%);
+	opacity: 0;
+	cursor: pointer;
+	transition: all 0.5s;
+}
+
+.articles-list div:hover {
+	opacity: 1;
+}
+
+.articles-list button {
+	font-size: 16px;
+	font-weight: 700;
+	padding: 6px 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.show-article {
+	font-size: 16px;
+	font-weight: 700;
+	padding: 6px 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	cursor: pointer;
+	border: none;
+	border-radius: 25px;
+	background-color: var(--orange);
+	font-family: "Barlow", sans-serif;
+	transition: all 0.5s;
+	color: black;
+	text-decoration: none;
+}
+
+.show-article:hover {
+	color: white;
+}
+
+@media (max-width: 1100px) {
+	.articles-list article {
+		width: calc(33% - 30px);
+	}
+	.articles-list div {
+		display: none;
+	}
+}
+
+@media (max-width: 800px) {
+	.articles-list article {
+		width: calc(50% - 30px);
+	}
+}
+
+@media (max-width: 600px) {
+	.articles-list article {
+		width: calc(100% - 30px);
+		max-width: 400px;
+	}
+
+	.articles-list img {
+		max-width: 350px;
+	}
+
+	.articles-list h3 {
+		font-size: 24px;
+	}
+}
+
+.pagination {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.pagination a {
+	width: 35px;
+	background-color: #e5e5e5;
+	color: black;
+	text-decoration: none;
+	padding: 10px 2px;
+	border-radius: 50%;
+	text-align: center;
+	transition: all 0.5s;
+}
+
+.pagination a:hover {
+	background-color: var(--main-color);
+	color: white;
+}
+
+.pagination a.active {
+	background-color: var(--main-color);
+	color: white;
+}
