@@ -1,0 +1,6 @@
+mutation Synchronize {
+  synchronize {
+     timestamp
+    __typename
+  }
+}

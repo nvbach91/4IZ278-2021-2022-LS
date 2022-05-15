@@ -1,0 +1,8 @@
+query GetProjectTree {
+  projectTree {
+    node_id
+    name
+    pushed_at
+    __typename
+  }
+}
