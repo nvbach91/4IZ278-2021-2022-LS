@@ -1,0 +1,105 @@
+@import "main.less";
+
+@upload-file-btn-width : 100px;
+@upload-file-btn-margin: 20px;
+
+.upload-text {
+  width : 100%;
+  height: 30vh;
+  .super-flex;
+
+  font-size: 3rem;
+}
+
+.edit-text {
+  width : 100%;
+  height: 10vh;
+
+  span {
+    text-align: center;
+    margin    : auto;
+    display   : block;
+  }
+
+  .md {
+    font-size: 2rem;
+  }
+
+  .sm {
+    font-size: 1rem;
+  }
+}
+
+.edit-block {
+  .super-flex;
+
+  .action-buttons-wrapper {
+    .super-flex;
+    flex-direction: column;
+  }
+
+  .action-btn {
+    .super-flex;
+    width           : @upload-file-btn-width;
+    height          : @upload-file-btn-width;
+    margin-left     : @upload-file-btn-margin;
+    margin-top      : @upload-file-btn-margin;
+    background-color: rgba(173, 173, 173, 0.63);
+    border-radius   : 10px;
+    cursor          : pointer;
+  }
+}
+
+.upload-input-wrapper {
+  width    : 60%;
+  min-width: 300px;
+  max-width: 800px;
+  margin   : auto;
+}
+
+.edit-wrapper {
+  margin-bottom: 20px;
+}
+
+.edit-image-wrapper {
+  width      : 60%;
+  min-width  : 600px;
+  min-height : 80vh;
+  margin-left: @upload-file-btn-width + @upload-file-btn-margin;
+
+  .edit-image-card {
+    .super-flex;
+    padding: 10px;
+  }
+
+  .edit-image-info-card {
+    min-height: 100px;
+
+    .tag {
+      margin: 5px;
+    }
+  }
+
+  .edit-image {
+    max-width: 100%;
+    height   : 40vh;
+  }
+}
+
+.upload-progress-container {
+  width      : 60%;
+  height     : 50vh;
+  margin     : auto;
+  padding-top: 10vh;
+
+  .text-progress {
+    width     : 100%;
+    display   : block;
+    text-align: right;
+  }
+
+  .upload-more-btn {
+    margin : auto;
+    display: block;
+  }
+}
