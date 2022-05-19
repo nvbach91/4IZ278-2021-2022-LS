@@ -27,4 +27,11 @@ class CategoryDB extends Database
     $res = $statement ->fetchAll();
     return isset($res[0]) ? $res[0] : '';
   }
+
+  public function insertRow($name)
+  {
+    $statement = $this->pdo->prepare("INSERT INTO $this->tableName (name) VALUES (:name)");
+    $statement->execute(['name' => $name]);
+  }
+
 }

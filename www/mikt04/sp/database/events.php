@@ -9,5 +9,5 @@
         <div class="filter-item">
             <?php echo $category['name'];?>
         </div>
-    <?php endforeach ; ?>
+    <?php endforeach ;?>
 </div>
