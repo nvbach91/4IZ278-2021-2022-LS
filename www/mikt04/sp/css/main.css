@@ -77,11 +77,13 @@ nav a:focus {
     color: white;
 }
 
+/*
 .logo:hover{
     color: #5371B6;
     transition: color .1s ease;
     cursor: pointer;
 }
+*/
 
 .active > a {
     color: #5371B6;
@@ -165,6 +167,72 @@ main{
 .event-button:focus {
     cursor: pointer;
     background-color: #9aafe0;
+}
+
+.signup {
+    display: flex;
+    justify-content: center;
+}
+
+.form-template {
+    width: 40%;
+    margin: 150px 0;
+    border: 1px black;
+    border-style: solid;
+    padding: 20px;
+}
+
+.form-label-group {
+    margin-top: 20px;
+    width: 70%;
+}
+
+.form-control {
+    width: 70%;
+}
+
+.checkbox-confirm {
+    margin-top: 20px;
+}
+
+.notify {
+    color:#5371B6;
+    font-style: normal;
+}
+
+.warning{
+    color: red;
+    font-style: normal;
+}
+
+/* CSS */
+.button-2 {
+    margin-top: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    color: #3c4043;
+    cursor: pointer;
+    font-size: 14px;
+    height: 36px;
+    line-height: 27px;
+    min-width: 54px;
+    padding: 0 16px;
+    text-align: center;
+    user-select: none;
+    touch-action: manipulation;
+    white-space: pre;
+}
+
+.button-2:hover {
+    border-color: #dadce0;
+    box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+    color: #202124;
+}
+
+.button-2:focus {
+    border-color: #4285f4;
+    outline: none;
 }
 
 
