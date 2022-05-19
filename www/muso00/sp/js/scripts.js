@@ -6,7 +6,38 @@
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
 
-var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-  return new bootstrap.Popover(popoverTriggerEl)
-})
+/* Code for changing active 
+            link on clicking */
+var btns =
+  $("#navigation .navbar-nav .nav-link");
+
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click",
+    function () {
+      var current = document
+        .getElementsByClassName("active");
+
+      current[0].className = current[0]
+        .className.replace(" active", "");
+
+      this.className += " active";
+    });
+}
+
+/* Code for changing active 
+link on Scrolling */
+$(window).scroll(function () {
+  var distance = $(window).scrollTop();
+  $('.page-section').each(function (i) {
+
+    if ($(this).position().top
+      <= distance + 250) {
+
+      $('.navbar-nav a.active')
+        .removeClass('active');
+
+      $('.navbar-nav a').eq(i)
+        .addClass('active');
+    }
+  });
+}).scroll();

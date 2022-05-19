@@ -1,5 +1,6 @@
 <?php
 $title = 'product';
+$pageActive = 2;
 session_start(); ?>
 <?php require __DIR__ . '/db/ProductsDB.php'; ?>
 <?php include __DIR__ . '/incl/head.php'; ?>
@@ -13,6 +14,7 @@ if (!empty($_GET)) {
     $res = $productsDB->fetchById($id);
     $product = $res->fetchAll()[0];
     $stock = $product['stock'];
+    $price = $product['price'];
 } else {
     exit('<div class="alert alert-warning text-center" role="alert">You have not chosen a product. <a href="./products.php" class="stretched-link link-warning">Start shopping</a></div>');
 }
@@ -22,24 +24,26 @@ if (!empty($_POST)) {
 
     if (isset($_SESSION['shopping_cart'])) {
 
-        $items_array_id = array_column($_SESSION['shopping_cart'], 'item_id');
-        if (!in_array($_GET['id'], $items_array_id)) {
+        $itemArrayId = array_column($_SESSION['shopping_cart'], 'item_id');
+        if (!in_array($_GET['id'], $itemArrayId)) {
             $count = count($_SESSION['shopping_cart']);
-            $item_array = array(
+            $itemArray = array(
                 'item_id' => $id,
                 'item_qty' => $qty,
+                'item_price' => $price,
             );
-            $_SESSION['shopping_cart'][$count] = $item_array; 
+            $_SESSION['shopping_cart'][$count] = $itemArray; 
         } else {
             echo 'Item already added';
         }
     } else {
 
-        $item_array = array(
+        $itemArray = array(
             'item_id' => $id,
             'item_qty' => $qty,
+            'item_price' => $price,
         );
-        $_SESSION['shopping_cart'][0] = $item_array;
+        $_SESSION['shopping_cart'][0] = $itemArray;
     }
 
     header("Location: ?id=$id");
@@ -51,8 +55,7 @@ if (!empty($_POST)) {
 <main>
     <div class="container w-75">
         <div class="row">
-            <div class="col-5 fs-3 p-2"><button onclick="history.go(-1);" class="btn btn-outline-secondary mt-5"><i class="bi bi-arrow-left"></i> Back</button></div>
-            <!-- FIXME: když submit tak zpět nevrátí na produkty -->
+            <div class="col-5 fs-3 p-2"><a href="./products.php" class="btn btn-outline-secondary mt-5"><i class="bi bi-arrow-left"></i> Back</a></div>
             <div class="col-6">
                 <h1 class="text-left">Product detail</h1>
             </div>
@@ -77,7 +80,7 @@ if (!empty($_POST)) {
                 <div class="row text-end">
                     <form method="POST">
                         <div class="row">
-                            <label class="col fs-4 align-middle text-start">$<?php echo $product['price']; ?></label>
+                            <label class="col fs-4 align-middle text-start">$<?php echo $price; ?></label>
                             <div class="col">
                                 <input class="align-items-end" type="number" name="qty" min="1" max="<?php echo $stock; ?>" value="1" <?php if ($stock == 0) {
                                                                                                                                             echo 'disabled';

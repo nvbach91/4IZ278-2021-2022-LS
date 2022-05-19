@@ -90,11 +90,15 @@ body {
 }
 
 .card-body p {
-    height: 70px;
+    height: 80px;
 }
 
 .card-footer a {
     width: 150px;
+}
+
+.card-title {
+    height: 80px;
 }
 
 .itm-title{
@@ -103,4 +107,22 @@ body {
 
 .btn-toolbar a {
     width: 100px;
+}
+
+.text-faded-primary {
+    color: rgb(139, 185, 255);
+    text-decoration: none;
+}
+
+.text-faded-primary:hover {
+    text-decoration: underline;
+    color: rgb(139, 185, 255);
+}
+
+.bi-info-circle:hover {
+    cursor: pointer;
+}
+
+.btn-admin {
+    max-width: 40px;
 }

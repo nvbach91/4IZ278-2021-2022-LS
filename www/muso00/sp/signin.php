@@ -5,14 +5,9 @@ session_start();
 <?php require __DIR__ . '/db/UsersDB.php'; ?>
 <?php include __DIR__ . '/incl/head.php'; ?>
 <?php include __DIR__ . '/incl/nav.php'; ?>
+<?php require __DIR__ . '/utils/nonuser_required.php'; ?>
 <?php
 $errors = [];
-$isLoggedIn = false;
-$recordFound = false;
-
-if (isset($_SESSION['user_id'])) {
-    exit('<div class="alert alert-primary text-center" role="alert">You are already signed in. <a href="./profile.php" class="stretched-link link-primary">View account</a></div>');
-}
 
 if (!empty($_GET)) {
     $email = $_GET['email'];
@@ -30,34 +25,8 @@ if (!empty($_POST)) {
     if (empty($password)) {
         array_push($errors, 'Fill in the password');
     }
-
-    $usersDB = new UsersDB();
-    $res = $usersDB->fetchByEmail($email);
-
-    if ($res->rowCount() == 0) {
-        $existingUser = null;
-    } else {
-        $existingUser = $res->fetchAll()[0];
-    }
-
-    if (!count($errors)) {
-        if (!is_null($existingUser)) {
-            if (password_verify($password, $existingUser['password'])) {
-                //$isLoggedIn = true;
-                $_SESSION['user_id'] = $existingUser['user_id'];
-                $_SESSION['user_email'] = $existingUser['email'];
-                $_SESSION['user_first_name'] = $existingUser['first_name'];
-                $_SESSION['user_privilege'] = $existingUser['privilege'];
-                header('Location: ./profile.php');
-                sendEmail($username, 'registration success');
-                exit();
-            } else {
-                array_push($errors, "Invalid password");
-            }
-        } else {
-            array_push($errors, 'Invalid username');
-        }
-    }
+    
+    require __DIR__ . '/utils/login_user.php';
 }
 ?>
 <?php if (isset($ref) && $ref === 'registration') : ?>

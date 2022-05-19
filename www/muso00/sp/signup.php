@@ -1,12 +1,19 @@
+<?php 
+$title = 'Sign up';
+session_start(); ?>
 <?php require __DIR__ . '/db/UsersDB.php'; ?>
-<?php require __DIR__ . '/utils/utils.php'; ?>
-<?php $title = 'Sign up'; ?>
+<?php include __DIR__ . '/incl/head.php'; ?>
+<?php include __DIR__ . '/incl/nav.php'; ?>
+<?php require __DIR__ . '/utils/nonuser_required.php'; ?>
 <?php
-session_start();
 
 $errors = [];
-$passwdReq = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,32}$/';
 $ref = 'registration';
+$passwdDesc = 
+'Your password has to have 
+at least one capital letter [A-Z], 
+one digit [0-9] and be 
+minimum 8 characters long.';
 
 if (!empty($_POST)) {
     $firstName = $_POST['firstName'];
@@ -18,50 +25,17 @@ if (!empty($_POST)) {
     $hashedPasswd = password_hash($password, PASSWORD_DEFAULT);
 
     // form input validation
-    if (strlen($firstName) < 2) {
-        array_push($errors, 'First name is too short');
-    }
-
-    if (strlen($lastName) < 2) {
-        array_push($errors, 'Last name is too short');
-    }
+    require __DIR__ . '/utils/name_validation.php';
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         array_push($errors, 'Invalid Email');
     }
 
-    if (!preg_match($passwdReq, $password)) {
-        array_push($errors, 'Invalid Password');
-    }
-
-    if ($password !== $confirm) {
-        array_push($errors, 'The passwords do not match');
-    }
-
-    $usersDB = new UsersDB();
-    $res = $usersDB->fetchByEmail($email);
-
-    if ($res->rowCount() == 0) {
-        $existingUser = null;
-    } else {
-        $existingUser = $res->fetchAll()[0];
-    }
-
-    if (!count($errors)) {
-        if (is_null($existingUser)) {
-            $users = $usersDB->create(['email' => $email, 'firstName' => $firstName, 'lastName' => $lastName, 'password' => $hashedPasswd]);
-            header("Location: signin.php?ref=$ref&email=$email");
-            exit();
-        } else {
-            array_push($errors, 'User with this email already registered!');
-        }
-    }
+    require __DIR__ . '/utils/passwd_req.php';
+    require __DIR__ . '/utils/register_user.php';
 }
 
 ?>
-
-<?php include __DIR__ . '/incl/head.php'; ?>
-<?php include __DIR__ . '/incl/nav.php'; ?>
 <main>
     <div class="sign-container">
         <h1 class="text-center">Registration</h1>
@@ -84,7 +58,7 @@ if (!empty($_POST)) {
                 <input class="form-control" value="<?php echo @$email;?>" name="email" type="email">
             </div>
             <div class="form-passwd">
-                <label class="form-label">Password<span class="text-danger">*</span></label>
+                <label class="form-label" title="<?php echo $passwdDesc; ?>">Password<span class="text-danger">*</span></label>
                 <input class="form-control" name="password" value="<?php echo @$password; ?>" type="password">
                 <label class="form-label">Confirm password<span class="text-danger">*</span></label>
                 <input class="form-control" name="confirm" value="<?php echo @$confirm; ?>" type="password">
@@ -94,6 +68,5 @@ if (!empty($_POST)) {
         </form>
     </div>
 </main>
-
 
 <?php include __DIR__ . '/incl/foot.php'; ?>

@@ -5,40 +5,32 @@ session_start();
 <?php require __DIR__ . '/db/UsersDB.php'; ?>
 <?php include __DIR__ . '/incl/head.php'; ?>
 <?php include __DIR__ . '/incl/nav.php'; ?>
+<?php require __DIR__ . '/utils/user_required.php'; ?>
 <?php
-if (!isset($_SESSION['user_id'])) {
-    exit('<div class="alert alert-warning text-center" role="alert">You are not signed in. <a href="./signin.php" class="stretched-link link-warning">Sign In</a></div>');
-}
 $errors = [];
-$passwdReq = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,32}$/';
 $id = intval($_SESSION['user_id']);
 
 $usersDB = new UsersDB();
-$result = $usersDB->fetchById($_SESSION['user_id']);
-$userInfo = $result->fetchAll()[0];
+$res = $usersDB->fetchById($_SESSION['user_id']);
+$userInfo = $res->fetchAll()[0];
 
 if (!empty($_POST)) {
     $originalPasswd = $_POST['originalPasswd'];
-    $newPasswd = $_POST['newPasswd'];
-    $confirmPasswd = $_POST['confirmPasswd'];
+    $password = $_POST['password'];
+    $confirm = $_POST['confirm'];
 
     if (empty($originalPasswd) || empty($newPasswd) || empty($confirmPasswd)) {
-        array_push($errors, 'Fill in old the fields');
+        array_push($errors, 'Fill in all the fields');
     }
 
-    if (!preg_match($passwdReq, $newPasswd)) {
-        array_push($errors, 'Invalid Password');
-    }
-
-    if ($newPasswd !== $confirmPasswd) {
-        array_push($errors, 'The passwords do not match');
-    }
+    require __DIR__ . '/utils/passwd_req.php';
 
     if (!count($errors)) {
         if (password_verify($originalPasswd, $userInfo['password'])) {
-        $hashedPasswd = password_hash($newPasswd, PASSWORD_DEFAULT);
-        $usersDB->updateById($id, 'password', $hashedPasswd);
-        header('Location: ./profile.php');} else {
+            $hashedPasswd = password_hash($newPasswd, PASSWORD_DEFAULT);
+            $usersDB->updateById($id, 'password', $hashedPasswd);
+            header('Location: ./profile.php');
+        } else {
             array_push($errors, 'Wrong current password');
         }
     }
@@ -48,7 +40,7 @@ if (!empty($_POST)) {
 <main>
     <h1 class="text-center">Password change</h1>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="form form-profile rounded shadow mx-auto p-5">
-    <div class="align-items-end justify-content-end"><a type="button" class="btn-close justify-content-end" aria-label="Close" href="./profile.php"></a></div>
+        <div><a type="button" class="btn-close float-end" aria-label="Close" href="./profile.php"></a></div>
         <?php if (!empty($errors)) : ?>
             <div class="alert alert-danger" role="alert">
                 <?php foreach ($errors as $error) : ?>
@@ -65,14 +57,14 @@ if (!empty($_POST)) {
             </div>
             <div class="row align-items-start">
                 <div class="col">
-                    <label class="form-label" for="newPasswd">New password</label>
-                    <input class="form-control" value="<?php echo @$newPasswd; ?>" name="newPasswd" type="password">
+                    <label class="form-label" for="password">New password</label>
+                    <input class="form-control" value="<?php echo @$password; ?>" name="password" type="password">
                 </div>
             </div>
             <div class="row align-items-start">
                 <div class="col">
-                    <label class="form-label" for="confirmPasswd">Old password</label>
-                    <input class="form-control" value="<?php echo @$confirmPasswd; ?>" name="confirmPasswd" type="password">
+                    <label class="form-label" for="confirm">Confirm password</label>
+                    <input class="form-control" value="<?php echo @$confirm; ?>" name="confirm" type="password">
                 </div>
             </div>
             <div class="row justify-content-center">

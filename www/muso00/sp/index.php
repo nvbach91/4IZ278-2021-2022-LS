@@ -1,5 +1,8 @@
-<?php $title = 'Home';?>
-<?php session_start(); ?>
+<?php 
+$title = 'Home';
+$pageActive = 1;
+session_start(); 
+?>
 <?php include __DIR__ . '/incl/head.php'; ?>
 <?php include __DIR__ . '/incl/nav.php'; ?>
     <!-- Header-->

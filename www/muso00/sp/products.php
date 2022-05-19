@@ -1,5 +1,8 @@
-<?php $title = 'Products';
-session_start(); ?>
+<?php 
+$title = 'Products';
+$pageActive = 2;
+session_start(); 
+?>
 <?php include __DIR__ . '/db/ProductsDB.php'; ?>
 <?php include __DIR__ . '/db/CategoriesDB.php'; ?>
 <?php include __DIR__ . '/incl/head.php'; ?>
