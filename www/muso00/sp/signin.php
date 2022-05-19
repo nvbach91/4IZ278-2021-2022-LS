@@ -1,0 +1,57 @@
+<?php
+$title = 'Sign in';
+session_start();
+?>
+<?php require __DIR__ . '/db/UsersDB.php'; ?>
+<?php include __DIR__ . '/incl/head.php'; ?>
+<?php include __DIR__ . '/incl/nav.php'; ?>
+<?php require __DIR__ . '/utils/nonuser_required.php'; ?>
+<?php
+$errors = [];
+
+if (!empty($_GET)) {
+    $email = $_GET['email'];
+    $ref = $_GET['ref'];
+}
+
+if (!empty($_POST)) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if (empty($email)) {
+        array_push($errors, 'Fill in the username');
+    }
+
+    if (empty($password)) {
+        array_push($errors, 'Fill in the password');
+    }
+    
+    require __DIR__ . '/utils/login_user.php';
+}
+?>
+<?php if (isset($ref) && $ref === 'registration') : ?>
+    <div class="alert alert-success text-center" role="alert">Congratulations, registration was successful!</div>
+<?php endif; ?>
+<h1 class="text-center">Login</h1>
+<main>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="form rounded shadow mx-auto p-5">
+        <?php if (!empty($errors)) : ?>
+            <div class="alert alert-danger" role="alert">
+                <?php foreach ($errors as $error) : ?>
+                    <div class="error"><?php echo $error; ?></div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+        <div>
+            <label class="form-label">Username</label>
+            <input class="form-control" placeholder="email" name="email" type="email" value="<?php echo @$email; ?>" <?php if (isset($ref)) {echo "readonly";}; ?>>
+        </div>
+        <div>
+            <label class="form-label">Password</label>
+            <input class="form-control" placeholder="password" name="password" type="password">
+        </div>
+        <button class="btn btn-outline-success rounded-pill btn-submit mx-auto mt-5 mb-2 p-2">Sign in</button>
+        <div class="text-secondary text-center">Don't have an account yet? <a href="./signup.php" class="link-secondary">Sign up</a></div>
+    </form>
+</main>
+<?php include __DIR__ . '/incl/foot.php'; ?>
