@@ -2,20 +2,21 @@
 
 namespace App\Services\Auth;
 
-use App\Http\Requests\Auth\RegisterRequest;
+use App\DTOs\Auth\RegisterDTO;
 use App\Models\User;
 
 class RegisterService
 {
-    public function registerWithRequest(RegisterRequest $request): ?User
+    public function register(RegisterDTO $registerDTO, bool $facebook = false): ?User
     {
         $user = new User();
 
-        $user->firstname = $request->getFirstname();
-        $user->lastname = $request->getLastname();
-        $user->email = $request->getEmail();
-        $user->password = $request->getPassword();
-        $user->phone_number = $request->getPhone();
+        $user->firstname = $registerDTO->firstName;
+        $user->lastname = $registerDTO->lastName;
+        $user->email = $registerDTO->email;
+        $user->password = $registerDTO->password;
+        $user->phone_number = $registerDTO->phone;
+        $user->created_from_facebook = $facebook;
 
         if (! $user->save()) {
             return null;

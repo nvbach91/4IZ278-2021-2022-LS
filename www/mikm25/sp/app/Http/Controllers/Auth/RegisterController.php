@@ -39,7 +39,7 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request): RedirectResponse
     {
-        $user = $this->service->registerWithRequest($request);
+        $user = $this->service->register($request->toDTO());
 
         if ($user === null) {
             return redirect()->back()->withInput()->with('status', [

@@ -50,7 +50,7 @@
                     <a href="{{ route('auth.forgotten-password.form') }}">{{ __('login.forgotten_password') }}</a>
                 </div>
 
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mb-3">
                     <div>
                         <a href="{{ route('landing-page') }}" class="btn btn-light">
                             <i class="bi bi-house"></i>
@@ -62,6 +62,12 @@
                     <button type="submit" class="btn btn-primary">
                         {{ __('login.submit') }}
                     </button>
+                </div>
+
+                <div class="d-grid">
+                    <a href="{{ route('auth.facebook.redirect') }}" class="btn btn-primary d-blo">
+                        <i class="bi bi-facebook"></i> {{ __('login.facebook') }}
+                    </a>
                 </div>
             </form>
         </div>

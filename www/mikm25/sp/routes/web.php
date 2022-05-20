@@ -3,6 +3,7 @@
 use App\Constants\PositionTabConstants;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\Auth\ForgottenPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -67,6 +68,13 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
             Route::post('reset/{token}', [PasswordResetController::class, 'reset'])
                 ->name('reset')
                 ->whereUuid('token');
+        });
+
+        Route::group(['prefix' => 'facebook', 'as' => 'facebook.'], static function (): void {
+            Route::get('redirect', [FacebookController::class, 'redirect'])
+                ->name('redirect');
+            Route::get('callback', [FacebookController::class, 'callback'])
+                ->name('callback');
         });
     });
 

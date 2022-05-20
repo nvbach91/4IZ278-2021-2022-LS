@@ -6,4 +6,6 @@ return [
 
     'verification_link_help' => 'Nepřišel Vám odkaz pro potvrzení emailové adresy?',
     'forgotten_password' => 'Zapomenuté heslo',
+
+    'facebook' => 'Přihlášení přes Facebook'
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\DTOs\Auth\RegisterDTO;
 use App\Http\Requests\Traits\WithPasswordRules;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
@@ -55,5 +56,16 @@ class RegisterRequest extends FormRequest
     public function getPassword(): string
     {
         return (string) $this->input('password');
+    }
+
+    public function toDTO(): RegisterDTO
+    {
+        return new RegisterDTO([
+            'firstName' => $this->getFirstname(),
+            'lastName' => $this->getLastname(),
+            'email' => $this->getEmail(),
+            'phone' => $this->getPhone(),
+            'password' => $this->getPassword(),
+        ]);
     }
 }

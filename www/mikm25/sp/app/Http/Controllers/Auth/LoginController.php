@@ -52,13 +52,11 @@ class LoginController extends Controller
             ]);
         }
 
-        if (! $this->service->login($user, $request->getPassword(), $request->rememberMe())) {
+        if (! $this->service->loginWithPassword($user, $request->getPassword(), $request->rememberMe())) {
             return redirect()->back()->withInput()->with('status', [
                 'danger' => __('status.auth.login.error_credentials'),
             ]);
         }
-
-        $this->repository->updateLastLoggedAt($user);
 
         return redirect()->route('app.dashboard')->with('status', [
             'success' => __('status.auth.login.success'),

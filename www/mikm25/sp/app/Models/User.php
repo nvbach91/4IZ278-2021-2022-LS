@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string|null $phone_number
+ * @property boolean $created_from_facebook
  * @property string|null $remember_token
  * @property Carbon|null $last_logged_at
  * @property Carbon $created_at
