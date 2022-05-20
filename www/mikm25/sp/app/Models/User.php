@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Hash;
  * @property Carbon|null $email_verified_at
  * @property string|null $phone_number
  * @property string|null $remember_token
+ * @property Carbon|null $last_logged_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *

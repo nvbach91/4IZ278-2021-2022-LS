@@ -58,6 +58,8 @@ class LoginController extends Controller
             ]);
         }
 
+        $this->repository->updateLastLoggedAt($user);
+
         return redirect()->route('app.dashboard')->with('status', [
             'success' => __('status.auth.login.success'),
         ]);

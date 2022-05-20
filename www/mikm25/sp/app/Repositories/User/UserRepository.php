@@ -30,4 +30,12 @@ class UserRepository implements UserRepositoryInterface
 
         return $user;
     }
+
+    public function updateLastLoggedAt(User $user, ?Carbon $time = null): User
+    {
+        $user->last_logged_at = $time ?? Carbon::now();
+        $user->save();
+
+        return $user;
+    }
 }
