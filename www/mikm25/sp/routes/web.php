@@ -3,7 +3,7 @@
 use App\Constants\PositionTabConstants;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Auth\EmailVerificationController;
-use App\Http\Controllers\Auth\FacebookController;
+use App\Http\Controllers\Auth\GithubController;
 use App\Http\Controllers\Auth\ForgottenPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -70,10 +70,10 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
                 ->whereUuid('token');
         });
 
-        Route::group(['prefix' => 'facebook', 'as' => 'facebook.'], static function (): void {
-            Route::get('redirect', [FacebookController::class, 'redirect'])
+        Route::group(['prefix' => 'github', 'as' => 'github.'], static function (): void {
+            Route::get('redirect', [GithubController::class, 'redirect'])
                 ->name('redirect');
-            Route::get('callback', [FacebookController::class, 'callback'])
+            Route::get('callback', [GithubController::class, 'callback'])
                 ->name('callback');
         });
     });

@@ -67,8 +67,8 @@
         </div>
         <div class="card-footer">
             <div class="d-grid">
-                <a href="{{ route('auth.facebook.redirect') }}" class="btn btn-primary d-blo">
-                    <i class="bi bi-facebook"></i> {{ __('login.facebook') }}
+                <a href="{{ route('auth.github.redirect') }}" class="btn btn-dark d-blo">
+                    <i class="bi bi-github"></i> {{ __('login.github') }}
                 </a>
             </div>
         </div>

@@ -11,7 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
-class FacebookController extends Controller
+class GithubController extends Controller
 {
     /**
      * @var RegisterService
@@ -40,22 +40,22 @@ class FacebookController extends Controller
 
     public function redirect(): RedirectResponse
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('github')->redirect();
     }
 
     public function callback(): RedirectResponse
     {
-        $facebookUser = Socialite::driver('github')->user();
+        $githubUser = Socialite::driver('github')->user();
 
-        $user = $this->userRepository->getUserByEmail($facebookUser->getEmail());
+        $user = $this->userRepository->getUserByEmail($githubUser->getEmail());
 
         if (! $user) {
-            $name = explode(' ', $facebookUser->getName());
+            $name = explode(' ', $githubUser->getName());
 
             $user = $this->registerService->register(new RegisterDTO([
                 'firstName' => $name[0],
                 'lastName' => $name[1] ?? '',
-                'email' => $facebookUser->getEmail(),
+                'email' => $githubUser->getEmail(),
                 'password' => Str::random(20),
             ]), true);
         }

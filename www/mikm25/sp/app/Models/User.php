@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Hash;
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string|null $phone_number
- * @property boolean $created_from_facebook
+ * @property boolean $created_from_github
  * @property string|null $remember_token
  * @property Carbon|null $last_logged_at
  * @property Carbon $created_at
@@ -68,6 +68,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'string',
         'phone_number' => 'string',
+        'created_from_github' => 'boolean',
         'remember_token' => 'string',
     ];
 

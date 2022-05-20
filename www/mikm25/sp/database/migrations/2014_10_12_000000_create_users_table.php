@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone_number')->nullable();
-            $table->boolean('created_from_facebook')->default(false);
+            $table->boolean('created_from_github')->default(false);
             $table->rememberToken();
             $table->timestamp('last_logged_at')->nullable();
             $table->timestamps();

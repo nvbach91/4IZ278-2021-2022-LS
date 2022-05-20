@@ -4,10 +4,11 @@ namespace App\Services\Auth;
 
 use App\DTOs\Auth\RegisterDTO;
 use App\Models\User;
+use Carbon\Carbon;
 
 class RegisterService
 {
-    public function register(RegisterDTO $registerDTO, bool $facebook = false): ?User
+    public function register(RegisterDTO $registerDTO, bool $github = false): ?User
     {
         $user = new User();
 
@@ -16,7 +17,8 @@ class RegisterService
         $user->email = $registerDTO->email;
         $user->password = $registerDTO->password;
         $user->phone_number = $registerDTO->phone;
-        $user->created_from_facebook = $facebook;
+        $user->created_from_github = $github;
+        $user->email_verified_at = $github ? Carbon::now() : null;
 
         if (! $user->save()) {
             return null;
