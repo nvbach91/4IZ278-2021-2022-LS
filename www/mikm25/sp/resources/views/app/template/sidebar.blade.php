@@ -8,7 +8,7 @@
 
             <li class="nav-item">
                 <a class="nav-link rounded-2 {{ $page['active'] ? 'active' : '' }}" href="{{ route($route) }}">
-                    <i class="{{ $page['icon'] }}"></i> {{ $page['text'] }}
+                    <i class="{{ $page['active'] ? $page['activeIcon'] : $page['icon'] }}"></i> {{ $page['text'] }}
                 </a>
             </li>
         @endforeach
