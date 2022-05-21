@@ -1,30 +1,47 @@
 <?php
 session_start();
 
-require './database/CategoryDB.php';
+require_once './database/CategoryDB.php';
+require_once './database/EventsDB.php';
+require_once './database/ticketDB.php';
 
 $categoryDB = new CategoryDB();
 $categories = $categoryDB->fetchAll();
+$eventsDB = new EventsDB();
+$ticketDB = new TicketDB();
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $name = $_POST['name'];
-    $descriptioj = $_POST['description'];
+    $description = $_POST['description'];
     $date = $_POST['date'];
     $locationName = $_POST['location-name'];
     $locationAdress = $_POST['location-adress'];
     $ticketCount = $_POST['ticket-count'];
+    $urlLink = $_POST['url'];
     $category = $_POST['category'];
+    $ticketPrice = $_POST['ticket-price'];
+
+    $categoryId = (int)$category;
+    $dateRnd = new DateTime($date);
+    $dateFixed = DATE_FORMAT($dateRnd, 'Y-m-d H:i:s'); 
     $valid = TRUE;
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo ('Invalid email');
-        $valid = FALSE;
-    }
+    /*
+    $name = "Pubquiz";
+    $description = "Popis";
+    $date = "2022-05-24T15:03";
+    $locationName = "Praha";
+    $locationAdress = "Ulice 123/10";
+    $ticketCount = 60;
+    $urlLink = "www.example.com";
+    $category = "5";
+    */
+    //2022-05-24T15:03
 
-    if (strlen($password) < 3) {
-        echo ('Password must be at least 3 characters long');
-        $valid = FALSE;
-    }
+    $insertEvent = $eventsDB->insertRow($name, $description, $dateFixed, $locationName, $locationAdress, $ticketCount, $urlLink, $categoryId);
+    $eventId = $eventsDB->fetchNameById($name);
+    $insertTicket = $ticketDB->insertRow($eventId['event_id'], $ticketPrice);
+    echo "inserted";
 }
 ?>
 
@@ -43,7 +60,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
                     <textarea type="text" name="description" class="form-control input-large" maxlength="255" placeholder="Popis" required autofocus></textarea>
                 </div>
                 <div class="form-label-group">
-                    <input type="date" name="date" class="form-control" placeholder="Datum" required autofocus>
+                    <input type="datetime-local" name="date" class="form-control" placeholder="Datum" required autofocus>
                 </div>
                 <div class="form-label-group">
                     <input type="text" name="location-name" class="form-control" placeholder="Místo" required autofocus>
@@ -53,6 +70,12 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
                 </div>
                 <div class="form-label-group">
                     <input type="number" name="ticket-count" class="form-control" placeholder="Počet míst" required autofocus>
+                </div>
+                <div class="form-label-group">
+                    <input type="number" name="ticket-price" class="form-control" placeholder="Cena lístku" required autofocus>
+                </div>
+                <div class="form-label-group">
+                    <input type="url" name="url" class="form-control" placeholder="URL obrázek" required autofocus>
                 </div>
                 <div class="form-label-group">
                 <p>Kategorie:</p> 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require './database/UsersDB.php';
+require_once './database/UsersDB.php';
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
@@ -39,7 +39,9 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     }
     if(!$validatedEmail){
         echo "false";
-        $inserted = $usersDB->insertUser($firstName, $lastName, $email, $hashedPassword);
+        date_default_timezone_set('Europe/Prague');
+        $date = date('Y-m-d H:i:s', time());
+        $inserted = $usersDB->insertUser($firstName, $lastName, $email, $hashedPassword, $date);
         header('Location: signin.php');
         exit();
     }

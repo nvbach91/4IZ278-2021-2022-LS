@@ -1,5 +1,5 @@
 <?php
-require './database/UsersDB.php';
+require_once './database/UsersDB.php';
 
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 

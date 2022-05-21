@@ -53,12 +53,11 @@ class UsersDB extends Database
     //$statement->execute(['name' => $name]);
   }
 
-  public function insertUser($firstName, $lastName, $email, $password)
+  public function insertUser($firstName, $lastName, $email, $password, $date)
   {
-    $rnd = '2018-12-05 12:39:16';
     $statement = $this->pdo->prepare("INSERT INTO $this->tableName (first_name, last_name, email, pwd_hash, created) 
     VALUES (?, ?, ?, ?, ?)");
-    $statement->execute([$firstName, $lastName, $email, $password, $rnd]);
+    $statement->execute([$firstName, $lastName, $email, $password, $date]);
   }
   
     /*
