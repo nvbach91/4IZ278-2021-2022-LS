@@ -18,14 +18,14 @@ use Illuminate\Support\Facades\Hash;
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string|null $phone_number
- * @property boolean $created_from_github
+ * @property boolean $github
  * @property string|null $remember_token
  * @property Carbon|null $last_logged_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
  * @see User::setPasswordAttribute()
- * @property string $password
+ * @property string|null $password
  *
  * @see User::getFullNameAttribute()
  * @property-read string $full_name
@@ -68,13 +68,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'string',
         'phone_number' => 'string',
-        'created_from_github' => 'boolean',
+        'github' => 'boolean',
         'remember_token' => 'string',
     ];
 
-    public function setPasswordAttribute(string $password): void
+    public function setPasswordAttribute(?string $password): void
     {
-        $this->attributes['password'] = Hash::make($password);
+        $this->attributes['password'] = empty($password) ? $password : Hash::make($password);
     }
 
     public function getFullNameAttribute(): string

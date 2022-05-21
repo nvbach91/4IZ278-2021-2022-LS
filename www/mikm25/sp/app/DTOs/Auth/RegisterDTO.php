@@ -14,6 +14,6 @@ class RegisterDTO extends DataTransferObject
     public $email;
     /** @var string|null */
     public $phone;
-    /** @var string */
+    /** @var string|null */
     public $password;
 }

@@ -17,7 +17,7 @@ class RegisterService
         $user->email = $registerDTO->email;
         $user->password = $registerDTO->password;
         $user->phone_number = $registerDTO->phone;
-        $user->created_from_github = $github;
+        $user->github = $github;
         $user->email_verified_at = $github ? Carbon::now() : null;
 
         if (! $user->save()) {

@@ -57,7 +57,7 @@ class GithubController extends Controller
                 'firstName' => $name[0],
                 'lastName' => $name[1] ?? '',
                 'email' => $githubUser->getEmail(),
-                'password' => Str::random(20),
+                'password' => null,
             ]), true);
         }
 

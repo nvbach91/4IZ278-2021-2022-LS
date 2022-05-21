@@ -13,12 +13,12 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('phone_number')->nullable();
-            $table->boolean('created_from_github')->default(false);
+            $table->boolean('github')->default(false);
             $table->rememberToken();
             $table->timestamp('last_logged_at')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
     }

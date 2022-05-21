@@ -28,7 +28,7 @@ class LoginService
 
     public function loginWithPassword(User $user, string $password, bool $rememberMe = false): bool
     {
-        if (! $this->hasher->check($password, $user->password)) {
+        if (empty($user->password) || ! $this->hasher->check($password, $user->password)) {
             return false;
         }
 
