@@ -27,7 +27,12 @@ return [
 
         'password_reset' => [
             'subject' => 'Změna hesla v systému :appName',
-            'line1' => 'Vaše heslo do aplikace bylo změněno. Pokud jste si v poslední době heslo neměnil, neprodleně kontaktujte podporu na email :supportEmail.'
-        ]
+            'line1' => 'Vaše heslo do aplikace bylo změněno. Pokud jste si v poslední době heslo neměnili, neprodleně kontaktujte podporu na email :supportEmail.',
+        ],
+
+        'registered_without_verification' => [
+            'subject' => 'Vítejte v systému :appName',
+            'line1' => 'děkujeme za Vaši registraci do systému :appName.',
+        ],
     ],
 ];

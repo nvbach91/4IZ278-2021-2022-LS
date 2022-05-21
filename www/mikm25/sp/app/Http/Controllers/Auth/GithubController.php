@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\DTOs\Auth\RegisterDTO;
 use App\Http\Controllers\Controller;
+use App\Notifications\User\RegisteredWithoutVerificationNotification;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Services\Auth\LoginService;
 use App\Services\Auth\RegisterService;
@@ -59,6 +60,8 @@ class GithubController extends Controller
                 'password' => Str::random(20),
             ]), true);
         }
+
+        $user->notify(new RegisteredWithoutVerificationNotification());
 
         $this->loginService->login($user);
 
