@@ -35,7 +35,7 @@ a {
 
 .container {
     width: 90%;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     height: 50px;
 }
@@ -130,8 +130,10 @@ main{
     padding: 50px 180px;
     display: grid;
     grid-gap: 1rem;
-    align-items: center;
     grid-template-columns: repeat(4, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
 }
 
 .event {
@@ -319,14 +321,16 @@ main{
     box-shadow: 5px 5px 27px -1px rgba(0,0,0,0.26);
     padding: 30px;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .event-body-description {
-    width: 50%;
+    flex: 0 0 50%;
+
 }
 
 .event-body-information {
-    width: 50%;
+    flex: 0 0 50%;
 }
 
 .body-information {
@@ -354,11 +358,39 @@ main{
     justify-items: right;
 }
 
+.fail {
+    margin-top: 40px;
+    background-color: #fcb8b8;
+    border-radius: 15px;
+    box-shadow: 5px 5px 27px -1px rgba(0,0,0,0.26);
+    padding: 30px;
+    display: flex;
+    justify-items: right;
+}
+
+.tickets-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ticket-item {
+    text-align: center;
+    margin: 30px 40px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 5px 5px 27px -1px rgba(0,0,0,0.26);
+    padding: 30px;
+}
+
 
 
 /*---Responsive settings----*/
 
 @media (min-width: 2000px) {
+    .event-grid {
+        grid-auto-flow: column;
+    }
+
     footer{
         display: none;
     }
@@ -369,19 +401,32 @@ main{
         padding: 50px 150px;
         display: grid;
         grid-gap: 1rem;
-        align-items: center;
         grid-template-columns: repeat(3, 1fr);
     }
 
 }
 
-@media (max-width: 830px) {
+@media (max-width: 1300px) {
     .event-grid {
         padding: 50px 150px;
         display: grid;
         grid-gap: 1rem;
-        align-items: center;
         grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        justify-items: center;
+        
+    }
+}
+
+@media (max-width: 960px) {
+    .event-grid {
+        padding: 50px 150px;
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(1, 1fr);
+        align-items: center;
+        justify-items: center;
+        
     }
 }
 
@@ -410,12 +455,16 @@ main{
     }
    
     .event-grid {
-        padding: 50px 150px;
+        padding: 20px 30px;
         display: grid;
         grid-gap: 1rem;
-        align-items: center;
-        grid-template-columns: repeat(1, 1fr);
+
     }
+
+    .event-container{
+        padding: 20px 30px;
+    }
+
 }
 
 @media (max-width: 320px) {

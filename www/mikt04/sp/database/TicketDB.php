@@ -23,9 +23,16 @@ class TicketDB extends Database
 
   public function fetchById($id)
   {
-    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE ticket_id = :ticket_id_id LIMIT 1");
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE ticket_id = :ticket_id LIMIT 1");
     $statement->execute(['event_id' => $id]);
     return $statement->fetchAll();
+  }
+
+  public function fetchByEventId($id)
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE event_id = :event_id LIMIT 1");
+    $statement->execute(['event_id' => $id]);
+    return $statement->fetch();
   }
 
   public function insertRow($eventId, $price)

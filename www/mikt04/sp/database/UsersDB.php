@@ -15,9 +15,9 @@ class UsersDB extends Database
 
   public function fetchById($id)
   {
-    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE category_id = :category_id LIMIT 1");
-    $statement->execute(['category_id' => $id]);
-    return $statement->fetchAll();
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE user_id = :user_id LIMIT 1");
+    $statement->execute(['user_id' => $id]);
+    return $statement->fetch();
   }
 
   public function fetchByName($name)
@@ -26,6 +26,13 @@ class UsersDB extends Database
     $statement->execute(['name' => $name]);
     $res = $statement ->fetchAll();
     return isset($res[0]) ? $res[0] : '';
+  }
+
+  public function fetchByEmail($email)
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE email = :email LIMIT 1");
+    $statement->execute(['email' => $email]);
+    return $statement->fetch();
   }
 
   public function fetchPassword($email)
@@ -53,11 +60,11 @@ class UsersDB extends Database
     //$statement->execute(['name' => $name]);
   }
 
-  public function insertUser($firstName, $lastName, $email, $password, $date)
+  public function insertUser($firstName, $lastName, $email, $password, $date, $privilege)
   {
-    $statement = $this->pdo->prepare("INSERT INTO $this->tableName (first_name, last_name, email, pwd_hash, created) 
-    VALUES (?, ?, ?, ?, ?)");
-    $statement->execute([$firstName, $lastName, $email, $password, $date]);
+    $statement = $this->pdo->prepare("INSERT INTO $this->tableName (first_name, last_name, email, pwd_hash, created, privilege) 
+    VALUES (?, ?, ?, ?, ?, ?)");
+    $statement->execute([$firstName, $lastName, $email, $password, $date, $privilege]);
   }
   
     /*

@@ -1,14 +1,12 @@
 <?php include './include/head.php'; ?>
 <?php include './include/nav.php'; ?>
 
+<?php require_once './include/check-login.php';?>
+
+
 <main>
-  <div class="promo">
-    <div class="welcome-text">
-        <h2>Akce</h2>
-    </div>
-  </div>
   <div class="wrapper">
-    <?php include './include/event-grid.php'; ?>
+    
   </div>
 </main>
 

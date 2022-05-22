@@ -2,16 +2,16 @@
 require_once './database/CategoryDB.php';
 require_once './database/EventsDB.php';
 
-    $categoryDB = new CategoryDB();
-    $categories = $categoryDB->fetchAll();
-    $eventsDB = new EventsDB();
-    $events = $eventsDB->fetchAll();
-    $pageId = '';
+$categoryDB = new CategoryDB();
+$categories = $categoryDB->fetchAll();
+$eventsDB = new EventsDB();
+$events = $eventsDB->fetchAll();
+$pageId = '';
 
-    if ('POST' == $_SERVER['REQUEST_METHOD']) {
-        $pageId = $_POST['button-id'];
-        header("Location: ./event-buy.php?udalost=$pageId");
-    }
+if ('POST' == $_SERVER['REQUEST_METHOD']) {
+    $pageId = $_POST['button-id'];
+    header("Location: ./event-buy.php?udalost=$pageId");
+}
 ?>
 
 

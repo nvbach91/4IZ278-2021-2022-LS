@@ -1,9 +1,11 @@
-<?php
-session_start();
+<?php include './include/head.php'; ?>
+<?php include './include/nav.php'; ?>
 
+<?php
 require_once './database/CategoryDB.php';
 require_once './database/EventsDB.php';
 require_once './database/ticketDB.php';
+require_once './include/check-admin.php';
 
 $categoryDB = new CategoryDB();
 $categories = $categoryDB->fetchAll();
@@ -44,9 +46,6 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     echo "inserted";
 }
 ?>
-
-<?php include './include/head.php'; ?>
-<?php include './include/nav.php'; ?>
 
 <main>
     <div class="wrapper">

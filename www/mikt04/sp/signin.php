@@ -1,9 +1,12 @@
+<?php include './include/head.php'; ?>
+<?php include './include/nav.php'; ?>
+<?php require_once './database/UsersDB.php';?>
+<?php require_once './include/check-logout.php';?>
+
+
 <?php
-require_once './database/UsersDB.php';
-
-    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-
-    $information = '';
+    $messageSuccess = '';
+    $messageFail = '';
 
     if (!empty($_POST)) {
         $email = $_POST['email'];
@@ -11,26 +14,28 @@ require_once './database/UsersDB.php';
 
         $usersDB = new UsersDB();
         $userPassword = $usersDB->fetchPassword($email);
+        $user = $usersDB->fetchByEmail($email);
 
         if (password_verify($password, $userPassword)) {
-            $_SESSION['id'] = $existingUser['user_id'];
-            $_SESSION['email'] = $existingUser['email'];
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['privilege'] = $user['privilege'];
             setcookie('email', $email, time() + 3600);
+            $messageSuccess = 'Úspěšně přihlášen';
             header("Location: index.php");
             exit();
         }
         else {
-            $information = "Špatný email nebo heslo";
+            $messageFail = "Špatný email nebo heslo";
         }
     }
 ?>
 
 
-<?php include './include/head.php'; ?>
-<?php include './include/nav.php'; ?>
-
 <main>
     <div class="wrapper">
+    <?php if(strlen(trim($messageSuccess)) > 0) { echo '<p class="fail">' . $messageSuccess . '</p>';}?>
+    <?php if(strlen(trim($messageFail)) > 0) { echo '<p class="fail">' . $messageFail . '</p>';}?>
         <div class="signup">
             <form class="form-template form-signin" method="POST">
             <h2>Přihlášení</h2>
@@ -43,7 +48,6 @@ require_once './database/UsersDB.php';
                     <input type="password" name="password" class="form-control" placeholder="Heslo" required>
                 </div>
                 <button type="submit" class="button-2">Potvrdit</button>
-                <p class="warning"><?php echo $information?></p>
                 <p>Nemáš účet? <a href="signup.php" class="notify">Zaregistruj se!</a></p>
             </form>
         </div>

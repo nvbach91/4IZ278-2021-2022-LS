@@ -1,8 +1,9 @@
+<?php include './include/head.php'; ?>
+<?php include './include/nav.php'; ?>
+<?php require_once './database/UsersDB.php';?>
+<?php require_once './include/check-logout.php';?>
+
 <?php
-session_start();
-
-require_once './database/UsersDB.php';
-
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     $firstName = $_POST['first-name'];
@@ -29,28 +30,22 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     $usersDB = new UsersDB();
     $validatedEmail = $usersDB->validateEmail($email);
-
-    // dalsi moznosti je vynutit bcrypt: PASSWORD_BCRYPT
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $normalPrivilage = 1;
 
     if($validatedEmail){
-        echo "true";
         echo "this email is in use";
     }
     if(!$validatedEmail){
-        echo "false";
         date_default_timezone_set('Europe/Prague');
         $date = date('Y-m-d H:i:s', time());
-        $inserted = $usersDB->insertUser($firstName, $lastName, $email, $hashedPassword, $date);
+        $inserted = $usersDB->insertUser($firstName, $lastName, $email, $hashedPassword, $date, $normalPrivilage);
         header('Location: signin.php');
         exit();
     }
 
 }
 ?>
-
-<?php include './include/head.php'; ?>
-<?php include './include/nav.php'; ?>
 
 <main>
     <div class="wrapper">
