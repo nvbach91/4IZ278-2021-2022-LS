@@ -35,6 +35,7 @@ if (isset($catId)) {
                         <p class="card-text text-secondary"><?php echo trim(substr($product['info'], 0, 100)); ?>...</p>
                         <div class="align-text-bottom">
                             <h5 align-text-bottom>$<?php echo number_format($product['price'], 2); ?></h5>
+                            <?php echo $product['stock'] == 0 ? " <span class='text-danger'>Out of stock</span>" : " <span class='text-success'>In stock</span>"; ?>
                         </div>
                     </div>
                     <div class="card-footer text-center">

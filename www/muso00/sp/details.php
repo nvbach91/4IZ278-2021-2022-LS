@@ -11,7 +11,13 @@ session_start();
 
 $errors = [];
 
+if (isset($_SESSION['user_id'])) {
 require __DIR__ . '/utils/fetch_user_info.php';
+} else {
+    $email = $_SESSION['user_email'];
+    $firstName = $_SESSION['user_first_name'];
+    $lastName = $_SESSION['user_last_name'];
+}
 
 if (!empty($_POST)) {
     $firstName = $_POST['firstName'];
@@ -96,7 +102,7 @@ if (!empty($_POST)) {
                                 <div class="row mb-4">
                                     <div class="col">
                                         <label class="form-label" for="email">Phone number</label>
-                                        <input class="form-control" value="<?php echo @$phone; ?>" name="phone" placeholder="+420123456789">
+                                        <input class="form-control" value="<?php echo @$phone; ?>" name="phone" placeholder="Example: +420123456789">
                                     </div>
                                 </div>
                                 <div class="row">

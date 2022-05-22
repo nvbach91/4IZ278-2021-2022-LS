@@ -9,7 +9,7 @@ if ($res->rowCount() == 0) {
     // else...
 } else {
     // fetch all user information.
-    $existingUser = $res->fetchAll()[0];
+    $existingUser = $res->fetchAll()[0]; //FIXME: nepotřebuji přinést to info ne?
 }
 
 // if the validation is successfull, and...
@@ -17,7 +17,7 @@ if (!count($errors)) {
     // if no user was found, then...
     if (is_null($existingUser)) {
         // register new user
-        $users = $usersDB->create(['email' => $email, 'firstName' => $firstName, 'lastName' => $lastName, 'password' => $hashedPasswd]);
+        $usersDB->create(['email' => $email, 'firstName' => $firstName, 'lastName' => $lastName, 'password' => $hashedPasswd]);
         // redirect to sign in page
         sendEmail($email, 'Registration confirmation');
         header("Location: signin.php?ref=$ref&email=$email");

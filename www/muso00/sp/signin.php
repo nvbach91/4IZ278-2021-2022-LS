@@ -25,7 +25,7 @@ if (!empty($_POST)) {
     if (empty($password)) {
         array_push($errors, 'Fill in the password');
     }
-    
+
     require __DIR__ . '/utils/login_user.php';
 }
 ?>
@@ -44,7 +44,9 @@ if (!empty($_POST)) {
         <?php endif; ?>
         <div>
             <label class="form-label">Username</label>
-            <input class="form-control" placeholder="email" name="email" type="email" value="<?php echo @$email; ?>" <?php if (isset($ref)) {echo "readonly";}; ?>>
+            <input class="form-control" placeholder="email" name="email" type="email" value="<?php echo @$email; ?>" <?php if (isset($ref)) {
+                                                                                                                            echo "readonly";
+                                                                                                                        }; ?>>
         </div>
         <div>
             <label class="form-label">Password</label>
@@ -53,5 +55,17 @@ if (!empty($_POST)) {
         <button class="btn btn-outline-success rounded-pill btn-submit mx-auto mt-5 mb-2 p-2">Sign in</button>
         <div class="text-secondary text-center">Don't have an account yet? <a href="./signup.php" class="link-secondary">Sign up</a></div>
     </form>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col h4 text-center mb-3 text-secondary">
+                OR
+            </div>
+        </div>
+        <div class="row form mx-auto">
+            <div class="col text-center p-4">
+                <a href="./facebook/index.php" class="btn btn-outline-primary rounded-pill p-2"><i class="bi bi-facebook"></i>&nbsp;Login with Facebook</a>
+            </div>
+        </div>
+    </div>
 </main>
 <?php include __DIR__ . '/incl/foot.php'; ?>

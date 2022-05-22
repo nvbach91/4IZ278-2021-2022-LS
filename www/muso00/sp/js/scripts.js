@@ -6,38 +6,18 @@
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
 
-/* Code for changing active 
-            link on clicking */
-var btns =
-  $("#navigation .navbar-nav .nav-link");
 
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click",
-    function () {
-      var current = document
-        .getElementsByClassName("active");
-
-      current[0].className = current[0]
-        .className.replace(" active", "");
-
-      this.className += " active";
-    });
-}
-
-/* Code for changing active 
-link on Scrolling */
-$(window).scroll(function () {
-  var distance = $(window).scrollTop();
-  $('.page-section').each(function (i) {
-
-    if ($(this).position().top
-      <= distance + 250) {
-
-      $('.navbar-nav a.active')
-        .removeClass('active');
-
-      $('.navbar-nav a').eq(i)
-        .addClass('active');
-    }
+$(document).ready(function () {
+  $('.nav-toggle').click(function () {
+      var collapse_content_selector = $(this).attr('href');
+      var toggle_switch = $(this);
+      $(collapse_content_selector).toggle(function () {
+          if ($(this).css('display') == 'none') {
+              toggle_switch.html('<i class="bi bi-arrow-down"></i>Read More');
+          } else {
+              toggle_switch.html('<i class="bi bi-arrow-up"></i>Read Less');
+          }
+      });
   });
-}).scroll();
+
+});

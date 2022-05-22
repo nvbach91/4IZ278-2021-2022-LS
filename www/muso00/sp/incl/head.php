@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="description" content="shopping, liquor, store, eshop, spirits, alcohol">
+    <meta name="author" content="Ondrej Musil">
     <title>Liquor Town<?php echo ' - ' . $title;?></title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="./assets/logo.png" />

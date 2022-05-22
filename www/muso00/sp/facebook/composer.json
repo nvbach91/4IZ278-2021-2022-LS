@@ -1,0 +1,12 @@
+{
+    "name": "om/facebook",
+    "authors": [
+        {
+            "name": "Ondřej Musil",
+            "email": "muso00@vse.cz"
+        }
+    ],
+    "require": {
+        "facebook/graph-sdk": "^5.1"
+    }
+}

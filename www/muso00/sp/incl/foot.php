@@ -5,7 +5,8 @@
     <!-- Footer-->
     <footer class="py-5 bg-dark mt-auto">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; <?php echo "$author $copYear"; ?></p>
+            <div class="row"><p class="m-0 text-center text-white">Copyright &copy; <?php echo "$author $copYear"; ?></p></div>
+            <div class="row text-center p-2"><a href="./privacy-policy.php" class="link-light"><i class="bi bi-shield-shaded"></i>&nbsp;Privacy policy</a></div>
         </div>
     </footer>
     <!-- Bootstrap core JS-->

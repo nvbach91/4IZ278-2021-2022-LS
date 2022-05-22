@@ -68,7 +68,7 @@ if (isset($_GET['action'])) {
     </div>
     <div class="container">
         <div class="row mt-4 mb-5">
-            <div class="col"><a class="btn btn-secondary" href="./products.php">Keep shopping</a></div>
+            <div class="col"><a class="btn btn-secondary" href="./products.php"><i class="bi bi-bag-plus-fill"></i>&nbsp;Keep shopping</a></div>
             <div class="col"><a class="btn btn-success float-end" href="./shipping.php">Next step <i class="bi bi-arrow-right"></i></a></div>
         </div>
     </div>

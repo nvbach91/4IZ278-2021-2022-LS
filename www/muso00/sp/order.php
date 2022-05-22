@@ -18,7 +18,11 @@ $orderItemsDB = new OrderItemsDB();
 $res = $deliveryDB->fetchById($_SESSION['delivery_id']);
 $delivery = $res->fetchAll()[0];
 
-$id = $_SESSION['user_id'];
+if(isset($_SESSION['user_id'])) {
+    $id = $_SESSION['user_id'];
+} else {
+    $id = $_SESSION['fb_user_id'];
+}
 $totalQty = array_sum(array_column($_SESSION['shopping_cart'], 'item_qty'));
 
 if (isset($_GET['action'])) {
