@@ -66,5 +66,4 @@ if (!empty($_POST)) {
         </form>
     </div>
 </main>
-
 <?php include __DIR__ . '/incl/foot.php'; ?>
