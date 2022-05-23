@@ -45,6 +45,47 @@ use App\Models\User;
             </ul>
         </div>
     </div>
-
+    <div class="row mb-2">
+        <div class="col-lg-6 col-sm-12 mb-sm-2">
+            <table class="table table-borderless">
+                <tbody>
+                <tr>
+                    <td>{{ __('models.id') }}</td>
+                    <td>{{ $user->id }}</td>
+                </tr>
+                <tr>
+                    <td>{{ __('models.user.firstname') }}</td>
+                    <td>
+                        {{ $user->firstname }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ __('models.user.lastname') }}</td>
+                    <td>
+                        {{ $user->lastname }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ __('models.user.phone') }}</td>
+                    <td>
+                        {{ $user->phone_number ?? '-' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ __('models.user.github') }} <i class="bi bi-github"></i></td>
+                    <td>
+                        {{ $user->github ? __('common.yes') : __('common.no') }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ __('models.user.last_logged_at') }}</td>
+                    <td>
+                        {{ $user->last_logged_at->format('j. n. Y H:i:s') }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     @include('app.user.modals.delete', ['user' => $user])
 @endsection

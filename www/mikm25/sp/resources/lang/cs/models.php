@@ -12,6 +12,8 @@ return [
         'phone' => 'Telefonní číslo',
         'password' => 'Heslo',
         'password_confirm' => 'Potvrzení hesla',
+        'github' => 'Přihlášen přes Github',
+        'last_logged_at' => 'Poslední přihlášení',
     ],
     'position' => [
         'branch' => 'Obor',
@@ -29,7 +31,7 @@ return [
         'reactions_count' => 'Počet reakcí',
         'tags' => 'Tagy',
         'company' => 'Společnost',
-        'detail_link' => 'Odkaz na úvodní stránku'
+        'detail_link' => 'Odkaz na úvodní stránku',
     ],
     'company' => [
         'name' => 'Název společnosti',
@@ -37,6 +39,6 @@ return [
         'url' => 'Web',
         'address' => 'Adresa sídla',
         'contact_email' => 'Kontaktní emailová adresa',
-        'positions_count' => 'Počet pozic'
+        'positions_count' => 'Počet pozic',
     ],
 ];

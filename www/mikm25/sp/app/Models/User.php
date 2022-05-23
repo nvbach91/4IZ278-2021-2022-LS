@@ -65,11 +65,12 @@ class User extends Authenticatable
         'firstname' => 'string',
         'lastname' => 'string',
         'email' => 'string',
-        'email_verified_at' => 'datetime',
         'password' => 'string',
         'phone_number' => 'string',
         'github' => 'boolean',
         'remember_token' => 'string',
+        'email_verified_at' => 'datetime',
+        'last_logged_at' => 'datetime',
     ];
 
     public function setPasswordAttribute(?string $password): void
