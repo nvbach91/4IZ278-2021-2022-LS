@@ -7,4 +7,3 @@ const CONFIG_FACEBOOK = [
 const CONFIG_PROTOCOL = 'https://';
 const CONFIG_DOMAIN = 'eso.vse.cz';
 const CONFIG_PATH = '/~muso00/sp/facebook';
-?>

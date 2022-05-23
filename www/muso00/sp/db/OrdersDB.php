@@ -21,8 +21,8 @@ class OrdersDB extends Database
 
     public function fetchByAnyId($id, $value)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE $id = '$value' ORDER BY date DESC;");
-        $stmt->execute();
+        $stmt = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE $id = :value ORDER BY date DESC;");
+        $stmt->execute(['value' => $value,]);
         return $stmt;
     }
 
@@ -42,14 +42,10 @@ class OrdersDB extends Database
 
     public function deleteById($id)
     {
-        $stmt = $this->pdo->prepare("DELETE FROM " . $this->tableName . " WHERE order_id = " . $id . ";");
-        $stmt->execute();
     }
 
     public function updateById($id, $field, $newValue)
     {
-        $stmt = $this->pdo->prepare("UPDATE " . $this->tableName . " SET " . $field . "= '" . $newValue . "' WHERE order_id = " . $id . ";");
-        $stmt->execute();
     }
 }
 

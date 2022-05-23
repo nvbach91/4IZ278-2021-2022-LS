@@ -8,7 +8,8 @@ session_start();
 <?php require __DIR__ . '/db/ProductsDB.php'; ?>
 <?php require __DIR__ . '/db/OrdersDB.php'; ?>
 <?php require __DIR__ . '/db/DeliveryDB.php'; ?>
-<?php require __DIR__ . '/utils/user_required.php'; ?>
+<?php require __DIR__ . '/utils/user_required.php';
+?>
 
 <?php
 $orderItemsDB = new OrderItemsDB();
@@ -80,7 +81,7 @@ $deliveryType = $res->fetchAll()[0];
             <div class="col text-end">Price</div>
         </div>
         <hr />
-        <?php 
+        <?php
         $subtotal = 0;
         foreach ($orderItems as $orderItem) {
             $res = $productsDB->fetchById($orderItem['product_id']);
@@ -123,5 +124,6 @@ $deliveryType = $res->fetchAll()[0];
             <div class="col text-end"><?php echo $totalQty; ?></div>
             <div class="col text-end">$<?php echo $subtotal + $shipping; ?></div>
         </div>
+    </div>
 </main>
 <?php require __DIR__ . '/incl/foot.php'; ?>

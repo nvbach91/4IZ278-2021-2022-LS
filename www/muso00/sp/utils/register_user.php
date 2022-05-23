@@ -9,7 +9,7 @@ if ($res->rowCount() == 0) {
     // else...
 } else {
     // fetch all user information.
-    $existingUser = $res->fetchAll()[0]; //FIXME: nepotřebuji přinést to info ne?
+    $existingUser = 'user found';
 }
 
 // if the validation is successfull, and...

@@ -9,7 +9,7 @@ $fb = new \Facebook\Facebook(CONFIG_FACEBOOK);
 $helper = $fb->getRedirectLoginHelper();
 
 if (isset($_GET['state'])) {
-    $helper->getPersistentDataHandler()->set('state', $_GET['state']); 
+    $helper->getPersistentDataHandler()->set('state', $_GET['state']);
 }
 ?>
 
@@ -19,10 +19,10 @@ if (isset($_GET['state'])) {
 <?php
 try {
     $accessToken = $helper->getAccessToken();
-} catch(\Facebook\Exceptions\FacebookResponseException $e) {
+} catch (\Facebook\Exceptions\FacebookResponseException $e) {
     echo 'Graph returned an error: ' . $e->getMessage();
     exit;
-} catch(\Facebook\Exceptions\FacebookSDKException $e) {
+} catch (\Facebook\Exceptions\FacebookSDKException $e) {
     echo 'Facebook SDK returned an error: ' . $e->getMessage();
     exit;
 }

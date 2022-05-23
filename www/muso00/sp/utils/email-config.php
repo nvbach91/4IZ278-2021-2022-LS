@@ -21,11 +21,10 @@ $emailTemplates = [
         'Content-type: text/html; charset=utf-8',
         'From: ' . $sender,
         'Reply-To: ' . $sender,
-        'X-Mailer: PHP/'.phpversion()
+        'X-Mailer: PHP/' . phpversion()
     ],
     'Registration confirmation' => function ($recipient) {
-        return (
-            "<h2>Hi Customer!</h2>" .
+        return ("<h2>Hi Customer!</h2>" .
             "<p>Thank you for signing up on our website!</p>" .
             "<p><strong>You registered email:</strong> <a href='mailto:$recipient'>$recipient</a>.</p>" .
             "<p>You can now sign in <a href='https://eso.vse.cz/~muso00/sp/signin.php'>here</a>.</p>" . "<br>" .
@@ -34,8 +33,7 @@ $emailTemplates = [
         );
     },
     'Order confirmation' => function ($recipient) {
-        return (
-            "<h2>Hi Customer!</h2>" .
+        return ("<h2>Hi Customer!</h2>" .
             "<p>Thank you for creating the order.</p>" .
             "<p>You can view the summary of your order on your profile. <a href='https://eso.vse.cz/~muso00/sp/profile.php'>Click here</a></p>" . "<br>" .
             "<p>Your,</p>" .
@@ -43,5 +41,3 @@ $emailTemplates = [
         );
     },
 ];
-
-?>

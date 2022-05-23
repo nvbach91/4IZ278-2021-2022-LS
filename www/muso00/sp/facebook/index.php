@@ -14,12 +14,6 @@ $loginUrl = $helper->getLoginUrl(CONFIG_PROTOCOL . CONFIG_DOMAIN . CONFIG_PATH .
 ?>
 <?php require __DIR__ . '/incl/fb-head.php'; ?>
 <?php require __DIR__ . '/incl/fb-nav.php'; ?>
-<?php 
-if (isset($_SESSION['fb_access_token'])) {
-    exit('<div class="alert alert-info text-center" role="alert">You are already logged in through Facebook. <a href="./profile.php" class="stretched-link link-info">View profile</a></div>');
-}
-
-?>
 <main class="container d-flex flex-column align-items-center justify-content-center flex-fill">
     <h1 class="mb-5">Facebook Log in</h1>
     <div class="container shadow rounded w-50 p-5">

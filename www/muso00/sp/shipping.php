@@ -1,5 +1,6 @@
 <?php
 $title = 'Shipping and Payment';
+$pageActive = 5;
 session_start();
 ?>
 <?php include __DIR__ . '/incl/head.php'; ?>
@@ -8,7 +9,6 @@ session_start();
 <?php require __DIR__ . '/utils/cart_empty.php'; ?>
 <?php require __DIR__ . '/db/DeliveryDB.php'; ?>
 <?php
-
 
 $deliveryDB = new DeliveryDB();
 $deliveryTypes = $deliveryDB->fetchAll();
@@ -57,7 +57,7 @@ if (isset($_POST['delivery']) && isset($_POST['payment'])) {
                                 <?php foreach ($deliveryTypes as $deliveryType) : ?>
                                     <div class="row">
                                         <div class="col"><input type="radio" name="delivery" value="<?php echo $deliveryType['delivery_type_id']; ?>" <?php if (isset($_SESSION['delivery_id']) && $_SESSION['delivery_id'] == $deliveryType['delivery_type_id'])  echo 'checked'; ?>>&nbsp;
-                                            <label class="form-label" for="delivery"><?php echo $deliveryType['name']; ?></label>
+                                            <label class="form-label"><?php echo $deliveryType['name']; ?></label>
                                         </div>
                                         <div class="col text-secondary"><small class="align-middle">+&nbsp;$<?php echo $deliveryType['price']; ?></small></div>
                                     </div>
@@ -66,10 +66,10 @@ if (isset($_POST['delivery']) && isset($_POST['payment'])) {
                             <div class="col shadow-sm p-3 m-2">
                                 <h4>Payment method <span class="fs-6" title="Both payment methods are made upon receipt of the goods"><i class="bi bi-info-circle"></i></span></h4>
                                 <div><input type="radio" name="payment" value="Credit card" <?php if (isset($_SESSION['payment']) && $_SESSION['payment'] == 'Credit card')  echo 'checked'; ?>>&nbsp;
-                                    <label class="form-label" for="payment">Credit card</label>
+                                    <label class="form-label">Credit card</label>
                                 </div>
                                 <div><input type="radio" name="payment" value="Cash" <?php if (isset($_SESSION['payment']) && $_SESSION['payment'] == 'Cash')  echo 'checked'; ?>>&nbsp;
-                                    <label class="form-label" for="payment">Cash</label>
+                                    <label class="form-label">Cash</label>
                                 </div>
                             </div>
                         </div>
@@ -80,10 +80,10 @@ if (isset($_POST['delivery']) && isset($_POST['payment'])) {
                 </form>
             </div>
             <div class="container mb-5">
-                <!-- tlačítko zpět -->
+                <!-- back button-->
                 <div class="mt-4"><a class="btn btn-secondary" href="./cart.php"><i class="bi bi-arrow-left"></i> Back</a></div>
             </div>
         </div>
-
+    </div>
 </main>
 <?php include __DIR__ . '/incl/foot.php'; ?>

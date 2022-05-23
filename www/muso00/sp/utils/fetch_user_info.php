@@ -1,5 +1,5 @@
 <?php
-$id = intval($_SESSION['user_id']);
+$id = $_SESSION['user_id'];
 $usersDB = new UsersDB();
 
 $res = $usersDB->fetchById($id);

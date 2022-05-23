@@ -1,16 +1,17 @@
-<?php 
+<?php
 $title = 'Sign up';
 session_start(); ?>
 <?php require __DIR__ . '/db/UsersDB.php'; ?>
 <?php include __DIR__ . '/incl/head.php'; ?>
 <?php include __DIR__ . '/incl/nav.php'; ?>
 <?php require __DIR__ . '/utils/nonuser_required.php'; ?>
+<?php require __DIR__ . '/utils/fb_signin.php'; ?>
 <?php
 
 $errors = [];
 $ref = 'registration';
-$passwdDesc = 
-'Your password has to have 
+$passwdDesc =
+    'Your password has to have 
 at least one capital letter [A-Z], 
 one digit [0-9] and be 
 minimum 8 characters long.';
@@ -37,25 +38,19 @@ if (!empty($_POST)) {
 
 ?>
 <main>
-    <div class="sign-container">
+    <div class="mb-5">
         <h1 class="text-center">Registration</h1>
         <form action="signup.php" method="POST" class="form rounded shadow mx-auto p-5">
-            <?php if (!empty($errors)) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <?php foreach ($errors as $error) : ?>
-                        <div><?php echo $error; ?></div>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+            <?php require __DIR__ . '/utils/form_error_container.php'; ?>
             <div>
-                <label class="form-label" for="firstName">First name<span class="text-danger">*</span></label>
-                <input class="form-control" value="<?php echo @$firstName;?>" name="firstName">
-                <label class="form-label" for="lastName">Last name<span class="text-danger">*</span></label>
-                <input class="form-control" value="<?php echo @$lastName;?>" name="lastName">
+                <label class="form-label">First name<span class="text-danger">*</span></label>
+                <input class="form-control" value="<?php echo @$firstName; ?>" name="firstName">
+                <label class="form-label">Last name<span class="text-danger">*</span></label>
+                <input class="form-control" value="<?php echo @$lastName; ?>" name="lastName">
             </div>
             <div>
-                <label class="form-label" for="email">Your email<span class="text-danger">*</span></label>
-                <input class="form-control" value="<?php echo @$email;?>" name="email" type="email">
+                <label class="form-label">Your email<span class="text-danger">*</span></label>
+                <input class="form-control" value="<?php echo @$email; ?>" name="email" type="email">
             </div>
             <div class="form-passwd">
                 <label class="form-label" title="<?php echo $passwdDesc; ?>">Password<span class="text-danger">*</span></label>

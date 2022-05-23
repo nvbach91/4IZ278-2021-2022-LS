@@ -10,30 +10,11 @@ session_start();
 $productsDB = new ProductsDB();
 if (isset($_GET)) {
     $productId = $_GET['id'];
-
-    
-    $res = $productsDB->fetchById($productId);
-    
-    if (!$res) {
-        exit(404);
-    }
-
-    $products = $res->fetchAll()[0];
-
-    $name = $products['name'];
-    $price = $products['price'];
-    $stock = $products['stock'];
-    $img = $products['img'];
-    $description = $products['info'];
-    $alcVol = $products['alc_vol'];
-    $size = $products['bottle_size'];
-    $origin = $products['origin'];
-    $catId = $products['category_id'];
-    $lastModified = $products['date_modified'];
+    require __DIR__ . '/utils/fetch_product_info.php';
 }
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
-    if($_SESSION[$productId . '_last_modified_at'] != $lastModified) {
+    if ($_SESSION[$productId . '_last_modified_at'] != $lastModified) {
         die('The product was modified by somebody else in the meantime!');
     }
 
@@ -47,17 +28,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $origin = $_POST['origin'];
     $catId = $_POST['category_id'];
 
-    $productsDB->updateById($productId, 'name', $name);
-    $productsDB->updateById($productId, 'price', $price);
-    $productsDB->updateById($productId, 'stock', $stock);
-    $productsDB->updateById($productId, 'img', $img);
-    $productsDB->updateById($productId, 'info', $description);
-    $productsDB->updateById($productId, 'alc_vol', $alcVol);
-    $productsDB->updateById($productId, 'bottle_size', $size);
-    $productsDB->updateById($productId, 'origin', $origin);
-    $productsDB->updateById($productId, 'date_modified', date('Y-m-d H:i:s', time()));
-    $productsDB->updateById($productId, 'category_id', $catId);
-
+    $productsDB->updateAllbyId($name, $price, $stock, $img, $description, $alcVol, $size, $origin, $catId, $productId);
     header('Location: ./products.php?action=updated');
 }
 $_SESSION[$productId . '_last_modified_at'] = $lastModified;
@@ -65,7 +36,7 @@ $_SESSION[$productId . '_last_modified_at'] = $lastModified;
 <main>
     <h1 class="text-center">Edit product</h1>
     <div class="container shadow rounded mb-5 p-4 w-50 mx-auto">
-        <form method="POST" action="<?php echo $_SERVER['PHP_SELF'].'?id='.$productId; ?>" class="mt-4">
+        <form method="POST" action="<?php echo $_SERVER['PHP_SELF'] . '?id=' . $productId; ?>" class="mt-4">
             <div class="row">
                 <div class="col-3">
                     <div class="input-group mb-3">
@@ -117,20 +88,20 @@ $_SESSION[$productId . '_last_modified_at'] = $lastModified;
                 </div>
                 <div class="col">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon5">Bottle size</span>
-                        <input name="bottle_size" value="<?php echo @$size; ?>" type="text" class="form-control" placeholder="varchar(255)" aria-label="id" aria-describedby="basic-addon5">
+                        <span class="input-group-text" id="basic-addon8">Bottle size</span>
+                        <input name="bottle_size" value="<?php echo @$size; ?>" type="text" class="form-control" placeholder="varchar(255)" aria-label="id" aria-describedby="basic-addon8">
                     </div>
                 </div>
                 <div class="col">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon8">Origin</span>
-                        <input name="origin" value="<?php echo @$origin; ?>" type="text" class="form-control" placeholder="varchar(255)" aria-label="id" aria-describedby="basic-addon8">
+                        <span class="input-group-text" id="basic-addon9">Origin</span>
+                        <input name="origin" value="<?php echo @$origin; ?>" type="text" class="form-control" placeholder="varchar(255)" aria-label="id" aria-describedby="basic-addon9">
                     </div>
                 </div>
                 <div class="col">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon9">Category ID</span>
-                        <input name="category_id" value="<?php echo @$catId; ?>" type="text" class="form-control" placeholder="int(11)" aria-label="id" aria-describedby="basic-addon9">
+                        <span class="input-group-text" id="basic-addon10">Category ID</span>
+                        <input name="category_id" value="<?php echo @$catId; ?>" type="text" class="form-control" placeholder="int(11)" aria-label="id" aria-describedby="basic-addon10">
                     </div>
                 </div>
             </div>

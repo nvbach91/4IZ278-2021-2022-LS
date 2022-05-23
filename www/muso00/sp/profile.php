@@ -7,16 +7,12 @@ session_start();
 <?php include __DIR__ . '/incl/head.php'; ?>
 <?php include __DIR__ . '/incl/nav.php'; ?>
 <?php require __DIR__ . '/utils/user_required.php'; ?>
+<?php require __DIR__ . '/utils/fb_signin.php'; ?>
 <?php require __DIR__ . '/db/OrdersDB.php'; ?>
 <?php
 
-if (isset($_SESSION['fb_access_token'])) {
-    exit('<div class="alert alert-info text-center" role="alert">You are logged through Facebook. <a href="./facebook/profile.php" class="stretched-link link-info">View profile</a></div>');
-}
-
 $ref = "";
 $errors = [];
-$id = $_SESSION['user_id'];
 
 require __DIR__ . '/utils/fetch_user_info.php';
 
@@ -25,22 +21,20 @@ if (isset($_GET['ref'])) {
 }
 
 if (!empty($_POST)) {
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
+    $firstName = ucfirst($_POST['firstName']);
+    $lastName = ucfirst($_POST['lastName']);
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-
     $city = $_POST['city'];
     $street = $_POST['street'];
     $postalCode = $_POST['postalCode'];
 
-
     require __DIR__ . '/utils/name_validation.php';
+    require __DIR__ . '/utils/user_details_req.php';
 
     if (!count($errors)) {
         require __DIR__ . '/utils/update_user_info.php';
 
-        $_SESSION['user_first_name'] = $firstName;
         header('Location: ./profile.php?ref=updated');
     }
 }

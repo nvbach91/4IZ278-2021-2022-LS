@@ -1,6 +1,8 @@
 <?php
 session_start();
 $title = 'Facebook User Profile';
+?>
+<?php
 
 if (!isset($_SESSION['fb_access_token'])) {
     header('Location: index.php');
@@ -27,24 +29,8 @@ $firstName = $words[0];
 $lastName = $words[1];
 $email = $me->getEmail();
 
-require '../utils/user_required.php';
-
-$_SESSION['user_first_name'] = $firstName;
-$_SESSION['user_last_name'] = $lastName;
-$_SESSION['user_email'] = $email;
-$_SESSION['user_privilege'] = 1;
-
-require '../db/UsersDB.php';
-$usersDB = new UsersDB();
-$res = $usersDB->fetchByEmail($email);
-if ($res->rowCount() == 0) {
-    $usersDB->create(['email' => $email, 'firstName' => $firstName, 'lastName' => $lastName, 'password' => '']);
-}
-$res = $usersDB->fetchByEmail($email);
-$user = $res->fetchAll()[0];
-$id = $user['user_id'];
-$_SESSION['fb_user_id'] = $id;
-
+require '../utils/save_fb_user.php';
+require '../utils/fetch_fb_user.php';
 require '../db/OrdersDB.php';
 
 ?>

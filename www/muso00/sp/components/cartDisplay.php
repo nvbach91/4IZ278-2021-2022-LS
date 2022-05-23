@@ -33,7 +33,6 @@ if (isset($_GET['action'])) {
                 $subtotal = 0;
                 if (!empty($_SESSION['shopping_cart'])) {
                     foreach ($_SESSION['shopping_cart'] as $keys => $values) {
-                
                         $id = $values['item_id'];
                         $res = $productsDB->fetchById($id);
                         $items = $res->fetchAll()[0];

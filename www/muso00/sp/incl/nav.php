@@ -39,12 +39,11 @@
                 <?php endif; ?>
                 <div class="d-flex">
                     <a href="./cart.php" class="btn btn-cart btn-outline-dark <?php echo $pageActive == 5 ? "active" : ""; ?>"><i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <?php if (isset($_SESSION['shopping_cart'])) : ?>
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">
-                                <?php echo $cartQty = sumArrayVars($_SESSION['shopping_cart'], 'item_qty'); ?>
-                            </span>
-                        <?php endif; ?></a>
+                        Cart<?php if (isset($_SESSION['shopping_cart'])) : ?>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">
+                            <?php echo sumArrayVars($_SESSION['shopping_cart'], 'item_qty'); ?>
+                        </span>
+                    <?php endif; ?></a>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 <?php
 $title = 'Order summary';
+$pageActive = 5;
 session_start();
 ?>
 <?php require __DIR__ . '/db/ProductsDB.php'; ?>
@@ -18,7 +19,7 @@ $orderItemsDB = new OrderItemsDB();
 $res = $deliveryDB->fetchById($_SESSION['delivery_id']);
 $delivery = $res->fetchAll()[0];
 
-if(isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id'])) {
     $id = $_SESSION['user_id'];
 } else {
     $id = $_SESSION['fb_user_id'];
@@ -28,40 +29,11 @@ $totalQty = array_sum(array_column($_SESSION['shopping_cart'], 'item_qty'));
 if (isset($_GET['action'])) {
     if ($_GET['action'] == 'complete') {
         // create order
-        $ordersDB->create([
-            'date' => date('Y-m-d H:i:s', time()), 
-            'userId' => $id, 
-            'fullName' => $_SESSION['order_fullname'], 
-            'address' => $_SESSION['order_address'], 
-            'phone' => $_SESSION['order_phone'], 
-            'payment' => $_SESSION['payment'], 
-            'deliveryTypeId' => $_SESSION['delivery_id'],
-        ]);
-        
-        // create order_items in DB
-        $res = $ordersDB->fetchById($id);
-        $order = $res->fetchAll()[0];
-        $orderId = $order['order_id'];
-        
-        foreach($_SESSION['shopping_cart'] as $keys => $values) {
-            $orderItemsDB->create([
-                'qty' => $values['item_qty'],
-                'price' => $values['item_price'],
-                'productId' => $values['item_id'],
-                'orderId' => $orderId,
-            ]);
-
-            // update stock
-            $res = $productsDB->fetchById($values['item_id']);
-            $products = $res->fetchAll()[0];
-            $stock = $products['stock'] - $values['item_qty'];
-
-            $productsDB->updateById($values['item_id'],'stock', $stock);
-
-        }
+        require __DIR__ . '/utils/create_order.php';
         // unset session variables
         require __DIR__ . '/utils/clear_cart.php';
-        sendEmail($_SESSION['user_email'],'Order confirmation');
+        // send order confirmation
+        sendEmail($_SESSION['user_email'], 'Order confirmation');
         header('Location: order-complete.php');
         exit();
     }
@@ -133,7 +105,6 @@ if (isset($_GET['action'])) {
                                 $total = $subtotal + $shipping;
                             }
                             ?>
-
                             <div class="row text-secondary">
                                 <hr />
                                 <div class="col">Subtotal</div>

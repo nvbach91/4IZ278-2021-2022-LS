@@ -1,27 +1,5 @@
-<?php
-$productsDB = new ProductsDB();
-$nItemsPerPagination = 3;
-
-if (isset($_GET['offset'])) {
-    $offset = (int)$_GET['offset'];
-} else {
-    $offset = 0;
-}
-
-if (isset($_GET['action']) && $_GET['action'] == 'delete') {
-    $productId = $_GET['id'];
-    $res = $productsDB->deleteById($productId);
-}
-
-if (isset($catId)) {
-    $products = $productsDB->fetchByIdPagination($catId, $nItemsPerPagination, $offset);
-    $count = $productsDB->getRowsNumberById($catId);
-} else {
-    $products = $productsDB->fetchAllPagination($nItemsPerPagination, $offset);
-    $count = $productsDB->getRowsNumber();
-}
-
-?>
+<?php require './utils/pagination.php'; ?>
+<?php require './utils/delete_product.php'; ?>
 <section class="d-flex justify-content-center">
     <div class="row w-75 p-3">
         <?php foreach ($products as $product) : ?>
@@ -34,7 +12,7 @@ if (isset($catId)) {
                         <h4 class="card-title"><a href="./product.php?id=<?php echo $product['product_id']; ?>"><?php echo $product['name']; ?></a></h4>
                         <p class="card-text text-secondary"><?php echo trim(substr($product['info'], 0, 100)); ?>...</p>
                         <div class="align-text-bottom">
-                            <h5 align-text-bottom>$<?php echo number_format($product['price'], 2); ?></h5>
+                            <h5>$<?php echo number_format($product['price'], 2); ?></h5>
                             <?php echo $product['stock'] == 0 ? " <span class='text-danger'>Out of stock</span>" : " <span class='text-success'>In stock</span>"; ?>
                         </div>
                     </div>
@@ -59,6 +37,7 @@ if (isset($catId)) {
                             <?php echo $i; ?>
                         </a></li>
                 <?php } ?>
+            </ul>
         </div>
     </div>
 </section>

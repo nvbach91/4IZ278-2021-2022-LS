@@ -1,7 +1,3 @@
 <?php
-$usersDB->updateById($id, 'first_name', $firstName);
-$usersDB->updateById($id, 'last_name', $lastName);
-$usersDB->updateById($id, 'phone', $phone);
-$usersDB->updateById($id, 'street', $street);
-$usersDB->updateById($id, 'city', $city);
-$usersDB->updateById($id, 'postal_code', $postalCode);
+$usersDB->updateAllbyId($firstName, $lastName, $phone, $street, $city, $postalCode, $_SESSION['user_id']);
+$_SESSION['user_first_name'] = $firstName;

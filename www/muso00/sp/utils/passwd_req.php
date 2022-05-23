@@ -2,7 +2,7 @@
 $passwdReq = '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,32}$/';
 
 if (!preg_match($passwdReq, $password)) {
-    array_push($errors, 'Invalid Password');
+    array_push($errors, 'Invalid password format');
 }
 
 if ($password !== $confirm) {

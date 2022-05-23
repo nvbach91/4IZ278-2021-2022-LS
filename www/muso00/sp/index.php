@@ -20,8 +20,9 @@ session_start();
     <div class="text-secondary w-75 mx-auto mb-2 ps-3">
         <small>BLOG</small>
     </div>
+    <!-- Section -->
     <section class="w-75 mx-auto shadow p-5 rounded">
-       <?php require __DIR__ . '/components/blogDisplay.php'; ?>
+        <?php require __DIR__ . '/components/blogDisplay.php'; ?>
     </section>
 </main>
 <?php include __DIR__ . '/incl/foot.php'; ?>

@@ -6,6 +6,7 @@ session_start();
 <?php include __DIR__ . '/incl/head.php'; ?>
 <?php include __DIR__ . '/incl/nav.php'; ?>
 <?php require __DIR__ . '/utils/nonuser_required.php'; ?>
+<?php require __DIR__ . '/utils/fb_signin.php'; ?>
 <?php
 $errors = [];
 
@@ -18,12 +19,8 @@ if (!empty($_POST)) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if (empty($email)) {
-        array_push($errors, 'Fill in the username');
-    }
-
-    if (empty($password)) {
-        array_push($errors, 'Fill in the password');
+    if (empty($email) || empty($password)) {
+        array_push($errors, 'Fill in the username and password');
     }
 
     require __DIR__ . '/utils/login_user.php';
@@ -35,13 +32,7 @@ if (!empty($_POST)) {
 <h1 class="text-center">Login</h1>
 <main>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="form rounded shadow mx-auto p-5">
-        <?php if (!empty($errors)) : ?>
-            <div class="alert alert-danger" role="alert">
-                <?php foreach ($errors as $error) : ?>
-                    <div class="error"><?php echo $error; ?></div>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+        <?php require __DIR__ . '/utils/form_error_container.php'; ?>
         <div>
             <label class="form-label">Username</label>
             <input class="form-control" placeholder="email" name="email" type="email" value="<?php echo @$email; ?>" <?php if (isset($ref)) {

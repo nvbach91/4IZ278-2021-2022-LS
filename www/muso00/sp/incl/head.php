@@ -4,9 +4,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="shopping, liquor, store, eshop, spirits, alcohol">
+    <meta name="keywords" content="shopping, liquor, store, eshop, spirits, alcohol">
+    <meta name="desctiption" content="Liquor Town has a large range of spirits at great prices 
+    that you can buy online from the comfort of your home.">
     <meta name="author" content="Ondrej Musil">
-    <title>Liquor Town<?php echo ' - ' . $title;?></title>
+    <title>Liquor Town<?php echo ' - ' . $title; ?></title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="./assets/logo.png" />
     <!-- Bootstrap icons-->

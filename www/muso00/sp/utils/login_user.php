@@ -16,7 +16,7 @@ if (!count($errors)) {
             $_SESSION['user_email'] = $existingUser['email'];
             $_SESSION['user_first_name'] = $existingUser['first_name'];
             $_SESSION['user_privilege'] = $existingUser['privilege'];
-            header('Location: ./profile.php');
+            header('Location: profile.php');
             exit();
         } else {
             array_push($errors, "Invalid password");

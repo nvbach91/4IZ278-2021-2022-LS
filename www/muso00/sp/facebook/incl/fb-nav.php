@@ -1,5 +1,5 @@
 <header>
-    <?php 
+    <?php
     require './../utils/utils.php'; ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
@@ -25,7 +25,7 @@
                     </div>
                 <?php else : ?>
                     <div class="d-flex nav-item dropdown">
-                    <a class="btn text-<?php echo $_SESSION['user_privilege'] > 2 ? "danger" : "black"; ?> nav-link dropdown-toggle " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="btn text-<?php echo $_SESSION['user_privilege'] > 2 ? "danger" : "black"; ?> nav-link dropdown-toggle " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-check-fill"></i>&nbsp;<?php echo $_SESSION['user_first_name']; ?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -49,4 +49,4 @@
             </div>
         </div>
     </nav>
-    </header>
+</header>

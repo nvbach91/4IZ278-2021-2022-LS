@@ -14,7 +14,7 @@ class UsersDB extends Database
 
     public function fetchById($id)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM " . $this->tableName . " WHERE user_id = :id;");
+        $stmt = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE user_id = :id;");
         $stmt->execute(['id' => $id]);
         return $stmt;
     }
@@ -32,21 +32,36 @@ class UsersDB extends Database
 
     public function deleteById($id)
     {
-        $stmt = $this->pdo->prepare("DELETE FROM " . $this->tableName . " WHERE user_id = ?");
+        $stmt = $this->pdo->prepare("DELETE FROM $this->tableName WHERE user_id = ?");
         $stmt->bindValue(1, $id, PDO::PARAM_INT);
         $stmt->execute();
     }
 
-    public function updateById($id, $field, $newValue) {
-        $stmt = $this -> pdo -> prepare("UPDATE " . $this -> tableName . " SET " . $field . "= '" . $newValue . "' WHERE user_id = " . $id . ";");
-        $stmt -> execute();
+    public function updateById($field, $newValue, $id)
+    {
+        $stmt = $this->pdo->prepare("UPDATE $this->tableName SET $field= ?
+        WHERE user_id = ?;");
+        $stmt->bindValue(1, $newValue, PDO::PARAM_STR);
+        $stmt->bindValue(2, $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
-    public function updateAllbyId($id) {
-        $stmt = $this->pdo->prepare("UPDATE $this->tableName SET ");
+    public function updateAllbyId($firstName, $lastName, $phone, $street, $city, $postCode, $id)
+    {
+        $stmt = $this->pdo->prepare("UPDATE $this->tableName 
+        SET first_name= :first_name, last_name= :last_name, phone= :phone, street= :street, city= :city, postal_code= :post_code
+        WHERE user_id = :user_id;");
+        $stmt->bindValue(':first_name', $firstName, PDO::PARAM_STR);
+        $stmt->bindValue(':last_name', $lastName, PDO::PARAM_STR);
+        $stmt->bindValue(':phone', $phone, PDO::PARAM_STR);
+        $stmt->bindValue(':street', $street, PDO::PARAM_STR);
+        $stmt->bindValue(':city', $city, PDO::PARAM_STR);
+        $stmt->bindValue(':post_code', $postCode, PDO::PARAM_STR);
+        $stmt->bindValue(':user_id', $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
-    
+
     public function fetchByEmail($email)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE email = ? LIMIT 1");
