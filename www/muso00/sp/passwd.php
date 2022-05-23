@@ -44,7 +44,6 @@ if (!empty($_POST)) {
     <div class="form form-profile rounded shadow mx-auto p-5">
         <div><a class="btn-close float-end" aria-label="Close" href="./profile.php"></a></div>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-
             <?php require __DIR__ . '/utils/form_error_container.php'; ?>
             <div class="container">
                 <div class="row align-items-start">

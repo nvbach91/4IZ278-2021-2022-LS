@@ -29,7 +29,7 @@
                             <i class="bi bi-person-check-fill"></i>&nbsp;<?php echo $_SESSION['user_first_name']; ?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="<?php echo isset($_SESSION['user_id']) ? "./profile.php" : "./facebook/profile.php"; ?>">My account</a></li>
+                            <li><a class="dropdown-item" href="./profile.php">My account</a></li>
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
