@@ -3,8 +3,8 @@
 use App\Constants\PositionTabConstants;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Auth\EmailVerificationController;
-use App\Http\Controllers\Auth\GithubController;
 use App\Http\Controllers\Auth\ForgottenPasswordController;
+use App\Http\Controllers\Auth\GithubController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\PasswordResetController;
@@ -13,6 +13,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,8 +67,8 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
             Route::get('/', [PasswordResetController::class, 'form'])
                 ->name('form');
             Route::post('reset/{token}', [PasswordResetController::class, 'reset'])
-                ->name('reset')
-                ->whereUuid('token');
+                ->whereUuid('token')
+                ->name('reset');
         });
 
         Route::group(['prefix' => 'github', 'as' => 'github.'], static function (): void {
@@ -94,20 +95,20 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
         Route::get('/create', [PositionController::class, 'create'])
             ->name('create');
         Route::get('/{position}/{tab}', [PositionController::class, 'show'])
-            ->name('show')
             ->where('position', '[0-9]+')
-            ->where('tab', implode('|', PositionTabConstants::getTabs()));
+            ->where('tab', implode('|', PositionTabConstants::getTabs()))
+            ->name('show');
         Route::post('/', [PositionController::class, 'store'])
             ->name('store');
         Route::get('/{position}/edit', [PositionController::class, 'edit'])
-            ->name('edit')
-            ->where('position', '[0-9]+');
+            ->where('position', '[0-9]+')
+            ->name('edit');
         Route::patch('/{position}', [PositionController::class, 'update'])
-            ->name('update')
-            ->where('position', '[0-9]+');
+            ->where('position', '[0-9]+')
+            ->name('update');
         Route::delete('/{position}', [PositionController::class, 'delete'])
-            ->name('delete')
-            ->where('position', '[0-9]+');
+            ->where('position', '[0-9]+')
+            ->name('delete');
     });
 
     Route::group(['prefix' => 'companies', 'as' => 'companies.'], static function (): void {
@@ -116,19 +117,28 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
         Route::get('/create', [CompanyController::class, 'create'])
             ->name('create');
         Route::get('/{company}', [CompanyController::class, 'show'])
-            ->name('show')
-            ->where('company', '[0-9]+');
+            ->where('company', '[0-9]+')
+            ->name('show');
         Route::post('/', [CompanyController::class, 'store'])
             ->name('store');
         Route::get('/{company}/edit', [CompanyController::class, 'edit'])
-            ->name('edit')
-            ->where('company', '[0-9]+');
+            ->where('company', '[0-9]+')
+            ->name('edit');
         Route::patch('/{company}', [CompanyController::class, 'update'])
-            ->name('update')
-            ->where('company', '[0-9]+');
+            ->where('company', '[0-9]+')
+            ->name('update');
         Route::delete('/{company}', [CompanyController::class, 'delete'])
-            ->name('delete')
-            ->where('company', '[0-9]+');
+            ->where('company', '[0-9]+')
+            ->name('delete');
+    });
+
+    Route::group(['prefix' => 'users', 'as' => 'users.'], static function (): void {
+        Route::get('/profile', [UserController::class, 'profile'])
+            ->name('profile');
+        Route::get('/{user}', [UserController::class, 'show'])
+            ->name('show');
+        Route::delete('/{user}', [UserController::class, 'delete'])
+            ->name('delete');
     });
 
     Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], static function (): void {

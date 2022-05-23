@@ -27,28 +27,35 @@ return [
         'password_reset' => [
             'invalid_url' => 'Odkaz pro nastavení nového hesla není platný.',
             'success' => 'Heslo bylo úspěšně obnoveno.',
-        ]
+        ],
     ],
     'positions' => [
         'create' => [
-            'success' => 'Pozice byla úspěšně vytvořena.'
+            'success' => 'Pozice byla úspěšně vytvořena.',
         ],
         'update' => [
-            'success' => 'Pozice byla úspěšně upravena.'
+            'success' => 'Pozice byla úspěšně upravena.',
         ],
         'delete' => [
-            'success' => 'Pozice :positionName byla úspěšně odstraněna.'
-        ]
+            'success' => 'Pozice :positionName byla úspěšně odstraněna.',
+        ],
     ],
     'companies' => [
         'create' => [
-            'success' => 'Společnost byla úspěšně vytvořena.'
+            'success' => 'Společnost byla úspěšně vytvořena.',
         ],
         'update' => [
-            'success' => 'Společnost byla úspěšně upravena.'
+            'success' => 'Společnost byla úspěšně upravena.',
         ],
         'delete' => [
-            'success' => 'Společnost :companyName byla úspěšně odstraněna.'
+            'success' => 'Společnost :companyName byla úspěšně odstraněna.',
         ],
-    ]
+    ],
+    'users' => [
+        'delete' => [
+            'passwordFailed' => 'Zadané heslo se neshoduje.',
+            'nameFailed' => 'Zadané jméno se neshoduje.',
+            'success' => 'Váš účet byl úspěšně smazán.'
+        ],
+    ],
 ];

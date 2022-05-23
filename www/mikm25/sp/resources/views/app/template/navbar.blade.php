@@ -31,6 +31,11 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="entity-switcher">
                 <li>
+                    <a class="dropdown-item" href="{{ route('app.users.profile') }}">
+                        <i class="bi bi-person"></i> {{ __('pages.app.users.profile') }}
+                    </a>
+                </li>
+                <li>
                     <a class="dropdown-item logout-btn" href="#">
                         <i class="bi bi-box-arrow-left"></i> {{ __('pages.app.logout') }}
                     </a>

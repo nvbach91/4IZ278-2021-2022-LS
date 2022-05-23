@@ -102,3 +102,10 @@ Breadcrumbs::for('app.companies.edit', static function (BreadcrumbTrail $trail):
         'company' => $company->id,
     ]));
 });
+
+Breadcrumbs::for('app.users.profile', static function (BreadcrumbTrail $trail): void {
+    /** @var string $title */
+    $title = __('pages.app.users.profile');
+
+    $trail->push($title, route('app.users.profile'));
+});

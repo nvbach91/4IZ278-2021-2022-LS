@@ -15,13 +15,16 @@ return [
             'index' => 'Pozice',
             'create' => 'Nová pozice',
             'show' => 'Detail pozice :positionName',
-            'edit' => 'Editace pozice :positionName'
+            'edit' => 'Editace pozice :positionName',
         ],
         'companies' => [
             'index' => 'Společnosti',
             'create' => 'Nová společnost',
             'show' => 'Detail společnost :companyName',
-            'edit' => 'Editace společnosti :companyName'
-        ]
+            'edit' => 'Editace společnosti :companyName',
+        ],
+        'users' => [
+            'profile' => 'Profil',
+        ],
     ],
 ];
