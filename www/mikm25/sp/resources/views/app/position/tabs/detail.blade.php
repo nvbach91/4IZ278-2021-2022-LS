@@ -104,7 +104,7 @@ use App\Models\Position;
                             <td>{{ __('models.position.detail_link') }}</td>
                             <td>
                                 @if($position->is_valid)
-                                    <a href="{{ route('landing-page.position', ['positionSlug' => $position->slug]) }}" target="_blank">
+                                    <a href="{{ route('landing-page.position', ['slugPosition' => $position->slug]) }}" target="_blank">
                                         {{ __('common.link') }}
                                     </a>
                                 @else
