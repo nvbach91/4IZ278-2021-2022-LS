@@ -53,8 +53,11 @@ if (!empty($_POST)) {
                 <input class="form-control" value="<?php echo @$email; ?>" name="email" type="email">
             </div>
             <div class="form-passwd">
-                <label class="form-label" title="<?php echo $passwdDesc; ?>">Password<span class="text-danger">*</span></label>
-                <input class="form-control" name="password" value="<?php echo @$password; ?>" type="password">
+                <label class="form-label">Password<span class="text-danger">*</span></label>
+                <div class="input-group">
+                    <input class="form-control" name="password" value="<?php echo @$password; ?>" type="password">
+                    <span class="input-group-text"><i class="bi bi-info-circle text-secondary" title="<?php echo $passwdDesc; ?>"></i></span>
+                </div>
                 <label class="form-label">Confirm password<span class="text-danger">*</span></label>
                 <input class="form-control" name="confirm" value="<?php echo @$confirm; ?>" type="password">
             </div>
