@@ -34,4 +34,5 @@ return [
         ],
     ],
     'searching' => 'Hledání...',
+    'unverified' => 'Prosím potvrďte svou emailovou adresu odkazem v emailové schránce. Pokud jste odkaz ztratili, je možné si v detailu profilu odeslat odkaz znovu. Uživatelé nebudou moci vidět Vaše nabídky, dokud nebude Váš email ověřen.'
 ];

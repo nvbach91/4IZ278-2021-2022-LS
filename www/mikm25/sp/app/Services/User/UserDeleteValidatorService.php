@@ -2,7 +2,7 @@
 
 namespace App\Services\User;
 
-use App\Http\Requests\User\UserDeleteRequest;
+use App\Http\Requests\User\UserDeleteSelfRequest;
 use App\Models\User;
 use Illuminate\Contracts\Hashing\Hasher;
 
@@ -13,11 +13,12 @@ class UserDeleteValidatorService
      */
     private $hasher;
 
-    public function __construct(Hasher $hasher) {
+    public function __construct(Hasher $hasher)
+    {
         $this->hasher = $hasher;
     }
 
-    public function validate(UserDeleteRequest $request, User $user): bool
+    public function validate(UserDeleteSelfRequest $request, User $user): bool
     {
         if ($user->github) {
             return $this->validateGithub($request, $user);
@@ -26,7 +27,7 @@ class UserDeleteValidatorService
         return $this->validateBasic($request, $user);
     }
 
-    private function validateBasic(UserDeleteRequest $request, User $user): bool
+    private function validateBasic(UserDeleteSelfRequest $request, User $user): bool
     {
         /** @var string $password */
         $password = $request->getPassword();
@@ -34,7 +35,7 @@ class UserDeleteValidatorService
         return $this->hasher->check($password, $user->password);
     }
 
-    private function validateGithub(UserDeleteRequest $request, User $user): bool
+    private function validateGithub(UserDeleteSelfRequest $request, User $user): bool
     {
         /** @var string $name */
         $name = $request->getName();

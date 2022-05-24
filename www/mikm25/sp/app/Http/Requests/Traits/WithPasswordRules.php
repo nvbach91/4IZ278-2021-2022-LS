@@ -6,18 +6,23 @@ use Illuminate\Validation\Rules\Password;
 
 trait WithPasswordRules
 {
-    protected function getPasswordRules(): array
+    protected function getPasswordRules(string $field = 'password'): array
     {
         return [
-            'password' => [
+            $field => [
                 'required',
                 'string',
                 'confirmed',
-                app()->environment('local')
-                    ? Password::min(5) // for easy testing
-                    : Password::min(9)->numbers()->mixedCase()->letters()->symbols(),
+                $this->getPasswordRule(),
             ],
-            'password_confirmation' => 'required|string',
+            $field . '_confirmation' => 'required|string',
         ];
+    }
+
+    protected function getPasswordRule(): Password
+    {
+        return app()->environment('local')
+            ? Password::min(5) // for easy local testing
+            : Password::min(9)->numbers()->mixedCase()->letters()->symbols();
     }
 }

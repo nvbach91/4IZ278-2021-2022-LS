@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\User;
+use App\Services\Auth\LogoutService;
 use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,8 +28,10 @@ class EnsureUserEmailIsVerified
                 abort(403, 'You need to verify your email.');
             }
 
-            // Logout user!
-            auth('web')->logout();
+            /** @var LogoutService $logoutService */
+            $logoutService = app(LogoutService::class);
+
+            $logoutService->logout($request);
 
             return redirect()->route('auth.login')->with('status', [
                 'danger' => __('status.auth.login.error_unverified'),

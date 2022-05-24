@@ -68,6 +68,15 @@ class RouteServiceProvider extends ServiceProvider
 
             return $company;
         });
+
+        Route::bind('user', static function ($value): ?User {
+            /** @var User|null $user */
+            $user = User::query()
+                ->ofId((int) $value)
+                ->first();
+
+            return $user;
+        });
     }
 
     protected function configureRateLimiting(): void

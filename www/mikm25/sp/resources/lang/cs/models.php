@@ -11,9 +11,11 @@ return [
         'email' => 'E-mail',
         'phone' => 'Telefonní číslo',
         'password' => 'Heslo',
+        'new_password' => 'Nové heslo',
         'password_confirm' => 'Potvrzení hesla',
         'github' => 'Přihlášen přes Github',
         'last_logged_at' => 'Poslední přihlášení',
+        'email_verified_at' => 'Email ověřen'
     ],
     'position' => [
         'branch' => 'Obor',

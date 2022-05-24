@@ -23,9 +23,6 @@
                     <input type="email" value="{{ old('email', $emailHint) }}" id="email"
                            class="form-control @error('email') is-invalid @enderror"
                            name="email" required autocomplete="email">
-                    <small class="text-muted">
-                        {{ __('login.verification_link_help') }} <a href="{{ route('auth.email-verification.form') }}">{{ __('common.click_here') }}</a>
-                    </small>
                     @include('common.forms.error', ['field' => 'email'])
                 </div>
                 <div class="mb-3">

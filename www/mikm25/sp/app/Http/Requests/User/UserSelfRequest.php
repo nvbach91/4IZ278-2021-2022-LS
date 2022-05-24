@@ -5,7 +5,7 @@ namespace App\Http\Requests\User;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SelfUserRequest extends FormRequest
+class UserSelfRequest extends FormRequest
 {
     public function authorize(): bool
     {

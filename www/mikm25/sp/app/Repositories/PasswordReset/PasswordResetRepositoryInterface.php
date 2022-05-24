@@ -9,9 +9,9 @@ interface PasswordResetRepositoryInterface
 {
     public function createForUser(User $user): PasswordReset;
 
-    public function getLatest(): ?PasswordReset;
-
-    public function markAsUsed(PasswordReset $passwordReset): PasswordReset;
+    public function getLatestForUser(User $user): ?PasswordReset;
 
     public function getByToken(string $token): ?PasswordReset;
+
+    public function markAsUsed(PasswordReset $passwordReset): PasswordReset;
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests\User;
 
 use App\Models\User;
 
-class UserDeleteRequest extends SelfUserRequest
+class UserDeleteSelfRequest extends UserSelfRequest
 {
     public function rules(): array
     {

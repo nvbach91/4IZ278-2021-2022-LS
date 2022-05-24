@@ -21,10 +21,24 @@ class PasswordResetRepository implements PasswordResetRepositoryInterface
         return $passwordReset;
     }
 
-    public function getLatest(): ?PasswordReset
+    public function getLatestForUser(User $user): ?PasswordReset
     {
         /** @var PasswordReset|null $passwordReset */
-        $passwordReset = PasswordReset::query()->latest()->first();
+        $passwordReset = PasswordReset::query()
+            ->ofUserId($user->id)
+            ->latest()
+            ->first();
+
+        return $passwordReset;
+    }
+
+    public function getByToken(string $token): ?PasswordReset
+    {
+        /** @var PasswordReset|null $passwordReset */
+        $passwordReset = PasswordReset::query()
+            ->with(['user'])
+            ->ofToken($token)
+            ->first();
 
         return $passwordReset;
     }
@@ -33,14 +47,6 @@ class PasswordResetRepository implements PasswordResetRepositoryInterface
     {
         $passwordReset->used = true;
         $passwordReset->save();
-
-        return $passwordReset;
-    }
-
-    public function getByToken(string $token): ?PasswordReset
-    {
-        /** @var PasswordReset|null $passwordReset */
-        $passwordReset = PasswordReset::query()->ofToken($token)->first();
 
         return $passwordReset;
     }

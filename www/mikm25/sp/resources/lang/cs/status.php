@@ -4,7 +4,7 @@ return [
     'auth' => [
         'unauthenticated' => 'Před vstupem na danou stránku se prosím přihlašte.',
         'register' => [
-            'success' => 'Registrace proběhla úspěšně.',
+            'success' => 'Registrace proběhla úspěšně. Na emailovou adresu jsme Vám poslali odkaz pro potvrzení Vaší emailové adresy.',
             'error' => 'Při registraci nastala chyba.',
         ],
         'login' => [
@@ -16,9 +16,8 @@ return [
             'success' => 'Úspěšně jste byl odhlášen.',
         ],
         'email_verification' => [
-            'success' => 'Emailová adresa byla úspěšně potvrzena. Nyní se můžete přihlásit.',
+            'success' => 'Emailová adresa byla úspěšně potvrzena.',
             'invalid_url' => 'Odkaz pro ověření emailové adresy není platný.',
-            'resend_success' => 'Pokud zadaný email v systému existuje a nebyl ještě ověřen, přijde na něj odkaz pro verifikaci emailové adresy.',
         ],
         'forgotten_password' => [
             'success' => 'Pokud zadaný email v systému existuje, přijde na něj odkaz pro nastavení nového hesla.',
@@ -55,7 +54,11 @@ return [
         'delete' => [
             'passwordFailed' => 'Zadané heslo se neshoduje.',
             'nameFailed' => 'Zadané jméno se neshoduje.',
-            'success' => 'Váš účet byl úspěšně smazán.'
+            'success' => 'Váš účet byl úspěšně smazán.',
+        ],
+        'resend_verification_link' => [
+            'already_verified' => 'Vaše emailová adresa je již ověřena.',
+            'success' => 'Odkaz byl úspěšně odeslán na Vaši emailovou adresu.',
         ],
     ],
 ];

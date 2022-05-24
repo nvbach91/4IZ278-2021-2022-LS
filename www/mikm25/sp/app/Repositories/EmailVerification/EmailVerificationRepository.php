@@ -21,10 +21,24 @@ class EmailVerificationRepository implements EmailVerificationRepositoryInterfac
         return $emailVerification;
     }
 
-    public function getLatest(): ?EmailVerification
+    public function getLatestForUser(User $user): ?EmailVerification
     {
         /** @var EmailVerification|null $emailVerification */
-        $emailVerification = EmailVerification::query()->latest()->first();
+        $emailVerification = EmailVerification::query()
+            ->ofUserId($user->id)
+            ->latest()
+            ->first();
+
+        return $emailVerification;
+    }
+
+    public function getByToken(string $token): ?EmailVerification
+    {
+        /** @var EmailVerification|null $emailVerification */
+        $emailVerification = EmailVerification::query()
+            ->with(['user'])
+            ->ofToken($token)
+            ->first();
 
         return $emailVerification;
     }

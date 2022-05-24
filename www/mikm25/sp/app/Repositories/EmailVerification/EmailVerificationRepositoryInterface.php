@@ -9,7 +9,9 @@ interface EmailVerificationRepositoryInterface
 {
     public function createForUser(User $user): EmailVerification;
 
-    public function getLatest(): ?EmailVerification;
+    public function getLatestForUser(User $user): ?EmailVerification;
+
+    public function getByToken(string $token): ?EmailVerification;
 
     public function markAsUsed(EmailVerification $verification): EmailVerification;
 }

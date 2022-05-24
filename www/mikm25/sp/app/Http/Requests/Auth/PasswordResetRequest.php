@@ -11,7 +11,7 @@ class PasswordResetRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return ! auth('web')->check();
+        return true;
     }
 
     public function rules(): array

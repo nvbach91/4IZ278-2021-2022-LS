@@ -3,14 +3,13 @@
 namespace App\Models\Builders;
 
 use App\Models\Builders\Traits\WithIdQuery;
+use App\Models\Builders\Traits\WIthTokenQuery;
+use App\Models\Builders\Traits\WithUserIdQuery;
 use Illuminate\Database\Eloquent\Builder;
 
 class PasswordResetBuilder extends Builder
 {
     use WithIdQuery;
-
-    public function ofToken(string $token): self
-    {
-        return $this->where('token', $token);
-    }
+    use WIthTokenQuery;
+    use WithUserIdQuery;
 }

@@ -2,6 +2,7 @@
 
 use App\Models\Company;
 use App\Models\Position;
+use App\Models\User;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
@@ -108,4 +109,18 @@ Breadcrumbs::for('app.users.profile', static function (BreadcrumbTrail $trail): 
     $title = __('pages.app.users.profile');
 
     $trail->push($title, route('app.users.profile'));
+});
+
+Breadcrumbs::for('app.users.edit', static function (BreadcrumbTrail $trail): void {
+    /** @var User $user */
+    $user = request()->route('user');
+
+    $trail->parent('app.users.profile');
+
+    /** @var string $title */
+    $title = __('pages.app.users.edit');
+
+    $trail->push($title, route('app.users.edit', [
+        'user' => $user->id,
+    ]));
 });

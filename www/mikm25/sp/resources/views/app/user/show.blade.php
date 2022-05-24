@@ -1,10 +1,10 @@
 @php
 
-use App\Models\User;
+    use App\Models\User;
 
-/**
- * @var User $user
- */
+    /**
+     * @var User $user
+     */
 
 @endphp
 
@@ -28,12 +28,12 @@ use App\Models\User;
     <div class="row mb-3">
         <div class="col">
             <ul class="nav nav-pills">
-                {{--                <li class="nav-item ms-2">--}}
-                {{--                    <a class="nav-link"--}}
-                {{--                       href="{{ route('app.companies.edit', ['company' => $company->id]) }}">--}}
-                {{--                        <i class="bi bi-pen"></i>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
+                <li class="nav-item ms-2">
+                    <a class="nav-link"
+                       href="{{ route('app.users.edit', ['user' => $user->id]) }}">
+                        <i class="bi bi-pen"></i>
+                    </a>
+                </li>
                 <li class="nav-item ms-2">
                     <a class="nav-link text-danger"
                        data-bs-toggle="modal"
@@ -63,6 +63,32 @@ use App\Models\User;
                     <td>{{ __('models.user.lastname') }}</td>
                     <td>
                         {{ $user->lastname }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ __('models.user.email') }}</td>
+                    <td>
+                        @if($user->is_email_verified)
+                            {{ $user->email }}
+                        @else
+                            <span class="text-muted">{{ $user->email }}</span>
+                        @endif
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ __('models.user.email_verified_at') }}</td>
+                    <td>
+                        @if($user->is_email_verified)
+                            {{ $user->email_verified_at->format('j. n. Y H:i:s') }}
+                        @else
+                            <button type="submit" class="btn btn-primary btn-sm" form="resend-verification-link-form">
+                                {{ __('users.buttons.resend_verification_link') }}
+                            </button>
+                            <form class="d-none" action="{{ route('app.users.resend-verification-link', ['user' => $user->id]) }}"
+                                  method="post" id="resend-verification-link-form">
+                                {{ csrf_field() }}
+                            </form>
+                        @endif
                     </td>
                 </tr>
                 <tr>

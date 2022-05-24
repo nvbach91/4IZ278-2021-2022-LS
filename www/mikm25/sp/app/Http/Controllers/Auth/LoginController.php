@@ -46,12 +46,6 @@ class LoginController extends Controller
             ]);
         }
 
-        if (! $user->is_email_verified) {
-            return redirect()->back()->withInput()->with('status', [
-                'danger' => __('status.auth.login.error_unverified'),
-            ]);
-        }
-
         if (! $this->service->loginWithPassword($user, $request->getPassword(), $request->rememberMe())) {
             return redirect()->back()->withInput()->with('status', [
                 'danger' => __('status.auth.login.error_credentials'),

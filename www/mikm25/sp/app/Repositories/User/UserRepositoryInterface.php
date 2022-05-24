@@ -7,9 +7,13 @@ use Carbon\Carbon;
 
 interface UserRepositoryInterface
 {
+    public function save(User $user): User;
+
     public function getUserByEmail(string $email): ?User;
 
     public function verifyEmail(User $user, ?Carbon $at = null): User;
+
+    public function changeEmail(User $user, string $email): User;
 
     public function resetPassword(User $user, string $password): User;
 

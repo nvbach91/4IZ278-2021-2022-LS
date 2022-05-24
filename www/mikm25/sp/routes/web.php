@@ -35,6 +35,19 @@ Route::get('/{slugPosition}', [LandingPageController::class, 'showPosition'])
     ->name('landing-page.position');
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
+    Route::group(['prefix' => 'email-verification', 'as' => 'email-verification.'], static function (): void {
+        Route::get('verify', [EmailVerificationController::class, 'verify'])
+            ->name('verify');
+    });
+
+    Route::group(['prefix' => 'password-reset', 'as' => 'password-reset.'], static function (): void {
+        Route::get('/', [PasswordResetController::class, 'form'])
+            ->name('form');
+        Route::post('reset/{token}', [PasswordResetController::class, 'reset'])
+            ->whereUuid('token')
+            ->name('reset');
+    });
+
     // Guest routes
     Route::group(['middleware' => 'guest:web'], static function (): void {
         Route::get('register', [RegisterController::class, 'index'])
@@ -47,28 +60,11 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
         Route::post('login', [LoginController::class, 'login'])
             ->name('login.submit');
 
-        Route::group(['prefix' => 'email-verification', 'as' => 'email-verification.'], static function (): void {
-            Route::get('/', [EmailVerificationController::class, 'form'])
-                ->name('form');
-            Route::post('resend', [EmailVerificationController::class, 'resend'])
-                ->name('resend');
-            Route::get('verify', [EmailVerificationController::class, 'verify'])
-                ->name('verify');
-        });
-
         Route::group(['prefix' => 'forgotten-password', 'as' => 'forgotten-password.'], static function (): void {
             Route::get('/', [ForgottenPasswordController::class, 'form'])
                 ->name('form');
             Route::post('send', [ForgottenPasswordController::class, 'send'])
                 ->name('send');
-        });
-
-        Route::group(['prefix' => 'password-reset', 'as' => 'password-reset.'], static function (): void {
-            Route::get('/', [PasswordResetController::class, 'form'])
-                ->name('form');
-            Route::post('reset/{token}', [PasswordResetController::class, 'reset'])
-                ->whereUuid('token')
-                ->name('reset');
         });
 
         Route::group(['prefix' => 'github', 'as' => 'github.'], static function (): void {
@@ -81,11 +77,11 @@ Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
 
     // Guarded logout route
     Route::post('logout', [LogoutController::class, 'logout'])
-        ->middleware(['auth:web', 'verified'])
+        ->middleware(['auth:web'])
         ->name('logout');
 });
 
-Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'verified']], static function (): void {
+Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web']], static function (): void {
     Route::get('dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
@@ -136,9 +132,20 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web', 'v
         Route::get('/profile', [UserController::class, 'profile'])
             ->name('profile');
         Route::get('/{user}', [UserController::class, 'show'])
+            ->where('user', '[0-9]+')
             ->name('show');
         Route::delete('/{user}', [UserController::class, 'delete'])
+            ->where('user', '[0-9]+')
             ->name('delete');
+        Route::get('/{user}/edit', [UserController::class, 'edit'])
+            ->where('user', '[0-9]+')
+            ->name('edit');
+        Route::patch('/{user}', [UserController::class, 'update'])
+            ->where('user', '[0-9]+')
+            ->name('update');
+        Route::post('/{user}/resend-verification-link', [UserController::class, 'resendVerificationLink'])
+            ->where('user', '[0-9]+')
+            ->name('resend-verification-link');
     });
 
     Route::group(['prefix' => 'ajax', 'as' => 'ajax.'], static function (): void {

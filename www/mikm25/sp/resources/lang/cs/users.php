@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'buttons' => [
+        'resend_verification_link' => 'Odeslat odkaz pro ověření'
+    ],
+    'sections' => [
+        'general' => 'Základní informace',
+        'password' => 'Heslo',
+    ],
     'modals' => [
         'delete' => [
             'title' => 'Odstranit profil',

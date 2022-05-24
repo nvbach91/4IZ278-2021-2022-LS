@@ -7,6 +7,13 @@ use Carbon\Carbon;
 
 class UserRepository implements UserRepositoryInterface
 {
+    public function save(User $user): User
+    {
+        $user->save();
+
+        return $user;
+    }
+
     public function getUserByEmail(string $email): ?User
     {
         /** @var User|null $user */
@@ -18,7 +25,15 @@ class UserRepository implements UserRepositoryInterface
     public function verifyEmail(User $user, ?Carbon $at = null): User
     {
         $user->email_verified_at = $at ?? Carbon::now();
-        $user->save();
+        $this->save($user);
+
+        return $user;
+    }
+
+    public function changeEmail(User $user, string $email): User
+    {
+        $user->email = $email;
+        $this->save($user);
 
         return $user;
     }
@@ -26,7 +41,7 @@ class UserRepository implements UserRepositoryInterface
     public function resetPassword(User $user, string $password): User
     {
         $user->password = $password;
-        $user->save();
+        $this->save($user);
 
         return $user;
     }
@@ -34,7 +49,7 @@ class UserRepository implements UserRepositoryInterface
     public function updateLastLoggedAt(User $user, ?Carbon $time = null): User
     {
         $user->last_logged_at = $time ?? Carbon::now();
-        $user->save();
+        $this->save($user);
 
         return $user;
     }
