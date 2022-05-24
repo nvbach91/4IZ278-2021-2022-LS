@@ -10,11 +10,6 @@ session_start(); ?>
 
 $errors = [];
 $ref = 'registration';
-$passwdDesc =
-    'Your password has to have 
-at least one capital letter [A-Z], 
-one digit [0-9] and be 
-minimum 8 characters long.';
 
 if (!empty($_POST)) {
     $firstName = $_POST['firstName'];
@@ -56,7 +51,9 @@ if (!empty($_POST)) {
                 <label class="form-label">Password<span class="text-danger">*</span></label>
                 <div class="input-group">
                     <input class="form-control" name="password" value="<?php echo @$password; ?>" type="password">
-                    <span class="input-group-text"><i class="bi bi-info-circle text-secondary" title="<?php echo $passwdDesc; ?>"></i></span>
+                    <span class="input-group-text">
+                        <a class="passwd-popover" data-toggle="popover" rel="popover" data-html="true" href="#"><i class="bi bi-info-circle text-secondary"></i></a>
+                    </span>
                 </div>
                 <label class="form-label">Confirm password<span class="text-danger">*</span></label>
                 <input class="form-control" name="confirm" value="<?php echo @$confirm; ?>" type="password">

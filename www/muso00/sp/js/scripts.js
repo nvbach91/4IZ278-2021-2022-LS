@@ -6,6 +6,8 @@
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
 
+var popoverTitle = 'Password requirements';
+var popoverContent = 'Your password has to have at least one capital letter [A-Z], one digit [0-9] and be minimum 8 characters long.';
 
 $(document).ready(function () {
     $('.nav-toggle').click(function () {
@@ -20,4 +22,13 @@ $(document).ready(function () {
         });
     });
 
+});
+
+$(document).ready(function () {
+    $('.passwd-popover').popover({
+        placement: 'right',
+        title: popoverTitle,
+        content: popoverContent,
+        trigger: 'click'
+    });
 });
