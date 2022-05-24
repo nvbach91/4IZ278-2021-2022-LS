@@ -16,6 +16,10 @@ const mix = require('laravel-mix');
 mix.copyDirectory('vendor/tinymce/tinymce', 'public/js/tinymce');
 mix.copy('resources/js/tinymce/langs/cs.js', 'public/js/tinymce/langs');
 
+// favicon
+
+mix.copyDirectory('resources/assets/favicon', 'public/favicon');
+
 // Application
 
 mix.js('resources/js/app.js', 'public/js').version();

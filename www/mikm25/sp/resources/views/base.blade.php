@@ -10,6 +10,7 @@
             {{ config('app.name') }}
         @endif
     </title>
+    @include('common.favicon')
     @stack('head')
 </head>
 <body>
