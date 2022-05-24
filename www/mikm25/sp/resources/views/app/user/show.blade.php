@@ -75,6 +75,7 @@
                         @endif
                     </td>
                 </tr>
+                @if(! $user->github)
                 <tr>
                     <td>{{ __('models.user.email_verified_at') }}</td>
                     <td>
@@ -91,6 +92,7 @@
                         @endif
                     </td>
                 </tr>
+                @endif
                 <tr>
                     <td>{{ __('models.user.phone') }}</td>
                     <td>
