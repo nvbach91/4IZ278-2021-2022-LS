@@ -50,7 +50,7 @@ class GithubController extends Controller
 
         $user = $this->userRepository->getUserByEmail($githubUser->getEmail());
 
-        if (! $user) {
+        if ($user === null) {
             $name = explode(' ', $githubUser->getName());
 
             $user = $this->registerService->register(new RegisterDTO([

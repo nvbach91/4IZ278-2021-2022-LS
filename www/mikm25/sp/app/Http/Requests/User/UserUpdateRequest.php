@@ -34,7 +34,7 @@ class UserUpdateRequest extends UserSelfRequest
                 'email',
                 'max:255',
                 // Exclude user which owns the email
-                (new Unique(User::class, 'email'))->whereNot('id', $user->id),
+                (new Unique(User::class, 'email'))->whereNot('id', (string) $user->id),
             ],
             'new_password' => [
                 'nullable',

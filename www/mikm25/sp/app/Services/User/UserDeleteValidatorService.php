@@ -32,7 +32,10 @@ class UserDeleteValidatorService
         /** @var string $password */
         $password = $request->getPassword();
 
-        return $this->hasher->check($password, $user->password);
+        /** @var string $userPassword */
+        $userPassword = $user->password;
+
+        return $this->hasher->check($password, $userPassword);
     }
 
     private function validateGithub(UserDeleteSelfRequest $request, User $user): bool
