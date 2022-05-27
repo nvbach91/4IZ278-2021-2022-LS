@@ -18,7 +18,13 @@ if (isset($_SESSION['shopping_cart'])) {
         // else... 
     } else {
         // echo error.
-        echo 'Item already added';
+        //echo 'Item already added'; //FIXME: Přidávání do košíku kdykoliv
+        foreach ($_SESSION['shopping_cart'] as $k => $v) {
+            if ($v['item_id'] == $_GET['id']) {
+                $_SESSION['shopping_cart'][$k]['item_qty'] = $qty;
+                break;
+            }
+        }
     }
     // else (session not set)...
 } else {

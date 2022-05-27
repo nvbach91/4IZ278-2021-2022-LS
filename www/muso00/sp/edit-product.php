@@ -11,14 +11,51 @@ $productsDB = new ProductsDB();
 if (isset($_GET)) {
     $productId = $_GET['id'];
     require __DIR__ . '/utils/fetch_product_info.php';
+    $productArray = array(
+        'first_name' => $name,
+        'price' => $price,
+        'stock' => $stock,
+        'img' => $img,
+        'info' => $description,
+        'alc_vol' => $alcVol,
+        'bottle_size' => $size,
+        'origin' => $origin,
+        'category_id' => $catId,
+    );
 }
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
     if ($_SESSION[$productId . '_last_modified_at'] != $lastModified) {
-        die('The product was modified by somebody else in the meantime!');
+        exit('<div class="alert alert-danger text-center" role="alert">The product was edited by somebody else in the meantime. <a href="./products.php" class="stretched-link link-danger">Go to products</a></div>');
     }
     require __DIR__ . '/utils/edit.php';
-    header('Location: ./products.php?action=updated');
+    $changedProductArray = array(
+        'first_name' => $name,
+        'price' => $price,
+        'stock' => $stock,
+        'img' => $img,
+        'info' => $description,
+        'alc_vol' => $alcVol,
+        'bottle_size' => $size,
+        'origin' => $origin,
+        'category_id' => $catId,
+    );
+    $arrayDif = array_diff($changedProductArray, $productArray);
+    print_r($arrayDif);
+    $record = [];
+    array_push($record, $lastModified, $arrayDif);
+    print_r($record);
+    //$logRecord = implode(';', ,$arrayDif);
+    // $itemRecords= [];
+    // array_push($itemRecords, $lastModified);
+    // foreach ($arrayDif as $values => $keys) {
+    //     array_push($itemRecords, $keys);
+    // }
+    // $itemRecord = implode(';', $itemRecords);
+    // file_put_contents(dirname(__DIR__).'/sp_changed/admin/edit-item-log.db', $itemRecord . PHP_EOL, FILE_APPEND);
+    
+    //header('Location: ./products.php?action=updated');
+
 }
 $_SESSION[$productId . '_last_modified_at'] = $lastModified;
 ?>
