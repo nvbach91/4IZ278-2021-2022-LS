@@ -1,0 +1,109 @@
+h1 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.form {
+    max-width: 512px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btn-submit {
+    width: 120px;
+}
+
+.form .link-secondary:hover {
+    color: red;
+}
+
+.index-container p {
+    padding-bottom: 20px;
+}
+
+.form-label {
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+.form-passwd {
+margin-top: 10px;
+}
+
+.btn-acc {
+    transition: color 0.3s;
+}
+
+.btn-acc:hover {
+    color: red;
+}
+
+.form-profile {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.link-warning:hover {
+    color: black;
+}
+
+body { 
+    padding-top: 66px; 
+}
+
+.product-image {
+    max-height: 300px;
+    width: auto;
+}
+
+.btn-profile {
+    width: 150px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.itm-img {
+    max-height: 350px;
+    width: auto;
+}
+
+.card-body p {
+    height: 80px;
+}
+
+.card-footer a {
+    width: 150px;
+}
+
+.card-title {
+    height: 80px;
+}
+
+.itm-title{
+    margin-left: 50px;
+} 
+
+.btn-toolbar a {
+    width: 100px;
+}
+
+.text-faded-primary {
+    color: rgb(139, 185, 255);
+    text-decoration: none;
+}
+
+.text-faded-primary:hover {
+    text-decoration: underline;
+    color: rgb(139, 185, 255);
+}
+
+.bi-info-circle:hover {
+    cursor: pointer;
+}
+
+.btn-admin {
+    max-width: 40px;
+}
