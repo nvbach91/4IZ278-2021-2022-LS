@@ -5,6 +5,7 @@ return [
         'unauthenticated' => 'Před vstupem na danou stránku se prosím přihlašte.',
         'register' => [
             'success' => 'Registrace proběhla úspěšně. Na emailovou adresu jsme Vám poslali odkaz pro potvrzení Vaší emailové adresy.',
+            'success_github' => 'Nový účet byl vytvořen. Přihlášení proběhlo úspěšně.',
             'error' => 'Při registraci nastala chyba.',
         ],
         'login' => [

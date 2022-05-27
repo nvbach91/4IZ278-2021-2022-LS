@@ -9,7 +9,6 @@ use App\Repositories\User\UserRepositoryInterface;
 use App\Services\Auth\LoginService;
 use App\Services\Auth\RegisterService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class GithubController extends Controller
@@ -64,6 +63,12 @@ class GithubController extends Controller
         $user->notify(new RegisteredWithoutVerificationNotification());
 
         $this->loginService->login($user);
+
+        if ($user->wasRecentlyCreated) {
+            return redirect()->route('app.dashboard')->with('status', [
+                'success' => __('status.auth.register.success_github'),
+            ]);
+        }
 
         return redirect()->route('app.dashboard')->with('status', [
             'success' => __('status.auth.login.success'),
