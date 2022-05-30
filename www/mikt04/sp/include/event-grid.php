@@ -1,19 +1,39 @@
 <?php 
-require_once './database/CategoryDB.php';
 require_once './database/EventsDB.php';
+require_once './include/offset-calc.php';
 
-$categoryDB = new CategoryDB();
-$categories = $categoryDB->fetchAll();
 $eventsDB = new EventsDB();
 $events = $eventsDB->fetchAll();
+$nItemsPerPagination = 6;
+$count = count($events);
 $pageId = '';
+$address = '';
+$offset = 0;
+
+if (isset($_REQUEST['offset']) && !empty($_REQUEST['offset'])) {
+    $offset = (int)$_GET['offset'];
+} else {
+    $offset = 0;
+}
+
+if (isset($_REQUEST['category_id']) && !empty($_REQUEST['category_id']))
+{
+    $categoryId = $_REQUEST['category_id'];
+    //$events = $eventsDB->fetchByCategoryId($categoryId);
+    $events = $eventsDB->fetchOrderById($categoryId, $nItemsPerPagination, $offset);
+    $address = "category_id=$categoryId";
+    $count = count($eventsDB->fetchByCategoryId($categoryId));
+}  else {
+    $events = $eventsDB->fetchAllPagination($nItemsPerPagination, $offset);
+    $address = '';
+}
+
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $pageId = $_POST['button-id'];
     header("Location: ./event-buy.php?udalost=$pageId");
 }
 ?>
-
 
 <div class="event-grid">
 <?php foreach($events as $event): ?>
@@ -26,11 +46,10 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     </div>
 <?php endforeach?>
 </div>
-
-<div class="filter">
-    <?php foreach($categories as $category):?>
-        <div class="filter-item">
-            <?php echo $category['name'];?>
-        </div>
-    <?php endforeach ;?>
+<div class="pagination">
+    <?php for ($i = 1; $i <= ceil($count / $nItemsPerPagination); $i++) { ?>
+        <a class="<?php echo $offset / $nItemsPerPagination + 1 == $i ? "page active-page" : "page not-active-page"; ?>" href="./index.php?offset=<?php echo ($i - 1) * $nItemsPerPagination . '&' . $address;?>">
+            <?php echo $i;?>
+        </a>
+    <?php } ?>
 </div>

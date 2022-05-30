@@ -6,7 +6,7 @@
                 <li class="nav-item"><a href="./index.php">Akce</a></li>
                 <li class="nav-item"><a href="./event-user.php">Lístky</a></li>
                 <li class="nav-item"><a href="./event-administration.php">Admin</a></li>
-                <li class="nav-item"><a href="./user.php">Účet</a></li>
+                <li class="nav-item"><a href="./user-administration.php">Účet</a></li>
                 <li class="nav-item"><a href="./logout.php">Odhlásit</a></li>
             </ul>
         </nav>

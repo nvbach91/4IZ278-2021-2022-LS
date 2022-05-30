@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/Database.php';
 
-class TicketDB extends Database
+class VEventBookedDB extends Database
 {
-  protected $tableName = 'ticket';
+  protected $tableName = 'v_event_booked';
 
   public function fetchAll()
   {
@@ -23,8 +23,8 @@ class TicketDB extends Database
 
   public function fetchById($id)
   {
-    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE ticket_id = :ticket_id LIMIT 1");
-    $statement->execute(['event_id' => $id]);
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE category_id = :category_id LIMIT 1");
+    $statement->execute(['category_id' => $id]);
     return $statement->fetchAll();
   }
 
@@ -35,11 +35,13 @@ class TicketDB extends Database
     return $statement->fetch();
   }
 
-  public function insertRow($eventId, $price, $capacity)
+
+  public function fetchByName($name)
   {
-    $statement = $this->pdo->prepare("INSERT INTO $this->tableName (`event_id`, `price`, `capacity`) 
-    VALUES (?, ?, ?)");
-    $statement->execute([$eventId, $price, $capacity]);
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE name LIKE :name LIMIT 1");
+    $statement->execute(['name' => $name]);
+    $res = $statement ->fetchAll();
+    return isset($res[0]) ? $res[0] : '';
   }
 
 }

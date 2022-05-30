@@ -2,53 +2,63 @@
 <?php include './include/nav.php'; ?>
 <?php require_once './database/UsersDB.php';?>
 <?php require_once './include/check-logout.php';?>
+<?php require_once './include/clean-input.php';?>
 
 <?php
-if ('POST' == $_SERVER['REQUEST_METHOD']) {
+$messageSuccess = '';
+$messageFail = '';
+$valid = TRUE;
 
-    $firstName = $_POST['first-name'];
-    $lastName = $_POST['last-name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmation = $_POST['confirmation'];
-    $valid = TRUE;
+if ('POST' == $_SERVER['REQUEST_METHOD']) {
+    $firstName = cleanInput($_POST['first-name']);
+    $lastName = cleanInput($_POST['last-name']);
+    $email = cleanInput($_POST['email']);
+    $password = cleanInput($_POST['password']);
+
+    if (isset($_POST['confirmation'])){
+        $confirmation = $_POST['confirmation'];
+    } else {
+        $confirmation = 0;
+    }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo ('Invalid email');
+        $messageFail = 'Neplatný email';
         $valid = FALSE;
     }
 
-    if (strlen($password) < 3) {
-        echo ('Password must be at least 3 characters long');
+    if (strlen($password) < 4) {
+        $messageFail = 'Heslo musí být alespoň 3 znaky dlouhé';
         $valid = FALSE;
     }
 
-    if ($confirmation != 1) {
-        echo ('Vyžadováno potvrzení');
+    if($confirmation != 1) {
+        $messageFail = 'Vyžadováno potvrzení';
         $valid = FALSE;
     }
 
     $usersDB = new UsersDB();
     $validatedEmail = $usersDB->validateEmail($email);
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $normalPrivilage = 1;
 
     if($validatedEmail){
-        echo "this email is in use";
+        $messageFail = 'Tento email se již používá';
+        $valid = FALSE;
     }
-    if(!$validatedEmail){
+
+    if($valid) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $normalPrivilage = 1;
         date_default_timezone_set('Europe/Prague');
         $date = date('Y-m-d H:i:s', time());
         $inserted = $usersDB->insertUser($firstName, $lastName, $email, $hashedPassword, $date, $normalPrivilage);
         header('Location: signin.php');
         exit();
     }
-
 }
 ?>
 
 <main>
     <div class="wrapper">
+    <?php include './include/message.php'?>
         <div class="signup">
             <form class="form-template form-signup" method="POST">
                 <h2>Registrace</h2>

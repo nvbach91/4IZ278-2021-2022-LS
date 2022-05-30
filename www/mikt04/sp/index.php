@@ -7,6 +7,9 @@
         <h2>Akce</h2>
     </div>
   </div>
+  <div class="filter">
+    <?php include './include/filter.php'; ?>
+  </div>
   <div class="wrapper">
     <?php include './include/event-grid.php'; ?>
   </div>

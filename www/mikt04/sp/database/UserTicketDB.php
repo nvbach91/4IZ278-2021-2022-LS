@@ -8,16 +8,8 @@ class UserTicketDB extends Database
 
   public function fetchAll()
   {
-    $statement = $this->pdo->prepare("SELECT `ticket_id`, `user_id`, `code` FROM $this->tableName");
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName");
     $statement->execute();
-    return $statement->fetchAll();
-  }
-
-  public function fetchAllByUserId($id)
-  {
-    $statement = $this->pdo->prepare("SELECT user_ticket.user_ticket_id, user_ticket.ticket_id, user_ticket.user_id, user_ticket.code, ticket.event_id FROM $this->tableName INNER JOIN ticket
-    ON user_ticket.ticket_id = ticket.ticket_id WHERE user_ticket.user_id = :user_id;");
-    $statement->execute(['user_id' => $id]);
     return $statement->fetchAll();
   }
 
@@ -38,9 +30,28 @@ class UserTicketDB extends Database
 
   public function insertRow($ticketId, $userId, $code)
   {
-    $statement = $this->pdo->prepare("INSERT INTO $this->tableName (`ticket_id`, `user_id`, `code`) 
-    VALUES (?, ?, ?)");
-    $statement->execute([$ticketId, $userId, $code]);
+    try {
+      $this->pdo->beginTransaction();
+      $statement = $this->pdo->prepare("INSERT INTO $this->tableName (`ticket_id`, `user_id`, `code`) 
+      VALUES (?, ?, ?)");
+      if(!$statement->execute([$ticketId, $userId, $code])) throw new Exception('insertRow failed');
+      $statement = null;
+      $this->pdo->commit();
+    } catch (Exception $e) {
+      $this->pdo->rollback();
+      return false;
+    }
+    return true;
   }
+
+    /*
+  public function fetchAllByUserId($id)
+  {
+    $statement = $this->pdo->prepare("SELECT user_ticket.user_ticket_id, user_ticket.ticket_id, user_ticket.user_id, user_ticket.code, ticket.event_id FROM $this->tableName INNER JOIN ticket
+    ON user_ticket.ticket_id = ticket.ticket_id WHERE user_ticket.user_id = :user_id;");
+    $statement->execute(['user_id' => $id]);
+    return $statement->fetchAll();
+  }
+  */
 
 }

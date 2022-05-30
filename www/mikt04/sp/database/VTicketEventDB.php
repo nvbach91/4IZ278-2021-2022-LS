@@ -2,14 +2,21 @@
 
 require_once __DIR__ . '/Database.php';
 
-class CategoryDB extends Database
+class VTicketEventDB extends Database
 {
-  protected $tableName = 'category';
+  protected $tableName = 'v_ticket_event';
 
   public function fetchAll()
   {
-    $statement = $this->pdo->prepare("SELECT category_id, name FROM $this->tableName");
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName");
     $statement->execute();
+    return $statement->fetchAll();
+  }
+
+  public function fetchAllByUserId($id)
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE user_id = :user_id");
+    $statement->execute(['user_id' => $id]);
     return $statement->fetchAll();
   }
 
@@ -34,12 +41,6 @@ class CategoryDB extends Database
     $statement->execute(['name' => $name]);
     $res = $statement ->fetchAll();
     return isset($res[0]) ? $res[0] : '';
-  }
-
-  public function insertRow($name)
-  {
-    $statement = $this->pdo->prepare("INSERT INTO $this->tableName (name) VALUES (:name)");
-    $statement->execute(['name' => $name]);
   }
 
 }

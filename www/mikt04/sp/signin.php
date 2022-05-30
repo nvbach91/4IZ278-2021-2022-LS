@@ -2,40 +2,42 @@
 <?php include './include/nav.php'; ?>
 <?php require_once './database/UsersDB.php';?>
 <?php require_once './include/check-logout.php';?>
+<?php require_once './include/clean-input.php';?>
 
 
 <?php
-    $messageSuccess = '';
-    $messageFail = '';
+$messageSuccess = '';
+$messageFail = '';
+$valid = TRUE;
 
-    if (!empty($_POST)) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+if (!empty($_POST)) {
+    $email = cleanInput($_POST['email']);
+    $password = cleanInput($_POST['password']);
 
-        $usersDB = new UsersDB();
-        $userPassword = $usersDB->fetchPassword($email);
-        $user = $usersDB->fetchByEmail($email);
+    $usersDB = new UsersDB();
+    $userPassword = $usersDB->fetchPassword($email);
+    $user = $usersDB->fetchByEmail($email);
 
-        if (password_verify($password, $userPassword)) {
-            $_SESSION['user_id'] = $user['user_id'];
-            $_SESSION['email'] = $user['email'];
-            $_SESSION['privilege'] = $user['privilege'];
-            setcookie('email', $email, time() + 3600);
-            $messageSuccess = 'Úspěšně přihlášen';
-            header("Location: index.php");
-            exit();
-        }
-        else {
-            $messageFail = "Špatný email nebo heslo";
-        }
+    if (password_verify($password, $userPassword)) {
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['privilege'] = $user['privilege'];
+        setcookie('email', $email, time() + 3600);
+        $messageSuccess = 'Úspěšně přihlášen';
+        header("Location: index.php");
+        exit();
     }
+    else {
+        $messageFail = "Špatný email nebo heslo";
+        $valid = FALSE;
+    }
+}
 ?>
 
 
 <main>
     <div class="wrapper">
-    <?php if(strlen(trim($messageSuccess)) > 0) { echo '<p class="fail">' . $messageSuccess . '</p>';}?>
-    <?php if(strlen(trim($messageFail)) > 0) { echo '<p class="fail">' . $messageFail . '</p>';}?>
+    <?php include './include/message.php'?>
         <div class="signup">
             <form class="form-template form-signin" method="POST">
             <h2>Přihlášení</h2>
