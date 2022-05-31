@@ -1,7 +1,6 @@
 <?php include './include/head.php'; ?>
 <?php include './include/nav.php'; ?>
 
-
 <?php
 require_once './database/EventsDB.php';
 require_once './database/TicketDB.php';

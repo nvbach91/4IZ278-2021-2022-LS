@@ -12,5 +12,4 @@ function checkCapacity($eventId) {
         return false;
     }
 }
-
 ?>

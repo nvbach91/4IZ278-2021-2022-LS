@@ -43,15 +43,4 @@ class UserTicketDB extends Database
     }
     return true;
   }
-
-    /*
-  public function fetchAllByUserId($id)
-  {
-    $statement = $this->pdo->prepare("SELECT user_ticket.user_ticket_id, user_ticket.ticket_id, user_ticket.user_id, user_ticket.code, ticket.event_id FROM $this->tableName INNER JOIN ticket
-    ON user_ticket.ticket_id = ticket.ticket_id WHERE user_ticket.user_id = :user_id;");
-    $statement->execute(['user_id' => $id]);
-    return $statement->fetchAll();
-  }
-  */
-
 }

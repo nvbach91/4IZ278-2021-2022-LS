@@ -1,6 +1,5 @@
 <?php 
 require_once './database/EventsDB.php';
-require_once './include/offset-calc.php';
 
 $eventsDB = new EventsDB();
 $events = $eventsDB->fetchAll();
@@ -27,7 +26,6 @@ if (isset($_REQUEST['category_id']) && !empty($_REQUEST['category_id']))
     $events = $eventsDB->fetchAllPagination($nItemsPerPagination, $offset);
     $address = '';
 }
-
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $pageId = $_POST['button-id'];

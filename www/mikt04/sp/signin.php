@@ -5,7 +5,6 @@
 <?php require_once './include/clean-input.php';?>
 <?php require_once './facebook/facebook.php';?>
 
-
 <?php
 $messageSuccess = '';
 $messageFail = '';
@@ -45,7 +44,6 @@ if (!empty($_POST)) {
     }
 }
 ?>
-
 
 <main>
     <div class="wrapper">

@@ -85,18 +85,4 @@ class UsersDB extends Database
     $statement = $this->pdo->prepare("UPDATE $this->tableName SET pwd_hash='$password' WHERE user_id = :user_id ");
     $statement->execute(['user_id' => $id]);
   }
-  
-  /*
-  public function insertUser($firstName, $lastName, $email, $password)
-  {
-    $rnd = '2018-12-05 12:39:16';
-    $statement = $this->pdo->prepare("INSERT INTO $this->tableName (first_name, last_name, email, pwd_hash, created) 
-    VALUES (:first_name, :last-name, :email, :pwd_hash, :created)");
-    $statement->execute(['first-name' => $firstName, 'last-name' => $lastName, 'email' => $email, 'pwd_hash' => $password, 'created' => $rnd]);
-  }
-  */
-  
-
-
-
 }

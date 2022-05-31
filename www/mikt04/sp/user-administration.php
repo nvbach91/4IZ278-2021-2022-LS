@@ -10,11 +10,8 @@ $messageSuccess = '';
 $messageFail = '';
 $valid = TRUE;
 
-
 $usersDB = new UsersDB();
 $user = $usersDB->fetchById($userId);
-
-
 
 if (!empty($_POST)) {
     $passwordMain = cleanInput($_POST['password-main']);
@@ -48,7 +45,6 @@ if (!empty($_POST)) {
         exit();
     }
 }
-
 ?>
 
 <main>

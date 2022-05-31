@@ -23,10 +23,4 @@ abstract class Database implements DatabaseOperations {
     }
 
 }
-
-/*
-$db = new Database();
-$db->pdo->prepare();
-*/
-
 ?>

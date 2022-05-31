@@ -8,10 +8,10 @@
         <title>4FIS events</title>
         <!-- Favicon-->
         <!--link rel="icon" type="image/x-icon" href="assets/favicon.ico" /-->
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon//favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon//favicon-16x16.png">
+        <link rel="manifest" href="./img/favicon/site.webmanifest">
         <link rel="stylesheet" href="./css/main.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
 <body>

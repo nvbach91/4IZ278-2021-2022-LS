@@ -42,5 +42,4 @@ class VTicketEventDB extends Database
     $res = $statement ->fetchAll();
     return isset($res[0]) ? $res[0] : '';
   }
-
 }

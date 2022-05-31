@@ -15,7 +15,6 @@ $permissions = ['email'];
 $callbackUrl = htmlspecialchars('https://eso.vse.cz/~mikt04/webove-aplikace/sp/facebook/fb-callback.php');
 $fbLoginUrl = $fbHelper->getLoginUrl($callbackUrl, $permissions);
 
-
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $firstName = cleanInput($_POST['first-name']);
     $lastName = cleanInput($_POST['last-name']);
