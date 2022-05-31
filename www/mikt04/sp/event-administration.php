@@ -52,7 +52,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
                     <input type="text" name="name" class="form-control" placeholder="Název události" required autofocus>
                 </div>
                 <div class="form-label-group">
-                    <textarea type="text" name="description" class="form-control input-large" maxlength="255" placeholder="Popis" required autofocus></textarea>
+                    <textarea type="text" name="description" class="form-control input-large" maxlength="254" placeholder="Popis" required autofocus></textarea>
                 </div>
                 <div class="form-label-group">
                     <input type="datetime-local" name="date" class="form-control" placeholder="Datum" min="2018-01-01" required autofocus>

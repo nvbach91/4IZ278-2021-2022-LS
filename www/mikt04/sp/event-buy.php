@@ -7,6 +7,7 @@
 <?php require_once './database/UserTicketDB.php';?>
 <?php require_once './include/check-capacity.php';?>
 <?php require_once './include/clean-input.php';?>
+<?php require_once './include/send-email.php';?>
 
 <?php
 $eventsDB = new EventsDB();
@@ -17,6 +18,7 @@ $messageFail = '';
 
 if (isset($_REQUEST['udalost']) && !empty($_REQUEST['udalost']))
 $eventId = $_REQUEST['udalost'];
+$emailAdress = $_COOKIE["email"];
 
 $event = $eventsDB->fetchById($eventId);
 $ticket = $ticketDB->fetchByEventId($eventId);
@@ -29,7 +31,10 @@ if (!empty($_POST)) {
   $success = $userTicketDB->insertRow($ticket['ticket_id'], $userId , $ticket_hash_code);
 
   if($success){
-    $messageSuccess = 'Lístek zakoupen.';
+    $messageSuccess = 'Lístek zakoupen. Podrobnosti byly zaslány emailem.';
+    $subject = 'Váš lístek na ' . $event['name'] ;
+    $message = 'Váš lístek na akci ' . $event['name'] . ' je ' . $ticket_hash_code . '. QR kód naleznete po přihlášení v sekci lístky.';
+    sendEmail($emailAdress, $subject, $message);
   }
   if(!$success){
     $messageFail = 'Lístek se nepodařilo zakoupit.';

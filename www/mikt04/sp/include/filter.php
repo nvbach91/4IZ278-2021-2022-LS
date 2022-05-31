@@ -4,10 +4,7 @@ require_once './database/CategoryDB.php';
 $categoryDB = new CategoryDB();
 $categories = $categoryDB->fetchAll();
 $address = '';
-
-
 ?>
-
 
 <div class="filter-container">
     <a class="filter-item" href="./index.php">
