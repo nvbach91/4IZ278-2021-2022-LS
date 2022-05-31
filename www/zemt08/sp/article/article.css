@@ -1,0 +1,124 @@
+.content {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 60%;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.headline {
+	text-align: left;
+	margin-top: 0;
+}
+
+.article h3 {
+	color: #333;
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.article img {
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+}
+
+.article p {
+	line-height: 1.5;
+	font-size: 17px;
+}
+
+.article p:last-child {
+	margin-bottom: 30px;
+}
+
+.article li {
+	margin: 5px 0;
+}
+
+.article li:hover {
+	border: none;
+}
+
+.article h4 {
+	max-width: 550px;
+	font-size: 28px;
+	margin-bottom: 10px;
+	color: var(--main-color);
+	margin-top: 30px;
+}
+
+@media (max-width: 1500px) {
+	.article h3 {
+		font-size: 22px;
+	}
+}
+
+@media (max-width: 800px) {
+	.article {
+		min-width: 0;
+	}
+	.article h4 {
+		font-size: 22px;
+	}
+}
+
+@media (max-width: 600px) {
+	.article h3 {
+		font-size: 20px;
+	}
+
+	.headline {
+		font-size: 28px;
+	}
+}
+
+.thumbs {
+	width: 100%;
+	margin-top: 50px;
+	text-align: center;
+}
+
+.thumbs label {
+	margin: 0 20px;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.thumbs input[type="submit"]:nth-of-type(1) {
+	background-color: var(--main-color);
+	color: white;
+}
+
+.thumbs input[type="submit"]:nth-of-type(2) {
+	background-color: rosybrown;
+	color: white;
+}
+
+.add-comment {
+	width: 100%;
+}
+
+.add-comment textarea {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.comments {
+	width: 100%;
+}
+
+.comment p:nth-of-type(1) {
+	font-weight: 600;
+	color: var(--main-color);
+}
+
+.comments h3 {
+	margin-top: 50px;
+}
+
+.comments ul {
+	margin-top: 30px;
+	width: 100%;
+}
