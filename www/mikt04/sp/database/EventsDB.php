@@ -44,21 +44,14 @@ class EventsDB extends Database
   }
 
   public function fetchAllPagination($nItemsPerPagination, $offset){
-    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY event_id DESC LIMIT :offset, :nItemsPerPagination");
-    $statement->bindValue(1, $offset, PDO::PARAM_INT);
-    $statement->bindValue(2, $nItemsPerPagination, PDO::PARAM_INT);
-
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY event_id DESC LIMIT $offset, $nItemsPerPagination");
     $statement->execute();
     return $statement->fetchAll();
   }
 
   public function fetchOrderById($id, $nItemsPerPagination, $offset){
-    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE category_id = :category_id ORDER BY event_id DESC LIMIT :offset, :nItemsPerPagination");
-    $statement->bindValue(1, $id, PDO::PARAM_INT);
-    $statement->bindValue(2, $offset, PDO::PARAM_INT);
-    $statement->bindValue(3, $nItemsPerPagination, PDO::PARAM_INT);
-
-    $statement->execute();
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE category_id = :category_id ORDER BY event_id DESC LIMIT $offset, $nItemsPerPagination");
+    $statement->execute(['category_id' => $id]);
     $products = $statement->fetchAll();
     return $products;
   }

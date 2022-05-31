@@ -3,11 +3,18 @@
 <?php require_once './database/UsersDB.php';?>
 <?php require_once './include/check-logout.php';?>
 <?php require_once './include/clean-input.php';?>
+<?php require_once './facebook/facebook.php';?>
 
 <?php
 $messageSuccess = '';
 $messageFail = '';
 $valid = TRUE;
+
+$fbHelper = $fb->getRedirectLoginHelper();
+$permissions = ['email'];
+$callbackUrl = htmlspecialchars('https://eso.vse.cz/~mikt04/webove-aplikace/sp/facebook/fb-callback.php');
+$fbLoginUrl = $fbHelper->getLoginUrl($callbackUrl, $permissions);
+
 
 if ('POST' == $_SERVER['REQUEST_METHOD']) {
     $firstName = cleanInput($_POST['first-name']);
@@ -81,6 +88,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
                 <input type="checkbox" name="confirmation" class="checkbox-confirm" value="1">Nejsem robot</input>
                 <br>
                 <button class="button-2" type="submit">Vytvořit účet</button>
+                <a class="button-2" href="<?php echo $fbLoginUrl;?>">Zaregistrovat se přes Facebook</a>
                 <p>Máš účet? <a href="signin.php" class="notify">Přihlaš se!</a></p>
             </form>
         </div>

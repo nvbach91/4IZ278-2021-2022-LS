@@ -3,7 +3,7 @@
 <?php include "./lib/phpqrcode/qrlib.php"; ?>
 
 <?php require_once './database/EventsDB.php';?>
-<?php require_once './database/ticketDB.php';?>
+<?php require_once './database/TicketDB.php';?>
 <?php require_once './database/UserTicketDB.php';?>
 <?php require_once './include/check-capacity.php';?>
 <?php require_once './include/clean-input.php';?>

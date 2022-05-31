@@ -43,6 +43,13 @@ class UsersDB extends Database
     return isset($res['pwd_hash']) ? $res['pwd_hash'] : '';
   }
 
+  public function fetchByFBId($fbUserId)
+  {
+    $statement = $this->pdo->prepare('SELECT * FROM users WHERE facebook_id LIKE :facebookId LIMIT 1;');
+    $statement->execute(['facebookId'=>$fbUserId]);
+    return $statement->fetch();
+  }
+
   public function validateEmail($email)
   {
     $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE email like :email LIMIT 1");
@@ -66,8 +73,20 @@ class UsersDB extends Database
     VALUES (?, ?, ?, ?, ?, ?)");
     $statement->execute([$firstName, $lastName, $email, $password, $date, $privilege]);
   }
+
+  public function insertFacebook($firstName, $lastName, $email, $date, $privilege, $fbUserId)
+  {
+    $statement = $this->pdo->prepare("INSERT INTO $this->tableName (first_name, last_name, email, created, privilege, facebook_id) 
+    VALUES (?, ?, ?, ?, ?, ?)");
+    $statement->execute([$firstName, $lastName, $email, $date, $privilege, $fbUserId]);
+  }
+
+  public function updatePassword($id, $password){
+    $statement = $this->pdo->prepare("UPDATE $this->tableName SET pwd_hash='$password' WHERE user_id = :user_id ");
+    $statement->execute(['user_id' => $id]);
+  }
   
-    /*
+  /*
   public function insertUser($firstName, $lastName, $email, $password)
   {
     $rnd = '2018-12-05 12:39:16';

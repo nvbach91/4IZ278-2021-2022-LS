@@ -4,7 +4,7 @@
 
 <?php
 require_once './database/EventsDB.php';
-require_once './database/ticketDB.php';
+require_once './database/TicketDB.php';
 require_once './database/UserTicketDB.php';
 require_once './database/VTicketEventDB.php';
 require_once './include/check-login.php';

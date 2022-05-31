@@ -447,10 +447,18 @@ main{
     border-radius: 20px;
 }
 
+.page:hover {
+    background-color: #6c89cd;
+}
+
 .active-page {
     background-color: #7890c8;
+}
 
-
+.user-container {
+    display: grid;
+    justify-content: center;
+    text-align: center;
 }
 
 
