@@ -9,12 +9,12 @@ function setArticleSize() {
 	let allImages = document.querySelectorAll(".articles-list img");
 	allImages.forEach((el) => {
 		el.style.height = imgSize + "px";
-		console.log(el.getBoundingClientRect().width);
+		// console.log(el.getBoundingClientRect().width);
 	});
 
 	allDivs.forEach((el) => {
 		el.style.height = imgSize + "px";
-		console.log(el.getBoundingClientRect().width);
+		// console.log(el.getBoundingClientRect().width);
 	});
 }
 

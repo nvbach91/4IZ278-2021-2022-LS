@@ -26,19 +26,6 @@ if (!empty($_POST)) {
 
     $title = $_POST['title'];
     $desc = $_POST['title-desc'];
-    if ($_FILES['file']['size'] != 0) {
-        $pic = $_FILES['file']['name'];
-        $pic_tem_loc = $_FILES['file']['tmp_name'];
-        $pic_store = "../pics/clanky/" . $pic;
-
-        move_uploaded_file($pic_tem_loc, $pic_store);
-
-        if (file_exists("../pics/clanky/" . $article['image_path'])) {
-            unlink("../pics/clanky/" . $article['image_path']);
-        }
-    } else {
-        $pic = $article['image_path'];
-    }
 
     $meta_title = $_POST['meta-title'];
     $meta_title_desc = $_POST['meta-title-desc'];
@@ -48,21 +35,40 @@ if (!empty($_POST)) {
     $author = $_SESSION['username'];
     $date = date("Y-m-d");
 
-    $statement = $con->prepare("UPDATE articles SET title = :title, description = :description, content = :content, meta_title = :meta_title, meta_description = :meta_description, 
-    image_path = :image_path, date = :date WHERE id = :id");
-    $statement->execute([
-        'title' => $title,
-        'description' => $desc,
-        'content' => $content,
-        'meta_title' => $meta_title,
-        'meta_description' => $meta_title_desc,
-        'image_path' => $pic,
-        'date' => $date,
-        'id' => $id
-    ]);
+    if (strlen($title) <= 60 && strlen($meta_title) <= 60 && strlen($meta_title_desc) <= 160 && strlen($desc) <= 160) {
+        if ($_FILES['file']['size'] != 0) {
+            $pic = $_FILES['file']['name'];
+            $pic_tem_loc = $_FILES['file']['tmp_name'];
+            $pic_store = "../pics/clanky/" . $pic;
 
-    updateTags($id, $con, $_POST['tags']);
-    header("Location: index.php");
+            move_uploaded_file($pic_tem_loc, $pic_store);
+
+            if (file_exists("../pics/clanky/" . $article['image_path'])) {
+                unlink("../pics/clanky/" . $article['image_path']);
+            }
+        } else {
+            $pic = $article['image_path'];
+        }
+
+
+        $statement = $con->prepare("UPDATE articles SET title = :title, description = :description, content = :content, meta_title = :meta_title, meta_description = :meta_description, 
+        image_path = :image_path, date = :date WHERE id = :id");
+        $statement->execute([
+            'title' => $title,
+            'description' => $desc,
+            'content' => $content,
+            'meta_title' => $meta_title,
+            'meta_description' => $meta_title_desc,
+            'image_path' => $pic,
+            'date' => $date,
+            'id' => $id
+        ]);
+
+        updateTags($id, $con, $_POST['tags']);
+        header("Location: index.php");
+    } else {
+        exit("*Nadpis a Title může obsahovat maximálně 60 znaků a popisek a Description 160!");
+    }
 }
 ?>
 
@@ -71,9 +77,8 @@ if (!empty($_POST)) {
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Nový článek | Fyzioterapie Meritum</title>
-    <link rel="icon" href="../pics/logo_meritum.png" />
-    <meta name="description" content="V ceníku najdete kompletní výpis našich služeb. Můžete u nás platit v hotovosti i na fakturu." />
+    <title>Úprava článku | Blogino</title>
+    <meta name="description" content="" />
     <meta name="author" content="Tomáš Zeman" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -95,10 +100,10 @@ if (!empty($_POST)) {
         </label>
         <ul>
             <li>
-                <a href="../">Úvod</a>
+                <a href="../">Články</a>
             </li>
 
-            <li><a href="../contact/">CRM</a></li>
+            <li><a href="./">Profil</a></li>
         </ul>
     </nav>
     <div class="content">
@@ -113,11 +118,13 @@ if (!empty($_POST)) {
                     <input name="title" type="text" placeholder="Nadpis" value="<?php echo $article['title'] ?>" />
                     <textarea name="title-desc" placeholder="Úvodní popisek"><?php echo $article['description'] ?></textarea>
                     <input name="file" id="file" type="file" class="form-data" />
+                    <p>*Nadpis může obsahovat maximálně 60 znaků a popisek 160</p>
                 </div>
 
                 <div class="meta-info boxes">
                     <input name="meta-title" type="text" placeholder="Title" value="<?php echo $article['meta_title'] ?>" />
                     <textarea name="meta-title-desc" placeholder="Description"><?php echo $article['meta_description'] ?></textarea>
+                    <p>*Title může obsahovat maximálně 60 znaků a Description 160</p>
                 </div>
                 <div class="editor-cont">
                     <div id="editor" class="editor">

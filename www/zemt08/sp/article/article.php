@@ -9,6 +9,7 @@ if (!empty($_GET)) {
         'id' => $id
     ]);
     $article = @$stmt->fetchAll()[0];
+    $author = getAuthor($article['author_id'], $con);
 } else {
     header('Location: index.php');
     exit();
@@ -49,11 +50,7 @@ if (!empty($_POST)) {
     }
 }
 
-$stmt = $con->prepare('SELECT * FROM ratings WHERE article_id = :id');
-$stmt->execute([
-    'id' => $article['id']
-]);
-$ratings = @$stmt->fetchAll();
+$ratings = getRatings($article['id'], $con);
 $bilance = 0;
 foreach ($ratings as $row) {
     if ($row['rating'] == 0) {
@@ -104,8 +101,8 @@ foreach ($ratings as $row) {
                 <h3>
                     <?php echo $article['description'] ?>
                 </h3>
-                <p><?php echo date("d.m.Y", strtotime($article['date'])); ?></p>
-                <img src="../pics/clanky/<?php echo $article['image_path'] ?>" alt="komplexní fyzioterapie" />
+                <p><?php echo date("d.m.Y", strtotime($article['date'])) . "<br> Autor: " . $author['username']; ?></p>
+                <img src="../pics/clanky/<?php echo $article['image_path'] ?>" />
                 <?php echo $article['content'] ?>
             </div>
         </section>
@@ -154,35 +151,9 @@ foreach ($ratings as $row) {
     </div>
     <footer>
         <div class="footer">
-            <section>
-                <h3>Otevírací doba</h3>
-                <p>Po - Pá:</p>
-                <p>8:00 - 17:00</p>
-                <p style="font-style: italic">(nebo dle rezervace)</p>
-            </section>
 
-            <section>
-                <h3>Kontakt</h3>
-                <p>+420 728 566 969</p>
-                <p>+420 724 220 607</p>
-                <p>ordinace@fyziomeritum.cz</p>
-            </section>
-
-            <section>
-                <h3>Adresa</h3>
-                <p>Fyzioterapie Meritum s.r.o.</p>
-                <p>28. pluku 575/21</p>
-                <p>101 00 Praha 10 - Vršovice</p>
-            </section>
-
-            <section>
-                <h3>Účetní údaje</h3>
-                <p>IČO: 14032066</p>
-            </section>
         </div>
     </footer>
-
-    <script src="../js/service.js"></script>
 </body>
 
 </html>

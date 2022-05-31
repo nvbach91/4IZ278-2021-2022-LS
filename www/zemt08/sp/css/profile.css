@@ -75,3 +75,13 @@ input[type="submit"].submit-button:hover {
 .show-article:hover {
 	color: white;
 }
+
+.form div.github_user {
+	width: 100%;
+	display: block;
+	text-align: center;
+}
+
+.github_user img {
+	max-width: 300px;
+}

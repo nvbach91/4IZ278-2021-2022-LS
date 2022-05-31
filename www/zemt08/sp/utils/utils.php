@@ -46,6 +46,24 @@ function getComments($articleId, $con, $deleteAllComments)
     }
 }
 
+function getRatings($articleId, $con)
+{
+    $stmt = $con->prepare('SELECT * FROM ratings WHERE article_id = :id');
+    $stmt->execute([
+        'id' => $articleId
+    ]);
+    return @$stmt->fetchAll();
+}
+
+function getAuthor($authorId, $con)
+{
+    $stmt = $con->prepare('SELECT * FROM users WHERE id = :id LIMIT 1');
+    $stmt->execute([
+        'id' => $authorId
+    ]);
+    return @$stmt->fetchAll()[0];
+}
+
 // Funkce k smazání položek
 
 function deleteTags($articleId, $con)

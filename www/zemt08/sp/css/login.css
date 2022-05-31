@@ -1,5 +1,4 @@
 form {
-	color: var(--main-color);
 	width: 450px;
 	background: radial-gradient(circle, rgba(0, 121, 112, 0.8) 0%, rgba(0, 63, 57, 0.8) 100%);
 	padding: 50px;
@@ -16,6 +15,13 @@ form h1 {
 }
 
 input[type="text"] {
+	width: 250px;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 15px;
+}
+
+input[type="email"] {
 	width: 250px;
 	display: block;
 	margin: 0 auto;
@@ -42,4 +48,12 @@ form a {
 nav div {
 	position: absolute;
 	left: 50px;
+}
+
+label {
+	color: white;
+	display: block;
+	margin-top: -5px;
+	margin-bottom: 10px;
+	font-size: 14px;
 }

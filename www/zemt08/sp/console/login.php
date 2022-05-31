@@ -31,7 +31,7 @@
             $_SESSION['user_id'] = $existing_user['id'];
             header('Location: index.php');
         } else {
-            exit('Invalid user or password!');
+            exit('Nesprávné uživatelské jméno nebo heslo.');
         }
     }
     ?>
@@ -44,8 +44,6 @@
             <li>
                 <a href="../">Úvod</a>
             </li>
-
-            <li><a href="../contact/">CRM</a></li>
         </ul>
     </nav>
     <div class="content">
@@ -54,6 +52,7 @@
             <input type="text" name="username" placeholder="Uživatelské jméno" autofocus="true" />
             <input type="password" name="password" placeholder="Heslo" />
             <input type="submit" value="Přihlásit" name="submit" class="login-button" />
+            <a href="https://github.com/login/oauth/authorize?client_id=ad7aed5e4e3b7497802a&">Přihlásit se pomocí Github</a>
             <a href="./register.php">Nemáte založený účet? Vytvořte si ho zde.</a>
         </form>
     </div>

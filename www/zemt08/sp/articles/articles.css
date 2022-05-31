@@ -142,3 +142,20 @@
 	background-color: var(--main-color);
 	color: white;
 }
+
+.filter {
+	text-align: center;
+}
+
+.filter input {
+	margin: 0 15px;
+}
+
+.users-list form {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	max-width: 350px;
+	margin: 0 auto;
+	margin-bottom: 15px;
+}

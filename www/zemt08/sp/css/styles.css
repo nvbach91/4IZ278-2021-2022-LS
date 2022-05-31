@@ -220,42 +220,6 @@ section {
 	}
 }
 
-/*--------------------------------------------DOMLUVIT SCHŮZKU*/
-
-.make-appointment {
-	background: radial-gradient(circle, rgba(0, 121, 112, 1) 0%, rgba(0, 63, 57, 1) 100%);
-	position: relative;
-	overflow: hidden;
-	text-align: center;
-	padding: 80px 0;
-}
-
-.make-appointment img {
-	width: 30%;
-	position: absolute;
-	top: -20%;
-	left: 0;
-}
-
-.make-appointment h3 {
-	color: white;
-	margin-bottom: 15px;
-	text-align: center;
-	position: relative;
-}
-
-.make-appointment button {
-	padding: 10px 20px;
-	font-size: 18px;
-	font-weight: 600;
-}
-
-@media (max-width: 900px) {
-	.make-appointment img {
-		display: none;
-	}
-}
-
 /*--------------------------------------------FOOTER*/
 footer {
 	background-color: #333;
@@ -275,7 +239,7 @@ footer {
 }
 
 .footer::after {
-	content: "© 2022 Fyzioterapie Meritum s.r.o.";
+	content: "© 2022 Blogino";
 }
 
 .footer section {
@@ -323,84 +287,7 @@ footer {
 	}
 }
 
-/*-------------------------------------------- FULL SCREEN IMAGE*/
-.full-screen-img {
-	width: 100%;
-	height: 100vh;
-	background-color: rgba(0, 0, 0, 0.9);
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 25;
-}
-
-.full-screen-img i {
-	position: absolute;
-	top: 35px;
-	right: 35px;
-	font-size: 35px;
-	color: white;
-	cursor: pointer;
-	transition: all 1s;
-}
-
-.full-screen-img i:hover {
-	transform: rotate(360deg);
-}
-
-.full-screen-img img:nth-of-type(1) {
-	max-width: 80%;
-	max-height: 80vh;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.full-screen-img img:nth-of-type(2) {
-	position: absolute;
-	top: 50%;
-	left: 35px;
-	transform: translateY(-50%);
-	cursor: pointer;
-}
-
-.full-screen-img img:nth-of-type(3) {
-	position: absolute;
-	top: 50%;
-	right: 35px;
-	transform: translateY(-50%);
-	cursor: pointer;
-}
-
-@media (max-width: 600px) {
-	.full-screen-img img:nth-of-type(2) {
-		height: 45px;
-		left: 5px;
-	}
-
-	.full-screen-img img:nth-of-type(3) {
-		height: 45px;
-		right: 5px;
-	}
-}
-
-@keyframes fadeOut {
-	from {
-		opacity: 1;
-	}
-
-	to {
-		opacity: 0;
-	}
-}
-
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
+.users-list {
+	max-height: 40vh;
+	overflow-y: auto;
 }

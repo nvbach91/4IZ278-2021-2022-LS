@@ -5,7 +5,7 @@
     <link rel="icon" href="../pics/logo_meritum.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <title>Profil</title>
+    <title>Profil | Blogino</title>
     <script src="../js/font-awesome.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/nav.css" />
@@ -17,12 +17,14 @@
     <?php
     include("./auth_session.php");
     include("./db.php");
+    require('../utils/utils_user.php');
     $userlogin = $_SESSION['username'];
+    $user_id = $_SESSION['user_id'];
     if (!empty($_POST)) {
         if (isset($_POST['password-submit'])) {
             $password = $_POST['password'];
             $passwordcheck = $_POST['passwordcheck'];
-            if ($password == $passwordcheck) {
+            if ($password == $passwordcheck && checkPasswordStrength($password)) {
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
                 $statement = $con->prepare("UPDATE users SET password = :password WHERE username = :username");
@@ -30,28 +32,40 @@
                     'username' => $userlogin,
                     'password' => $hashedPassword
                 ]);
+            } else {
+                exit("Heslo nesplňuje požadavky.");
             }
         } else {
             $username = $_POST['username'];
             $surname = $_POST['surname'];
             $forename = $_POST['forename'];
-
-            $statement = $con->prepare("UPDATE users SET username = :username, forename = :forename, surname = :surname  WHERE username = :userlogin");
-            $statement->execute([
-                'username' => $username,
-                'forename' => $forename,
-                'surname' => $surname,
-                'userlogin' => $userlogin
-            ]);
-            $_SESSION['username'] = $username;
+            if ($_SESSION['username'] != $_POST['username']) {
+                if (!checkUser($username, $con)) {
+                    $statement = $con->prepare("UPDATE users SET username = :username, forename = :forename, surname = :surname  WHERE username = :userlogin");
+                    $statement->execute([
+                        'username' => $username,
+                        'forename' => $forename,
+                        'surname' => $surname,
+                        'userlogin' => $userlogin
+                    ]);
+                    $_SESSION['username'] = $username;
+                } else {
+                    exit("Uživatelské jméno je již zabrané");
+                }
+            } else {
+                $statement = $con->prepare("UPDATE users SET forename = :forename, surname = :surname  WHERE username = :userlogin");
+                $statement->execute([
+                    'forename' => $forename,
+                    'surname' => $surname,
+                    'userlogin' => $userlogin
+                ]);
+            }
         }
+        $userlogin = $_SESSION['username'];
+        $user = getUser($userlogin, $con);
     }
     //** Načtení údajů o uživateli */
-    $stmt = $con->prepare('SELECT * FROM users WHERE username = :username LIMIT 1');
-    $stmt->execute([
-        'username' => $userlogin
-    ]);
-    $user = @$stmt->fetchAll()[0];
+    $user = getUser($userlogin, $con);
 
     $itemsPerPage = 5;
     $offset = 0;
@@ -59,9 +73,9 @@
         $offset = $_GET['offset'];
     }
 
-    $count = $con->query("SELECT COUNT(id) FROM articles")->fetchColumn();
+    $count = $con->query("SELECT COUNT(id) FROM articles WHERE author_id = '$user_id'")->fetchColumn();
 
-    $stmt = $con->prepare("SELECT * FROM articles ORDER BY id DESC LIMIT $itemsPerPage OFFSET ?");
+    $stmt = $con->prepare("SELECT * FROM articles WHERE author_id = '$user_id' ORDER BY id DESC LIMIT $itemsPerPage OFFSET ?");
     $stmt->bindValue(1, $offset, PDO::PARAM_INT);
     $stmt->execute();
     $goods = $stmt->fetchAll();
@@ -81,18 +95,26 @@
     <div class="content">
         <form class="form" method="post">
             <h1 class="headline">Správa uživatelského účtu</h1>
-            <div>
-                <input type="text" name="username" placeholder="Uživatelské jméno" value="<?php echo $_SESSION['username'] ?>" />
-                <input type="text" name="forename" placeholder="Křestní jméno" value="<?php echo $user['forename'] ?>" />
-                <input type="text" name="surname" placeholder="Příjmení" value="<?php echo $user['surname'] ?>" />
-                <input type="submit" value="Uložit" name="submit" class="submit-button" />
-            </div>
+            <?php if (isset($_SESSION['access_token'])) { ?>
+                <div class="github_user">
+                    <img src="../pics/github.svg" />
+                    <h3><?php echo $_SESSION['username']; ?></h3>
+                    <p>Pro přihlášení využíváte služby Github</p>
+                </div>
+            <?php } else { ?>
+                <div>
+                    <input type="text" name="username" placeholder="Uživatelské jméno" value="<?php echo $_SESSION['username'] ?>" />
+                    <input type="text" name="forename" placeholder="Křestní jméno" value="<?php echo $user['forename'] ?>" />
+                    <input type="text" name="surname" placeholder="Příjmení" value="<?php echo $user['surname'] ?>" />
+                    <input type="submit" value="Uložit" name="submit" class="submit-button" />
+                </div>
 
-            <div>
-                <input type="password" name="password" placeholder="Heslo" />
-                <input type="password" name="passwordcheck" placeholder="Heslo znovu" />
-                <input type="submit" value="Změnit heslo" name="password-submit" class="submit-button" />
-            </div>
+                <div>
+                    <input type="password" name="password" placeholder="Heslo" />
+                    <input type="password" name="passwordcheck" placeholder="Heslo znovu" />
+                    <input type="submit" value="Změnit heslo" name="password-submit" class="submit-button" />
+                </div>
+            <?php } ?>
         </form>
 
         <section class="user-articles">

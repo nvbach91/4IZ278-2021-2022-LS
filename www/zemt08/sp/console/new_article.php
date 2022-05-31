@@ -10,8 +10,6 @@ if (!empty($_POST)) {
     $pic_tem_loc = $_FILES['file']['tmp_name'];
     $pic_store = "../pics/clanky/" . $pic;
 
-    move_uploaded_file($pic_tem_loc, $pic_store);
-
     $meta_title = $_POST['meta-title'];
     $meta_title_desc = $_POST['meta-title-desc'];
 
@@ -20,35 +18,41 @@ if (!empty($_POST)) {
     $author = $_SESSION['user_id'];
     $date = date("Y-m-d H:i:s");
 
-    $statement = $con->prepare("INSERT INTO articles(title, description, content, meta_title, meta_description, image_path, author_id, date) VALUES(:title, :description, :content, :meta_title,
-     :meta_description, :image_path, :author_id, :date)");
-    $statement->execute([
-        'title' => $title,
-        'description' => $desc,
-        'content' => $content,
-        'meta_title' => $meta_title,
-        'meta_description' => $meta_title_desc,
-        'image_path' => $pic,
-        'author_id' => $author,
-        'date' => $date,
-    ]);
+    if (strlen($title) <= 60 && strlen($meta_title) <= 60 && strlen($meta_title_desc) <= 160 && strlen($desc) <= 160) {
 
-    $id = getAricleId($author, $date, $con);
+        move_uploaded_file($pic_tem_loc, $pic_store);
+        $statement = $con->prepare("INSERT INTO articles(title, description, content, meta_title, meta_description, image_path, author_id, date) VALUES(:title, :description, :content, :meta_title,
+        :meta_description, :image_path, :author_id, :date)");
+        $statement->execute([
+            'title' => $title,
+            'description' => $desc,
+            'content' => $content,
+            'meta_title' => $meta_title,
+            'meta_description' => $meta_title_desc,
+            'image_path' => $pic,
+            'author_id' => $author,
+            'date' => $date,
+        ]);
 
-    $tags = $_POST['tags'];
-    $tags = str_replace(" ", "", $tags);
-    $tagsArray = explode("#", $tags);
-    foreach ($tagsArray as $value) {
-        if ($value != "") {
-            $statement = $con->prepare("INSERT INTO tags(tag, article_id) VALUES(:tag, :article_id)");
-            $statement->execute([
-                'tag' => $value,
-                'article_id' => $id
-            ]);
+        $id = getAricleId($author, $date, $con);
+
+        $tags = $_POST['tags'];
+        $tags = str_replace(" ", "", $tags);
+        $tagsArray = explode("#", $tags);
+        foreach ($tagsArray as $value) {
+            if ($value != "") {
+                $statement = $con->prepare("INSERT INTO tags(tag, article_id) VALUES(:tag, :article_id)");
+                $statement->execute([
+                    'tag' => $value,
+                    'article_id' => $id
+                ]);
+            }
         }
-    }
 
-    header("Location: index.php");
+        header("Location: index.php");
+    } else {
+        exit("*Nadpis a Title může obsahovat maximálně 60 znaků a popisek a Description 160!");
+    }
 }
 ?>
 
@@ -57,9 +61,8 @@ if (!empty($_POST)) {
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Nový článek | Fyzioterapie Meritum</title>
-    <link rel="icon" href="../pics/logo_meritum.png" />
-    <meta name="description" content="V ceníku najdete kompletní výpis našich služeb. Můžete u nás platit v hotovosti i na fakturu." />
+    <title>Nový článek | Blogino</title>
+    <meta name="description" content="" />
     <meta name="author" content="Tomáš Zeman" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
