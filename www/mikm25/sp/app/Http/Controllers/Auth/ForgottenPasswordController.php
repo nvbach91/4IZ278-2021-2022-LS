@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ForgottenPasswordSendRequest;
 use App\Notifications\User\ForgottenPasswordNotification;
-use App\Repositories\PasswordReset\PasswordResetRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Services\PasswordReset\PasswordResetService;
 use Illuminate\Http\RedirectResponse;
 
 class ForgottenPasswordController extends Controller
@@ -17,16 +17,16 @@ class ForgottenPasswordController extends Controller
     private $userRepository;
 
     /**
-     * @var PasswordResetRepositoryInterface
+     * @var PasswordResetService
      */
-    private $passwordResetRepository;
+    private $passwordResetService;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
-        PasswordResetRepositoryInterface $passwordResetRepository
+        PasswordResetService $passwordResetService
     ) {
         $this->userRepository = $userRepository;
-        $this->passwordResetRepository = $passwordResetRepository;
+        $this->passwordResetService = $passwordResetService;
     }
 
     public function form(): string
@@ -44,7 +44,7 @@ class ForgottenPasswordController extends Controller
             ]);
         }
 
-        $passwordReset = $this->passwordResetRepository->createForUser($user);
+        $passwordReset = $this->passwordResetService->createForUser($user);
 
         $user->notify(new ForgottenPasswordNotification($passwordReset));
 

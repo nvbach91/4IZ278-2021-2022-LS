@@ -49,15 +49,8 @@ class PasswordResetController extends Controller
 
         $passwordReset = $this->passwordResetRepository->getByToken($token);
 
-        // non-existing or used link
+        // non-existing or non-usable link
         if ($passwordReset === null || ! $passwordReset->is_usable) {
-            return $this->sendFailedViewResponse();
-        }
-
-        $latest = $this->passwordResetRepository->getLatestForUser($passwordReset->user);
-
-        // user used one of his older links
-        if ($latest->id !== $passwordReset->id) {
             return $this->sendFailedViewResponse();
         }
 
@@ -82,15 +75,8 @@ class PasswordResetController extends Controller
     {
         $passwordReset = $this->passwordResetRepository->getByToken($token);
 
-        // non-existing or used link
+        // non-existing or non-usable link
         if ($passwordReset === null || ! $passwordReset->is_usable) {
-            return $this->sendFailedResponse();
-        }
-
-        $latest = $this->passwordResetRepository->getLatestForUser($passwordReset->user);
-
-        // user used one of his older links
-        if ($latest->id !== $passwordReset->id) {
             return $this->sendFailedResponse();
         }
 

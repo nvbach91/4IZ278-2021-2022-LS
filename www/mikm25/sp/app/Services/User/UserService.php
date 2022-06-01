@@ -6,8 +6,8 @@ use App\DTOs\User\UserDTO;
 use App\Models\User;
 use App\Notifications\User\EmailVerificationNotification;
 use App\Notifications\User\PasswordResetNotification;
-use App\Repositories\EmailVerification\EmailVerificationRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Services\EmailVerification\EmailVerificationService;
 
 class UserService
 {
@@ -17,16 +17,16 @@ class UserService
     private $userRepository;
 
     /**
-     * @var EmailVerificationRepositoryInterface
+     * @var EmailVerificationService
      */
-    private $emailVerificationRepository;
+    private $emailVerificationService;
 
     public function __construct(
         UserRepositoryInterface $userRepository,
-        EmailVerificationRepositoryInterface $emailVerificationRepository
+        EmailVerificationService $emailVerificationService
     ) {
         $this->userRepository = $userRepository;
-        $this->emailVerificationRepository = $emailVerificationRepository;
+        $this->emailVerificationService = $emailVerificationService;
     }
 
     public function update(User $user, UserDTO $userDTO): User
@@ -35,6 +35,7 @@ class UserService
         $user->lastname = $userDTO->lastname;
         $user->phone_number = $userDTO->phone;
 
+        // User changed email -> make him verify his email again!
         if (! empty($userDTO->email) && $userDTO->email !== $user->email) {
             $user->email = $userDTO->email;
             $user->email_verified_at = null;
@@ -53,7 +54,7 @@ class UserService
 
         // If email changed, send him the link for verification again
         if ($user->wasChanged('email')) {
-            $emailVerification = $this->emailVerificationRepository->createForUser($user);
+            $emailVerification = $this->emailVerificationService->createForUser($user);
             $user->notify(new EmailVerificationNotification($emailVerification));
         }
 

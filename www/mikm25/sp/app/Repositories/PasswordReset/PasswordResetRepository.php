@@ -21,17 +21,6 @@ class PasswordResetRepository implements PasswordResetRepositoryInterface
         return $passwordReset;
     }
 
-    public function getLatestForUser(User $user): ?PasswordReset
-    {
-        /** @var PasswordReset|null $passwordReset */
-        $passwordReset = PasswordReset::query()
-            ->ofUserId($user->id)
-            ->latest()
-            ->first();
-
-        return $passwordReset;
-    }
-
     public function getByToken(string $token): ?PasswordReset
     {
         /** @var PasswordReset|null $passwordReset */
@@ -43,11 +32,23 @@ class PasswordResetRepository implements PasswordResetRepositoryInterface
         return $passwordReset;
     }
 
-    public function markAsUsed(PasswordReset $passwordReset): PasswordReset
+    public function markAsUsed(PasswordReset $passwordReset, ?Carbon $time = null): PasswordReset
     {
         $passwordReset->used = true;
+        $passwordReset->used_at = $time ?? Carbon::now();
         $passwordReset->save();
 
         return $passwordReset;
+    }
+
+    public function invalidateUserNotUsedPasswordResets(User $user, ?Carbon $time = null): void
+    {
+        PasswordReset::query()
+            ->ofUserId($user->id)
+            ->notUsed()
+            ->update([
+                'invalidated' => true,
+                'invalidated_at' => $time ?? Carbon::now(),
+            ]);
     }
 }

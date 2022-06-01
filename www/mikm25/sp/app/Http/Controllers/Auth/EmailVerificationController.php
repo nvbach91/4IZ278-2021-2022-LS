@@ -39,15 +39,8 @@ class EmailVerificationController extends Controller
 
         $verification = $this->verificationRepository->getByToken($token);
 
-        // non-existing or used link
+        // non-existing or non-usable link
         if ($verification === null || ! $verification->is_usable) {
-            return $this->sendFailedResponse();
-        }
-
-        $latest = $this->verificationRepository->getLatestForUser($verification->user);
-
-        // user used one of his older links
-        if ($latest->id !== $verification->id) {
             return $this->sendFailedResponse();
         }
 

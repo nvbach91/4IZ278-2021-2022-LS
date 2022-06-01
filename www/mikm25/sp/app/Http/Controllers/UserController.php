@@ -9,8 +9,8 @@ use App\Http\Requests\User\UserShowSelfRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Models\User;
 use App\Notifications\User\EmailVerificationNotification;
-use App\Repositories\EmailVerification\EmailVerificationRepositoryInterface;
 use App\Services\Auth\LogoutService;
+use App\Services\EmailVerification\EmailVerificationService;
 use App\Services\User\UserDeleteValidatorService;
 use App\Services\User\UserService;
 use Illuminate\Http\RedirectResponse;
@@ -23,9 +23,9 @@ class UserController extends Controller
     private $deleteValidatorService;
 
     /**
-     * @var EmailVerificationRepositoryInterface
+     * @var EmailVerificationService
      */
-    private $emailVerificationRepository;
+    private $emailVerificationService;
 
     /**
      * @var LogoutService
@@ -39,12 +39,12 @@ class UserController extends Controller
 
     public function __construct(
         UserDeleteValidatorService $deleteValidatorService,
-        EmailVerificationRepositoryInterface $emailVerificationRepository,
+        EmailVerificationService $emailVerificationService,
         LogoutService $logoutService,
         UserService $userService
     ) {
         $this->deleteValidatorService = $deleteValidatorService;
-        $this->emailVerificationRepository = $emailVerificationRepository;
+        $this->emailVerificationService = $emailVerificationService;
         $this->logoutService = $logoutService;
         $this->userService = $userService;
     }
@@ -117,7 +117,7 @@ class UserController extends Controller
             ]);
         }
 
-        $verification = $this->emailVerificationRepository->createForUser($user);
+        $verification = $this->emailVerificationService->createForUser($user);
 
         $user->notify(new EmailVerificationNotification($verification));
 

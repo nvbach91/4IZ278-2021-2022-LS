@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Notifications\User\RegisteredNotification;
-use App\Repositories\EmailVerification\EmailVerificationRepositoryInterface;
 use App\Services\Auth\RegisterService;
+use App\Services\EmailVerification\EmailVerificationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -15,19 +15,19 @@ class RegisterController extends Controller
     /**
      * @var RegisterService
      */
-    private $service;
+    private $registerService;
 
     /**
-     * @var EmailVerificationRepositoryInterface
+     * @var EmailVerificationService
      */
-    private $verificationRepository;
+    private $emailVerificationService;
 
     public function __construct(
-        RegisterService $service,
-        EmailVerificationRepositoryInterface $verificationRepository
+        RegisterService $registerService,
+        EmailVerificationService $emailVerificationService
     ) {
-        $this->service = $service;
-        $this->verificationRepository = $verificationRepository;
+        $this->registerService = $registerService;
+        $this->emailVerificationService = $emailVerificationService;
     }
 
     public function index(Request $request): string
@@ -39,7 +39,7 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request): RedirectResponse
     {
-        $user = $this->service->register($request->toDTO());
+        $user = $this->registerService->register($request->toDTO());
 
         if ($user === null) {
             return redirect()->back()->withInput()->with('status', [
@@ -47,7 +47,7 @@ class RegisterController extends Controller
             ]);
         }
 
-        $emailVerification = $this->verificationRepository->createForUser($user);
+        $emailVerification = $this->emailVerificationService->createForUser($user);
 
         $user->notify(new RegisteredNotification($emailVerification));
 

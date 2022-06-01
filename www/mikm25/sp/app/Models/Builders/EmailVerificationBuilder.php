@@ -12,4 +12,14 @@ class EmailVerificationBuilder extends Builder
     use WithIdQuery;
     use WIthTokenQuery;
     use WithUserIdQuery;
+
+    public function used(): self
+    {
+        return $this->where(['used' => true]);
+    }
+
+    public function notUsed(): self
+    {
+        return $this->where(['used' => false]);
+    }
 }

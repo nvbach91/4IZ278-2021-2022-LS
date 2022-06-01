@@ -21,17 +21,6 @@ class EmailVerificationRepository implements EmailVerificationRepositoryInterfac
         return $emailVerification;
     }
 
-    public function getLatestForUser(User $user): ?EmailVerification
-    {
-        /** @var EmailVerification|null $emailVerification */
-        $emailVerification = EmailVerification::query()
-            ->ofUserId($user->id)
-            ->latest()
-            ->first();
-
-        return $emailVerification;
-    }
-
     public function getByToken(string $token): ?EmailVerification
     {
         /** @var EmailVerification|null $emailVerification */
@@ -43,11 +32,23 @@ class EmailVerificationRepository implements EmailVerificationRepositoryInterfac
         return $emailVerification;
     }
 
-    public function markAsUsed(EmailVerification $verification): EmailVerification
+    public function markAsUsed(EmailVerification $verification, ?Carbon $time = null): EmailVerification
     {
         $verification->used = true;
+        $verification->used_at = $time ?? Carbon::now();
         $verification->save();
 
         return $verification;
+    }
+
+    public function invalidateUserNotUsedVerifications(User $user, ?Carbon $time = null): void
+    {
+        EmailVerification::query()
+            ->ofUserId($user->id)
+            ->notUsed()
+            ->update([
+                'invalidated' => true,
+                'invalidated_at' => $time ?? Carbon::now(),
+            ]);
     }
 }

@@ -13,7 +13,10 @@ class CreatePasswordResetsTable extends Migration
             $table->uuid('token')->unique();
             $table->foreignId('user_id');
             $table->boolean('used')->default(0);
+            $table->boolean('invalidated')->default(0);
             $table->timestamp('valid_until');
+            $table->timestamp('invalidated_at')->nullable();
+            $table->timestamp('used_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

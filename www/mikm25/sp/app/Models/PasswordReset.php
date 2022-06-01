@@ -14,7 +14,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $token
  * @property int $user_id
  * @property bool $used
+ * @property bool $invalidated
  * @property Carbon $valid_until
+ * @property Carbon|null $invalidated_at
+ * @property Carbon|null $used_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
@@ -43,11 +46,15 @@ class PasswordReset extends Model
         'token',
         'user_id',
         'used',
+        'invalidated',
         'valid_until',
+        'invalidated_at',
+        'used_at',
     ];
 
     protected $attributes = [
         'used' => false,
+        'invalidated' => false,
     ];
 
     protected $appends = [
@@ -60,7 +67,10 @@ class PasswordReset extends Model
         'token' => 'string',
         'user_id' => 'integer',
         'used' => 'boolean',
-        'valid_until' => 'date',
+        'invalidated' => 'boolean',
+        'valid_until' => 'datetime',
+        'invalidated_at' => 'datetime',
+        'used_at' => 'datetime',
     ];
 
     public function getIsValidAttribute(): bool
@@ -72,7 +82,7 @@ class PasswordReset extends Model
 
     public function getIsUsableAttribute(): bool
     {
-        return $this->is_valid && ! $this->used;
+        return $this->is_valid && ! $this->used && ! $this->invalidated;
     }
 
     public function getPasswordResetLinkAttribute(): string
