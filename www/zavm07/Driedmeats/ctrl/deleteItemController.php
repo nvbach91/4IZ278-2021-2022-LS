@@ -5,11 +5,13 @@
 <?php
 
 if(empty($_POST)){
-    header('Location ../fb_login.php');
+    var_dump(1);
+    header('Location ../index.php');
     exit();
 }
 
 $productsDB = new ProductsDB();
+$productsDB->deleteById($_POST['id']);
 
 header('Location: ../deleteItem.php?success=1');
 exit()

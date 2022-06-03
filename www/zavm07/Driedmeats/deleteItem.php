@@ -11,12 +11,12 @@ $item = $productsDB->fetchById($_GET['id'])[0];
 }
 
 if (empty($item)&&empty($_GET['success'])){
-    header('Location: fb_login.php');
+    header('Location: index.php');
     exit();
 }
 ?>
 
-<div class="conainer w-25 m-auto text-black">
+<div class="container w-25 m-auto text-black">
     <?php if(!empty($_GET['success'])): ?>
         <h5 class="text-success">Položka byla úspěšně odstraněna</h5>
     <?php else: ?>

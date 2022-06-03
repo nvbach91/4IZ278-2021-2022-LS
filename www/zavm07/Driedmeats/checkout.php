@@ -86,5 +86,5 @@ $_SESSION['od_values']['time'] = date("Y-m-d H:i:s");
     </div>
 </div>
 
-
+<?php $_SESSION['od_values']['price'] = $total ?>
 <?php include 'inc/footer.php'?>

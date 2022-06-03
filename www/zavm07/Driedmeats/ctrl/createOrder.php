@@ -8,7 +8,7 @@
 
 <?php
 if(empty($_SESSION['cart'])){
-    header('Location: ../fb_login.php');
+    header('Location: ../index.php');
     exit();
 }
 
@@ -36,12 +36,13 @@ $orderDetails = [
     'zip'=>$orderValues['zip'],
     'shipping'=>$orderValues['shipping'],
     'user_id'=>$user['user_id'],
+    'price'=>$orderValues['price']
         ];
 
 //if creating order fail
 if(!$ordersDB->create($orderDetails)){
     $_SESSION['od_errorMsg']= "Něco se pokazilo, zkuste to prosím znovu";
-    header('Location: ../orderDetails.php');
+    //header('Location: ../orderDetails.php');
     exit();
 }
 

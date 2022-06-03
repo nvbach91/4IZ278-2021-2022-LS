@@ -6,7 +6,7 @@
 <?php
 
 if(empty($_POST)){
-    header('Location ../fb_login.php');
+    header('Location ../index.php');
     exit();
 }
 

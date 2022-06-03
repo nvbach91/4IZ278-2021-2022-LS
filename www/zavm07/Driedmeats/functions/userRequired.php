@@ -2,7 +2,7 @@
 
 <?php
 if (!isset($_SESSION['lg_email'])) {
-    header('Location: ../login.php');
+    header('Location: ./login.php');
     exit();
 }
 

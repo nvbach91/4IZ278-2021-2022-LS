@@ -6,7 +6,7 @@
 <?php
 
 if(empty($_POST)){
-    header('Location: ../fb_login.php');
+    header('Location: ../index.php');
     exit();
 
 }
@@ -34,7 +34,7 @@ $existingItem = $productsDB->fetchById($id)[0];
 
 //check if product exist
 if (empty($existingItem)){
-    header('Location ../fb_login.php');
+    header('Location ../index.php');
     exit();
 }
 

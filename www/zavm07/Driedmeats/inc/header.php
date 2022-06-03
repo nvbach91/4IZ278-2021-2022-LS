@@ -56,7 +56,13 @@
             </li>
         <?php endif;?>
         <?php if (!empty($_SESSION['lg_privileges'])&&$_SESSION['lg_privileges']==2):?>
-            <li class="nav-item"><a class="nav-link" href="createItem.php">Vytvořit produkt</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Admin menu</a>
+                <ul class="dropdown-menu">
+                    <li ><a class="dropdown-item mb-1" href="createItem.php">Vytvořit produkt</a></li>
+                    <li ><a class="dropdown-item mb-1" href="aggregation.php">Obrat</a></li>
+                </ul>
+            </li>
         <?php endif;?>
         <li class="nav-item">
             <a class="nav-link" href="cart.php"><img src="./res/icons/cart.svg" width="23" height="23"></a>
