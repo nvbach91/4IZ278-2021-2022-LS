@@ -2,14 +2,12 @@
 include("auth_session.php");
 include("db.php");
 include("../utils/utils.php");
+include("../article/Articles.php");
 
 if (!empty($_GET)) {
     $id = $_GET['id'];
-    $stmt = $con->prepare('SELECT * FROM articles WHERE id = :id LIMIT 1');
-    $stmt->execute([
-        'id' => $id
-    ]);
-    $article = @$stmt->fetchAll()[0];
+    $article = new Articles();
+    $data = $article->getArticle($id);
     $tags = getTags($id, $con, true);
 } else {
     header('Location: index.php');
@@ -30,7 +28,7 @@ if (!empty($_POST)) {
     $meta_title = $_POST['meta-title'];
     $meta_title_desc = $_POST['meta-title-desc'];
 
-    $content = $_POST['hello'];
+    $content = strip_tags($_POST['hello'], "<p><h3>");
 
     $author = $_SESSION['username'];
     $date = date("Y-m-d");
@@ -115,20 +113,23 @@ if (!empty($_POST)) {
         <section>
             <form id="formArticle" method="post" class="article-form" enctype="multipart/form-data">
                 <div class="main-info boxes">
-                    <input name="title" type="text" placeholder="Nadpis" value="<?php echo $article['title'] ?>" />
-                    <textarea name="title-desc" placeholder="Úvodní popisek"><?php echo $article['description'] ?></textarea>
+                    <input name="title" type="text" placeholder="Nadpis" value="<?php echo $data['title'] ?>" />
+                    <textarea name="title-desc"
+                        placeholder="Úvodní popisek"><?php echo $data['description'] ?></textarea>
                     <input name="file" id="file" type="file" class="form-data" />
                     <p>*Nadpis může obsahovat maximálně 60 znaků a popisek 160</p>
                 </div>
 
                 <div class="meta-info boxes">
-                    <input name="meta-title" type="text" placeholder="Title" value="<?php echo $article['meta_title'] ?>" />
-                    <textarea name="meta-title-desc" placeholder="Description"><?php echo $article['meta_description'] ?></textarea>
+                    <input name="meta-title" type="text" placeholder="Title"
+                        value="<?php echo $data['meta_title'] ?>" />
+                    <textarea name="meta-title-desc"
+                        placeholder="Description"><?php echo $data['meta_description'] ?></textarea>
                     <p>*Title může obsahovat maximálně 60 znaků a Description 160</p>
                 </div>
                 <div class="editor-cont">
                     <div id="editor" class="editor">
-                        <?php echo $article['content'] ?>
+                        <?php echo $data['content'] ?>
                     </div>
                 </div>
                 <div class="tags">
@@ -137,7 +138,8 @@ if (!empty($_POST)) {
                 </div>
                 <div style="width: 100%;">
                     <input id="btnUpload" type="submit" name="upload" value="Uložit" />
-                    <input type="submit" name="delete" value="Smazat" style="background-color: #AE1414; color: white;" />
+                    <input type="submit" name="delete" value="Smazat"
+                        style="background-color: #AE1414; color: white;" />
                 </div>
             </form>
         </section>

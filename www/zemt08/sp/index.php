@@ -1,6 +1,7 @@
 <?php
 include("./console/db.php");
 include("./utils/filter.php");
+require "./article/Articles.php";
 $itemsPerPage = 5;
 if (isset($_GET['offset'])) {
     $offset = $_GET['offset'];
@@ -9,8 +10,10 @@ if (isset($_GET['offset'])) {
 }
 //$offset = 0;
 //$count = $con->query("SELECT COUNT(id) FROM articles")->fetchColumn();
-$count = getCount("", "", "", "", $con);
-$articles = getFilteredArticles("", "", "", "", $con, $itemsPerPage, $offset);
+//$count = getCount("", "", "", "", $con);
+$articles = new Articles();
+$data = $articles->getFilteredArticles("", "", "", "", $itemsPerPage, $offset);
+$count = $articles->getFilteredArticlesCount("", "", "", "");
 
 if (!empty($_POST)) {
     $category = $_POST['tags'];
@@ -18,8 +21,8 @@ if (!empty($_POST)) {
     $dateStart = $_POST['date_start'];
     $dateEnd = $_POST['date_end'];
 
-    $articles = getFilteredArticles($category, $author, $dateStart, $dateEnd, $con, $itemsPerPage, $offset);
-    $count = getCount($category, $author, $dateStart, $dateEnd, $con);
+    $data = $articles->getFilteredArticles($category, $author, $dateStart, $dateEnd, $itemsPerPage, $offset);
+    $count = $articles->getFilteredArticlesCount($category, $author, $dateStart, $dateEnd);
 }
 
 ?>
@@ -74,27 +77,28 @@ if (!empty($_POST)) {
 
         <section class="articles">
             <?php if ($count) { ?>
-                <div class="articles-list">
-                    <?php foreach ($articles as $row) : ?>
-                        <article>
-                            <img src='./pics/clanky/<?php echo $row['image_path'] ?>' alt='<?php echo $row['title'] ?>' />
-                            <h3><?php echo $row['title'] ?></h3>
-                            <p><?php echo date("d.m.Y", strtotime($row['date'])); ?></p>
-                            <div>
-                                <a class="show-article" href='./article/article.php?id=<?php echo $row['id'] ?>'>Zobrazit</a>
-                            </div>
-                        </article>
-                    <?php endforeach; ?>
-                </div>
-                <br>
-                <div class="pagination">
-                    <?php for ($i = 1; $i <= ceil($count / $itemsPerPage); $i++) { ?>
-                        <a class="<?php echo $offset / $itemsPerPage + 1 == $i ? "active" : ""; ?>" href="./index.php?offset=<?php echo ($i - 1) * $itemsPerPage; ?>">
-                            <?php echo $i; ?>
-                        </a>
-                    <?php } ?>
-                </div>
-                <br>
+            <div class="articles-list">
+                <?php foreach ($data as $row) : ?>
+                <article>
+                    <img src='./pics/clanky/<?php echo $row['image_path'] ?>' alt='<?php echo $row['title'] ?>' />
+                    <h3><?php echo $row['title'] ?></h3>
+                    <p><?php echo date("d.m.Y", strtotime($row['date'])); ?></p>
+                    <div>
+                        <a class="show-article" href='./article/article.php?id=<?php echo $row['id'] ?>'>Zobrazit</a>
+                    </div>
+                </article>
+                <?php endforeach; ?>
+            </div>
+            <br>
+            <div class="pagination">
+                <?php for ($i = 1; $i <= ceil($count / $itemsPerPage); $i++) { ?>
+                <a class="<?php echo $offset / $itemsPerPage + 1 == $i ? "active" : ""; ?>"
+                    href="./index.php?offset=<?php echo ($i - 1) * $itemsPerPage; ?>">
+                    <?php echo $i; ?>
+                </a>
+                <?php } ?>
+            </div>
+            <br>
             <?php } ?>
         </section>
     </div>

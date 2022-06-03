@@ -1,14 +1,12 @@
 <?php
 include("../console/db.php");
 include("../utils/utils.php");
+include("../article/Articles.php");
 session_start();
 if (!empty($_GET)) {
     $id = $_GET['id'];
-    $stmt = $con->prepare('SELECT * FROM articles WHERE id = :id LIMIT 1');
-    $stmt->execute([
-        'id' => $id
-    ]);
-    $article = @$stmt->fetchAll()[0];
+    $data = new Articles();
+    $article = $data->getArticle($id);
     $author = getAuthor($article['author_id'], $con);
 } else {
     header('Location: index.php');
@@ -126,26 +124,26 @@ foreach ($ratings as $row) {
             ?>
 
             <?php if ($commentsCount) { ?>
-                <ul>
-                    <?php foreach ($comments as $row) : ?>
-                        <li class="comment">
-                            <p>
-                                <?php
+            <ul>
+                <?php foreach ($comments as $row) : ?>
+                <li class="comment">
+                    <p>
+                        <?php
                                 $username = $con->query("SELECT username FROM users WHERE id=" . $row['user_id'])->fetchColumn();
                                 echo $username;
                                 ?>
-                            </p>
-                            <p>
-                                <?php
+                    </p>
+                    <p>
+                        <?php
                                 echo date("d.m.Y", strtotime($row['date'])) . " ";
 
                                 echo substr($row['date'], 11);
                                 ?>
-                            </p>
-                            <p><?php echo $row['comment'] ?></p>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+                    </p>
+                    <p><?php echo $row['comment'] ?></p>
+                </li>
+                <?php endforeach; ?>
+            </ul>
             <?php } ?>
         </section>
     </div>

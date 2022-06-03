@@ -6,7 +6,7 @@ function getFilteredArticles($category, $author, $dateStart, $dateEnd, $con, $it
         $offset = $_GET['offset'];
     }
 
-    $stmt = $con->prepare("SELECT * FROM articles ORDER BY id DESC");
+    $stmt = $con->prepare("SELECT * FROM articles ORDER BY date DESC");
     $stmt->execute();
     $articles = $stmt->fetchAll();
 
@@ -49,6 +49,7 @@ function getFilteredArticles($category, $author, $dateStart, $dateEnd, $con, $it
             //$error_array = array('id' => '0', 'title' => "Špatně zadáno", 'date' => "", 'image_path' => 'error.png');
             $kk = array();
             //array_push($kk, $error_array);
+            exit("Datum bylo zadáno ve špatném formátu <br>Datum musí být ve formátu dd.mm.yyyy");
             return $kk;
         }
         $dateStart = $dateStart != "" ? explode(".", $dateStart) : explode(".", "01.01.1970");
