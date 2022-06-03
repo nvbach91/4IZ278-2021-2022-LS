@@ -13,6 +13,13 @@ class VEventBookedDB extends Database
     return $statement->fetchAll();
   }
 
+  public function fetchAllOrderByDate()
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY start_date DESC");
+    $statement->execute();
+    return $statement->fetchAll();
+  }
+
   public function fetchName()
   {
     $statement = $this->pdo->prepare("SELECT name FROM $this->tableName");

@@ -44,16 +44,22 @@ class EventsDB extends Database
   }
 
   public function fetchAllPagination($nItemsPerPagination, $offset){
-    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY event_id DESC LIMIT $offset, $nItemsPerPagination");
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY start_date DESC LIMIT $offset, $nItemsPerPagination");
     $statement->execute();
     return $statement->fetchAll();
   }
 
   public function fetchOrderById($id, $nItemsPerPagination, $offset){
-    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE category_id = :category_id ORDER BY event_id DESC LIMIT $offset, $nItemsPerPagination");
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE category_id = :category_id ORDER BY start_date DESC LIMIT $offset, $nItemsPerPagination");
     $statement->execute(['category_id' => $id]);
     $products = $statement->fetchAll();
     return $products;
+  }
+
+  public function fetchAllOrderedByDate(){
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY start_date DESC");
+    $statement->execute();
+    return $statement->fetchAll();
   }
 
   public function insertRow($name, $description, $date, $locationName, $locationAdress, $imageLink, $categoryId)

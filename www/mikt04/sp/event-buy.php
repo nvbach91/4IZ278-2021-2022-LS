@@ -8,6 +8,7 @@
 <?php require_once './include/check-capacity.php';?>
 <?php require_once './include/clean-input.php';?>
 <?php require_once './include/send-email.php';?>
+<?php require_once './include/compare-dates.php';?>
 
 <?php
 $eventsDB = new EventsDB();
@@ -18,10 +19,13 @@ $messageFail = '';
 
 if (isset($_REQUEST['udalost']) && !empty($_REQUEST['udalost']))
 $eventId = $_REQUEST['udalost'];
-$emailAdress = $_COOKIE["email"];
+if (isset($_COOKIE["email"])) {
+  $emailAdress = $_COOKIE["email"];
+}
 
 $event = $eventsDB->fetchById($eventId);
 $ticket = $ticketDB->fetchByEventId($eventId);
+
 
 if (!empty($_POST)) {
   $salt = mt_rand(10000, 99999);
@@ -71,7 +75,9 @@ if (!empty($_POST)) {
         </div>
 
         <?php if (isset($_SESSION['user_id'])) {
-          if (!checkCapacity($eventId)) {
+          if(compareDates($event['start_date'])) { 
+            include './include/html/event-registration-passed.php';
+          } else if (!checkCapacity($eventId)) {
             include './include/html/event-registration-buy.php';
           } else {
             include './include/html/event-registration-full.php';

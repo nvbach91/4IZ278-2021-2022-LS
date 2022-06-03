@@ -1,8 +1,9 @@
 <?php 
 require_once './database/EventsDB.php';
+require_once './include/compare-dates.php';
 
 $eventsDB = new EventsDB();
-$events = $eventsDB->fetchAll();
+$events = $eventsDB->fetchAllOrderedByDate();
 $nItemsPerPagination = 6;
 $count = count($events);
 $pageId = '';
@@ -35,9 +36,12 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
 <div class="event-grid">
 <?php foreach($events as $event): ?>
-    <div class="event">
+    <div class="event <?php if(compareDates($event['start_date'])) {echo 'event-passed';};?>">
         <img class="event-cover" src="<?php echo $event['image_url']?>" alt="event-cover">
         <h3 class="event-title"><?php echo $event['name']?></h3>
+        <p class="event-date"><?php 
+            $dateRnd = new DateTime($event['start_date']);
+            $dateFixed = DATE_FORMAT($dateRnd, 'd.m.Y - H:i');echo $dateFixed?></p>
         <form method="POST" >
             <button name="button-id" value="<?php echo $event['event_id']?>" class="event-button">Koupit lístek</button>
         </form>

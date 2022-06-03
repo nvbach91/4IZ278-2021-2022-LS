@@ -5,12 +5,15 @@
 require_once './database/CategoryDB.php';
 require_once './database/EventsDB.php';
 require_once './database/TicketDB.php';
+require_once './database/vEventBookedDB.php';
 require_once './include/check-admin.php';
 require_once './include/clean-input.php';
+require_once './include/compare-dates.php';
 
 $categoryDB = new CategoryDB();
 $categories = $categoryDB->fetchAll();
-$eventsDB = new EventsDB();
+$vEventBookedDB = new VEventBookedDB();
+$events = $vEventBookedDB->fetchAllOrderByDate();
 $ticketDB = new TicketDB();
 $messageSuccess = '';
 $messageFail = '';
@@ -29,7 +32,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
 
     $categoryId = (int)$category;
     $dateRnd = new DateTime($date);
-    $dateFixed = DATE_FORMAT($dateRnd, 'Y-m-d H:i:s');
+    $dateFixed = DATE_FORMAT($dateRnd, 'Y-m-d H:i');
 
     if($valid){
         $insertEvent = $eventsDB->insertRow($name, $description, $dateFixed, $locationName, $locationAdress, $urlLink, $categoryId);
@@ -45,6 +48,19 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
     <div class="wrapper">
     <h1 class="page-title">Správa událostí</h1>
     <?php include './include/message.php'?>
+
+    <div class="event-grid">
+    <?php foreach($events as $event): ?>
+    <div class="event <?php if(compareDates($event['start_date'])) {echo 'event-passed';};?>">
+        <h3 class="event-title"><?php echo $event['name']?></h3>
+        <p class="event-date"><?php 
+            $dateRnd = new DateTime($event['start_date']);
+            $dateFixed = DATE_FORMAT($dateRnd, 'd.m.Y - H:i');echo $dateFixed?>
+        </p>
+        <p class="event-date">Volná kapacita <span class="notify"><?php echo $event['t_free']?></span></p>
+    </div>
+    <?php endforeach?>
+    </div>
         <div class="signup event-admin-create">
             <form class="form-template form-create-event" method="POST">
                 <h2>Nová událost</h2>

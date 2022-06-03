@@ -546,6 +546,23 @@ main{
         padding: 20px 30px;
     }
 
+    .filter-container {
+        background-color: #eeeeee;
+        display: flex;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 3px;
+    }
+    
+    .filter-item {
+        text-align: center;
+        color: black;
+        background-color: #dadce0;
+        box-shadow: 5px 5px 27px -1px rgba(0,0,0,0.26);
+        padding: 10px 10px;
+        border-radius: 10px;
+    }
+
 }
 
 @media (max-width: 320px) {
