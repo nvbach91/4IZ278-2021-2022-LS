@@ -29,10 +29,34 @@ class UsersDB extends Database
     return isset($result[0]) ? $result[0] : '';
   }
 
+  public function fetchCount()
+  {
+    $statement = $this->pdo->query("SELECT COUNT(id) FROM $this->tableName");
+    return $statement->fetchColumn();
+  }
+
+  public function fetchPagination($limit, $offset, $id)
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE id <> ? ORDER BY id ASC LIMIT ? OFFSET ?");
+    $statement->bindValue(1, $id, PDO::PARAM_INT);
+    $statement->bindValue(2, $limit, PDO::PARAM_INT);
+    $statement->bindValue(3, $offset, PDO::PARAM_INT);
+    $statement->execute();
+    return $statement->fetchAll();
+  }
+
+  public function searchByName($email)
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE email LIKE :email");
+    $statement->execute(['email' => "%$email%"]);
+    return $statement->fetchAll();
+  }
+
   public function insertRow($email, $name, $password)
   {
     $statement = $this->pdo->prepare("INSERT INTO $this->tableName (email, name, password) VALUES (:email, :name, :password)");
     $statement->execute(['email' => $email, 'name' => $name, 'password' => $password]);
+    return $this->fetchByEmail($email);
   }
 
   public function updateRow($email, $name, $privilege, $password, $id)

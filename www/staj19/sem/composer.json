@@ -1,0 +1,11 @@
+{
+    "name": "czsan/sem",
+    "authors": [
+        {
+            "name": "JanStatska"
+        }
+    ],
+    "require": {
+        "facebook/graph-sdk": "^5.1"
+    }
+}

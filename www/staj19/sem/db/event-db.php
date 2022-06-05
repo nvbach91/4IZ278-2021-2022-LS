@@ -21,19 +21,62 @@ class EventDB extends Database
     return isset($result[0]) ? $result[0] : '';
   }
 
-  // public function fetchCount()
-  // {
-  //   $statement = $this->pdo->query("SELECT COUNT(id) FROM $this->tableName");
-  //   return $statement->fetchColumn();
-  // }
+  public function fetchByOwner($owner)
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE owner = :owner AND datetime > now()");
+    $statement->execute(['owner' => $owner]);
+    return $statement->fetchAll();
+  }
 
-  // public function fetchPagination($pagination, $offset)
-  // {
-  //   $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY id DESC LIMIT $pagination OFFSET ?");
-  //   $statement->bindValue(1, $offset, PDO::PARAM_INT);
-  //   $statement->execute();
-  //   return $statement->fetchAll();
-  // }
+  public function fetchByRegistredTo($user)
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE id IN (SELECT event_id from sem_registred_to WHERE user_id = :user) AND datetime > NOW()");
+    $statement->execute(['user' => $user]);
+    return $statement->fetchAll();
+  }
+
+  public function fetchUsersWithEvents()
+  {
+    $statement = $this->pdo->prepare("SELECT email, id FROM sem_user WHERE id IN (SELECT DISTINCT owner FROM sem_event)");
+    $statement->execute();
+    return $statement->fetchAll();
+  }
+
+  public function fetchAllActive()
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE datetime > now()");
+    $statement->execute();
+    return $statement->fetchAll();
+  }
+
+  public function fetchAllEnded()
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE datetime < now()");
+    $statement->execute();
+    return $statement->fetchAll();
+  }
+
+  public function searchByName($name)
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE name LIKE :name AND datetime > now()");
+    $statement->execute(['name' => "%$name%"]);
+    return $statement->fetchAll();
+  }
+
+  public function fetchCount()
+  {
+    $statement = $this->pdo->query("SELECT COUNT(id) FROM $this->tableName");
+    return $statement->fetchColumn();
+  }
+
+  public function fetchPagination($limit, $offset)
+  {
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY id ASC LIMIT ? OFFSET ?");
+    $statement->bindValue(1, $limit, PDO::PARAM_INT);
+    $statement->bindValue(2, $offset, PDO::PARAM_INT);
+    $statement->execute();
+    return $statement->fetchAll();
+  }
 
   // public function fetchCartProducts($ids)
   // {

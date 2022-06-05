@@ -1,9 +1,102 @@
+body {
+  overflow-x: hidden;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 100;
+}
+
 header a,
-h1 a {
+h1 a,
+main>p>a,
+main>a {
   color: #000;
   text-decoration: none;
 }
 
 img {
   width: 100%;
+}
+
+main {
+  margin: 15vh auto 5vh;
+  padding: 15px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+form {
+  min-width: 300px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.col {
+  margin-top: 2rem;
+}
+
+header>span, 
+header>span:before,
+header>span:after {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+  border-radius: 1px;
+  height: 5px;
+  width: 35px;
+  background: #000;
+  position: absolute;
+  display: none;
+  content: '';
+  border-radius: 5px;
+}
+header>span:before {
+  top: -10px;
+  right: 0px;
+}
+header>span:after {
+  bottom: -10px;
+  right: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+  main {
+    margin: 10vh auto 0;
+  }
+  nav {
+    display: none;
+    margin-top: 50px;
+    padding-top: 50px;
+    flex-direction: column;
+    justify-content: unset;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    z-index: 100;
+  }
+  nav.menu-show {
+    display: flex;
+  }
+  .row-cols-2>*,
+  .row-cols-4>* {
+    margin: 10px 0;
+    width: unset !important;
+  }
+  header>span, 
+  header>span:before,
+  header>span:after {
+    display: block;
+  }
 }

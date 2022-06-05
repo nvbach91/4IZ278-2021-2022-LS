@@ -154,7 +154,10 @@ class Validate implements ValidateCredentials
 
   public function location($street, $city, $zip)
   {
-    if (!(isset($street) && isset($city) && isset($zip))) {
+    if (
+      (isset($street) || isset($city) || isset($zip))
+      && !(isset($street) && isset($city) && isset($zip))
+    ) {
       return 'Fill in or leave empty all address inputs';
     }
     return '';
