@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @property int $position_id
  * @property Carbon $created_at
- * @property Carbon $updated_at
  *
  * @property-read Position $position
  *
@@ -22,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PositionClick extends Model
 {
     use HasFactory;
+
+    public const UPDATED_AT = null; // disable updated_at attribute
 
     protected $table = 'position_clicks';
 

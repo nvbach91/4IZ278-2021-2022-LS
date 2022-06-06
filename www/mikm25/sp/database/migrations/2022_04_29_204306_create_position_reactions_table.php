@@ -11,7 +11,7 @@ class CreatePositionReactionsTable extends Migration
         Schema::create('position_reactions', static function (Blueprint $table): void {
             $table->id();
             $table->foreignId('position_id');
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
 
             $table->foreign('position_id')
                 ->references('id')

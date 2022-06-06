@@ -11,7 +11,8 @@ use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\LandingPage\LandingPageController;
+use App\Http\Controllers\LandingPage\PositionController as LandingPagePositionController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [LandingPageController::class, 'index'])
     ->name('landing-page');
 
-Route::get('/{slugPosition}', [LandingPageController::class, 'showPosition'])
+Route::get('/show-position/{slugPosition}', [LandingPageController::class, 'showPosition'])
+    ->where('slugPosition', '[a-zA-Z0-9\-]+')
+    ->name('landing-page.show-position');
+
+Route::get('/{slugPosition}', [LandingPagePositionController::class, 'show'])
     ->where('slugPosition', '[a-zA-Z0-9\-]+')
     ->name('landing-page.position');
 

@@ -53,12 +53,12 @@ use App\Models\Position;
                     <div class="card border-0 bg-light p-1 mb-2">
                         <div class="card-body d-flex justify-content-between">
                             <div class="flex-grow-1 me-2">
-                                <h5 class="card-title">
+                                <h5 class="card-title m-0">
                                     {{ $position->name }}
                                 </h5>
                             </div>
                             <div>
-                                <a href="{{ route('landing-page.position', ['slugPosition' => $position->slug]) }}" class="btn btn-primary">
+                                <a href="{{ route('landing-page.show-position', ['slugPosition' => $position->slug]) }}" class="btn btn-sm btn-primary">
                                     {{ __('common.buttons.detail') }}
                                 </a>
                             </div>
