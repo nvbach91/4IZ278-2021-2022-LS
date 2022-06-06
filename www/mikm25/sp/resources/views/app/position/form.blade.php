@@ -77,7 +77,6 @@ $positionContent = old('content', isset($position) ? $position->content : null);
                     data-server="{{ route('app.ajax.search-tags') }}"
                     data-value-field="name"
                     data-label-field="name"
-                    data-live-server="true"
                     data-debounce-time="300"
                     data-max="5"
                     data-selected="{{ implode(',', $positionTags) }}"
