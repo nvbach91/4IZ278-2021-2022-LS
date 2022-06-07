@@ -56,7 +56,7 @@ class OrdersController extends Controller
 
         $order = Order::create([
             'user_id' => $request->input("user_id"),
-            'address_id' => 6,
+            'address_id' => 1,
             'status' => Texts::ORDER_STATUS[0],
             'variable_symbol' => Features::variableSymbol(),
             'note' => $request->input("note"),
