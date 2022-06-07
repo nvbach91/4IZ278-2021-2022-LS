@@ -29,7 +29,7 @@ class PositionBuilder extends Builder
 
     public function userHasVerifiedEmail(): self
     {
-        return $this->whereHas('user', function (UserBuilder $builder): void {
+        return $this->whereHas('user', static function (UserBuilder $builder): void {
             $builder->hasVerifiedEmail();
         });
     }
