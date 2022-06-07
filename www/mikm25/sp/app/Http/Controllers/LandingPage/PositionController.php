@@ -9,6 +9,15 @@ class PositionController extends Controller
 {
     public function show(Position $position): string
     {
-        return "$position->name";
+        $position->load([
+            'user',
+            'branch',
+            'company',
+            'tags',
+        ]);
+
+        return view('landing-page.position', [
+            'position' => $position
+        ]);
     }
 }
