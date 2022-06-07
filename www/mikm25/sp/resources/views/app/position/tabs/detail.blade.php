@@ -1,9 +1,11 @@
 @php
 
 use App\Models\Position;
+use App\Enums\PositionTabEnum;
 
 /**
  * @var Position $position
+ * @var PositionTabEnum $activeTab
  */
 
 @endphp

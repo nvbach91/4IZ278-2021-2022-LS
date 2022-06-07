@@ -51,6 +51,7 @@ class RouteServiceProvider extends ServiceProvider
             /** @var Position|null $position */
             $position = Position::query()
                 ->ofSlug((string) $value)
+                ->userHasVerifiedEmail()
                 ->first();
 
             return $position;

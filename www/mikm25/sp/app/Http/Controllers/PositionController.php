@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Constants\PositionTabConstants;
+use App\Enums\PositionTabEnum;
 use App\Http\Requests\Position\PositionDeleteRequest;
 use App\Http\Requests\Position\PositionStoreRequest;
 use App\Http\Requests\Position\PositionUpdateRequest;
@@ -74,7 +74,9 @@ class PositionController extends Controller
             'company',
         ]);
 
-        if ($tab === PositionTabConstants::TAB_DETAIL) {
+        $tab = PositionTabEnum::make($tab);
+
+        if ($tab->isEqual(PositionTabEnum::detail())) {
             return view('app.position.tabs.detail', [
                 'position' => $position,
                 'activeTab' => $tab,
@@ -97,7 +99,7 @@ class PositionController extends Controller
 
         return redirect()->route('app.positions.show', [
             'position' => $position->id,
-            'tab' => PositionTabConstants::TAB_DETAIL,
+            'tab' => PositionTabEnum::detail()->getValue(),
         ])->with('status', [
             'success' => __('status.positions.create.success'),
         ]);
@@ -133,7 +135,7 @@ class PositionController extends Controller
 
         return redirect()->route('app.positions.show', [
             'position' => $position->id,
-            'tab' => PositionTabConstants::TAB_DETAIL,
+            'tab' => PositionTabEnum::detail()->getValue(),
         ])->with('status', [
             'success' => __('status.positions.update.success'),
         ]);

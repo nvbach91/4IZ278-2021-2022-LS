@@ -13,4 +13,9 @@ class UserBuilder extends Builder
     {
         return $this->where('email', $email);
     }
+
+    public function hasVerifiedEmail(): self
+    {
+        return $this->whereNotNull('email_verified_at');
+    }
 }

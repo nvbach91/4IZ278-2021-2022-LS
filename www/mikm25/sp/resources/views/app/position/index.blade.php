@@ -72,7 +72,7 @@ use App\Models\Position;
                             <td class="text-nowrap">{{ $position->clicks_count }}</td>
                             <td class="text-nowrap">{{ $position->reactions_count }}</td>
                             <td class="text-nowrap">
-                                <a href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_DETAIL]) }}"
+                                <a href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Enums\PositionTabEnum::detail()->getValue()]) }}"
                                    class="btn btn-sm btn-primary">
                                     {{ __('common.buttons.detail') }}
                                 </a>

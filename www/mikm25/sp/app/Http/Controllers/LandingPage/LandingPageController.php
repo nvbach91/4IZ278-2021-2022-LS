@@ -27,6 +27,8 @@ class LandingPageController extends Controller
                 'company',
                 'tags',
             ])
+            ->valid()
+            ->userHasVerifiedEmail()
             ->paginate(20);
 
         return view('landing-page.index', [

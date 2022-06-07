@@ -1,6 +1,6 @@
 <?php
 
-use App\Constants\PositionTabConstants;
+use App\Enums\PositionTabEnum;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\ForgottenPasswordController;
@@ -97,7 +97,7 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => ['auth:web']], 
             ->name('create');
         Route::get('/{position}/{tab}', [PositionController::class, 'show'])
             ->where('position', '[0-9]+')
-            ->where('tab', implode('|', PositionTabConstants::getTabs()))
+            ->where('tab', implode('|', PositionTabEnum::getValues()))
             ->name('show');
         Route::post('/', [PositionController::class, 'store'])
             ->name('store');

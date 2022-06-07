@@ -1,9 +1,13 @@
 @php
 
 use App\Models\Position;
+use App\Enums\PositionTabEnum;
+use App\View\Models\Dashboards\DashboardInterface;
 
 /**
  * @var Position $position
+ * @var PositionTabEnum $activeTab
+ * @var list<DashboardInterface> $dashboards
  */
 
 @endphp

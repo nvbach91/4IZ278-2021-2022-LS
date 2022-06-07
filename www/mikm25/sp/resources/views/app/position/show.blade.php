@@ -1,9 +1,11 @@
 @php
 
 use App\Models\Position;
+use App\Enums\PositionTabEnum;
 
 /**
  * @var Position $position
+ * @var PositionTabEnum $activeTab
  */
 
 @endphp
@@ -28,14 +30,14 @@ use App\Models\Position;
         <div class="col">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link {{ $activeTab === \App\Constants\PositionTabConstants::TAB_DETAIL ? 'active' : '' }}"
-                       href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_DETAIL]) }}">
+                    <a class="nav-link {{ $activeTab->isEqual(\App\Enums\PositionTabEnum::detail()) ? 'active' : '' }}"
+                       href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Enums\PositionTabEnum::detail()->getValue()]) }}">
                         {{ __('positions.detail.tabs.detail') }}
                     </a>
                 </li>
                 <li class="nav-item ms-2">
-                    <a class="nav-link {{ $activeTab === \App\Constants\PositionTabConstants::TAB_STATISTICS ? 'active' : '' }}"
-                       href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Constants\PositionTabConstants::TAB_STATISTICS]) }}">
+                    <a class="nav-link {{ $activeTab->isEqual(\App\Enums\PositionTabEnum::statistics()) ? 'active' : '' }}"
+                       href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Enums\PositionTabEnum::statistics()->getValue()]) }}">
                         {{ __('positions.detail.tabs.statistics') }}
                     </a>
                 </li>
