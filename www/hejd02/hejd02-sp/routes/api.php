@@ -12,6 +12,7 @@ use App\Http\Controllers\AuthController;
 
 
 Route::apiResource('/product', ProductsController::class)->only(['index', 'show']);
+Route::get('/product-slug/{slug}', [ProductsController::class, 'slugProduct']);
 Route::apiResource('/category', CategoryController::class)->only(['index', 'show']);
 Route::apiResource('/size', SizesController::class)->only(['store'])->only(['index', 'show']);
 Route::apiResource('/message', MessagesController::class)->only(['store']);
@@ -27,8 +28,8 @@ Route::middleware(['auth:sanctum', 'abilities:role:admin'])->prefix('admin')->gr
     Route::apiResource('/message', MessagesController::class);
     Route::apiResource('/address', AddressController::class);
     Route::apiResource('/order', OrdersController::class);
-    Route::get('/order/invoice/{order}', [OrdersController::class, 'orderInvoice']);
 });
+Route::get('/order/invoice/{order}', [OrdersController::class, 'orderInvoice']);
 
 Route::middleware(['auth:sanctum', 'abilities:role:user'])->prefix('user')->group(function () {
     Route::apiResource('/user', UsersController::class)->except(['index', 'store']);

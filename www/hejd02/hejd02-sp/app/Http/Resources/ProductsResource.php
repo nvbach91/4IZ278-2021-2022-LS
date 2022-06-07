@@ -14,12 +14,13 @@ class ProductsResource extends JsonResource
      * @param Request $request
      * @return array
      */
-    #[ArrayShape(['product_id' => "string", 'type' => "string", 'category' => "\App\Http\Resources\CategoryResource", 'size' => "mixed", 'attributes' => "array"])] public function toArray($request)
+    #[ArrayShape(['product_id' => "string", 'slug' => "string", 'type' => "string", 'category' => "\App\Http\Resources\CategoryResource", 'size' => "mixed", 'attributes' => "array"])] public function toArray($request)
     {
         $cat = new CategoryResource($this->category);
 
         return [
             'product_id' => (string)$this->product_id,
+            'slug' => (string)$this->slug,
             'type' => 'Products',
             'category' => $cat,
             'size' => $this->size,

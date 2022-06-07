@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Components\FormatText;
 use App\Models\Product;
 use App\Http\Resources\ProductsResource;
 use App\Http\Requests\ProductsRequest;
@@ -34,20 +35,29 @@ class ProductsController extends Controller
         return new ProductsResource($product);
     }
 
+    public function slugProduct($slug): ProductsResource
+    {
+        $product = Product::where("slug", $slug)->first();
+        return new ProductsResource($product);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
      * @param ProductsRequest $request
      * @return ProductsResource
      */
-    public function store(ProductsRequest $request): ProductsResource
+    public function store(ProductsRequest $request)
     {
+        $format = new FormatText();
+
         $product = Product::create([
-           'product_name' => $request->input("product_name"),
-           'price' => $request->input("price"),
-           'color' => $request->input("color"),
-           'category_id' => $request->input("category_id"),
-           'description' => $request->input("description"),
+            'product_name' => $request->input("product_name"),
+            'slug' => $format->slug($request->input("slug")),
+            'price' => $request->input("price"),
+            'color' => $request->input("color"),
+            'category_id' => $request->input("category_id"),
+            'description' => $request->input("description"),
         ]);
         $pivotColumns = ["size_id", "remaining_quantity"];
 

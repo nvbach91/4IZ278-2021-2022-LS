@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,14 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Category::factory(5)->create();
+        $sizes = [
+            [
+                'name' => 'Pásek'
+            ]
+        ];
+
+        foreach ($sizes as $size) {
+            Category::create($size);
+        }
     }
 }

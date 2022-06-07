@@ -12,7 +12,7 @@ class Product extends Model
 
     use HasFactory;
     protected $primaryKey = 'product_id';
-    protected $fillable = ['product_name', 'price', 'color', 'category_id', 'description', 'sizes'];
+    protected $fillable = ['product_name', 'slug', 'price', 'color', 'category_id', 'description', 'sizes'];
     protected $hidden = [
         'created_at',
         'updated_at'

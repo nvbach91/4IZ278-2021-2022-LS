@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('role',20);
             $table->string('first_name',20);
             $table->string('last_name',20);
-            $table->string('phone',20);
+            $table->string('phone',20)->nullable();
             $table->string('email',100);
             $table->string('password',100);
             $table->timestamps();

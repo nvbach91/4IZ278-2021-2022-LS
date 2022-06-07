@@ -37,6 +37,8 @@ class MessagesController extends Controller
      */
     public function store(MessageRequest $request): JsonResponse
     {
+        return response()->json(Texts::SENT_MESSAGE);
+
         Features::emailCollection($request->input("email"));
 
         $mess = Message::create([
@@ -45,6 +47,7 @@ class MessagesController extends Controller
             'subject' => $request->input("subject"),
             'message' => $request->input("message"),
         ]);
+
 
         Mail::send('email.messageEmail', ['data' => $mess, 'subject' => Texts::SENT_MESSAGE_SUBJECT], function ($message) use ($mess) {
             $message->to(Texts::EMAIL_FROM)->subject(Texts::SENT_MESSAGE_SUBJECT)->replyTo($mess->email);

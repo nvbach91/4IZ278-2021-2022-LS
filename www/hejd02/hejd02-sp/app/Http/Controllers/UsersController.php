@@ -50,18 +50,17 @@ class UsersController extends Controller
             'last_name' => $request->input("last_name"),
             'password' => Hash::make($request->input("password")),
             'email' => $request->input("email"),
-            'role' => Texts::ROLE_USER,
-            'phone' => $request->input("phone"),
+            'role' => Texts::ROLE_USER
         ]);
-
-        $user->address()->create([
-            'user_id' => $user->user_id,
-            'region' => $request->input("region"),
-            'town' => $request->input("town"),
-            'street' => $request->input("street"),
-            'street_number' => $request->input("street_number"),
-            'zip' => $request->input("zip"),
-        ]);
+//user si nedělá adresu když se registruje
+//        $user->address()->create([
+//            'user_id' => $user->user_id,
+//            'region' => $request->input("region"),
+//            'town' => $request->input("town"),
+//            'street' => $request->input("street"),
+//            'street_number' => $request->input("street_number"),
+//            'zip' => $request->input("zip"),
+//        ]);
 
         return new UserResource($user);
     }

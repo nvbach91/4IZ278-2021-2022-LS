@@ -50,13 +50,13 @@ class OrdersController extends Controller
      * @param OrderRequest $request
      * @return OrderResource
      */
-    public function store(OrderRequest $request): OrderResource
+    public function store(OrderRequest $request)
     {
-        Gate::authorize('create-orders', $request);
+//        Gate::authorize('create-orders', $request);
 
         $order = Order::create([
             'user_id' => $request->input("user_id"),
-            'address_id' => 1,
+            'address_id' => 6,
             'status' => Texts::ORDER_STATUS[0],
             'variable_symbol' => Features::variableSymbol(),
             'note' => $request->input("note"),
@@ -65,14 +65,24 @@ class OrdersController extends Controller
 
         $pivotColumns = ["product_size_id", "product_quantity"];
         $pivotData = Features::preparePivotData($request->input("products"), $pivotColumns);
+//        return $pivotData;
 
         $order->product_size()->attach(
             $pivotData
         );
+//        return $order;
 
         $orderProducts = Features::productFormatter($order);
-        $pdf = PDF::loadView('pdf', ['data' => $order, 'products' => $orderProducts, 'total' => $order->total, 'depositPayment' => $order->total]);
+        $orderProducts[1] = [
+            "id" => 2,
+            "product_name_fulled" => "Poštovné",
+            "price" => 79,
+            "quantity" => 1,
+        ];
+        $order->total = $order->total+79;
+        return $order->address;
 
+        $pdf = PDF::loadView('pdf', ['data' => $order, 'products' => $orderProducts, 'total' => $order->total, 'depositPayment' => $order->total]);
         Emails::orderAdminEmail($order, $orderProducts, $pdf);
         Emails::orderUserEmail($order, $orderProducts, $pdf);
 
