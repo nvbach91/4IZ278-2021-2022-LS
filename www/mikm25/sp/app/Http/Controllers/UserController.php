@@ -99,8 +99,18 @@ class UserController extends Controller
     {
         $user = $this->userService->update($user, $request->toDTO());
 
+        $messages = [
+            __('status.users.update.success')
+        ];
+
+        if ($user->wasChanged('email')) {
+            $messages[] = __('status.users.update.email_changed');
+        }
+
         return redirect()->route('app.users.show', [
             'user' => $user->id,
+        ])->with('status', [
+            'success' => $messages
         ]);
     }
 

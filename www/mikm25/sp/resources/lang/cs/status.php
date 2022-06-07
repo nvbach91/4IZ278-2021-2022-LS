@@ -61,5 +61,9 @@ return [
             'already_verified' => 'Vaše emailová adresa je již ověřena.',
             'success' => 'Odkaz byl úspěšně odeslán na Vaši emailovou adresu.',
         ],
+        'update' => [
+            'success' => 'Váš účet byl úspěšně upraven.',
+            'email_changed' => 'Vaše emailová adresa byla změněna, poslali jsme Vám odkaz pro její ověření.'
+        ]
     ],
 ];
