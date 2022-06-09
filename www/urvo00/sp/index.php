@@ -1,13 +1,16 @@
 <?php
 require __DIR__ . '/db/ProductsDB.php';
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-if (!empty($_COOKIE)) {
+if (!empty($_COOKIE) && !empty($_SESSION['privilege'])) {
     if (isset($_COOKIE['email'])) {
         $email = $_COOKIE['email'];
     } else {
         header('Location: login.php');
         exit();
     }
+} else {
+    header('Location: login.php');
+    exit();
 }
 
 $nItemsPerPagination = 5;

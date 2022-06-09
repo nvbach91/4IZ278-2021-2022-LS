@@ -8,7 +8,7 @@ if (!empty($_GET)) {
     $productsDB -> deleteById($id);
 }
 
-header('Location: index.php');
+header('Location: ../index.php');
 exit();
 
 ?>

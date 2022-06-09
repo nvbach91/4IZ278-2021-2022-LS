@@ -1,16 +1,8 @@
 <?php require __DIR__ . '/requireAdmin.php' ?>
 <?php include dirname(__DIR__, 1) . '/incl/head.php' ?>
+<?php require dirname(__DIR__, 1). '/db/ProductsDB.php' ?>
 <?php
-require dirname(__DIR__, 1). '/db/ProductsDB.php';
 $productsDB = new ProductsDB();
-if (!empty($_GET)) {
-    $id = $_GET['id'];
-    $products = $productsDB -> fetchById($id)[0];
-
-} else {
-    header('Location: index.php');
-    exit();
-}
 
 if (!empty($_POST)) {
     $name = $_POST['name'];
@@ -19,27 +11,25 @@ if (!empty($_POST)) {
     $img = $_POST['img'];
     $category_id = $_POST['category_id'];
 
-    $productsDB -> updateEntireProductById($id, $name, $price, $description, $img, $category_id);
+    $productsDB -> create(['name' => $name, 'description' => $description,
+                          'price' => $price, 'img' => $img, 'category_id' => $category_id ]);
 
-    echo 'product edited';
-
-    $products = $productsDB -> fetchById($id)[0];
-
+    echo 'Product added';
 }
 ?>
 <main class="container">
-    <h1>Edit product</h1>
+    <h1>Create a new product</h1>
     <br><br>
     <form method="POST">
         <div class="form-group">
             <label for="name">Name</label>
-            <input class="form-control" type="text" name="name" placeholder="name" value="<?php echo $products['name']; ?>">
+            <input class="form-control" type="text" name="name" placeholder="name">
             <label for="name">Description</label>
-            <input class="form-control" placeholder="description" name="description" type="text" value="<?php echo $products['description']; ?>">
+            <input class="form-control" placeholder="description" name="description" type="text">
             <label for="name">Price</label>
-            <input class="form-control" placeholder="price" name="price" type="text" value="<?php echo $products['price']; ?>">
+            <input class="form-control" placeholder="price" name="price" type="text">
             <label for="name">Img</label>
-            <input class="form-control" placeholder="img" name="img" type="text" value="<?php echo $products['img']; ?>">
+            <input class="form-control" placeholder="img" name="img" type="text">
             <label for="name">Category ID</label>
             <input class="form-control" placeholder="category_id" name="category_id" type="text">
         </div>

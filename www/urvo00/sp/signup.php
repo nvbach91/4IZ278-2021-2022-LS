@@ -1,4 +1,5 @@
 <?php require __DIR__ . '/db/UsersDB.php'; ?>
+<?php require __DIR__ . '/utils/mailSender.php'; ?>
 <?php
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 if (!empty($_POST)) {
@@ -15,7 +16,7 @@ if (!empty($_POST)) {
         $valid = FALSE;
     }
     $usersDB = new UsersDB();
-    $existingUser = $usersDB -> fetchByEmail($email);
+    $existingUser = $usersDB -> fetchByEmail($email)[0];
     if ($existingUser) {
         echo ('This email is already in use.');
         $valid = FALSE;
@@ -23,6 +24,8 @@ if (!empty($_POST)) {
     if($valid){
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $usersDB -> create(['email' => $email, 'password' => $hashedPassword, 'privilege' => 1]);
+    $sender = new MailSender();
+    $sender -> sendMail($email, 'Registration successful!', 'TeaShop registration');
 
     header('Location: login.php');
     exit();
@@ -37,9 +40,9 @@ if (!empty($_POST)) {
     <form action="" method="POST">
         <div class="form-group">
             <label for="name">Email</label>
-            <input class="form-control" name="email" placeholder="email">
+            <input class="form-control" name="email" placeholder="email" type="text">
             <label for="name">Password</label>
-            <input class="form-control" name="password" placeholder="password">
+            <input class="form-control" name="password" placeholder="password" type="password">
         </div>
         <button class="btn btn-primary">Submit</button>
     </form>

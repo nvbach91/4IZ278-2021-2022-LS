@@ -16,8 +16,6 @@ abstract class Database implements DatabaseOperations {
                 DATABASE_PASSWORD,
                 $options
         );
-        $this -> pdo ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this -> pdo ->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
     public function __toString()
     {

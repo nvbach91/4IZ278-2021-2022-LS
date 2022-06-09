@@ -1,8 +1,8 @@
 <?php require_once  __DIR__ . '/Database.php'; ?>
 <?php
-class ProductsDB extends Database
+class OrderedProductsDB extends Database
 {
-    protected $tableName = 'products';
+    protected $tableName = 'ordered_products';
     public function fetchAll()
     {
         $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . ";");
@@ -48,21 +48,20 @@ class ProductsDB extends Database
         $statement = $this->pdo->prepare("UPDATE " . $this->tableName . " SET " . $field . "= '" . $newValue . "' WHERE product_id = " . $id . ";");
         $statement->execute();
     }
-    public function updateEntireProductById($id, $name, $price, $description, $img, $category_id){
+    public function updateEntireProductById($id, $name, $price, $description, $img){
         $statement = $this->pdo->prepare("UPDATE " . $this->tableName . " SET name = " . "'" . $name . "'," 
         . " price = " . "" . $price . "," 
         . " description = " . "'" . $description . "'," 
-        . " img = " . "'" . $img . "'" 
-        . " category_id = " . "'" . $category_id . "'" .
+        . " img = " . "'" . $img . "'" .
         " WHERE product_id = " . $id . ";");
         $statement->execute();
     }
     public function create($args)
     {
         $statement = $this->pdo->prepare("INSERT INTO " . $this->tableName . " (name, price, description, img, category_id) 
-        " . " VALUES ('" . $args['name'] . "'," . $args['price'] . ",'" . $args['description'] . "  ','"
-            . $args['img'] . " '," . $args['category_id'] . " 
-         " . ");");
+        " . " VALUES ('" . $args['name'] . "','" . $args['price'] . "  ','" . $args['description'] . "  ','"
+            . $args['img'] . "  ','" . $args['img'] . "  ','" . $args['category_id'] . " 
+         " . "');");
         $statement->execute();
     }
     public function deleteById($id)

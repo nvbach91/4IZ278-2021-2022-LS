@@ -23,7 +23,8 @@ class UsersDB extends Database{
         return $statement -> fetchAll();
     }
     public function updateById($id, $field, $newValue){
-        $statement = $this -> pdo -> prepare("UPDATE " . $this-> tableName . " SET " . $field . "= '" . $newValue . "' WHERE user_id = " . $id .";");
+        $statement = $this -> pdo -> prepare("UPDATE " . $this-> tableName . " SET " . $field . " = '" . $newValue . "' WHERE user_id = " . $id .";");
+        echo "UPDATE " . $this-> tableName . " SET " . $field . " = '" . $newValue . "' WHERE user_id = " . $id .";";
         $statement -> execute();
     }
     public function create($args){

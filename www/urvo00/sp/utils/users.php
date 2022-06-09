@@ -18,10 +18,7 @@ $users = $usersDB->fetchAll();
         <form method="POST">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input name="email" class="form-control" placeholder="Email" required value="<?php echo $user['email']; ?>">
-
-                <label for="password">Password</label>
-                <input name="password" class="form-control" placeholder="Password" required value="<?php echo $user['password']; ?>">
+                <input name="email" class="form-control" placeholder="Email" required value="<?php echo $user['email']; ?>" type="email">
 
                 <label for="privilege">Privilege</label>
                 <input name="privilege" type="number" class="form-control" placeholder="Privilege" required value="<?php echo $user['privilege']; ?>">
