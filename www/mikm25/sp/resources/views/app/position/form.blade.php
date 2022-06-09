@@ -13,6 +13,7 @@ use App\Models\Position;
 $positionName = old('name', isset($position) ? $position->name : null);
 $positionWorkplaceAddress = old('workplace_address', isset($position) ? $position->workplace_address : null);
 $positionBranch = old('branch', isset($position) ? $position->branch->id : null);
+$positionWorkload = old('workload', isset($position) ? $position->workload->getWorkload() : null);
 $positionTags = old('tags', isset($position) ? $position->tags->pluck('name')->toArray() : []);
 $positionValidFrom = old('valid_from', isset($position) && ! empty($position->valid_from) ? $position->valid_from->format('Y-m-d') : null);
 $positionValidTo = old('valid_until', isset($position) && ! empty($position->valid_until) ? $position->valid_until->format('Y-m-d') : null);
@@ -65,6 +66,20 @@ $positionContent = old('content', isset($position) ? $position->content : null);
                 <option value="" {{ empty($positionBranch) ? 'selected' : '' }}>{{ __('positions.selects.branch_empty') }}</option>
                 @foreach($branches as $branch)
                     <option value="{{ $branch->id }}" {{ $positionBranch == $branch->id ? 'selected' : '' }}>{{ $branch->translated_name }}</option>
+                @endforeach
+            </select>
+            @include('common.forms.error', ['field' => 'branch'])
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <label for="workload" class="form-label">
+                {{ __('models.position.workload') }}
+                @include('common.forms.required')
+            </label>
+            <select name="workload" id="workload" class="form-select @error('workload') is-invalid @enderror"
+                    required>
+                <option value="" {{ empty($positionWorkload) ? 'selected' : '' }}>{{ __('positions.selects.workload_empty') }}</option>
+                @foreach(\App\Models\Attributes\PositionWorkloadAttribute::getAllWorkloads() as $key => $workload)
+                    <option value="{{ $key }}" {{ $positionWorkload == $key ? 'selected' : '' }}>{{ $workload->getTranslatedWorkload() }}</option>
                 @endforeach
             </select>
             @include('common.forms.error', ['field' => 'branch'])

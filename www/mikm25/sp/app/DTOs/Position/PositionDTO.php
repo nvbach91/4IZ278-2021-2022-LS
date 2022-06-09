@@ -12,6 +12,8 @@ class PositionDTO extends DataTransferObject
     public $workplaceAddress;
     /** @var int */
     public $branchId;
+    /** @var string */
+    public $workload;
     /** @var array */
     public $tags;
     /** @var \Carbon\Carbon|null */

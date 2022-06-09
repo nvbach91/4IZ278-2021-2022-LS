@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Attributes\PositionWorkloadAttribute;
 use App\Models\Builders\PositionBuilder;
+use App\Models\Casts\PositionWorkloadCast;
 use App\Models\Formatters\PositionFormatter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,6 +20,7 @@ use Illuminate\Support\Str;
  *
  * @property int $user_id
  * @property int $branch_id
+ * @property PositionWorkloadAttribute $workload
  * @property int|null $company_id
  * @property string $name
  * @property string $slug
@@ -60,6 +63,7 @@ class Position extends Model
     protected $fillable = [
         'user_id',
         'branch_id',
+        'workload',
         'company_id',
         'name',
         'salary_from',
@@ -79,6 +83,7 @@ class Position extends Model
     protected $casts = [
         'user_id' => 'integer',
         'branch_id' => 'integer',
+        'workload' => PositionWorkloadCast::class,
         'company_id' => 'integer',
         'name' => 'string',
         'salary_from' => 'integer',

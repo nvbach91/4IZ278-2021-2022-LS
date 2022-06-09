@@ -16,20 +16,16 @@
             <div class="card bg-light border-0">
                 <div class="card-body m-between-column-2 p-4">
                     <h2>{{ $position->name }}</h2>
-                    @if(isset($position->company) || isset($position->workplace_address))
-                        <div class="d-flex justify-content-start align-items-center m-between-row-2 flex-wrap">
-                            @isset($position->company)
-                                <span class="h5">
-                                    <i class="bi bi-building"></i> {{ $position->company->name }}
-                                </span>
-                            @endisset
-                            @isset($position->workplace_address)
-                                <span class="h5">
-                                    <i class="bi bi-geo-alt"></i> {{ $position->workplace_address }}
-                                </span>
-                            @endisset
-                        </div>
-                    @endif
+                    <div class="d-flex justify-content-start align-items-center m-between-row-2 flex-wrap">
+                        @isset($position->company)
+                            <span class="h5">
+                                <i class="bi bi-building"></i> {{ $position->company->name }}
+                            </span>
+                        @endisset
+                        <span class="h5">
+                            <i class="bi bi-geo-alt"></i> {{ $position->workplace_address }}
+                        </span>
+                    </div>
                     @if(!empty($position->tags))
                         <div class="d-flex justify-content-start align-items-center m-between-row-2 flex-wrap">
                             @foreach($position->tags as $tag)
@@ -86,6 +82,10 @@
                         <span class="fw-bolder mb-1 d-block">{{ __('models.position.branch') }}:</span>
                         <span>{{ $position->branch->translated_name }}</span>
                     </div>
+                    <div>
+                        <span class="fw-bolder mb-1 d-block">{{ __('models.position.workload') }}:</span>
+                        <span>{{ $position->workload->getTranslatedWorkload() }}</span>
+                    </div>
                     @isset($position->min_practice_length)
                         <div>
                             <span class="fw-bolder mb-1 d-block">{{ __('models.position.min_practice_length') }}:</span>
@@ -115,7 +115,9 @@
                             <div>
                                 <span class="fw-bolder mb-1 d-block">{{ __('models.company.url') }}:</span>
                                 <span>
-                                    <a href="{{ $position->company->url }}" target="_blank">{{ $position->company->url }}</a>
+                                    <a href="{{ $position->company->url }}" target="_blank">
+                                        {{ $position->company->url }}
+                                    </a>
                                 </span>
                             </div>
                         @endisset

@@ -19,7 +19,7 @@ class CompanyFactory extends Factory
         return [
             'user_id' => $user->id,
             'name' => $this->faker->company,
-            'size' => CompanySizeAttribute::toFifty(),
+            'size' => CompanySizeAttribute::of(CompanySizeAttribute::SIZE_TO_50),
             'url' => $this->faker->url,
             'address' => $this->faker->address,
             'contact_email' => $this->faker->unique()->email,

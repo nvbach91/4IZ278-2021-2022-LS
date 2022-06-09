@@ -12,6 +12,7 @@ class CreatePositionsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('branch_id');
+            $table->string('workload', 10);
             $table->foreignId('company_id')->nullable();
             $table->string('name');
             $table->string('slug', 400)->unique();

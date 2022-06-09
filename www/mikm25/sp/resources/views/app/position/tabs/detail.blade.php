@@ -45,6 +45,10 @@ use App\Enums\PositionTabEnum;
                             <td>{{ $position->branch->translated_name }}</td>
                         </tr>
                         <tr>
+                            <td>{{ __('models.position.workload') }}</td>
+                            <td>{{ $position->workload->getTranslatedWorkload() }}</td>
+                        </tr>
+                        <tr>
                             <td>{{ __('models.position.tags') }}</td>
                             <td>
                                 @forelse($position->tags as $tag)

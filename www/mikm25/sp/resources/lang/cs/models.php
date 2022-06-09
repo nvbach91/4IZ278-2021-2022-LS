@@ -19,6 +19,7 @@ return [
     ],
     'position' => [
         'branch' => 'Obor',
+        'workload' => 'Spolupráce',
         'name' => 'Jméno',
         'salary' => 'Odměna',
         'salary_from' => 'Odměna od',

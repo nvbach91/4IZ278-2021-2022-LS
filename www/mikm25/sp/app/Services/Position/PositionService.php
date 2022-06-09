@@ -18,6 +18,7 @@ class PositionService
 
         $position->user_id = $user->id;
         $position->branch_id = $positionStoreDTO->branchId;
+        $position->workload = $positionStoreDTO->workload;
         $position->company_id = $positionStoreDTO->company;
         $position->name = $positionStoreDTO->name;
         $position->salary_from = $positionStoreDTO->salaryFrom;

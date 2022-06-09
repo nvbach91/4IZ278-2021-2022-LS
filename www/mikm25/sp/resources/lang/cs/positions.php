@@ -29,11 +29,21 @@ return [
     'selects' => [
         'branch_empty' => 'Zvolte obor',
         'company_empty' => 'Zvolte společnost',
+        'workload_empty' => 'Zvolte typ spolupráce',
     ],
     'modals' => [
         'delete' => [
             'title' => 'Odstranit pozici',
             'text' => 'Chystáte se odstranit pozici. Všechny data budou ztracena. Opravdu to chcete udělat?'
         ]
+    ],
+    'workloads' => [
+        'full_time' => 'Full-time',
+        'part_time' => 'Part-time',
+        'contract' => 'Smlouva',
+        'freelance' => 'Freelance',
+        'internship' => 'Stáž',
+        'on_site' => 'On-site',
+        'remote' => 'Remote',
     ]
 ];

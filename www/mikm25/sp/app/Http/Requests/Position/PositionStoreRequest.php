@@ -3,12 +3,14 @@
 namespace App\Http\Requests\Position;
 
 use App\DTOs\Position\PositionDTO;
+use App\Models\Attributes\PositionWorkloadAttribute;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Exists;
+use Illuminate\Validation\Rules\In;
 
 class PositionStoreRequest extends FormRequest
 {
@@ -31,6 +33,11 @@ class PositionStoreRequest extends FormRequest
                 'required',
                 'integer',
                 new Exists(Branch::class, 'id'),
+            ],
+            'workload' => [
+                'required',
+                'string',
+                new In(array_keys(PositionWorkloadAttribute::getAllWorkloads())),
             ],
             'tags' => 'nullable|array|max:5',
             'tags.*' => 'nullable|string|max:30',
@@ -60,6 +67,7 @@ class PositionStoreRequest extends FormRequest
             'name' => (string) $this->input('name'),
             'workplaceAddress' => (string) $this->input('workplace_address'),
             'branchId' => (int) $this->input('branch'),
+            'workload' => (string) $this->input('workload'),
             'tags' => $tags,
             'validFrom' => $this->filled('valid_from')
                 ? Carbon::parse((string) $this->input('valid_from'))
