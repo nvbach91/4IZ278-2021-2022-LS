@@ -21,14 +21,14 @@
                 <div class="collapse navbar-collapse" id="navbar-toggle">
                     <div class="ms-auto d-grid gap-1 d-md-block pt-3 pt-md-0">
                         @if(auth('web')->check())
-                            <a href="{{ route('app.dashboard') }}" class="btn btn-primary me-lg-2">
+                            <a href="{{ route('app.dashboard') }}" class="btn btn-sm btn-primary me-lg-2">
                                 {{ __('landing-page.to_app') }}
                             </a>
                         @else
-                            <a href="{{ route('auth.login') }}" class="btn btn-outline-primary me-lg-2">
+                            <a href="{{ route('auth.login') }}" class="btn btn-sm btn-outline-primary me-lg-2">
                                 {{ __('pages.auth.login') }}
                             </a>
-                            <a href="{{ route('auth.register') }}" class="btn btn-outline-primary">
+                            <a href="{{ route('auth.register') }}" class="btn btn-sm btn-outline-primary">
                                 {{ __('pages.auth.register') }}
                             </a>
                         @endif
