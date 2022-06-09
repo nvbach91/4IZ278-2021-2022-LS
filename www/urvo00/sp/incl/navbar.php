@@ -15,6 +15,9 @@
                 <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'cart') ? ' active' : '' ?>">
                     <a class="nav-link" href="cart.php">Cart</a>
                 </li>
+                <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'orders') ? ' active' : '' ?>">
+                    <a class="nav-link" href="orders.php">Orders</a>
+                </li>
                 <?php if ($_SESSION['privilege'] > 1) : ?>
                 <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'users') ? ' active' : '' ?>">
                     <a class="nav-link" href="./utils/users.php">Users</a>

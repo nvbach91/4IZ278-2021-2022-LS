@@ -22,6 +22,12 @@ class OrderedProductsDB extends Database
         $statement->execute();
         return $statement->fetchAll();
     }
+    public function fetchByOrderId($id)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . " WHERE order_id = " . $id . ";");
+        $statement->execute();
+        return $statement->fetchAll();
+    }
     public function fetchIdCount()
     {
         $statement = $this->pdo->prepare("SELECT count(product_id) FROM " . $this->tableName . ";");
@@ -58,10 +64,8 @@ class OrderedProductsDB extends Database
     }
     public function create($args)
     {
-        $statement = $this->pdo->prepare("INSERT INTO " . $this->tableName . " (name, price, description, img, category_id) 
-        " . " VALUES ('" . $args['name'] . "','" . $args['price'] . "  ','" . $args['description'] . "  ','"
-            . $args['img'] . "  ','" . $args['img'] . "  ','" . $args['category_id'] . " 
-         " . "');");
+        $statement = $this->pdo->prepare("INSERT INTO " . $this->tableName . " (order_id, product_id, quantity) 
+        " . " VALUES (" . $args['order_id'] . "," . $args['product_id'] . "  ," . $args['quantity'] . ");");
         $statement->execute();
     }
     public function deleteById($id)
