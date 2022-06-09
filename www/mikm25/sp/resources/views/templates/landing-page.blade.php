@@ -10,7 +10,7 @@
 
 @section('content')
     <div class="container-md">
-        <nav class="navbar navbar-expand-md navbar-light bg-light rounded-2 mt-2">
+        <nav class="navbar navbar-expand-md navbar-light bg-light rounded-2 mt-2 mb-2 mb-lg-3">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ route('landing-page') }}">
                     {{ config('app.name') }}
@@ -36,6 +36,7 @@
                 </div>
             </div>
         </nav>
+        @include('common.status')
         @yield('landing-page-content')
     </div>
 @endsection

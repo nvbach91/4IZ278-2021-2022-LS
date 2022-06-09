@@ -11,7 +11,7 @@ use App\Models\Position;
 @extends('templates.landing-page')
 
 @section('landing-page-content')
-    <div class="row mt-4">
+    <div class="row">
         <div class="col">
             <div class="card border-0 bg-light p-5">
                 <h1>Najděte si práci, co vás bude bavit!</h1>

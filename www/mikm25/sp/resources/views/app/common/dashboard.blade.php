@@ -10,7 +10,14 @@ use App\View\Models\Dashboards\DashboardInterface;
 
 <div class="card border-0 bg-light">
     <div class="card-body">
-        <h5 class="card-title mb-2">{{ $dashboard->getTitle() }}</h5>
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-2 flex-grow-1">
+                {{ $dashboard->getTitle() }}
+            </h5>
+            @if($dashboard instanceof \App\View\Models\Dashboards\Concerns\HasHelpText)
+                <i class="bi bi-info-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $dashboard->getHelpText() }}"></i>
+            @endif
+        </div>
         @if($dashboard instanceof \App\View\Models\Dashboards\Concerns\HasPreviousValue)
             <div class="d-flex align-items-center">
                 <span class="h2 mb-0">{{ $dashboard->getCount() ?? '-' }}</span>

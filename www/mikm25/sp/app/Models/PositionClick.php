@@ -31,7 +31,7 @@ class PositionClick extends Model
     ];
 
     protected $casts = [
-        'position_id',
+        'position_id' => 'integer',
     ];
 
     public function position(): BelongsTo

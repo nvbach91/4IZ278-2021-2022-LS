@@ -63,7 +63,12 @@ return [
         ],
         'update' => [
             'success' => 'Váš účet byl úspěšně upraven.',
-            'email_changed' => 'Vaše emailová adresa byla změněna, poslali jsme Vám odkaz pro její ověření.'
+            'email_changed' => 'Vaše emailová adresa byla změněna, poslali jsme Vám odkaz pro její ověření.',
+        ],
+    ],
+    'reaction' => [
+        'send' => [
+            'success' => 'Zpráva byla úspěšně odeslána!',
         ]
     ],
 ];

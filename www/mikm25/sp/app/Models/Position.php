@@ -46,6 +46,7 @@ use Illuminate\Support\Str;
  * @property-read Collection|list<Tag> $tags
  * @property-read Collection|list<PositionClick> $clicks
  * @property-read Collection|list<PositionReaction> $reactions
+ * @property-read Collection|list<PositionInterest> $interests
  * @property-read Company|null $company null company means private job listing
  *
  * @property-read int|null $clicks_count
@@ -149,6 +150,11 @@ class Position extends Model
     public function reactions(): HasMany
     {
         return $this->hasMany(PositionReaction::class, 'position_id', 'id');
+    }
+
+    public function interests(): HasMany
+    {
+        return $this->hasMany(PositionInterest::class, 'position_id', 'id');
     }
 
     public function company(): BelongsTo

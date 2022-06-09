@@ -6,9 +6,10 @@ use App\Models\Builders\PositionBuilder;
 use App\Models\Position;
 use App\Models\PositionReaction;
 use App\Models\User;
+use App\View\Models\Dashboards\Concerns\HasHelpText;
 use App\View\Models\Dashboards\Concerns\HasPreviousValue;
 
-class MonthlyReactionsDashboard implements DashboardInterface, HasPreviousValue
+class MonthlyReactionsDashboard implements DashboardInterface, HasPreviousValue, HasHelpText
 {
     /**
      * @var Position|null
@@ -78,5 +79,13 @@ class MonthlyReactionsDashboard implements DashboardInterface, HasPreviousValue
         $previousText = __('common.dashboards.previous_month');
 
         return $previousText;
+    }
+
+    public function getHelpText(): string
+    {
+        /** @var string $helpText */
+        $helpText = __('common.dashboards.monthly_position_reactions.help');
+
+        return $helpText;
     }
 }

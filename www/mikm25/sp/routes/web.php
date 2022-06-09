@@ -43,7 +43,7 @@ Route::get('/{slugPosition}/redirect', [LandingPagePositionController::class, 'r
     ->where('slugPosition', '[a-zA-Z0-9\-]+')
     ->name('landing-page.position-redirect');
 
-Route::get('/{slugPosition}/react', [LandingPagePositionController::class, 'react'])
+Route::post('/{slugPosition}/react', [LandingPagePositionController::class, 'react'])
     ->where('slugPosition', '[a-zA-Z0-9\-]+')
     ->name('landing-page.position-react');
 

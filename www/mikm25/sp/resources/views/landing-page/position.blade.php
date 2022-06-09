@@ -11,7 +11,7 @@
 @extends('templates.landing-page')
 
 @section('landing-page-content')
-    <div class="row mt-2 mt-lg-3">
+    <div class="row">
         <div class="col">
             <div class="card bg-light border-0">
                 <div class="card-body m-between-column-2 p-4">
@@ -157,6 +157,8 @@
                 <div class="card bg-light border-0">
                     <div class="card-body p-4">
                         <form action="{{ route('landing-page.position-react', ['slugPosition' => $position->slug]) }}" method="post">
+                            @include('common.forms.errors')
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-lg-6 m-between-column-2 mb-2 mb-lg-0">
                                     <div>
@@ -164,20 +166,23 @@
                                             {{ __('landing-page.position.form.name') }}
                                             @include('common.forms.required')
                                         </label>
-                                        <input type="text" name="name" id="reaction-name" class="form-control" required>
+                                        <input type="text" name="name" id="reaction-name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+                                        @include('common.forms.error', ['field' => 'name'])
                                     </div>
                                     <div>
                                         <label for="reaction-email" class="form-label">
                                             {{ __('landing-page.position.form.email') }}
                                             @include('common.forms.required')
                                         </label>
-                                        <input type="email" name="email" id="reaction-email" class="form-control" required>
+                                        <input type="email" name="email" id="reaction-email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
+                                        @include('common.forms.error', ['field' => 'email'])
                                     </div>
                                     <div>
                                         <label for="reaction-phone" class="form-label">
                                             {{ __('landing-page.position.form.phone') }}
                                         </label>
-                                        <input type="tel" name="phone" id="reaction-phone" class="form-control">
+                                        <input type="tel" name="phone" id="reaction-phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}">
+                                        @include('common.forms.error', ['field' => 'phone'])
                                     </div>
                                 </div>
                                 <div class="col-lg-6 d-flex flex-column">
@@ -185,7 +190,8 @@
                                         {{ __('landing-page.position.form.message') }}
                                         @include('common.forms.required')
                                     </label>
-                                    <textarea class="form-control flex-grow-1" name="message" id="reaction-message" required></textarea>
+                                    <textarea class="form-control flex-grow-1 @error('message') is-invalid @enderror" name="message" id="reaction-message" required>{{ old('message') }}</textarea>
+                                    @include('common.forms.error', ['field' => 'message'])
                                 </div>
                             </div>
                             <div class="mt-3">

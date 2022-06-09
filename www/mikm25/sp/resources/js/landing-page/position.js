@@ -9,3 +9,16 @@ document.querySelectorAll('.position-interested-btn').forEach(element => {
     }
   })
 })
+
+
+const reactionFormHasErrors = document.querySelector('.position-reaction-form .form-control.is-invalid') !== null
+
+if (reactionFormHasErrors) {
+  const positionForm = document.querySelector('.position-reaction-form')
+
+  if (positionForm) {
+    positionForm.scrollIntoView(true, {
+      behavior: 'smooth'
+    })
+  }
+}

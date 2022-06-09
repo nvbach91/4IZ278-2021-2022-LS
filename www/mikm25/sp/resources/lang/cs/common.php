@@ -31,6 +31,7 @@ return [
         ],
         'monthly_position_reactions' => [
             'title' => 'Počet reakcí tento měsíc',
+            'help' => 'Číslo obsahuje počet kliknutí na tlačítko "Mám zájem" ať už při přesměrování či odeslání kontaktního formuláře.'
         ],
     ],
     'searching' => 'Hledání...',
