@@ -27,8 +27,8 @@ class SidebarViewComposer
             ],
             'app.companies.index' => [
                 'text' => __('pages.app.companies.index'),
-                'icon' => 'bi bi-people',
-                'activeIcon' => 'bi bi-people-fill',
+                'icon' => 'bi bi-building',
+                'activeIcon' => 'bi bi-building',
                 'active' => $request->is('app/companies*'),
             ],
         ]);

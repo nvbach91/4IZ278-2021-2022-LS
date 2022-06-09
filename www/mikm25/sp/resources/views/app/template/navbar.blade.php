@@ -19,7 +19,7 @@
                 </li>
                 <li>
                     <a class="dropdown-item" href="{{ route('app.companies.create') }}">
-                        <i class="bi bi-people"></i> {{ __('pages.app.companies.create') }}
+                        <i class="bi bi-building"></i> {{ __('pages.app.companies.create') }}
                     </a>
                 </li>
             </ul>

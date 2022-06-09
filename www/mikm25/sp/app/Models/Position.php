@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Builders\PositionBuilder;
+use App\Models\Formatters\PositionFormatter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -52,6 +53,7 @@ use Illuminate\Support\Str;
 class Position extends Model
 {
     use HasFactory;
+    use PositionFormatter;
 
     protected $table = 'positions';
 
@@ -102,6 +104,11 @@ class Position extends Model
         }
 
         return true;
+    }
+
+    public function isSalarySet(): bool
+    {
+        return ! empty($this->salary_from) && ! empty($this->salary_to);
     }
 
     public function getTitleNameAttribute(): string

@@ -20,6 +20,7 @@ return [
     'position' => [
         'branch' => 'Obor',
         'name' => 'Jméno',
+        'salary' => 'Odměna',
         'salary_from' => 'Odměna od',
         'salary_to' => 'Odměna do',
         'external_url' => 'Externí odkaz',

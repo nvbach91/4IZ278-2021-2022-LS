@@ -36,8 +36,8 @@ class PositionStoreRequest extends FormRequest
             'tags.*' => 'nullable|string|max:30',
             'valid_from' => "nullable|date|before:valid_until|after_or_equal:$today",
             'valid_until' => 'nullable|date|after:valid_from',
-            'salary_from' => 'nullable|integer|lte:salary_to|gte:0',
-            'salary_to' => 'nullable|integer|gte:salary_from|gte:0',
+            'salary_from' => 'nullable|required_with:salary_to|integer|lte:salary_to|gte:0',
+            'salary_to' => 'nullable|required_with:salary_from|integer|gte:salary_from|gte:0',
             'company' => [
                 'nullable',
                 'integer',
