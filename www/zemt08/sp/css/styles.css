@@ -1,0 +1,293 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@100;300;400;500;600;700;800&display=swap");
+html,
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Barlow", sans-serif;
+	scrollbar-color: #f5a512 rgba(0, 63, 57, 1);
+	scrollbar-width: thin;
+	scroll-behavior: smooth;
+}
+
+:root {
+	/* --main-color: #4caf50; */
+	--main-color: #00625a;
+	--orange: #f7a515;
+	--red: #af4c5a;
+}
+
+/* background: radial-gradient(circle, rgba(0, 121, 112, 1) 0%, rgba(0, 63, 57, 1) 100%); */
+/* box-shadow: 5px 5px 15px 3px rgb(0, 0, 0, 0.3); */
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: rgba(0, 63, 57, 1);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #f5a512;
+	border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+	border-radius: 25px;
+	background-color: var(--orange);
+	font-family: "Barlow", sans-serif;
+	transition: all 0.5s;
+	color: black;
+}
+
+input {
+	font-family: "Barlow", sans-serif;
+	border: solid 1px #e5e5e5;
+	font-size: 16px;
+	border-radius: 8px;
+	outline: none;
+	padding: 10px 15px;
+}
+
+textarea {
+	font-family: "Barlow", sans-serif;
+	border: solid 1px #e5e5e5;
+	font-size: 16px;
+	border-radius: 8px;
+	outline: none;
+	padding: 10px 15px;
+	resize: none;
+}
+
+input[type="submit"] {
+	background-color: var(--orange);
+	font-weight: 700;
+	border-radius: 25px;
+	padding: 10px 20px;
+	letter-spacing: 2px;
+	cursor: pointer;
+	transition: all 0.5s;
+	border: none;
+}
+
+input[type="submit"]:hover {
+	color: white;
+}
+
+button:hover {
+	color: white;
+}
+
+ul {
+	padding-left: 20px;
+}
+
+section {
+	padding: 80px 0;
+}
+
+@media (max-width: 600px) {
+	section {
+		padding: 60px 0;
+	}
+}
+
+.content {
+	margin: 0 auto;
+}
+
+.headline {
+	font-size: 55px;
+	color: var(--main-color);
+	text-align: center;
+	margin-bottom: 30px;
+	margin-top: 0;
+}
+
+@media (max-width: 1500px) {
+	.headline {
+		font-size: 50px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.headline {
+		font-size: 45px;
+	}
+}
+
+@media (max-width: 800px) {
+	.headline {
+		font-size: 40px;
+	}
+}
+
+@media (max-width: 600px) {
+	.headline {
+		font-size: 35px;
+	}
+}
+
+/*--------------------------------------------BANNER*/
+.banner {
+	background: radial-gradient(circle, rgba(0, 121, 112, 1) 0%, rgba(0, 63, 57, 1) 100%);
+	height: 40vh;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+	padding: 0;
+	max-height: 400px;
+}
+
+.banner h1 {
+	font-size: 90px;
+	color: white;
+	margin: 0;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	letter-spacing: 5px;
+}
+
+.banner img {
+	width: 40%;
+	max-width: 600px;
+	min-width: 200px;
+	position: absolute;
+	top: -80px;
+	right: -80px;
+	opacity: 0.7;
+	animation: kruhy 3s forwards;
+}
+
+@media (max-width: 1500px) {
+	.banner {
+		height: 35vh;
+	}
+}
+
+@media (max-width: 1200px) {
+	.banner img {
+		top: -50px;
+		right: -80px;
+	}
+}
+
+@media (max-width: 800px) {
+	.banner {
+		height: 25vh;
+	}
+
+	.banner h1 {
+		font-size: 75px;
+	}
+}
+
+@media (max-width: 550px) {
+	.banner {
+		height: 160px;
+	}
+
+	.banner h1 {
+		font-size: 50px;
+	}
+
+	.banner img {
+		display: none;
+	}
+}
+
+@keyframes kruhy {
+	from {
+		top: -110px;
+		right: -110px;
+		opacity: 0.3;
+	}
+
+	to {
+		top: -80px;
+		right: -80px;
+		opacity: 1;
+	}
+}
+
+/*--------------------------------------------FOOTER*/
+footer {
+	background-color: #333;
+}
+
+.footer {
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	flex-wrap: wrap;
+	text-align: center;
+	background-color: #333;
+	color: white;
+	padding: 30px 0;
+}
+
+.footer::after {
+	content: "© 2022 Blogino";
+}
+
+.footer section {
+	margin: 10px 30px;
+	width: calc(25% - 60px);
+	padding: 0;
+}
+
+.footer h3 {
+	font-size: 24px;
+	margin-top: 0;
+	font-weight: 500;
+	margin-bottom: 8px;
+}
+
+.footer p {
+	margin: 10px;
+	font-size: 18px;
+	color: white;
+}
+
+@media (max-width: 1400px) {
+	.footer {
+		width: 100%;
+	}
+}
+
+@media (max-width: 1150px) {
+	.footer {
+		max-width: 800px;
+	}
+
+	.footer section {
+		margin: 0 30px;
+		margin-bottom: 30px;
+		width: calc(50% - 60px);
+	}
+}
+
+@media (max-width: 600px) {
+	.footer section {
+		margin: 0 30px;
+		margin-bottom: 30px;
+		width: calc(100% - 60px);
+	}
+}
+
+.users-list {
+	max-height: 40vh;
+	overflow-y: auto;
+}

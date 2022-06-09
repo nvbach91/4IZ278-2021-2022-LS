@@ -1,0 +1,59 @@
+form {
+	width: 450px;
+	background: radial-gradient(circle, rgba(0, 121, 112, 0.8) 0%, rgba(0, 63, 57, 0.8) 100%);
+	padding: 50px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 8px;
+	text-align: center;
+}
+
+form h1 {
+	color: white !important;
+}
+
+input[type="text"] {
+	width: 250px;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 15px;
+}
+
+input[type="email"] {
+	width: 250px;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 15px;
+}
+
+input[type="password"] {
+	width: 250px;
+	display: block;
+	margin: 0 auto;
+	margin-bottom: 15px;
+}
+form a {
+	display: block;
+	margin-top: 15px;
+	color: white;
+}
+.content {
+	width: 100%;
+	height: calc(100vh - 118px);
+	position: relative;
+}
+
+nav div {
+	position: absolute;
+	left: 50px;
+}
+
+label {
+	color: white;
+	display: block;
+	margin-top: -5px;
+	margin-bottom: 10px;
+	font-size: 14px;
+}

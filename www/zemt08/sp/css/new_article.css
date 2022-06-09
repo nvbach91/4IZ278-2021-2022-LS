@@ -1,0 +1,112 @@
+.article-form {
+	width: 60%;
+	margin: 0 auto;
+	text-align: center;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.article-form button {
+	padding: 10px 20px;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.article-form input,
+textarea {
+	display: block;
+	width: 100%;
+	margin: 15px 0;
+}
+
+.article-form input[type="submit"] {
+	margin: 0 auto;
+	margin-top: 30px;
+	width: auto;
+}
+
+#file {
+	border: none;
+}
+
+.boxes {
+	border: solid 1px var(--main-color);
+	padding: 25px;
+	border-radius: 8px;
+	width: calc(50% - 75px);
+	position: relative;
+}
+.boxes::before {
+	position: absolute;
+	top: -15px;
+	left: 25px;
+	background-color: white;
+	color: var(--main-color);
+	font-size: 20px;
+	padding: 0 5px;
+}
+
+.main-info::before {
+	content: "Informace o článku:";
+}
+
+.meta-info::before {
+	content: "Meta data:";
+}
+
+.editor-cont {
+	width: calc(100% - 50px);
+	outline: solid 1px var(--main-color);
+	text-align: left;
+	padding: 25px;
+	border-radius: 8px;
+	margin-top: 60px;
+	position: relative;
+}
+
+.editor-cont::before {
+	content: "Obsah článku:";
+	position: absolute;
+	top: -15px;
+	left: 25px;
+	background-color: white;
+	color: var(--main-color);
+	font-size: 20px;
+	padding: 0 5px;
+}
+
+.editor {
+	width: 100%;
+	min-height: 350px;
+}
+
+.ql-container {
+	font-family: "Barlow", sans-serif;
+	font-size: 16px;
+	height: 40vh;
+	border-radius: 0 0 8px 8px;
+}
+
+.ql-toolbar {
+	border-radius: 8px 8px 0 0;
+}
+
+.tags {
+	border: solid 1px var(--main-color);
+	padding: 25px;
+	border-radius: 8px;
+	width: calc(100% - 50px);
+	position: relative;
+	margin-top: 60px;
+}
+.tags::before {
+	content: "Kategorie:";
+	position: absolute;
+	top: -15px;
+	left: 25px;
+	background-color: white;
+	color: var(--main-color);
+	font-size: 20px;
+	padding: 0 5px;
+}
