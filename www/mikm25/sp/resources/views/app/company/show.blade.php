@@ -47,60 +47,64 @@ use App\Models\Company;
     </div>
     <div class="row mb-2">
         <div class="col-lg-6 col-sm-12 mb-sm-2">
-            <table class="table table-borderless">
-                <tbody>
-                <tr>
-                    <td colspan="2"><b>{{ __('companies.sections.general') }}</b></td>
-                </tr>
-                <tr>
-                    <td>{{ __('models.id') }}</td>
-                    <td>{{ $company->id }}</td>
-                </tr>
-                <tr>
-                    <td>{{ __('models.company.name') }}</td>
-                    <td>
-                        <a href="{{ route('app.companies.show', ['company' => $company->id]) }}">
-                            {{ $company->name }}
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>{{ __('models.company.size') }}</td>
-                    <td>{{ !empty($company->size) ? $company->size->getTranslatedSize() : '-' }}</td>
-                </tr>
-                <tr>
-                    <td>{{ __('models.company.url') }}</td>
-                    <td>
-                        @if(!empty($company->url))
-                            <a href="{{ $company->url }}" target="_blank">{{ $company->url }}</a>
-                        @else
-                            -
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <td>{{ __('models.company.address') }}</td>
-                    <td>{{ $company->address ?? '-' }}</td>
-                </tr>
-                <tr>
-                    <td>{{ __('models.company.contact_email') }}</td>
-                    <td>
-                        @if(!empty($company->contact_email))
-                            <a href="mailto:{{ $company->contact_email }}">{{ $company->contact_email }}</a>
-                        @else
-                            -
-                        @endif
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><b>{{ __('companies.sections.statistics') }}</b></td>
-                </tr>
-                <tr>
-                    <td>{{ __('models.company.positions_count') }}</td>
-                    <td>{{ $company->positions_count }}</td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="card bg-light border-0">
+                <div class="card-body">
+                    <table class="table table-borderless">
+                        <tbody>
+                        <tr>
+                            <td colspan="2"><b>{{ __('companies.sections.general') }}</b></td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('models.id') }}</td>
+                            <td>{{ $company->id }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('models.company.name') }}</td>
+                            <td>
+                                <a href="{{ route('app.companies.show', ['company' => $company->id]) }}">
+                                    {{ $company->name }}
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('models.company.size') }}</td>
+                            <td>{{ !empty($company->size) ? $company->size->getTranslatedSize() : '-' }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('models.company.url') }}</td>
+                            <td>
+                                @if(!empty($company->url))
+                                    <a href="{{ $company->url }}" target="_blank">{{ $company->url }}</a>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('models.company.address') }}</td>
+                            <td>{{ $company->address ?? '-' }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('models.company.contact_email') }}</td>
+                            <td>
+                                @if(!empty($company->contact_email))
+                                    <a href="mailto:{{ $company->contact_email }}">{{ $company->contact_email }}</a>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>{{ __('companies.sections.statistics') }}</b></td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('models.company.positions_count') }}</td>
+                            <td>{{ $company->positions_count }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     @include('app.company.modals.delete')

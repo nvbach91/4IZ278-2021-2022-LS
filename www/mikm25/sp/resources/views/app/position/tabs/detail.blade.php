@@ -14,9 +14,9 @@ use App\Enums\PositionTabEnum;
 
 @section('position-content')
     <div class="row mb-2">
-        <div class="col-lg-6 col-md-12 order-1 order-lg-0">
-            <div class="card">
-                <div class="card-header">
+        <div class="col-xl-8 col-lg-6 col-md-12 order-1 order-lg-0">
+            <div class="card bg-light border-0">
+                <div class="card-header border-0">
                     {{ __('positions.detail.sections.preview') }}
                 </div>
                 <div class="card-body p-4">
@@ -25,7 +25,7 @@ use App\Enums\PositionTabEnum;
             </div>
         </div>
         <div class="col-xl-4 col-lg-6 col-md-12 mb-md-3 order-0 order-lg-1">
-            <div class="card position-lg-sticky top-0">
+            <div class="card position-lg-sticky top-0 bg-light border-0">
                 <div class="card-body">
                     <table class="table table-borderless">
                         <tbody>
