@@ -41,11 +41,11 @@
                     @endif
                 </div>
                 <div class="card-footer border-0 px-4">
-                    <div class="d-flex justify-content-start align-items-center m-between-row-2 flex-wrap">
+                    <div class="d-flex justify-content-start align-items-lg-center m-between-row-2 flex-column flex-lg-row">
                         <small class="text-muted">
                             <i class="bi bi-calendar"></i> {{ __('models.created_at') }}: {{ $position->created_at->format('j. n. Y H:i:s') }}
                         </small>
-                        <small class="text-muted">
+                        <small class="text-muted mt-1 mt-lg-0 ms-0 ms-lg-2">
                             <i class="bi bi-calendar"></i> {{ __('models.updated_at') }}: {{ $position->updated_at->format('j. n. Y H:i:s') }}
                         </small>
                     </div>
@@ -53,6 +53,23 @@
             </div>
         </div>
     </div>
+
+    @if(auth('web')->check() && auth('web')->user()->id === $position->user_id)
+        <div class="row mt-2 mt-lg-3">
+            <div class="col">
+                <div class="card bg-light border-0">
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> {{ __('landing-page.position.app_link_text') }}
+                        </div>
+                        <a href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Enums\PositionTabEnum::detail()->getValue()]) }}" class="btn btn-primary">
+                            {{ __('landing-page.position.app_link_button') }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <div class="row mt-2 mt-lg-3 gx-0 gx-lg-3">
         <div class="col-12 col-lg-9 order-1 order-lg-0">
