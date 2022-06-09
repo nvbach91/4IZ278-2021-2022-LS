@@ -20,13 +20,13 @@
                         <div class="d-flex justify-content-start align-items-center m-between-row-2 flex-wrap">
                             @isset($position->company)
                                 <span class="h5">
-                        <i class="bi bi-building"></i> {{ $position->company->name }}
-                    </span>
+                                    <i class="bi bi-building"></i> {{ $position->company->name }}
+                                </span>
                             @endisset
                             @isset($position->workplace_address)
                                 <span class="h5">
-                        <i class="bi bi-geo-alt-fill"></i> {{ $position->workplace_address }}
-                    </span>
+                                    <i class="bi bi-geo-alt"></i> {{ $position->workplace_address }}
+                                </span>
                             @endisset
                         </div>
                     @endif
@@ -34,11 +34,21 @@
                         <div class="d-flex justify-content-start align-items-center m-between-row-2 flex-wrap">
                             @foreach($position->tags as $tag)
                                 <span class="badge bg-primary">
-                            {{ $tag->name }}
-                        </span>
+                                    {{ $tag->name }}
+                                </span>
                             @endforeach
                         </div>
                     @endif
+                </div>
+                <div class="card-footer border-0 px-4">
+                    <div class="d-flex justify-content-start align-items-center m-between-row-2 flex-wrap">
+                        <small class="text-muted">
+                            <i class="bi bi-calendar"></i> {{ __('models.created_at') }}: {{ $position->created_at->format('j. n. Y H:i:s') }}
+                        </small>
+                        <small class="text-muted">
+                            <i class="bi bi-calendar"></i> {{ __('models.updated_at') }}: {{ $position->updated_at->format('j. n. Y H:i:s') }}
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,7 +98,7 @@
                             <div>
                                 <span class="fw-bolder mb-1 d-block">{{ __('models.company.url') }}:</span>
                                 <span>
-                                    <a href="{{ $position->company->url }}">{{ $position->company->url }}</a>
+                                    <a href="{{ $position->company->url }}" target="_blank">{{ $position->company->url }}</a>
                                 </span>
                             </div>
                         @endisset
@@ -106,12 +116,74 @@
                         @endisset
                     @endisset
                     <div class="d-grid">
-                        <button class="btn btn-primary position-interested-btn">
-                            {{ __('landing-page.position.interested_button') }}
-                        </button>
+                        @if($position->isExternalUrlSet())
+                            <a href="{{ route('landing-page.position-redirect', ['slugPosition' => $position->slug]) }}"
+                               class="btn btn-primary">
+                                {{ __('landing-page.position.interested_button') }}
+                            </a>
+                        @else
+                            <button type="button" class="btn btn-primary position-interested-btn">
+                                {{ __('landing-page.position.interested_button') }}
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    @if(!$position->isExternalUrlSet())
+        <div class="row mt-2 mt-lg-3 mb-2 position-reaction-form">
+            <div class="col">
+                <div class="card bg-light border-0">
+                    <div class="card-body p-4">
+                        <form action="{{ route('landing-page.position-react', ['slugPosition' => $position->slug]) }}" method="post">
+                            <div class="row">
+                                <div class="col-lg-6 m-between-column-2 mb-2 mb-lg-0">
+                                    <div>
+                                        <label for="reaction-name" class="form-label">
+                                            {{ __('landing-page.position.form.name') }}
+                                            @include('common.forms.required')
+                                        </label>
+                                        <input type="text" name="name" id="reaction-name" class="form-control" required>
+                                    </div>
+                                    <div>
+                                        <label for="reaction-email" class="form-label">
+                                            {{ __('landing-page.position.form.email') }}
+                                            @include('common.forms.required')
+                                        </label>
+                                        <input type="email" name="email" id="reaction-email" class="form-control" required>
+                                    </div>
+                                    <div>
+                                        <label for="reaction-phone" class="form-label">
+                                            {{ __('landing-page.position.form.phone') }}
+                                        </label>
+                                        <input type="tel" name="phone" id="reaction-phone" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 d-flex flex-column">
+                                    <label for="reaction-message" class="form-label">
+                                        {{ __('landing-page.position.form.message') }}
+                                        @include('common.forms.required')
+                                    </label>
+                                    <textarea class="form-control flex-grow-1" name="message" id="reaction-message" required></textarea>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-lg-3">
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary">
+                                                {{ __('landing-page.position.interested_button') }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection

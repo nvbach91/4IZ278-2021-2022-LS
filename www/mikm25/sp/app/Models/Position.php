@@ -111,6 +111,11 @@ class Position extends Model
         return ! empty($this->salary_from) && ! empty($this->salary_to);
     }
 
+    public function isExternalUrlSet(): bool
+    {
+        return ! empty($this->external_url);
+    }
+
     public function getTitleNameAttribute(): string
     {
         return Str::limit($this->name, 25);
