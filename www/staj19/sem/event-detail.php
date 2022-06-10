@@ -37,7 +37,7 @@ $registeredCount = $registerDB->getCount($eventId);
 if (isset($user) && ($user['id'] !== $event['owner'])) {
   $userRegistered = $registerDB->fetchByAll($user['id'], $eventId);
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if ($_SERVER['REQUEST_METHOD'] == 'POST' && $registeredCount['COUNT(user_id)'] < $event['capacity']) {
     if ($userRegistered === '') {
       $registerDB->insertRow($user['id'], $eventId);
     } else {
@@ -59,7 +59,7 @@ if (isset($user) && ($user['id'] !== $event['owner'])) {
     <div class="p-3 row row-cols-2">
       <div class="col">
         <?php if (isset($event['datetime'])) : ?>
-          <div>Datetime: <?php echo $event['datetime'] ?></div>
+          <div>Datetime: <?php echo date('H:i d.m.Y', strtotime($event['datetime'])) ?></div>
         <?php endif ?>
         <?php if (isset($event['name'])) : ?>
           <div>Owner: <?php echo $owner['name'] ?></div>
@@ -88,7 +88,7 @@ if (isset($user) && ($user['id'] !== $event['owner'])) {
     <div class="col">
       <?php if (isset($user) && ($user['id'] === $event['owner'])) : ?>
         <a class="btn btn-primary ms-3" href="event-edit.php?id=<?php echo $eventId ?>">Edit event</a>
-      <?php else : ?>
+      <?php elseif (isset($userRegistered) && $registeredCount['COUNT(user_id)'] < $event['capacity']) : ?>
         <form class="d-inline" method="POST">
           <button class="btn btn-primary m-3" type="submit"><?php echo $userRegistered !== '' ? 'No longer interested' : 'Register to' ?></button>
         </form>

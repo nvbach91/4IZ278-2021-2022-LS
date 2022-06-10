@@ -30,6 +30,12 @@ if (empty($_GET) || isset($_GET['offset'])) {
     } else if ($_GET['filter'] === 'registered') {
       $events = $eventDB->fetchByRegistredTo($user['id']);
     }
+  } else if ($_GET['order']) {
+    if ($_GET['order'] === 'asc') {
+      $events = $eventDB->fetchByDate('asc');
+    } else if ($_GET['order'] === 'desc') {
+      $events = $eventDB->fetchByDate('desc');
+    }
   }
   $showAllUsers = true;
 }
@@ -64,6 +70,10 @@ if (empty($_GET) || isset($_GET['offset'])) {
       <?php endif ?>
     </p>
   <?php endif ?>
+  <p>
+    <a class="ms-3 fs-0.5" href="events.php?order=asc">From earliest</a>
+    <a class="ms-3 fs-0.5" href="events.php?order=desc">From furthest</a>
+  </p>
 
   <div class="mx-auto container">
     <div class="row row-cols-4">

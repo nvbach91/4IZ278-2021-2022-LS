@@ -15,7 +15,7 @@ class EventDB extends Database
 
   public function fetchById($id)
   {
-    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE id = :id");
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE id = :id AND datetime > now()");
     $statement->execute(['id' => $id]);
     $result = $statement->fetchAll();
     return isset($result[0]) ? $result[0] : '';
@@ -56,6 +56,17 @@ class EventDB extends Database
     return $statement->fetchAll();
   }
 
+  public function fetchByDate($order)
+  {
+    if ($order === 'asc') {
+      $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE datetime > now() ORDER BY datetime ASC");
+    } else if ($order === 'desc') {
+      $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE datetime > now() ORDER BY datetime DESC");
+    }
+    $statement->execute();
+    return $statement->fetchAll();
+  }
+
   public function searchByName($name)
   {
     $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE name LIKE :name AND datetime > now()");
@@ -71,7 +82,7 @@ class EventDB extends Database
 
   public function fetchPagination($limit, $offset)
   {
-    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY id ASC LIMIT ? OFFSET ?");
+    $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE datetime > now() ORDER BY id ASC LIMIT ? OFFSET ?");
     $statement->bindValue(1, $limit, PDO::PARAM_INT);
     $statement->bindValue(2, $offset, PDO::PARAM_INT);
     $statement->execute();
