@@ -1,6 +1,6 @@
 <?php require_once  __DIR__ . './Database.php'; ?>
 <?php
-class CategoriesDB extends Database{
+class CategoryDB extends Database{
     protected $tableName = 'category';
     public function fetchAll(){
         $statement = $this -> pdo -> prepare("SELECT * FROM " . $this-> tableName .";");

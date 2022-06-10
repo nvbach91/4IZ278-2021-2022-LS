@@ -18,10 +18,18 @@ $offset = 0;
 if (!empty($_GET)) {
     $offset = $_GET['offset'];
 }
-$productsDB = new ProductsDB();
-$count = $productsDB->fetchIdCount();
 
-$products = $productsDB -> fetchAllPaginated($nItemsPerPagination, $offset);
+$productsDB = new ProductsDB();
+
+if (isset($_GET['category'])) {
+    $category_id = $_GET['category'];
+
+    $count = $productsDB->fetchIdCountByCategory($category_id);
+    $products = $productsDB->fetchAllByCategoryPaginated($nItemsPerPagination, $offset, $category_id);
+} else {
+    $count = $productsDB->fetchIdCount();
+    $products = $productsDB->fetchAllPaginated($nItemsPerPagination, $offset);
+}
 ?>
 <?php include __DIR__ . '/incl/head.php'; ?>
 <?php include __DIR__ . '/incl/navbar.php'; ?>
@@ -31,8 +39,9 @@ $products = $productsDB -> fetchAllPaginated($nItemsPerPagination, $offset);
     Total product count: <?php echo $count ?>
     <br><br>
     <?php if ($_SESSION['privilege'] > 1) : ?>
-    <a class="btn btn-primary" href="./utils/create-item.php">Add new product</a>
+        <a class="btn btn-primary" href="./utils/create-item.php">Add new product</a>
     <?php endif; ?>
+    <a class="btn btn-primary" href="./index.php">All products</a>
     <br><br>
 
     <div class="pagination">
@@ -46,7 +55,7 @@ $products = $productsDB -> fetchAllPaginated($nItemsPerPagination, $offset);
         <div class="products">
             <?php foreach ($products as $row) : ?>
                 <div class="card product" style="width: calc(100% / 3)">
-                <div class="card-img-top" style="background-image: url(<?php echo $row['img']; ?>)"></div>
+                    <div class="card-img-top" style="background-image: url(<?php echo $row['img']; ?>)"></div>
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $row['name'] ?></h5>
                         <div class="card-subtitle"><?php echo $row['price'] ?></div>

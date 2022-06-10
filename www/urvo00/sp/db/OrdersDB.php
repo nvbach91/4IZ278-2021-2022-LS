@@ -5,13 +5,15 @@ class OrdersDB extends Database
     protected $tableName = 'orders';
     public function fetchAll()
     {
-        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . ";");
+        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName ." INNER JOIN users on users.user_id = "
+         . $this -> tableName.".user_id" ." ORDER BY date ASC;");
         $statement->execute();
         return $statement->fetchAll();
     }
     public function fetchAllPaginated($pagination, $offset)
     {
-        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . " ORDER BY order_id DESC LIMIT " . $pagination . " OFFSET ? " . ";");
+        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName ." INNER JOIN users on users.user_id = " . $this -> tableName."user_id" 
+        ." ORDER BY order_id DESC LIMIT " . $pagination . " OFFSET ? " . ";");
         $statement->bindValue(1, $offset, PDO::PARAM_INT);
         $statement->execute();
         return $statement->fetchAll();
@@ -30,7 +32,7 @@ class OrdersDB extends Database
     }
     public function fetchByUserId($id)
     {
-        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . " WHERE user_id = " . $id . ";");
+        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . " WHERE user_id = " . $id . " ORDER BY date ASC;");
         $statement->execute();
         return $statement->fetchAll();
     }

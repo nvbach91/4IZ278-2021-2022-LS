@@ -22,6 +22,7 @@ if (!empty($_POST)) {
 }
 ?>
 <?php include __DIR__ . '/incl/head.php'; ?>
+<?php include __DIR__ . '/incl/navbar.php'; ?>
 <main class="container">
    <h1>Login</h1>
    <form method="POST">

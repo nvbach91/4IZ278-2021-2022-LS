@@ -16,15 +16,35 @@ class ProductsDB extends Database
         $statement->execute();
         return $statement->fetchAll();
     }
+    public function fetchAllByCategoryPaginated($pagination, $offset, $category_id)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . " WHERE category_id = " . $category_id .
+        " ORDER BY product_id DESC LIMIT " . $pagination . " OFFSET ? " . ";");
+        $statement->bindValue(1, $offset, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
     public function fetchById($id)
     {
         $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . " WHERE product_id = " . $id . ";");
         $statement->execute();
         return $statement->fetchAll();
     }
+    public function fetchByCategoryId($id)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . " WHERE category_id = " . $id . ";");
+        $statement->execute();
+        return $statement->fetchAll();
+    }
     public function fetchIdCount()
     {
         $statement = $this->pdo->prepare("SELECT count(product_id) FROM " . $this->tableName . ";");
+        $statement->execute();
+        return $statement->fetchColumn();
+    }
+    public function fetchIdCountByCategory($id)
+    {
+        $statement = $this->pdo->prepare("SELECT count(product_id) FROM " . $this->tableName . " WHERE category_id = ". $id . ";");
         $statement->execute();
         return $statement->fetchColumn();
     }

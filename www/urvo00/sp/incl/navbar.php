@@ -11,7 +11,7 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <?php if (isset($_COOKIE['email'])): ?>
+                <?php if (isset($_COOKIE['email']) && isset($_SESSION['privilege'])): ?>
                 <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'cart') ? ' active' : '' ?>">
                     <a class="nav-link" href="cart.php">Cart</a>
                 </li>
@@ -21,6 +21,9 @@
                 <?php if ($_SESSION['privilege'] > 1) : ?>
                 <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'users') ? ' active' : '' ?>">
                     <a class="nav-link" href="./utils/users.php">Users</a>
+                </li>
+                <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'users') ? ' active' : '' ?>">
+                    <a class="nav-link" href="adminOrders.php">Orders</a>
                 </li>
                 <?php endif; ?>
                 <li class="nav-item<?php echo strpos($_SERVER['REQUEST_URI'], 'profile') ? ' active' : '' ?>">

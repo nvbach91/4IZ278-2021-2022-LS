@@ -1,6 +1,6 @@
 <?php
 if(isset($_COOKIE['email'])){
-    setcookie('email','',1);
+    setcookie('email','',-1000);
     setcookie('cart','',1);
     $_SESSION = array();
     if (ini_get("session.use_cookies")) {
@@ -10,6 +10,7 @@ if(isset($_COOKIE['email'])){
             $params["secure"], $params["httponly"]
         );
     }
+
     session_destroy();    
     header('Location: login.php');
 }
