@@ -15,7 +15,7 @@ class Order extends Model
 
     protected $table = "orders";
     protected $primaryKey = "order_id";
-    protected $fillable = ["user_id", "address_id", "status", "variable_symbol", "note"];
+    protected $fillable = ["user_id", "order_uuid", "address_id", "status", "variable_symbol", "note"];
 
     public function product_size(): BelongsToMany
     {

@@ -10,11 +10,13 @@ use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use App\Custom\Emails;
+use Illuminate\Support\Str;
 
 class OrdersController extends Controller
 {
@@ -56,6 +58,7 @@ class OrdersController extends Controller
 
         $order = Order::create([
             'user_id' => $request->input("user_id"),
+            'order_uuid' => Str::uuid(),
             'address_id' => 1,
             'status' => Texts::ORDER_STATUS[0],
             'variable_symbol' => Features::variableSymbol(),
@@ -80,7 +83,6 @@ class OrdersController extends Controller
             "quantity" => 1,
         ];
         $order->total = $order->total+79;
-        return $order->address;
 
         $pdf = PDF::loadView('pdf', ['data' => $order, 'products' => $orderProducts, 'total' => $order->total, 'depositPayment' => $order->total]);
         Emails::orderAdminEmail($order, $orderProducts, $pdf);
@@ -94,10 +96,20 @@ class OrdersController extends Controller
      * Display the specified resource.
      * @param Order $order
      */
-    public function orderInvoice(Order $order): Response
+    public function orderInvoice(Order $order)
     {
         $orderProducts = Features::productFormatter($order);
 
+        $pdf = PDF::loadView('pdf', ['data' => $order, 'products' => $orderProducts]);
+
+
+        return $pdf->stream();
+    }
+
+    public function orderInvoiceUuid($uuid)
+    {
+        $order = Order::where("order_uuid", "=", $uuid)->first();
+        $orderProducts = Features::productFormatter($order);
         $pdf = PDF::loadView('pdf', ['data' => $order, 'products' => $orderProducts]);
         return $pdf->stream();
     }

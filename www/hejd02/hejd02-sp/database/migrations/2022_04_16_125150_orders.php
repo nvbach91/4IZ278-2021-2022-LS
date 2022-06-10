@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id('order_id');
+            $table->uuid('order_uuid');
             $table->foreignId('user_id')->nullable()->references('user_id')->on('users')->onDelete('set null');
             $table->foreignId('address_id');
             $table->string('status',100);

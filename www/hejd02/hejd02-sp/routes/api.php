@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum', 'abilities:role:admin'])->prefix('admin')->gr
     Route::apiResource('/order', OrdersController::class);
 });
 Route::get('/order/invoice/{order}', [OrdersController::class, 'orderInvoice']);
+Route::get('/order/invoice-uuid/{uuid}', [OrdersController::class, 'orderInvoiceUuid']);
 
 Route::middleware(['auth:sanctum', 'abilities:role:user'])->prefix('user')->group(function () {
     Route::apiResource('/user', UsersController::class)->except(['index', 'store']);
