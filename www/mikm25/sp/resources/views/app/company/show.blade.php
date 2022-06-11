@@ -95,6 +95,14 @@ use App\Models\Company;
                             </td>
                         </tr>
                         <tr>
+                            <td>{{ __('models.created_at') }}</td>
+                            <td>{{ $company->created_at->format('j. n. Y H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('models.updated_at') }}</td>
+                            <td>{{ $company->updated_at->format('j. n. Y H:i:s') }}</td>
+                        </tr>
+                        <tr>
                             <td colspan="2"><b>{{ __('companies.sections.statistics') }}</b></td>
                         </tr>
                         <tr>

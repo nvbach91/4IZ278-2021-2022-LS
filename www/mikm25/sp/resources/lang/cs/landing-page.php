@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'title' => 'Najděte si práci, co vás bude bavit!',
+
     'to_app' => 'Do aplikace',
 
     'position' => [

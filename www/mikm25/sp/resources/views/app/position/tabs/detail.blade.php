@@ -61,6 +61,14 @@ use App\Enums\PositionTabEnum;
                             </td>
                         </tr>
                         <tr>
+                            <td>{{ __('models.created_at') }}</td>
+                            <td>{{ $position->created_at->format('j. n. Y H:i:s') }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('models.updated_at') }}</td>
+                            <td>{{ $position->updated_at->format('j. n. Y H:i:s') }}</td>
+                        </tr>
+                        <tr>
                             <td colspan="2"><b>{{ __('positions.detail.sections.validity') }}</b></td>
                         </tr>
                         <tr>
