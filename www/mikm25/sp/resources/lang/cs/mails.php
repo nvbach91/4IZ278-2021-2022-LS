@@ -39,6 +39,7 @@ return [
     'position' => [
         'new_application' => [
             'subject' => 'Nový zájem o pozici v systému :appName',
+            'message' => 'Pro zobrazení zprávy si zobrazte zájem v aplikaci.',
             'line1' => 'v aplikaci se objevil nový zájem o Vaši pozici **:positionName**.',
             'action' => 'Detail v aplikaci',
         ],

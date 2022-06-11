@@ -35,7 +35,7 @@ use App\Models\Position;
 @endisset
 **{{ __('models.position_application.message') }}**:
 <br>
-{{ \Illuminate\Support\Str::limit($application->message, 100) }}
+{{ __('mails.position.new_application.message') }}
 @endcomponent
 
 @component('mail::button', ['url' => $action])
