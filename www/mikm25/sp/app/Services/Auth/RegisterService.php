@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class RegisterService
 {
-    public function register(RegisterDTO $registerDTO, bool $github = false): ?User
+    public function register(RegisterDTO $registerDTO): ?User
     {
         $user = new User();
 
@@ -17,8 +17,8 @@ class RegisterService
         $user->email = $registerDTO->email;
         $user->password = $registerDTO->password;
         $user->phone_number = $registerDTO->phone;
-        $user->github = $github;
-        $user->email_verified_at = $github ? Carbon::now() : null;
+        $user->github_id = $registerDTO->githubId;
+        $user->email_verified_at = !empty($registerDTO->githubId) ? Carbon::now() : null;
 
         if (! $user->save()) {
             return null;

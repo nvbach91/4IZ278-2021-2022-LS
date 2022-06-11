@@ -23,7 +23,7 @@ class UserUpdateRequest extends UserSelfRequest
         ];
 
         // gitHub user cannot change his email neither password
-        if ($user->github) {
+        if ($user->is_from_github) {
             return $base;
         }
 

@@ -22,6 +22,19 @@ class UserRepository implements UserRepositoryInterface
         return $user;
     }
 
+    public function getUserByGithubId(string $githubId): ?User
+    {
+        /** @var User|null $user */
+        $user = User::query()->ofGithubId($githubId)->first();
+
+        return $user;
+    }
+
+    public function existsByEmail(string $email): bool
+    {
+        return User::query()->ofEmail($email)->exists();
+    }
+
     public function verifyEmail(User $user, ?Carbon $at = null): User
     {
         $user->email_verified_at = $at ?? Carbon::now();

@@ -11,6 +11,10 @@ interface UserRepositoryInterface
 
     public function getUserByEmail(string $email): ?User;
 
+    public function getUserByGithubId(string $githubId): ?User;
+
+    public function existsByEmail(string $email): bool;
+
     public function verifyEmail(User $user, ?Carbon $at = null): User;
 
     public function changeEmail(User $user, string $email): User;

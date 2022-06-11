@@ -22,7 +22,7 @@ use App\Models\User;
                     {{ csrf_field() }}
                     @method('delete')
                     @include('common.forms.errors', ['name' => 'user_delete'])
-                    @if($user->github)
+                    @if($user->is_from_github)
                         <label for="name" class="form-label">
                             {{ __('users.modals.delete.name') }}
                             @include('common.forms.required')

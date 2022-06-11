@@ -77,7 +77,7 @@
                                 @endif
                             </td>
                         </tr>
-                        @if(! $user->github)
+                        @if(! $user->is_from_github)
                             <tr>
                                 <td>{{ __('models.user.email_verified_at') }}</td>
                                 <td>
@@ -104,7 +104,7 @@
                         <tr>
                             <td>{{ __('models.user.github') }} <i class="bi bi-github"></i></td>
                             <td>
-                                {{ $user->github ? __('common.yes') : __('common.no') }}
+                                {{ $user->is_from_github ? __('common.yes') : __('common.no') }}
                             </td>
                         </tr>
                         <tr>

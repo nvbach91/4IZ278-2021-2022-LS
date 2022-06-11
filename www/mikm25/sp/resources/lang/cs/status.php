@@ -7,6 +7,7 @@ return [
             'success' => 'Registrace proběhla úspěšně. Na emailovou adresu jsme Vám poslali odkaz pro potvrzení Vaší emailové adresy.',
             'success_github' => 'Nový účet byl vytvořen. Přihlášení proběhlo úspěšně.',
             'error' => 'Při registraci nastala chyba.',
+            'error_github_email_exists' => 'Uživatel s Vaším emailem je již v aplikaci registrován.'
         ],
         'login' => [
             'error_credentials' => 'Email nebo heslo není správné.',

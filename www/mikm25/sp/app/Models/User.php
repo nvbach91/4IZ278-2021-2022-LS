@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Hash;
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string|null $phone_number
- * @property boolean $github
+ * @property int|null $github_id
  * @property string|null $remember_token
  * @property Carbon|null $last_logged_at
  * @property Carbon $created_at
@@ -33,6 +33,9 @@ use Illuminate\Support\Facades\Hash;
  *
  * @see User::getIsEmailVerifiedAttribute()
  * @property-read bool $is_email_verified
+ *
+ * @see User::getIsFromGithubAttribute()
+ * @property-read bool $is_from_github
  *
  * @property-read list<Tag> $tags
  * @property-read list<Position> $positions
@@ -54,6 +57,7 @@ class User extends Authenticatable
         'email_verified_at',
         'password',
         'phone_number',
+        'github_id',
         'remember_token',
     ];
 
@@ -68,7 +72,7 @@ class User extends Authenticatable
         'email' => 'string',
         'password' => 'string',
         'phone_number' => 'string',
-        'github' => 'boolean',
+        'github_id' => 'integer',
         'remember_token' => 'string',
         'email_verified_at' => 'datetime',
         'last_logged_at' => 'datetime',
@@ -87,6 +91,11 @@ class User extends Authenticatable
     public function getIsEmailVerifiedAttribute(): bool
     {
         return ! empty($this->email_verified_at);
+    }
+
+    public function getIsFromGithubAttribute(): bool
+    {
+        return ! empty($this->github_id);
     }
 
     public function tags(): HasMany

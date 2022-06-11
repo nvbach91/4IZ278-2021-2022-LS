@@ -8,7 +8,7 @@ class CreatePositionApplicationsTable extends Migration
 {
     public function up(): void
     {
-        Schema::create('position_application', static function (Blueprint $table): void {
+        Schema::create('position_applications', static function (Blueprint $table): void {
             $table->id();
             $table->foreignId('position_id');
             $table->string('name');
@@ -27,6 +27,6 @@ class CreatePositionApplicationsTable extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('position_application');
+        Schema::dropIfExists('position_applications');
     }
 }

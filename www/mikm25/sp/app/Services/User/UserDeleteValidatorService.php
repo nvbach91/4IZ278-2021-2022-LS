@@ -20,7 +20,7 @@ class UserDeleteValidatorService
 
     public function validate(UserDeleteSelfRequest $request, User $user): bool
     {
-        if ($user->github) {
+        if ($user->is_from_github) {
             return $this->validateGithub($request, $user);
         }
 

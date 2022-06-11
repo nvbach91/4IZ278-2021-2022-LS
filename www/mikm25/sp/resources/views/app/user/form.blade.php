@@ -44,7 +44,7 @@
                    class="form-control @error('phone') is-invalid @enderror">
             @include('common.forms.error', ['field' => 'phone'])
         </div>
-        @if(! $user->github)
+        @if(! $user->is_from_github)
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label for="user-email" class="form-label">
                     {{ __('models.user.email') }}
@@ -57,7 +57,7 @@
         @endif
     </div>
 
-    @if(! $user->github)
+    @if(! $user->is_from_github)
         <h2>{{ __('users.sections.password') }}</h2>
         <div class="row g-3 mb-3">
             <div class="col-lg-4 col-md-6 col-sm-12">

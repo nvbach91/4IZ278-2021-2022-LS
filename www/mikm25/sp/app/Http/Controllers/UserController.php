@@ -69,7 +69,7 @@ class UserController extends Controller
     public function delete(User $user, UserDeleteSelfRequest $request): RedirectResponse
     {
         if (! $this->deleteValidatorService->validate($request, $user)) {
-            $error = $user->github
+            $error = $user->is_from_github
                 ? ['name' => [__('status.users.delete.nameFailed')]]
                 : ['password' => [__('status.users.delete.passwordFailed')]];
 

@@ -21,8 +21,22 @@ class PositionStoreRequest extends FormRequest
 
     public function rules(): array
     {
+        $today = Carbon::now()->format('Y-m-d');
+
         /** @var User $user */
         $user = auth('web')->user();
+
+        $validFromRule = 'nullable';
+        $validUntilRule = 'nullable';
+
+        if ($this->filled('valid_from') && $this->filled('valid_until')) {
+            $validFromRule = 'required|date|before_or_equal:valid_until';
+            $validUntilRule = "required|date|after_or_equal:valid_from|after_or_equal:$today";
+        } elseif (! $this->filled('valid_from') && $this->filled('valid_until')) {
+            $validUntilRule = "required|date|after_or_equal:$today";
+        } elseif ($this->filled('valid_from') && ! $this->filled('valid_until')) {
+            $validFromRule = 'required|date';
+        }
 
         return [
             'name' => 'required|string|max:255',
@@ -39,8 +53,8 @@ class PositionStoreRequest extends FormRequest
             ],
             'tags' => 'nullable|array|max:5',
             'tags.*' => 'nullable|string|max:30',
-            'valid_from' => 'nullable|date|before_or_equal:valid_until',
-            'valid_until' => 'nullable|required_with:valid_from|date|after_or_equal:valid_from',
+            'valid_from' => $validFromRule,
+            'valid_until' => $validUntilRule,
             'salary_from' => 'nullable|required_with:salary_to|integer|lte:salary_to|gte:0',
             'salary_to' => 'nullable|required_with:salary_from|integer|gte:salary_from|gte:0',
             'company' => [

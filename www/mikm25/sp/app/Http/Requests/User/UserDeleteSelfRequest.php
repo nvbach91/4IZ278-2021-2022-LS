@@ -11,7 +11,7 @@ class UserDeleteSelfRequest extends UserSelfRequest
         /** @var User $user */
         $user = $this->route('user');
 
-        if ($user->github) {
+        if ($user->is_from_github) {
             return [
                 'name' => 'required|string',
             ];

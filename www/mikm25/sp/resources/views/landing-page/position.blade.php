@@ -18,11 +18,11 @@
                     <h2>{{ $position->name }}</h2>
                     <div class="d-flex justify-content-start align-items-center m-between-row-2 flex-wrap">
                         @isset($position->company)
-                            <span class="h5 m-0">
+                            <span class="h5 mb-0">
                                 <i class="bi bi-building"></i> {{ $position->company->name }}
                             </span>
                         @endisset
-                        <span class="h5 m-0">
+                        <span class="h5 mb-0">
                             <i class="bi bi-geo-alt"></i> {{ $position->workplace_address }}
                         </span>
                     </div>
