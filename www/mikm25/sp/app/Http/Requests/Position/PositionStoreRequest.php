@@ -21,8 +21,6 @@ class PositionStoreRequest extends FormRequest
 
     public function rules(): array
     {
-        $today = Carbon::now()->format('Y-m-d');
-
         /** @var User $user */
         $user = auth('web')->user();
 
@@ -41,8 +39,8 @@ class PositionStoreRequest extends FormRequest
             ],
             'tags' => 'nullable|array|max:5',
             'tags.*' => 'nullable|string|max:30',
-            'valid_from' => "nullable|date|before:valid_until|after_or_equal:$today",
-            'valid_until' => 'nullable|date|after:valid_from',
+            'valid_from' => 'nullable|date|before_or_equal:valid_until',
+            'valid_until' => 'nullable|required_with:valid_from|date|after_or_equal:valid_from',
             'salary_from' => 'nullable|required_with:salary_to|integer|lte:salary_to|gte:0',
             'salary_to' => 'nullable|required_with:salary_from|integer|gte:salary_from|gte:0',
             'company' => [

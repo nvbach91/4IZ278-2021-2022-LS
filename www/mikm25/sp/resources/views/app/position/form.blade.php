@@ -121,7 +121,7 @@ $positionContent = old('content', isset($position) ? $position->content : null);
                 {{ __('models.position.valid_until') }}
             </label>
             <input type="date" id="valid-until" name="valid_until" value="{{ $positionValidTo }}"
-                   class="form-control @error('valid_to') is-invalid @enderror">
+                   class="form-control @error('valid_until') is-invalid @enderror">
             @include('common.forms.error', ['field' => 'valid_until'])
         </div>
     </div>
