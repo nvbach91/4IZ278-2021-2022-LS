@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Builders\PositionInterestBuilder;
+use App\Models\Builders\PositionApplicationBuilder;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,15 +20,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @property-read Position $position
  *
- * @method static PositionInterestBuilder query()
+ * @method static PositionApplicationBuilder query()
  */
-class PositionInterest extends Model
+class PositionApplication extends Model
 {
     use HasFactory;
 
     public const UPDATED_AT = null; // disable updated_at attribute
 
-    protected $table = 'position_interests';
+    protected $table = 'position_applications';
 
     protected $fillable = [
         'position_id',
@@ -51,8 +51,8 @@ class PositionInterest extends Model
         return $this->belongsTo(Position::class, 'position_id', 'id', 'position');
     }
 
-    public function newEloquentBuilder($query): PositionInterestBuilder
+    public function newEloquentBuilder($query): PositionApplicationBuilder
     {
-        return new PositionInterestBuilder ($query);
+        return new PositionApplicationBuilder ($query);
     }
 }

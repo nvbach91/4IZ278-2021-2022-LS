@@ -4,11 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePositionInterestsTable extends Migration
+class CreatePositionApplicationsTable extends Migration
 {
     public function up(): void
     {
-        Schema::create('position_interests', static function (Blueprint $table): void {
+        Schema::create('position_application', static function (Blueprint $table): void {
             $table->id();
             $table->foreignId('position_id');
             $table->string('name');
@@ -27,6 +27,6 @@ class CreatePositionInterestsTable extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('position_interests');
+        Schema::dropIfExists('position_application');
     }
 }

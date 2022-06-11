@@ -43,9 +43,9 @@ Route::get('/{slugPosition}/redirect', [LandingPagePositionController::class, 'r
     ->where('slugPosition', '[a-zA-Z0-9\-]+')
     ->name('landing-page.position-redirect');
 
-Route::post('/{slugPosition}/react', [LandingPagePositionController::class, 'react'])
+Route::post('/{slugPosition}/apply', [LandingPagePositionController::class, 'apply'])
     ->where('slugPosition', '[a-zA-Z0-9\-]+')
-    ->name('landing-page.position-react');
+    ->name('landing-page.position-apply');
 
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], static function (): void {
     Route::group(['prefix' => 'email-verification', 'as' => 'email-verification.'], static function (): void {

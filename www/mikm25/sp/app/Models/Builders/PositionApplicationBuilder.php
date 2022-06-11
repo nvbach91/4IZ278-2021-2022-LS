@@ -6,7 +6,7 @@ use App\Models\Builders\Traits\WithDateQueries;
 use App\Models\Builders\Traits\WithIdQuery;
 use Illuminate\Database\Eloquent\Builder;
 
-class PositionInterestBuilder extends Builder
+class PositionApplicationBuilder extends Builder
 {
     use WithIdQuery;
     use WithDateQueries;

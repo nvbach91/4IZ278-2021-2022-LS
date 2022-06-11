@@ -7,6 +7,7 @@ use Spatie\Enum\Enum;
 /**
  * @method static self detail()
  * @method static self statistics()
+ * @method static self applications()
  */
 class PositionTabEnum extends Enum
 {
@@ -15,6 +16,7 @@ class PositionTabEnum extends Enum
         return [
             'detail' => 'detail',
             'statistics' => 'statistics',
+            'applications' => 'applications'
         ];
     }
 }

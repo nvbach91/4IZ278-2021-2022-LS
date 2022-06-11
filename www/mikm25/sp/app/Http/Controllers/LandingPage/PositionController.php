@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\LandingPage;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LandingPage\ReactionRequest;
+use App\Http\Requests\LandingPage\ApplicationRequest;
 use App\Models\Position;
 use App\Repositories\Position\PositionRepositoryInterface;
 use App\Services\Position\PositionService;
@@ -55,7 +55,7 @@ class PositionController extends Controller
         return redirect()->to($position->external_url);
     }
 
-    public function react(Position $position, ReactionRequest $request): RedirectResponse
+    public function apply(Position $position, ApplicationRequest $request): RedirectResponse
     {
         if ($position->isExternalUrlSet()) {
             throw new Exception("Cannot react to position with filled external URL.");
@@ -63,12 +63,12 @@ class PositionController extends Controller
 
         $this->positionRepository->createReaction($position);
 
-        $this->positionService->storeInterest($position, $request->toDTO());
+        $this->positionService->storeApplication($position, $request->toDTO());
 
         // todo notification
 
         return redirect()->route('landing-page.position', ['slugPosition' => $position->slug])->with('status', [
-            'success' => __('status.reaction.send.success'),
+            'success' => __('status.application.send.success'),
         ]);
     }
 }

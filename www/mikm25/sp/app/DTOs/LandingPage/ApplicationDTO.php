@@ -4,7 +4,7 @@ namespace App\DTOs\LandingPage;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
-class ReactionDTO extends DataTransferObject
+class ApplicationDTO extends DataTransferObject
 {
     /** @var string */
     public $name;

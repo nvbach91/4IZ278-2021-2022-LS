@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\LandingPage;
 
-use App\DTOs\LandingPage\ReactionDTO;
+use App\DTOs\LandingPage\ApplicationDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReactionRequest extends FormRequest
+class ApplicationRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -22,9 +22,9 @@ class ReactionRequest extends FormRequest
         ];
     }
 
-    public function toDTO(): ReactionDTO
+    public function toDTO(): ApplicationDTO
     {
-        return new ReactionDTO([
+        return new ApplicationDTO([
             'name' => (string) $this->input('name'),
             'email' => (string) $this->input('email'),
             'phone' => $this->filled('phone') ? (string) $this->input('phone') : null,

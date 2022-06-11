@@ -66,9 +66,9 @@ return [
             'email_changed' => 'Vaše emailová adresa byla změněna, poslali jsme Vám odkaz pro její ověření.',
         ],
     ],
-    'reaction' => [
+    'application' => [
         'send' => [
-            'success' => 'Zpráva byla úspěšně odeslána!',
-        ]
+            'success' => 'Zájem o pozici byl úspěšně odeslán!',
+        ],
     ],
 ];

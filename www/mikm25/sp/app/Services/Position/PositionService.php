@@ -2,10 +2,10 @@
 
 namespace App\Services\Position;
 
-use App\DTOs\LandingPage\ReactionDTO;
+use App\DTOs\LandingPage\ApplicationDTO;
 use App\DTOs\Position\PositionDTO;
 use App\Models\Position;
-use App\Models\PositionInterest;
+use App\Models\PositionApplication;
 use App\Models\Tag;
 use App\Models\User;
 
@@ -53,18 +53,18 @@ class PositionService
         return $position;
     }
 
-    public function storeInterest(Position $position, ReactionDTO $reactionDTO): PositionInterest
+    public function storeApplication(Position $position, ApplicationDTO $reactionDTO): PositionApplication
     {
-        $interest = new PositionInterest();
+        $application = new PositionApplication();
 
-        $interest->position_id = $position->id;
-        $interest->name = $reactionDTO->name;
-        $interest->email = $reactionDTO->email;
-        $interest->phone = $reactionDTO->phone;
-        $interest->message = $reactionDTO->message;
+        $application->position_id = $position->id;
+        $application->name = $reactionDTO->name;
+        $application->email = $reactionDTO->email;
+        $application->phone = $reactionDTO->phone;
+        $application->message = $reactionDTO->message;
 
-        $interest->save();
+        $application->save();
 
-        return $interest;
+        return $application;
     }
 }

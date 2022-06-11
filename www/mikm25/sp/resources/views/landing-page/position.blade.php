@@ -158,7 +158,7 @@
             <div class="col">
                 <div class="card bg-light border-0">
                     <div class="card-body p-4">
-                        <form action="{{ route('landing-page.position-react', ['slugPosition' => $position->slug]) }}" method="post">
+                        <form action="{{ route('landing-page.position-apply', ['slugPosition' => $position->slug]) }}" method="post">
                             @include('common.forms.errors')
                             {{ csrf_field() }}
                             <div class="row">
