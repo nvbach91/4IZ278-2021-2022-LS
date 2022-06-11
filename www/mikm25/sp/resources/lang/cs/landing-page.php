@@ -5,6 +5,8 @@ return [
 
     'to_app' => 'Do aplikace',
 
+    'empty' => 'Prozatím zde nejsou žádné pozice :(',
+
     'position' => [
         'interested_button' => 'Mám zájem!',
         'app_link_text' => 'Toto vidíte pouze pokud jste přihlášen jako majitel pozice!',

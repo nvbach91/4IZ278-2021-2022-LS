@@ -21,7 +21,7 @@ use App\Models\Position;
 
     <div class="row mt-2 mt-lg-3">
         <div class="col">
-            @foreach($positions as $position)
+            @forelse($positions as $position)
                 <div class="card bg-light border-0 mb-2">
                     <a href="{{ route('landing-page.show-position', ['slugPosition' => $position->slug]) }}" class="position-absolute w-100 h-100"></a>
                     <div class="card-body m-between-column-2 p-4">
@@ -49,7 +49,11 @@ use App\Models\Position;
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="alert alert-info">
+                    {{ __('landing-page.empty') }}
+                </div>
+            @endforelse
         </div>
     </div>
 
