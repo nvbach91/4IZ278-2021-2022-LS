@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\LandingPage;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LandingPage\ApplicationRequest;
+use App\Http\Requests\LandingPage\ApplyRequest;
 use App\Models\Position;
 use App\Repositories\Position\PositionRepositoryInterface;
 use App\Services\Position\PositionService;
@@ -55,7 +55,7 @@ class PositionController extends Controller
         return redirect()->to($position->external_url);
     }
 
-    public function apply(Position $position, ApplicationRequest $request): RedirectResponse
+    public function apply(Position $position, ApplyRequest $request): RedirectResponse
     {
         if ($position->isExternalUrlSet()) {
             throw new Exception("Cannot react to position with filled external URL.");

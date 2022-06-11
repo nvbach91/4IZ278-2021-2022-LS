@@ -5,7 +5,7 @@ namespace App\Http\Requests\LandingPage;
 use App\DTOs\LandingPage\ApplicationDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ApplicationRequest extends FormRequest
+class ApplyRequest extends FormRequest
 {
     public function authorize(): bool
     {
