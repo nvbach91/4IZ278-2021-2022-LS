@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Database\Factories\BranchFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,5 +45,10 @@ class Branch extends Model
     public function positions(): HasMany
     {
         return $this->hasMany(Position::class, 'branch_id', 'id');
+    }
+
+    protected static function newFactory(): BranchFactory
+    {
+        return new BranchFactory();
     }
 }

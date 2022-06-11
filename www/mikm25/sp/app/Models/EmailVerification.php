@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Builders\EmailVerificationBuilder;
 use Carbon\Carbon;
+use Database\Factories\EmailVerificationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -95,6 +96,11 @@ class EmailVerification extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id', 'user');
+    }
+
+    protected static function newFactory(): EmailVerificationFactory
+    {
+        return new EmailVerificationFactory();
     }
 
     public function newEloquentBuilder($query): EmailVerificationBuilder

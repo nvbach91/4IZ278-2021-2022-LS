@@ -7,11 +7,13 @@ use App\Models\Builders\PositionBuilder;
 use App\Models\Casts\PositionWorkloadCast;
 use App\Models\Formatters\PositionFormatter;
 use Carbon\Carbon;
+use Database\Factories\PositionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
@@ -58,6 +60,7 @@ class Position extends Model
 {
     use HasFactory;
     use PositionFormatter;
+    use Notifiable;
 
     protected $table = 'positions';
 
@@ -160,6 +163,11 @@ class Position extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'company_id', 'id', 'company');
+    }
+
+    protected static function newFactory(): PositionFactory
+    {
+        return new PositionFactory();
     }
 
     public function newEloquentBuilder($query): PositionBuilder

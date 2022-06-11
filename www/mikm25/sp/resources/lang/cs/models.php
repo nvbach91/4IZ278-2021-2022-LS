@@ -15,7 +15,7 @@ return [
         'password_confirm' => 'Potvrzení hesla',
         'github' => 'Přihlášen přes Github',
         'last_logged_at' => 'Poslední přihlášení',
-        'email_verified_at' => 'Email ověřen'
+        'email_verified_at' => 'E-mail ověřen'
     ],
     'position' => [
         'branch' => 'Obor',
@@ -36,6 +36,12 @@ return [
         'tags' => 'Tagy',
         'company' => 'Společnost',
         'detail_link' => 'Odkaz na úvodní stránku',
+    ],
+    'position_application' => [
+        'name' => 'Jméno a příjmení',
+        'email' => 'E-mail',
+        'phone' => 'Telefonní číslo',
+        'message' => 'Zpráva'
     ],
     'company' => [
         'name' => 'Název společnosti',

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Builders\PositionApplicationBuilder;
 use Carbon\Carbon;
+use Database\Factories\PositionApplicationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -49,6 +50,11 @@ class PositionApplication extends Model
     public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class, 'position_id', 'id', 'position');
+    }
+
+    protected static function newFactory(): PositionApplicationFactory
+    {
+        return new PositionApplicationFactory();
     }
 
     public function newEloquentBuilder($query): PositionApplicationBuilder

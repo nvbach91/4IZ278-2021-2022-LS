@@ -6,6 +6,7 @@ use App\Models\Attributes\CompanySizeAttribute;
 use App\Models\Builders\CompanyBuilder;
 use App\Models\Casts\CompanySizeCast;
 use Carbon\Carbon;
+use Database\Factories\CompanyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -79,6 +80,11 @@ class Company extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id', 'user');
+    }
+
+    protected static function newFactory(): CompanyFactory
+    {
+        return new CompanyFactory();
     }
 
     public function newEloquentBuilder($query): CompanyBuilder

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Builders\PositionClickBuilder;
 use Carbon\Carbon;
+use Database\Factories\PositionClickFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,6 +38,11 @@ class PositionClick extends Model
     public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class, 'position_id', 'id', 'position');
+    }
+
+    protected static function newFactory(): PositionClickFactory
+    {
+        return new PositionClickFactory();
     }
 
     public function newEloquentBuilder($query): PositionClickBuilder

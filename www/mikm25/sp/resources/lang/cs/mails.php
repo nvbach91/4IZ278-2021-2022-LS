@@ -35,4 +35,12 @@ return [
             'line1' => 'děkujeme za Vaši registraci do systému :appName.',
         ],
     ],
+
+    'position' => [
+        'new_application' => [
+            'subject' => 'Nový zájem o pozici v systému :appName',
+            'line1' => 'v aplikaci se objevil nový zájem o Vaši pozici **:positionName**.',
+            'action' => 'Detail v aplikaci',
+        ],
+    ],
 ];

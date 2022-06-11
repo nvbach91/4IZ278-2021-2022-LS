@@ -5,6 +5,7 @@ namespace App\Http\Controllers\LandingPage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LandingPage\ApplyRequest;
 use App\Models\Position;
+use App\Notifications\Position\NewApplicationNotification;
 use App\Repositories\Position\PositionRepositoryInterface;
 use App\Services\Position\PositionService;
 use Exception;
@@ -58,14 +59,15 @@ class PositionController extends Controller
     public function apply(Position $position, ApplyRequest $request): RedirectResponse
     {
         if ($position->isExternalUrlSet()) {
-            throw new Exception("Cannot react to position with filled external URL.");
+            throw new Exception("Cannot apply to position with filled external URL.");
         }
 
         $this->positionRepository->createReaction($position);
 
-        $this->positionService->storeApplication($position, $request->toDTO());
+        $application = $this->positionService->storeApplication($position, $request->toDTO());
 
-        // todo notification
+        // send notification to user
+        $position->notify(new NewApplicationNotification($application));
 
         return redirect()->route('landing-page.position', ['slugPosition' => $position->slug])->with('status', [
             'success' => __('status.application.send.success'),

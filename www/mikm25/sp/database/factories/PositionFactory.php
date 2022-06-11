@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Attributes\PositionWorkloadAttribute;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Position;
@@ -10,6 +11,7 @@ use App\Models\PositionReaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 
 class PositionFactory extends Factory
 {
@@ -26,10 +28,14 @@ class PositionFactory extends Factory
         /** @var Company $company */
         $company = Company::query()->inRandomOrder()->first() ?? Company::factory()->create();
 
+        /** @var PositionWorkloadAttribute $workload */
+        $workload = Arr::random(PositionWorkloadAttribute::getAllWorkloads(), 1)[0];
+
         return [
             'user_id' => $user->id,
             'company_id' => $company->id,
             'branch_id' => $branch->id,
+            'workload' => $workload->getWorkload(),
             'name' => $this->faker->words(4, true),
             'salary_from' => rand(500, 60000),
             'salary_to' => static function (array $attributes): int {

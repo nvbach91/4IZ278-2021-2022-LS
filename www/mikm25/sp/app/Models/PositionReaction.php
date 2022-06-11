@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Builders\PositionReactionBuilder;
 use Carbon\Carbon;
+use Database\Factories\PositionReactionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -37,6 +38,11 @@ class PositionReaction extends Model
     public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class, 'position_id', 'id', 'position');
+    }
+
+    protected static function newFactory(): PositionReactionFactory
+    {
+        return new PositionReactionFactory();
     }
 
     public function newEloquentBuilder($query): PositionReactionBuilder

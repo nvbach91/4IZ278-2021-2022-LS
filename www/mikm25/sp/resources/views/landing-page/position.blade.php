@@ -165,7 +165,7 @@
                                 <div class="col-lg-6 m-between-column-2 mb-2 mb-lg-0">
                                     <div>
                                         <label for="reaction-name" class="form-label">
-                                            {{ __('landing-page.position.form.name') }}
+                                            {{ __('models.position_application.name') }}
                                             @include('common.forms.required')
                                         </label>
                                         <input type="text" name="name" id="reaction-name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
@@ -173,7 +173,7 @@
                                     </div>
                                     <div>
                                         <label for="reaction-email" class="form-label">
-                                            {{ __('landing-page.position.form.email') }}
+                                            {{ __('models.position_application.email') }}
                                             @include('common.forms.required')
                                         </label>
                                         <input type="email" name="email" id="reaction-email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
@@ -181,7 +181,7 @@
                                     </div>
                                     <div>
                                         <label for="reaction-phone" class="form-label">
-                                            {{ __('landing-page.position.form.phone') }}
+                                            {{ __('models.position_application.phone') }}
                                         </label>
                                         <input type="tel" name="phone" id="reaction-phone" class="form-control @error('phone') is-invalid @enderror" value="{{ old('phone') }}">
                                         @include('common.forms.error', ['field' => 'phone'])
@@ -189,7 +189,7 @@
                                 </div>
                                 <div class="col-lg-6 d-flex flex-column">
                                     <label for="reaction-message" class="form-label">
-                                        {{ __('landing-page.position.form.message') }}
+                                        {{ __('models.position_application.message') }}
                                         @include('common.forms.required')
                                     </label>
                                     <textarea class="form-control flex-grow-1 @error('message') is-invalid @enderror" name="message" id="reaction-message" required>{{ old('message') }}</textarea>

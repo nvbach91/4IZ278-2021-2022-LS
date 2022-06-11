@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Builders\UserBuilder;
 use Carbon\Carbon;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -111,6 +112,11 @@ class User extends Authenticatable
     public function companies(): HasMany
     {
         return $this->hasMany(Company::class, 'user_id', 'id');
+    }
+
+    protected static function newFactory(): UserFactory
+    {
+        return new UserFactory();
     }
 
     public function newEloquentBuilder($query): UserBuilder
