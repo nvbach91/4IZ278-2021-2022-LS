@@ -5,6 +5,7 @@ namespace App\Http\Controllers\LandingPage;
 use App\Http\Controllers\Controller;
 use App\Models\Position;
 use App\Repositories\Position\PositionRepositoryInterface;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class LandingPageController extends Controller
@@ -36,7 +37,7 @@ class LandingPageController extends Controller
         ]);
     }
 
-    public function showPosition(Position $position): string
+    public function showPosition(Position $position): RedirectResponse
     {
         $this->positionRepository->createClick($position);
 

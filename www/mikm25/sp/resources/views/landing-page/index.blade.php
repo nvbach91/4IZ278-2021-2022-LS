@@ -19,11 +19,11 @@ use App\Models\Position;
         </div>
     </div>
 
-    <div class="row mt-4">
+    <div class="row mt-2 mt-lg-3">
         <div class="col">
             @foreach($positions as $position)
                 <div class="card border-0 bg-light p-1 mb-2">
-                    <div class="card-body d-flex justify-content-between">
+                    <div class="card-body d-flex justify-content-between align-items-center">
                         <div class="flex-grow-1 me-2">
                             <h5 class="card-title m-0">
                                 {{ $position->name }}
