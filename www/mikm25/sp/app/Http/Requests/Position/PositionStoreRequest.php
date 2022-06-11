@@ -52,7 +52,7 @@ class PositionStoreRequest extends FormRequest
             ],
             'external_url' => 'nullable|string|url|max:255',
             'min_practice_length' => 'nullable|integer|gte:0',
-            'content' => 'required|string',
+            'content' => 'required|string|min:300',
         ];
     }
 

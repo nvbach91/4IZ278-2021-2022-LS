@@ -43,6 +43,9 @@ use Illuminate\Support\Str;
  * @see Position::getTitleNameAttribute()
  * @property-read string $title_name
  *
+ * @see Position::getContentLengthAttribute()
+ * @property-read int $content_length
+ *
  * @property-read User $user
  * @property-read Branch $branch
  * @property-read Collection|list<Tag> $tags
@@ -123,6 +126,11 @@ class Position extends Model
     public function isExternalUrlSet(): bool
     {
         return ! empty($this->external_url);
+    }
+
+    public function getContentLengthAttribute(): int
+    {
+        return Str::length(strip_tags($this->content));
     }
 
     public function getTitleNameAttribute(): string
