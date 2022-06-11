@@ -8,7 +8,7 @@ return [
         'tabs' => [
             'detail' => 'Detail',
             'statistics' => 'Statistika',
-            'applications' => 'Přihlášky',
+            'applications' => 'Zájmy',
         ],
         'sections' => [
             'company' => 'Společnost',
@@ -22,6 +22,14 @@ return [
     ],
     'index' => [
         'empty' => 'Prozatím jste nevytvořili žádnou pozici.',
+    ],
+    'applications' => [
+        'modal' => [
+            'title' => 'Zájem o pozici'
+        ],
+        'index' => [
+            'empty' => 'Prozatím nebyl o pozici projeven žádný zájem.'
+        ]
     ],
     'create' => [
         'external_url_hint' => 'Tento odkaz se v detailu nabídky na hlavní stránce zobrazí jako tlačítko.',

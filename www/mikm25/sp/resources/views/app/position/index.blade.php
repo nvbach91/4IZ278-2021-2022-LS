@@ -89,7 +89,9 @@ use App\Models\Position;
                     @empty
                         <tr>
                             <td colspan="10">
-                                {{ __('positions.index.empty') }}
+                                <span class="text-muted">
+                                    {{ __('positions.index.empty') }}
+                                </span>
                                 <a href="{{ route('app.positions.create') }}" class="btn btn-sm btn-primary">
                                     {{ __('positions.buttons.create') }}
                                 </a>

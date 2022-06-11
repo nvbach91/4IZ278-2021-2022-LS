@@ -187,12 +187,12 @@
                                         @include('common.forms.error', ['field' => 'phone'])
                                     </div>
                                 </div>
-                                <div class="col-lg-6 d-flex flex-column">
+                                <div class="col-lg-6">
                                     <label for="reaction-message" class="form-label">
                                         {{ __('models.position_application.message') }}
                                         @include('common.forms.required')
                                     </label>
-                                    <textarea class="form-control flex-grow-1 @error('message') is-invalid @enderror" name="message" id="reaction-message" required>{{ old('message') }}</textarea>
+                                    <textarea class="form-control @error('message') is-invalid @enderror" name="message" id="reaction-message">{{ old('message') }}</textarea>
                                     @include('common.forms.error', ['field' => 'message'])
                                 </div>
                             </div>
@@ -214,3 +214,9 @@
         </div>
     @endif
 @endsection
+
+@if(!$position->isExternalUrlSet())
+    @push('scripts')
+        @include('common.forms.tinymce', ['id' => 'reaction-message'])
+    @endpush
+@endif

@@ -42,6 +42,12 @@ use App\Enums\PositionTabEnum;
                     </a>
                 </li>
                 <li class="nav-item ms-2">
+                    <a class="nav-link {{ $activeTab->isEqual(\App\Enums\PositionTabEnum::applications()) ? 'active' : '' }}"
+                       href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Enums\PositionTabEnum::applications()->getValue()]) }}">
+                        {{ __('positions.detail.tabs.applications') }}
+                    </a>
+                </li>
+                <li class="nav-item ms-2">
                     <a class="nav-link"
                        href="{{ route('app.positions.edit', ['position' => $position->id]) }}">
                         <i class="bi bi-pen"></i>

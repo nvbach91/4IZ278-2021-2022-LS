@@ -9,6 +9,7 @@ use App\Http\Requests\Position\PositionUpdateRequest;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Position;
+use App\Models\PositionApplication;
 use App\Models\User;
 use App\Services\Position\PositionService;
 use App\View\Models\Dashboards\MonthlyClicksDashboard;
@@ -80,6 +81,17 @@ class PositionController extends Controller
             return view('app.position.tabs.detail', [
                 'position' => $position,
                 'activeTab' => $tab,
+            ]);
+        } else if ($tab->isEqual(PositionTabEnum::applications())) {
+            $applications = PositionApplication::query()
+                ->ofPositionId($position->id)
+                ->orderBy('created_at', 'desc')
+                ->paginate(15);
+
+            return view('app.position.tabs.applications', [
+                'position' => $position,
+                'activeTab' => $tab,
+                'applications' => $applications
             ]);
         }
 

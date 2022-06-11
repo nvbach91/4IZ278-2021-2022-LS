@@ -78,7 +78,9 @@ use App\Models\Company;
                     @empty
                         <tr>
                             <td colspan="10">
-                                {{ __('companies.index.empty') }}
+                                <span class="text-muted">
+                                    {{ __('companies.index.empty') }}
+                                </span>
                                 <a href="{{ route('app.companies.create') }}" class="btn btn-sm btn-primary">
                                     {{ __('companies.buttons.create') }}
                                 </a>
