@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'host' => 'sql11.freesqldatabase.com',
-    'dbname' => 'sql11491830',
-    'user' => 'sql11491830',
-    'password' => 'xJ7M8Qz6VV'
+    'host' => 'server3.hosting.reg.ru',
+    'dbname' => 'u1706351_repoc',
+    'user' => 'u1706351_user',
+    'password' => '0OIRzG3P7Lgw6mrr',
 );

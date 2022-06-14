@@ -13,7 +13,8 @@ class Router
     private function getURI()
     {
         if (!empty($_SERVER['REQUEST_URI'])) {
-            return trim($_SERVER['REQUEST_URI'], '/');
+			
+            return trim($_SERVER['REQUEST_URI'], '/~');
         }
     }
 
@@ -24,9 +25,11 @@ class Router
         $parsedURL = parse_url($uri);
 
         $uri = $parsedURL['path'];
+		
 
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~$uriPattern~", $uri)) {
+			
 
                 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
 
@@ -38,15 +41,19 @@ class Router
                 $parameters = $segments;
 
                 $controllerFile = ROOT . '/controllers/' . $controllerName . '.php';
-
+				
+				
                 if (file_exists($controllerFile)) {
                     include_once($controllerFile);
                 }
-
+				
+				
                 $controllerObject = new $controllerName;
-
+                //$result = $controllerObject->$actionName();
                 if (!method_exists($controllerObject, $actionName)) {
                     echo "Page doesn't exist";
+                    //var_dump($controllerName);
+                    //var_dump($actionName);
                     break;
                 } else {
                     $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
