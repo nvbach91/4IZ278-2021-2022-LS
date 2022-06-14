@@ -41,11 +41,7 @@
                         </div>
                     </div>
                     <?php endforeach;?>
-                </div>
-                <!--features_items-->
-
-                
-                <!--/recommended_items-->
+                </div><!--features_items-->
 
             </div>
         </div>
