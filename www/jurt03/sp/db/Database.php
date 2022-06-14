@@ -1,5 +1,5 @@
-<?php require __DIR__ . '/config.php'; ?>
-<?php require __DIR__ . '/DatabaseOperations.php'; ?>
+<?php require_once __DIR__ . '/config.php'; ?>
+<?php require_once __DIR__ . '/DatabaseOperations.php'; ?>
 
 <?php
 

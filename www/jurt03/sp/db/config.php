@@ -1,7 +1,10 @@
 <?php 
 
-DEFINE('DATABASE_URL', 'localhost');
-DEFINE('DATABASE_NAME', 'jur03');
-DEFINE('DATABASE_USERNAME', 'jurt03');
-DEFINE('DATABASE_PASSWORD', ''); 
+
+
+const DB_HOST = 'localhost';
+const DB_DATABASE = 'jurt03';
+const DB_USERNAME = 'jurt03';
+const DB_PASSWORD = 'chohw7gaichiufeevo';
+
 ?> 
