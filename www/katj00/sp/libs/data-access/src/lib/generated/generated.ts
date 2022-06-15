@@ -254,6 +254,13 @@ export type WorkData = {
   time: Scalars['Int'];
 };
 
+export type DeleteWorkMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteWorkMutation = { __typename?: 'Mutation', deleteWork: { __typename?: 'TrackedWork', id: string } };
+
 export type LogFragmentFragment = { __typename?: 'Log', id: string, name: string, log: Array<{ __typename?: 'ActivityLog', id: string, date: any, activities?: Array<{ __typename?: 'Activity', type: ActivityType, created_at: any }> | null } | null> };
 
 export type ProjectInfoFragmentFragment = { __typename?: 'ProjectInfo', id: string, name: string, collaborators: number, isPrivate: string, languages: Array<{ __typename?: 'Language', size: number, name: string } | null>, issues: { __typename?: 'Count', totalCount: number, assignedCount: number }, pullRequests: { __typename?: 'Count', totalCount: number, assignedCount: number }, owner: { __typename?: 'Owner', login: string, url: string }, lastCommit: { __typename?: 'Commit', messageHeadline: string, committedDate?: any | null, url?: string | null } };
@@ -418,6 +425,24 @@ export const WorkActionFragmentDoc = gql`
   created_at
 }
     `;
+export const DeleteWorkDocument = gql`
+    mutation DeleteWork($id: ID!) {
+  deleteWork(id: $id) {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class DeleteWorkGQL extends Apollo.Mutation<DeleteWorkMutation, DeleteWorkMutationVariables> {
+    document = DeleteWorkDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const FetchProjectDocument = gql`
     query fetchProject($today: DateRangeInput!, $week: DateRangeInput!, $month: DateRangeInput!, $year: DateRangeInput!, $yesterday: DateRangeInput!, $lastWeek: DateRangeInput!, $lastMonth: DateRangeInput!, $id: ID!) {
   projectInfo(id: $id) {

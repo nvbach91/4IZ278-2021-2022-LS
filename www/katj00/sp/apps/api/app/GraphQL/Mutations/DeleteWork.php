@@ -22,7 +22,7 @@ final class DeleteWork
         if (!$toDelete) {
             return Error::createLocatedError('You don\'t have enough permission to do this!');
         }
-        print_r($toDelete);
+        $toDelete->delete();
         return $toDelete;
     }
 }

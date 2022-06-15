@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {GetActivityLogGQL, GetActivityLogQuery} from "@project-management/data-access";
+import {ActivityType, DeleteWorkGQL, GetActivityLogGQL, GetActivityLogQuery} from "@project-management/data-access";
 import {map, Observable, pluck, Subject, switchMap} from "rxjs";
 import {RxState, selectSlice} from "@rx-angular/state";
 import {ActivatedRoute, Router} from '@angular/router';
@@ -47,10 +47,12 @@ export class ActivityLogComponent {
       }
     }));
   datePickerValue$ = new Subject<TuiDayRange | null>();
+
   constructor(private _route: ActivatedRoute,
               private _router: Router,
               private _state: RxState<ActivityLogState>,
               private _getActivityLog: GetActivityLogGQL,
+              private _deleteWork: DeleteWorkGQL,
               private _cacheService: CacheService) {
     this._state.connect('datePicker', this.datePickerValue$);
     if (this._route.firstChild) {
@@ -82,11 +84,31 @@ export class ActivityLogComponent {
   }
 
   deleteWork(id: string | undefined) {
-    console.log(id);
+    if (!id) return;
+    this._deleteWork.mutate({id}, {
+      update: (proxy, {data}) => {
+        proxy.modify({
+          id: proxy.identify({__typename: "ActivityLog", id}),
+          fields: {
+            activities(cachedValue) {
+              return [];
+            }
+          }
+        })
+      }
+    }).subscribe()
   }
 
   filterLog($event: TuiDayRange | null, scrollbar: TuiScrollbarComponent) {
     this.datePickerValue$.next($event);
     scrollbar.browserScrollRef.nativeElement.scrollTop = 0;
+  }
+
+  activitiesCount(activities: Array<{ __typename?: "Activity"; type: ActivityType; created_at: any }>  | null | undefined) {
+    if (activities) {
+      return activities.length > 0;
+    } else {
+      return true;
+    }
   }
 }
