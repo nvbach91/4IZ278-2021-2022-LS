@@ -1,7 +1,13 @@
-<section>
+<section [ngClass]="size">
   <header>
-    <span>24.11.2000</span>
-    <h3>Nadpis abcde</h3>
+    <div class="date">
+      <ng-content select="date"></ng-content>
+    </div>
+    <h3 class="header">
+      <ng-content select="title"></ng-content>
+    </h3>
   </header>
-  <span>1h 11m 23s</span>
+  <div class="value">
+    <ng-content select="value"></ng-content>
+  </div>
 </section>

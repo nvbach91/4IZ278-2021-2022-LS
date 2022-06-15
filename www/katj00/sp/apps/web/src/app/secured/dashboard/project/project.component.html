@@ -1,3 +1,49 @@
-<div class="project__grid">
-
+<div class="project__grid" *rxLet="viewModel$; let viewModel">
+  <tui-loader [overlay]="true" size="l" [inheritColor]="true" [showLoader]="viewModel.loading">
+    <ng-container *rxFor="let row of projectGrid">
+      <ng-template [ngTemplateOutlet]="rowTemplate" [ngTemplateOutletContext]="{row, data: viewModel}"></ng-template>
+    </ng-container>
+  </tui-loader>
 </div>
+
+<ng-template #rowTemplate let-row="row" let-data="data">
+  <section class="project__row" [ngClass]="row.title" [attr.aria-label]="row.title"
+           *ngIf="stringAccessor(data, row.field) as field">
+    <pm-card *rxFor="let card of row.cards" [size]="card.type">
+      <ng-container ngProjectAs="date" *ngIf="card.date">
+        <ng-container *ngIf="card.dateView === 'range'; else normalDate">
+          <ng-container *ngIf="stringAccessor(field, card.date) as date">
+            <span>{{date.from | date: card.dateFormat ?? "dd/MM/yyyy HH:mm":'"+4"'}}</span>
+            <span *ngIf="date.from"> - </span>
+            <span>{{date.to | date: card.dateFormat ?? "dd/MM/yyyy HH:mm":'"+4"'}}</span>
+          </ng-container>
+        </ng-container>
+        <ng-template #normalDate>
+          {{stringAccessor(field, card.date) | date: card.dateFormat ?? "dd/MM/yyyy HH:mm":'"+4"'}}
+        </ng-template>
+      </ng-container>
+      <ng-container ngProjectAs="title">{{card.title}}</ng-container>
+      <ng-container ngProjectAs="value">
+        <a [attr.href]="stringAccessor(field, card.link)"
+           [ngClass]="{ellipsis: stringAccessor(field, card.value).length > 30}" target="_blank"
+           *ngIf="card.link; else noLink">
+          <ng-container [ngTemplateOutlet]="noLink"></ng-container>
+        </a>
+        <ng-template
+          #noLink>
+          <ng-container>
+            {{stringAccessor(field, card.value) === 0 ? "N/A" : card.typeValue === "time" ? (stringAccessor(field, card.value) | toTime) : stringAccessor(field, card.value)}}
+          </ng-container>
+        </ng-template>
+      </ng-container>
+    </pm-card>
+    <ng-container *ngIf="row?.rows">
+      <div class="inner_rows">
+        <ng-container *rxFor="let innerRow of row.rows"
+                      [ngTemplateOutlet]="rowTemplate"
+                      [ngTemplateOutletContext]="{row: innerRow, data}"></ng-container>
+      </div>
+    </ng-container>
+  </section>
+</ng-template>
+

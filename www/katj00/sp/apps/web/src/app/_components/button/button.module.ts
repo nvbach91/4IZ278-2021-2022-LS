@@ -5,11 +5,14 @@ import { ButtonComponent } from './button.component';
 
 
 @NgModule({
-  declarations: [
-    ButtonComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+    declarations: [
+        ButtonComponent
+    ],
+    exports: [
+        ButtonComponent
+    ],
+    imports: [
+        CommonModule
+    ]
 })
 export class ButtonModule { }

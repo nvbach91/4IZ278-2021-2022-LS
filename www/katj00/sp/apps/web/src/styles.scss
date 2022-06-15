@@ -1,12 +1,7 @@
 @use '@taiga-ui/core/styles/taiga-ui-local';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --tui-text-01: #225E61;
-}
 
 html, body {
   @apply w-full h-full;

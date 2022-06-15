@@ -10,23 +10,25 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ThemesModule} from "./_themes/themes.module";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    CoreModule.forRoot(),
-    TuiRootModule,
-    TuiThemeNightModule,
-    TuiModeModule,
-    FontAwesomeModule,
-    GraphQLModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        CoreModule.forRoot(),
+        TuiRootModule,
+        TuiThemeNightModule,
+        TuiModeModule,
+        FontAwesomeModule,
+        GraphQLModule,
+        HttpClientModule,
+        ThemesModule
+    ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

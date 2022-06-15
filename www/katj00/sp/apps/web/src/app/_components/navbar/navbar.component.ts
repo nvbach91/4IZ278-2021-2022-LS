@@ -18,11 +18,11 @@ interface NavbarState {
 export class NavbarComponent {
 
   @Input()
-  set user(user$: Observable<GetUserQuery['me']>) {
-    this._state.connect('user', user$);
+  set user(user: GetUserQuery['me']) {
+    this._state.set({user: user});
   }
 
-  // user$: Observable<GetUserQuery['me']> = this._state.select("user");
+  user$: Observable<GetUserQuery['me']> = this._state.select("user");
 
   constructor(private _state: RxState<NavbarState>) {
   }

@@ -4,6 +4,8 @@ import { SidebarComponent } from './sidebar.component';
 import {RouterModule} from "@angular/router";
 import {ForModule} from "@rx-angular/template/experimental/for";
 import {TuiScrollbarModule} from "@taiga-ui/core";
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import {LetModule} from "@rx-angular/template";
 
 
 
@@ -18,7 +20,9 @@ import {TuiScrollbarModule} from "@taiga-ui/core";
     CommonModule,
     RouterModule,
     ForModule,
-    TuiScrollbarModule
+    TuiScrollbarModule,
+    ScrollingModule,
+    LetModule
   ]
 })
 export class SidebarModule { }

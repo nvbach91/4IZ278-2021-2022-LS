@@ -1,14 +1,99 @@
-<!--<div class="dashboard__container">-->
-<div class="dashboard__container" *rxLet="projectTree$; let loaded; rxSuspense: loader">
-  <main class="dashboard__main-content">
-    <router-outlet></router-outlet>
-  </main>
-  <div class="dashboard__right-panel">
-    <pm-navbar [user]="user$"></pm-navbar>
-    <pm-sidebar [projectTree]="projectTree$"></pm-sidebar>
-    <pm-activity-log></pm-activity-log>
+<ng-container *rxLet="viewModel$; let viewModel; rxSuspense: loader">
+  <div class="dashboard__container">
+    <ng-container [ngTemplateOutlet]="desktop"
+                  [ngTemplateOutletContext]="{viewModel}"></ng-container>
   </div>
-</div>
+  <footer class="page-footer">
+    <div class="links">
+      <a href="">GitHub</a>
+      <ui-separator></ui-separator>
+      <a href="">ProjectManagement</a>
+    </div>
+    <div class="links">
+      <a routerLink="/settings">Settings</a>
+      <ui-separator></ui-separator>
+      <a (click)="synchronize()">Synchronize</a>
+      <ui-separator></ui-separator>
+      <a (click)="logout()">Logout</a>
+    </div>
+  </footer>
+
+  <ng-template #desktop let-viewModel="viewModel">
+    <main class="dashboard__main-content">
+      <router-outlet></router-outlet>
+    </main>
+    <div class="dashboard__right-panel">
+      <pm-navbar [user]="viewModel.user">
+        <ng-container ngProjectAs="work-time" *ngIf="checkKeys(viewModel.projectInfo) > 0">
+          <span class="navbar-time">{{(viewModel.projectInfo?.status?.timeSpent ?? 0) | toTime: 'digital'}}</span>
+        </ng-container>
+        <ng-container ngProjectAs="control-buttons">
+          <ng-container *ngIf="checkKeys(viewModel.projectInfo) > 0">
+            <ui-separator></ui-separator>
+            <ng-container *ngIf="viewModel.projectInfo" [ngTemplateOutlet]="
+        !!viewModel.projectInfo.status.inProgress && viewModel.projectInfo.status.lastAction === 'PAUSE' ? startButton :
+          viewModel.projectInfo.status.lastAction === 'START' ? pauseButton :
+          viewModel.projectInfo.status.lastAction === 'PAUSE' ? continueButton :
+          viewModel.projectInfo.status.lastAction === 'CONTINUE' ? pauseButton :
+          startButton" [ngTemplateOutletContext]="{projectInfo: viewModel.projectInfo}"></ng-container>
+            <ui-separator></ui-separator>
+            <button pm-button (click)="endWork(viewModel.projectInfo?.id)">STOP</button>
+            <ui-separator></ui-separator>
+          </ng-container>
+        </ng-container>
+      </pm-navbar>
+      <pm-sidebar [projectTree]="viewModel.projectTree"></pm-sidebar>
+      <pm-activity-log></pm-activity-log>
+    </div>
+  </ng-template>
+
+  <!--  <ng-template #mobile let-viewModel>-->
+  <!--    <div class="m-dashboard__left-panel" [ngClass]="{hidden: !sidebarVisible}">-->
+  <!--      <div class="m-dashboard__side-control">-->
+  <!--        <button (click)="sidebarVisible = !sidebarVisible">BACK</button>-->
+  <!--      </div>-->
+  <!--      <pm-sidebar [projectTree]="viewModel.projectTree" mobile></pm-sidebar>-->
+  <!--    </div>-->
+  <!--    <main class="dashboard__main-content" [ngClass]="{hidden: logVisible || sidebarVisible}">-->
+  <!--      <div class="m-dashboard__side-control">-->
+  <!--        <h3 class="long" *ngIf="viewModel.selectedProject.length > 30">{{viewModel.selectedProject}}</h3>-->
+  <!--        <div class="controls">-->
+  <!--          <button (click)="sidebarVisible = !sidebarVisible">REPOS</button>-->
+  <!--          <h3 class="short" *ngIf="viewModel.selectedProject.length <= 30">{{viewModel.selectedProject}}</h3>-->
+  <!--          <button (click)="logVisible = !logVisible">LOG</button>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--      <router-outlet></router-outlet>-->
+  <!--    </main>-->
+  <!--    <div class="m-dashboard__right-panel" [ngClass]="{hidden: !logVisible}">-->
+  <!--      <pm-navbar [user]="viewModel.user">-->
+  <!--        <ng-container ngProjectAs="control-buttons">-->
+  <!--          <button (click)="logVisible = !logVisible">BACK</button>-->
+  <!--          <ui-separator></ui-separator>-->
+  <!--          <button>START</button>-->
+  <!--          <ui-separator></ui-separator>-->
+  <!--          <button>STOP</button>-->
+  <!--        </ng-container>-->
+  <!--      </pm-navbar>-->
+  <!--      <pm-activity-log></pm-activity-log>-->
+  <!--    </div>-->
+  <!--  </ng-template>-->
+
+  <ng-template #startButton let-projectInfo="projectInfo">
+    <button pm-button (click)="startWork(projectInfo.id)">START
+    </button>
+  </ng-template>
+  <ng-template #pauseButton let-projectInfo="projectInfo">
+    <button pm-button (click)="pauseWork(projectInfo.id)">
+      PAUSE
+    </button>
+  </ng-template>
+
+  <ng-template #continueButton let-projectInfo="projectInfo">
+    <button pm-button (click)="continueWork(projectInfo.id)">CONTINUE</button>
+  </ng-template>
+</ng-container>
+
 <ng-template #loader>
   <ui-loading>
   </ui-loading>

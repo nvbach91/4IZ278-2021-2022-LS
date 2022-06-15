@@ -1,3 +1,23 @@
-.toolbar {
-  @apply flex flex-1 justify-end;
+.toolbar__container {
+  @apply py-4 pl-4 flex flex-1 items-center justify-end min-h-[64px];
+
+  .toolbar__buttons {
+    @apply flex mx-2 items-center;
+    button, ui-separator {
+     @apply text-base font-black ml-4;
+    }
+  }
+
+  .toolbar__time {
+    @apply flex items-center font-cousine text-xl font-black;
+    margin-bottom: 2px;
+  ;
+  }
+
+  .toolbar__avatar {
+    margin-bottom: 2px;
+    tui-avatar {
+      @apply cursor-pointer;
+    }
+  }
 }

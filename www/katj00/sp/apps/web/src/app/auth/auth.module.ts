@@ -21,4 +21,5 @@ import {LetModule, PushModule} from "@rx-angular/template";
         PushModule
     ]
 })
-export class AuthModule { }
+export class AuthModule {
+}

@@ -1,9 +1,9 @@
-.pm-button {
-  @apply rounded-full h-[40px] font-roboto;
-}
-.pm-button__filled {
-  @apply bg-
-}
-.pm-button__outlined {
-  @apply border-[1px] px-4 border-black border-solid;
+:host {
+  @apply font-cousine text-base font-black px-1 mx-1 border-b-2 border-transparent border-solid;
+  &:hover {
+    @apply border-pm-900 dark:border-pm-200;
+  }
+  span {
+    @apply uppercase font-cousine text-xl text-pm-900 dark:text-pm-200 font-black;
+  }
 }

@@ -1,3 +1,39 @@
+:host {
+  @apply w-full;
+}
 .project__grid {
+  @apply w-full h-full grid grid-flow-row;
+  .project__row {
+    @apply grid grid-flow-col;
+    grid-auto-columns: 220px;
+    //@apply flex flex-grow-0 flex-shrink-0 basis-full justify-evenly;
+    pm-card {
+      @apply flex items-end;
+    }
 
+    &.mainStats {
+      pm-card {
+        @apply min-w-[220px] items-center;
+      }
+    }
+    .present,.past {
+      @apply items-end;
+    }
+
+    &.projectInfo {
+      @apply mb-4 flex;
+    }
+  }
+}
+
+a {
+  @apply underline font-cousine;
+}
+
+.ellipsis {
+  width: 200px;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

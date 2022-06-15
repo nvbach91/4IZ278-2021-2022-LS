@@ -1,0 +1,176 @@
+[
+  {
+    "title": "projectInfo",
+    "field": "projectInfo",
+    "order": 1,
+    "cards": [
+      {
+        "title": "Last Commit",
+        "value": "lastCommit.messageHeadline",
+        "link": "lastCommit.url",
+        "date": "lastCommit.committedDate",
+        "type": "small"
+      },
+      {
+        "title": "Owner",
+        "value": "owner.login",
+        "link": "owner.url",
+        "date": null,
+        "type": "small"
+      },
+      {
+        "title": "Repository",
+        "value": "isPrivate",
+        "link": null,
+        "date": null,
+        "type": "small"
+      },
+      {
+        "title": "Contributors",
+        "value": "collaborators",
+        "link": null,
+        "date": null,
+        "type": "small"
+      }
+    ]
+  },
+  {
+    "title": "mainStats",
+    "order": 2,
+    "field": "stats",
+    "cards": [
+      {
+        "title": "Total time",
+        "value": "totalTime.time",
+        "typeValue": "time",
+        "link": null,
+        "date": null,
+        "type": "large"
+      }
+    ],
+    "rows": [
+      {
+        "title": "present",
+        "order": 1,
+        "field": "stats",
+        "cards": [
+          {
+            "title": "Today",
+            "value": "today.time",
+            "typeValue": "time",
+            "link": null,
+            "date": "today.date.from",
+            "dateFormat": "dd/MM/yyyy",
+            "type": "medium"
+          },
+          {
+            "title": "This week",
+            "value": "week.time",
+            "typeValue": "time",
+            "link": null,
+            "date": "week.date",
+            "dateView": "range",
+            "dateFormat": "dd/MM/yyyy",
+            "type": "medium"
+          },
+          {
+            "title": "This month",
+            "value": "month.time",
+            "typeValue": "time",
+            "link": null,
+            "date": "month.date.from",
+            "dateFormat": "LLLL",
+            "type": "medium"
+          },
+          {
+            "title": "This year",
+            "value": "year.time",
+            "typeValue": "time",
+            "link": null,
+            "date": "year.date.from",
+            "dateFormat": "yyyy",
+            "type": "medium"
+          }
+        ]
+      },
+      {
+        "title": "past",
+        "order": 2,
+        "field": "stats",
+        "cards": [
+          {
+            "title": "Yesterday",
+            "value": "yesterday.time",
+            "typeValue": "time",
+            "link": null,
+            "date": "yesterday.date.from",
+            "dateFormat": "dd/MM/yyyy",
+            "type": "medium"
+          },
+          {
+            "title": "Last week",
+            "value": "lastWeek.time",
+            "typeValue": "time",
+            "link": null,
+            "date": "lastWeek.date.from",
+            "dateFormat": "dd/MM/yyyy",
+            "type": "medium"
+          },
+          {
+            "title": "Last month",
+            "value": "lastMonth.time",
+            "typeValue": "time",
+            "link": null,
+            "date": "lastMonth.date.from",
+            "dateFormat": "LLLL",
+            "type": "medium"
+          },
+          {
+            "title": "Last work",
+            "value": "lastWork.time",
+            "typeValue": "time",
+            "link": null,
+            "date": "lastWork.date.from",
+            "dateFormat": "dd/MM/yyyy",
+            "type": "medium"
+          }
+        ]
+      },
+      {
+        "title": "issues",
+        "order": 2,
+        "field": "projectInfo",
+        "cards": [
+          {
+            "title": "Assigned issues",
+            "value": "issues.assignedCount",
+            "link": null,
+            "date": null,
+            "type": "medium"
+          },
+          {
+            "title": "Assigned PR's",
+            "value": "pullRequests.assignedCount",
+            "link": null,
+            "date": null,
+            "type": "medium"
+          },
+          {
+            "title": "Total issues",
+            "value": "issues.totalCount",
+            "link": null,
+            "date": null,
+            "type": "medium"
+          },
+          {
+            "title": "Total PR",
+            "value": "pullRequests.totalCount",
+            "link": null,
+            "date": null,
+            "type": "medium"
+          }
+        ]
+      }
+    ]
+  }
+]
