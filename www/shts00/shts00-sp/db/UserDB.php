@@ -10,22 +10,44 @@ class UserDB extends DBConnection implements IEntityDB {
         $sql = "SELECT * FROM user;";
         $statement = $this -> pdo ->prepare($sql);
         $statement->execute();
-        return $categories = $statement->fetchAll();
+        return $users = $statement->fetchAll();
     }
 
     public function fetchById($user_id){
-        //TODO
+        $sql = "SELECT * FROM user WHERE user_id = " . $user_id .";";
+        $statement = $this -> pdo -> prepare($sql);
+        $statement->execute();
+        return $ticket = $statement->fetchAll();
+    }
+
+    public function fetchByEmail($email){
+        $sql = 'SELECT * FROM user WHERE email = :email';
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([
+            'email'=>$email
+        ]);
+        return $statement->fetchAll();
     }
 
     public function updateById($user_id, $field, $newValue){
-        //TODO
+        $sql = "UPDATE user SET " . $field . "= '" . $newValue . "' WHERE user_id = " . $user_id .";" ;
+        $statement = $this -> pdo -> prepare($sql);
+        $statement -> execute();
     }
 
     public function create($args){
-        //TODO
+        $sql = 'INSERT INTO user (email, password, privilege) VALUES (:email, :password, :privilege)';
+        $statement = $this->pdo->prepare($sql);
+        return $statement->execute([
+            'email' => $args['email'],
+            'password' => $args['hashedPassword'],
+            'privilege' => $args['privilege']
+        ]);
     }
 
     public function deleteById($user_id){
-        //TODO
+        $sql = 'DELETE * FROM user WHERE user_id = :user_id';
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(['user_id'=>$user_id]);
     }
 }

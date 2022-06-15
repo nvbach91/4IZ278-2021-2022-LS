@@ -5,7 +5,7 @@ $categoryDB = new CategoryDB();
 $categories = $categoryDB->fetchAll();
 ?>
 
-<header>
+<header class="header-margin">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="index.php">Konference</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,12 +20,12 @@ $categories = $categoryDB->fetchAll();
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <?php foreach($categories as $category) : ?>
-                    <button class="dropdown-item" type="button"><?php echo $category['name']; ?></button>
+                    <?php echo "<a class='dropdown-item' href='https://eso.vse.cz/~shts00/shts00-sp/index.php?category=$category[category_id]'>$category[name]</a>" ?>
                 <?php endforeach; ?>
             </div>
         </li>
         </ul>
-        <a href="signin.php" class="btn btn-success">Přihlásit se</a>
+        <a href="https://eso.vse.cz/~shts00/shts00-sp/signin.php" class="btn btn-success">Přihlásit se</a>
     </div>
     </nav>
 </header>

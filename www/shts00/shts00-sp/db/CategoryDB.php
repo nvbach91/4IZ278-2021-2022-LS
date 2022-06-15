@@ -32,8 +32,8 @@ class CategoryDB extends DBConnection implements IEntityDB {
     }
 
     public function deleteById($category_id){
-        $sql = "DELETE FROM category WHERE category_id = " . $category_id .";";
-        $statement = $this -> pdo -> prepare($sql);
-        $statement -> execute();
+        $sql = 'DELETE * FROM category WHERE category_id = :category_id';
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(['category_id'=>$category_id]);
     }
 }
