@@ -1,0 +1,64 @@
+fragment LogFragment on Log {
+  id
+  name
+  log {
+    id
+    date
+    activities {
+      type
+      created_at
+    }
+  }
+}
+fragment ProjectInfoFragment on ProjectInfo {
+  id
+  name
+  collaborators
+  isPrivate
+  languages {
+    size
+    name
+  }
+  issues {
+    totalCount
+    assignedCount
+  }
+  pullRequests {
+    totalCount
+    assignedCount
+  }
+  owner {
+    login
+    url
+  }
+  lastCommit {
+    messageHeadline
+    committedDate
+    url
+  }
+}
+
+fragment WorkDataFragment on WorkData {
+  id
+  name
+  represents
+  date {
+    from
+    to
+  }
+  time
+  __typename
+}
+
+fragment WorkAction on Activity {
+  type
+  work {
+    id
+    created_at
+    project {
+      id
+      name
+    }
+  }
+  created_at
+}

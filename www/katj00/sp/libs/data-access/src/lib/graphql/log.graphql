@@ -1,0 +1,5 @@
+query GetActivityLog($name: String!) {
+  activityLog(name: $name) {
+    ...LogFragment
+  }
+}
