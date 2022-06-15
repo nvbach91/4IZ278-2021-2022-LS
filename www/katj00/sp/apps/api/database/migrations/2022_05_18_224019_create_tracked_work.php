@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,13 +12,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('tracked_works', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('node_id')->unique();
-            $table->string('name');
+            $table->char('project_id', 36);
+            $table->char('start_id', 36)->nullable()->unique();
+            $table->char('end_id', 36)->nullable()->unique();
             $table->char('user_id', 36);
-            $table->timestamp('pushed_at');
-            $table->boolean('visible')->default(true);
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('tracked_works');
     }
 };

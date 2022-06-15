@@ -15,6 +15,8 @@ final class ProjectTree
      */
     public function __invoke($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
-        return $context->user()->projects()->orderBy('pushed_at', 'desc')->get();
+        $projects =  $context->user()->projects()->orderBy('pushed_at', 'desc')->get();
+
+        return $projects;
     }
 }

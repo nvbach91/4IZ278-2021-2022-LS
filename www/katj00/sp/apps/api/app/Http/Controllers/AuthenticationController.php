@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
+use App\Services\Synchronize\SynchronizeHelper;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -42,6 +41,15 @@ class AuthenticationController extends BaseController
             'username' => $githubUser->getNickname(),
             'avatar_url' => $githubUser->getAvatar()
         ]);
+
+
+        $userID = $user["id"];
+        $token = $response->json()["access_token"];
+        if (is_null($user["last_synchronized"])) {
+            $synchronize = SynchronizeHelper::synchronize($userID, $token);
+            return \response()->json([...$response->json(), ...$synchronize], 200);
+        }
         return \response()->json([...$response->json(), "synchronized" => $user["last_synchronized"]], 200);
+
     }
 }

@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * Project
+ *
+ * @mixin Builder
+ */
 class Project extends Model
 {
     use TraitUuid, HasFactory;
@@ -14,12 +20,18 @@ class Project extends Model
     protected $fillable = [
         'node_id',
         'name',
-        'owner_id',
+        'user_id',
         'visible',
         'pushed_at'
     ];
 
-    public function owner() {
-        return $this->belongsTo(User::class, 'id', 'owner_id');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function trackedWork()
+    {
+        return $this->hasMany(TrackedWork::class, 'project_id', 'id');
     }
 }

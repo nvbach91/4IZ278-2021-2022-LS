@@ -15,8 +15,6 @@ final class Me
      */
     public function __invoke($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo)
     {
-//    public static function resolve($rootValue, array $args, GraphQLContext $context, ResolveInfo $resolveInfo): User
-//    {
         return $context->user();
     }
 }
