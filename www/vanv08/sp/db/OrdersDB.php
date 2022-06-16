@@ -38,7 +38,6 @@ class OrdersDB extends Database {
             'product_id' => $args['product_id'],
             'price' => $args['price'],
         ]);
-       
     }
 
     // delete existing

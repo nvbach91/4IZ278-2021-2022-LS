@@ -33,50 +33,51 @@ if (!empty($_POST)) {
 }
 
 ?>
+
 <body class="d-flex flex-column min-vh-100">
-<div class="header">
-    <h2>Profile</h2>
-    <?php if (!empty($errors)) : ?>
-    <div class="alert alert-danger" role="alert">
-        <?php foreach ($errors as $error) : ?>
-        <div><?php echo $error; ?></div>
-        <?php endforeach; ?>
+    <div class="header">
+        <h2>Profile</h2>
+        <?php if (!empty($errors)) : ?>
+        <div class="alert alert-danger" role="alert">
+            <?php foreach ($errors as $error) : ?>
+            <div><?php echo $error; ?></div>
+            <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
     </div>
-    <?php endif; ?>
-</div>
-<form class="mb-5" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-    <div class="mb-3">
-        <label class="form-label">Email</label> <br>
-        <input class="form-control" value="<?php echo @$email; ?>" name="email" readonly>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">First Name</label> <br>
-        <input class="form-control" value="<?php echo @$first_name; ?>" name="first_name">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Last Name</label><br>
-        <input class="form-control " value="<?php echo @$last_name; ?>" name="last_name">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Phone</label><br>
-        <input class="form-control" value="<?php echo @$phone; ?>" name="phone">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">City</label><br>
-        <input class="form-control " value="<?php echo @$city; ?>" name="city">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Street</label><br>
-        <input class="form-control " value="<?php echo @$street; ?>" name="street">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Postal code</label><br>
-        <input class="form-control " value="<?php echo @$postal; ?>" name="postal">
-    </div>
-    <div class="mb-3">
-        <button type="submit" class="btn btn-secondary" name="save_changes">Save changes</button>
-    </div>
-</form>
+    <form class="mb-5" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Email</label> <br>
+            <input class="form-control" value="<?php echo @$email; ?>" name="email" readonly>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">First Name</label> <br>
+            <input class="form-control" value="<?php echo @$first_name; ?>" name="first_name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Last Name</label><br>
+            <input class="form-control " value="<?php echo @$last_name; ?>" name="last_name">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phone</label><br>
+            <input class="form-control" value="<?php echo @$phone; ?>" name="phone">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">City</label><br>
+            <input class="form-control " value="<?php echo @$city; ?>" name="city">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Street</label><br>
+            <input class="form-control " value="<?php echo @$street; ?>" name="street">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Postal code</label><br>
+            <input class="form-control " value="<?php echo @$postal; ?>" name="postal">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-secondary" name="save_changes">Save changes</button>
+        </div>
+    </form>
 </body>
 <?php
 include __DIR__ . '/incl/footer.php'; ?>

@@ -2,6 +2,7 @@
 $productsDB = new productsDB();
 $nItemsPerPagination = 6;
 
+
 // if the get offset is set
 if (isset($_GET['offset'])) {
     // save the offset in a var

@@ -12,7 +12,7 @@ if (isset($_GET['category_id'])) {
         <h2 class="m-0">Categories</h2>
         <i class="fa fa-angle-down text-dark"></i>
     </a>
-    <nav class="collapse hide navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
+    <nav class="collapse hide navbar navbar-vertical navbar-light align-items-start p-0 "
         id="navbar-vertical">
         <div class="navbar-nav w-50 overflow-hidden" style="height: 210px">
             <?php foreach ($categories as $category) : ?>
