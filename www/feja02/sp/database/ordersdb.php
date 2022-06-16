@@ -1,40 +1,57 @@
 <?php
 
-require_once __DIR__ "./database.php";
+class OrdersDB extends Database {
 
-class OrdersDB implements Database {
     protected $tableName = "orders";
 
     public function fetchAll() {
-        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName);
+        $sql = "SELECT * FROM " . $this->tableName;
+        $statement = $this->pdo->prepare($sql);
         $statement->execute();
         return $statement->fetchAll();
     }
 
     public function fetchById($id) {
-        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . " WHERE id = " . $id . ";");
-        $statement->execute();
-        return $statement->fetch();
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE id = :id;";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(["id" => $id]);
+        return $statement->fetchAll();
+    }
+
+    public function fetchByUserId($id) {
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE user_id = :id;";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(["id" => $id]);
+        return $statement->fetchAll();
+    }
+
+    public function fetchLastId() {
+        return $this->pdo->lastInsertId();
     }
 
     public function create($args) {
-        $statement = $this->pdo->prepare("INSERT INTO " . $this->tableName . " (user_id, total) " . " VALUES (
-            '" . $args['user_id'] . "',
-            '" . $args['total'] . "',
-            '" . date("Y-m-d h:i:s") . "')");
-        $statement->execute();
+        $sql = "INSERT INTO " . $this->tableName . " (user_id, shipping_details_id, total) " . " VALUES (
+            :userId,
+            :shippingId,
+            :total);";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute($args);
     }
 
     public function deleteById($id) {
-        $statement = $this->pdo->prepare("DELETE * FROM " . $this->tableName . " WHERE id = " . $id . ";");
-        $statement->execute();
+        $sql = "DELETE FROM " . $this->tableName . " WHERE id = :id;";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(["id" => $id]);
     }
 
     public function updateById($id, $field, $value) {
-        $statement = $this->pdo->prepare("UPDATE " . $this->tableName . "SET " . $field . " = '" . $value . "' WHERE id = " . $id . ";");
-        $statement->execute();
+        $sql = "UPDATE " . $this->tableName . " SET " . $field . " = :value WHERE id = :id;";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([
+            ":value" => $value,
+            ":id" => $id
+        ]);
     }
-
 
 }
 

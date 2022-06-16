@@ -1,8 +1,8 @@
 <?php
 
-class BrandsDB extends Database {
+class OrderItemsDB extends Database {
     
-    protected $tableName = "brands";
+    protected $tableName = "ordered_items";
 
     public function fetchAll() {
         $sql = "SELECT * FROM " . $this->tableName;
@@ -18,10 +18,19 @@ class BrandsDB extends Database {
         return $statement->fetchAll();
     }
 
+    public function fetchByOrderId($id) {
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE order_id = :id;";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(["id" => $id]);
+        return $statement->fetchAll();
+    }
+
     public function create($args) {
-        $sql = "INSERT INTO " . $this->tableName . " (name, description) " . " VALUES (
-            :name,
-            :description);";
+        $sql = "INSERT INTO " . $this->tableName . " (order_id, product_id, quantity, total) " . " VALUES (
+            :order_id,
+            :product_id,
+            :quantity,
+            :total);";
         $statement = $this->pdo->prepare($sql);
         $statement->execute($args);
     }

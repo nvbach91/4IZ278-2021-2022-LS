@@ -1,47 +1,49 @@
 <?php
 
-require_once __DIR__ "./database.php";
-
-class UsersDB implements Database {
-    protected $tableName = "users";
+class UsersDB extends Database {
     
+    protected $tableName = "users";
+
     public function fetchAll() {
-        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName);
+        $sql = "SELECT * FROM " . $this->tableName;
+        $statement = $this->pdo->prepare($sql);
         $statement->execute();
         return $statement->fetchAll();
     }
 
     public function fetchById($id) {
-        $statement = $this->pdo->prepare("SELECT * FROM " . $this->tableName . " WHERE id = " . $id . ";");
-        $statement->execute();
-        return $statement->fetch();
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE id = :id;";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(["id" => $id]);
+        return $statement->fetchAll();
+    }
+
+    public function fetchByEmail($email) {
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE email = :email;";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([":email" => $email]);
+        return $statement->fetchAll();
     }
 
     public function create($args) {
-        $statement = $this->pdo->prepare("INSERT INTO " . $this->tableName . " (name, email, phone, password, born, country, state, city, postal_code, address, role) " . " VALUES (
-            '" . $args['name'] . "',
-            '" . $args['email'] . "',
-            '" . $args['phone'] . "',
-            '" . $args['password'] . "',
-            '" . $args['born'] . "',
-            '" . $args['country'] . "',
-            '" . $args['state'] . "',
-            '" . $args['city'] . "',
-            '" . $args['postal_code'] . "',
-            '" . $args['address'] . "',
-            '" . $args['role'] . "',
-            '" . date("Y-m-d h:i:s") . "')");
-        $statement->execute();
+        $sql = "INSERT INTO " . $this->tableName . " (email, password, role) " . " VALUES (:email, :password, 0);";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute($args);
     }
 
     public function deleteById($id) {
-        $statement = $this->pdo->prepare("DELETE * FROM " . $this->tableName . " WHERE id = " . $id . ";");
-        $statement->execute();
+        $sql = "DELETE FROM " . $this->tableName . " WHERE id = :id;";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(["id" => $id]);
     }
 
     public function updateById($id, $field, $value) {
-        $statement = $this->pdo->prepare("UPDATE " . $this->tableName . "SET " . $field . " = '" . $value . "' WHERE id = " . $id . ";");
-        $statement->execute();
+        $sql = "UPDATE " . $this->tableName . " SET " . $field . " = :value WHERE id = :id;";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([
+            ":value" => $value,
+            ":id" => $id
+        ]);
     }
 }
 
