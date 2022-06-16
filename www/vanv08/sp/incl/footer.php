@@ -1,10 +1,11 @@
-<?php
-    $author = 'Van Nguyen';
-    $copYear = date("Y");
-    ?>
-<!-- Footer-->
-<!-- Back to Top -->
-<a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<footer class="bg-light text-center text-lg-start mt-auto">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <p class="text-dark">Van Nguyen</p>
+  </div>
+  <!-- Copyright -->
+</footer>
 
 
 <!-- JavaScript Libraries -->

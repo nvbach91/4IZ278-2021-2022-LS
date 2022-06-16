@@ -10,7 +10,7 @@ include __DIR__ . '/components/display_categories.php';
 include __DIR__ . '/components/display_products.php';
 ?>
 
-<body>
+<<body class="d-flex flex-column min-vh-100">
 
     
     

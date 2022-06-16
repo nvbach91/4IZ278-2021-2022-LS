@@ -1,6 +1,9 @@
 <?php require __DIR__ . '/db/ProductsDB.php'; ?>
 <?php require __DIR__ . '/db/UsersDB.php'; ?>
 <?php require __DIR__ . '/db/OrdersDB.php';?>
+<?php include __DIR__ . '/incl/head.php'; 
+include __DIR__ . '/incl/nav.php';
+?>
 <?php
 $productsDB = new ProductsDB();
 $usersDB = new UsersDB();
@@ -13,7 +16,10 @@ $ordersDB = new OrdersDB();
     $date = date("Y/m/d");
     // VALIDACE SAME BUYERA
 
+    ?>
 
+<body class="d-flex flex-column min-vh-100">
+    <?
     // add to sp_orders
     $ordersDB->create(['date' => $date, 'seller_id' => $product['user_id'],  'buyer_id' => $_SESSION['user_id'], 'product_id' => $product['product_id'], 'price' => $product['price']]);
     // remove from sp_products
@@ -23,3 +29,5 @@ $ordersDB = new OrdersDB();
     $productsDB->deleteById($id_delete_product);
 
     ?>
+</body>
+<?php include __DIR__ . '/incl/footer.php' ?>

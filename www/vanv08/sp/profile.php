@@ -1,12 +1,10 @@
 <?php 
 $title = 'Profile';
-session_start();
-session_regenerate_id(true);
 $errors = [];
-
+require __DIR__ . '/utils/protec_acess.php';
 include __DIR__ . '/incl/head.php';
 include __DIR__ . '/incl/nav.php';
-require __DIR__ . '/utils/protec_acess.php';
+
 //  req
 require  __DIR__ . '/db/UsersDB.php'; 
 include __DIR__ . '/incl/head.php';
@@ -35,18 +33,18 @@ if (!empty($_POST)) {
 }
 
 ?>
-
+<body class="d-flex flex-column min-vh-100">
 <div class="header">
-        <h2>Profile</h2>
-        <?php if (!empty($errors)) : ?>
-        <div class="alert alert-danger" role="alert">
-            <?php foreach ($errors as $error) : ?>
-            <div><?php echo $error; ?></div>
-            <?php endforeach; ?>
-        </div>
-        <?php endif; ?>
+    <h2>Profile</h2>
+    <?php if (!empty($errors)) : ?>
+    <div class="alert alert-danger" role="alert">
+        <?php foreach ($errors as $error) : ?>
+        <div><?php echo $error; ?></div>
+        <?php endforeach; ?>
     </div>
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+    <?php endif; ?>
+</div>
+<form class="mb-5" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
     <div class="mb-3">
         <label class="form-label">Email</label> <br>
         <input class="form-control" value="<?php echo @$email; ?>" name="email" readonly>
@@ -79,3 +77,6 @@ if (!empty($_POST)) {
         <button type="submit" class="btn btn-secondary" name="save_changes">Save changes</button>
     </div>
 </form>
+</body>
+<?php
+include __DIR__ . '/incl/footer.php'; ?>

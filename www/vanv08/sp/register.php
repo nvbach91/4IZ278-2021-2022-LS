@@ -46,7 +46,7 @@ if (!count($errors)) {
 
 ?>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <div class="header">
         <h2>Register</h2>
         <?php if (!empty($errors)) : ?>
@@ -82,3 +82,4 @@ if (!count($errors)) {
 </body>
 
 </html>
+<?php include __DIR__ . '/incl/footer.php' ?>

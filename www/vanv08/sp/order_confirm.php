@@ -30,7 +30,7 @@ if (!empty($_GET)) {
 
 
 ?>
-
+<body class="d-flex flex-column min-vh-100">
 <form method="post" action="order_confirm.php">
 <div class="wrapper">
     <div class="container">
@@ -93,5 +93,6 @@ if (!empty($_GET)) {
         </h3>
     </form>
 </div>
-
+</body>
 </div>
+<?php include __DIR__ . '/incl/footer.php' ?>

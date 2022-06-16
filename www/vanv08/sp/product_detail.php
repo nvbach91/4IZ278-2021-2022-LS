@@ -1,6 +1,6 @@
 <?php
 $title = 'Product detail';
-session_start();
+require __DIR__ . '/utils/protec_acess.php';
 ?>
 
 <?php require __DIR__ . '/db/ProductsDB.php'; ?>
@@ -27,9 +27,10 @@ if (!empty($_GET)) {
     exit('No product chosen');
 }
 
-
-
 ?>
+
+<body class="d-flex flex-column min-vh-100">
+
 <div class="card" style="width: 50%; margin:auto;">
     <img src="<?php echo $product['img_link']; ?>" style="max-height: 30%;min-height:auto"alt="img_link" class="card-img-top- img-fluid">
     <div class="card-body">
@@ -45,3 +46,5 @@ if (!empty($_GET)) {
         </h3>
     </div>
 </div>
+
+<?php include __DIR__ . '/incl/footer.php' ?>

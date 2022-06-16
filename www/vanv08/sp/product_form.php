@@ -1,12 +1,12 @@
 <?php
 $title = 'Sell product';
-session_start();
+require __DIR__ . '/utils/protec_acess.php';
 require __DIR__ . '/db/UsersDB.php';
 require __DIR__ . '/db/ProductsDB.php';
 require __DIR__ . '/db/OrdersDB.php';
 include __DIR__ . '/incl/head.php';
 include __DIR__ . '/incl/nav.php';
-require __DIR__ . '/utils/protec_acess.php';
+
 ?>
 <?php
 // init
@@ -42,7 +42,7 @@ if (!empty($_POST)) {
 
 ?>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <div class="header">
         <h2>Add product to sell</h2>
         <?php if (!empty($errors)) : ?>
@@ -84,3 +84,4 @@ if (!empty($_POST)) {
         </div>
     </form>
 </body>
+<?php include __DIR__ . '/incl/footer.php' ?>
