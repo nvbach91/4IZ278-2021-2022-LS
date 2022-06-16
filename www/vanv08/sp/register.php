@@ -36,6 +36,7 @@ if ($result->rowCount() == 0) {
 if (!count($errors)) {
     if (is_null($existingUser)) {
         $usersDB->create(['email' => $email, 'password' => $hashedPassword]);
+        include __DIR__ . '/utils/send_email_reg.php';
         header("Location: login.php?ref=$ref&email=$email");
         exit();
     } else {

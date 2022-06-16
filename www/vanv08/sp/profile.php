@@ -13,7 +13,8 @@ include __DIR__ . '/incl/head.php';
 require __DIR__ . '/utils/login_user_info.php';
 
 // update changes
-
+?>
+<? echo $_SESSION['user_level']; 
 if (!empty($_POST)) {
     $first_name = ucfirst($_POST['first_name']);
     $last_name = ucfirst($_POST['last_name']);

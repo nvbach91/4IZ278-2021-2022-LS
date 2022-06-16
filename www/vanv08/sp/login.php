@@ -26,11 +26,13 @@ if ($result->rowCount() == 0) {
   $existingUser = $result->fetchAll()[0];
 }
 
+// create session with credentials if no problem
 if (!count($errors)) {
   if (!is_null($existingUser)) {
       if (password_verify($password, $existingUser['password'])) {
           $_SESSION['user_id'] = $existingUser['user_id'];
           $_SESSION['user_email'] = $existingUser['email'];
+          $_SESSION['user_level'] = $existingUser['level'];
           header('Location: profile.php');
           exit();
       } else {
@@ -56,7 +58,6 @@ if (!count($errors)) {
     </div>
     </div>
     <form method="post" action="login.php">
-
         <div class="mb-3">
             <label>Email</label>
             <input class="form-control" name="email" value="<?php echo isset($email) ? $email : '' ?>">
@@ -70,11 +71,12 @@ if (!count($errors)) {
             <div class="mb-3">
                 <button type="submit" class="btn btn-secondary" name="login">Log in</button>
             </div>
+        </div>
             <p>
                 Not a member? <a href="register.php">Register</a>
+            </p>
             
     </form>
 </body>
 
-</html>
 <?php include __DIR__ . '/incl/footer.php' ?>

@@ -6,7 +6,6 @@ require __DIR__ . '/db/ProductsDB.php';
 require __DIR__ . '/db/OrdersDB.php';
 include __DIR__ . '/incl/head.php';
 include __DIR__ . '/incl/nav.php';
-
 ?>
 
 
@@ -20,10 +19,18 @@ if (!empty($_GET)) {
     $result = $productsDB->fetchById($id);
     $product = $result->fetchAll()[0];
 
-    
+
+    require __DIR__ . '/utils/login_user_info.php';
+    require __DIR__ . '/utils/user_email_fr_id.php';
+
+    echo $first_name;
 }   
     ?>
-<?php require __DIR__ . '/utils/user_email_fr_id.php'; ?>
+    <?php
+    // validate if user_info is set
+    require __DIR__ . '/utils/user_info_empty.php';
+    ?>
+
 <?php
     $price = $product['price'];
 
@@ -83,10 +90,10 @@ if (!empty($_GET)) {
                     </div>
                 </div>
                 <div class="col border">
-                    <?php echo $userInfo['phone']; ?>
+                    <?php echo $phone; ?>
                 </div>
                 <div class="col border">
-                    <?php echo $adress; ?>
+                    <?php echo $city . " " . $street . " " . $postalCode; ?>
                 </div>
             </div>
             <h3 class="mb-4">

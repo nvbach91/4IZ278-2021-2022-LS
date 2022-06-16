@@ -11,7 +11,7 @@ include __DIR__ . '/components/display_products.php';
 ?>
 
 <<body class="d-flex flex-column min-vh-100">
-
+<?echo $_SESSION['user_level']?>;
     
     
 
