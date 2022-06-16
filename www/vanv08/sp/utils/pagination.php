@@ -14,9 +14,9 @@ if (isset($_GET['offset'])) {
 }
 
 
-if (isset($category_id)) {
-    $products = $productsDB->fetchByIdPagination($category_id, $nItemsPerPagination, $offset);
-    $count = $productsDB->getRowsNumberById($category_id);
+if (isset($categories_id)) {
+    $products = $productsDB->fetchByIdPagination($categories_id, $nItemsPerPagination, $offset);
+    $count = $productsDB->getRowsNumberById($categories_id);
 } else {
     $products = $productsDB->fetchAllPagination($nItemsPerPagination, $offset);
     $count = $productsDB->getRowsNumber();
