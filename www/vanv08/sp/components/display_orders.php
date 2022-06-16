@@ -7,7 +7,7 @@ $usersDB = new UsersDB();
 // $orders = $result->fetchAll();
 
 $orders = $ordersDB->fetchAll();
-$user_id = $_SESSION['user_id'];
+$usr_id = $_SESSION['user_id'];
 $i=0;
 
 ?>
@@ -23,7 +23,7 @@ $i=0;
         </div>
 
         <?php foreach ($orders as $order) : ?>
-        <?php if($order['buyer_id'] == $user_id) : 
+        <?php if($order['buyer_id'] == $usr_id) : 
             $i++;?>
         <div class="row shadow-sm justify-content-center align-items-center">
             <div class="col"><?php echo $order['order_id']; ?></div>

@@ -1,14 +1,13 @@
 <?php
-$title = 'Order confirmation';
+$title = 'Sell product';
 session_start();
-
+require __DIR__ . '/db/UsersDB.php';
+require __DIR__ . '/db/ProductsDB.php';
+require __DIR__ . '/db/OrdersDB.php';
+include __DIR__ . '/incl/head.php';
+include __DIR__ . '/incl/nav.php';
+include __DIR__ . '/utils/protec_acess.php';
 ?>
-<?php require __DIR__ . '/db/ProductsDB.php'; ?>
-<?php require __DIR__ . '/db/UsersDB.php'; ?>
-<?php require __DIR__ . '/db/OrdersDB.php';?>
-<?php include __DIR__ . '/incl/head.php'; ?>
-<?php include __DIR__ . '/incl/nav.php'; ?>
-<?php require __DIR__ . '/utils/login_user_info.php' ?>
 
 
 <?php

@@ -30,8 +30,8 @@ if (!empty($_GET)) {
 
 
 ?>
-<div class="card" style="width: 60%; margin:auto;">
-    <img src="<?php echo $product['img_link']; ?>" alt="img_link" class="card-img-top-">
+<div class="card" style="width: 50%; margin:auto;">
+    <img src="<?php echo $product['img_link']; ?>" style="max-height: 30%;min-height:auto"alt="img_link" class="card-img-top- img-fluid">
     <div class="card-body">
         <h2 class="mb-10"><?php echo $product['name']; ?></h2>
         <h3 class="mb-4"> Product information </h3>

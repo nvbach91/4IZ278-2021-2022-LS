@@ -3,9 +3,10 @@ $title = 'Sell product';
 session_start();
 require __DIR__ . '/db/UsersDB.php';
 require __DIR__ . '/db/ProductsDB.php';
+require __DIR__ . '/db/OrdersDB.php';
 include __DIR__ . '/incl/head.php';
 include __DIR__ . '/incl/nav.php';
-$user_id = $_SESSION['user_id'];
+require __DIR__ . '/utils/protec_acess.php';
 ?>
 <?php
 // init

@@ -6,15 +6,7 @@ $errors = [];
 
 include __DIR__ . '/incl/head.php';
 include __DIR__ . '/incl/nav.php';
-
-$u_email = $_SESSION['user_email'];
-$u_id = $_SESSION['user_id'];
-
-// protect acccess
-if (!$u_email || !$u_id){
-    header("location: login.php");
-    exit();
-}
+require __DIR__ . '/utils/protec_acess.php';
 //  req
 require  __DIR__ . '/db/UsersDB.php'; 
 include __DIR__ . '/incl/head.php';
