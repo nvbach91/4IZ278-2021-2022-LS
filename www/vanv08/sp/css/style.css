@@ -9,10 +9,10 @@ body {
 }
 
 .header {
-    width: 30%;
-    margin: 50px auto 0px;
+    width: 50%;
+    margin: 100px auto 0px;
     color: white;
-    background: #5F9EA0;
+    background: #6c757d;
     text-align: center;
     border: 1px solid #B0C4DE;
     border-bottom: none;
@@ -22,7 +22,7 @@ body {
 
 form,
 .content {
-    width: 30%;
+    width: 50%;
     margin: 0px auto;
     padding: 20px;
     border: 1px solid #B0C4DE;
@@ -38,12 +38,13 @@ form,
     display: block;
     text-align: left;
     margin: 3px;
+    margin-left: auto;
 }
 
 .input-group input {
     height: 30px;
     width: 93%;
-    padding: 5px 10px;
+    padding: 5%, 10%;
     font-size: 16px;
     border-radius: 5px;
     border: 1px solid gray;

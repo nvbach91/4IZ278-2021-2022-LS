@@ -1,5 +1,5 @@
-<?php require_once '/config.php'; ?>
-<?php require '/DatabaseOperations.php'; ?>
+<?php require_once __DIR__ . '/config.php'; ?>
+<?php require __DIR__ . '/DatabaseOperations.php'; ?>
 <?php
 
 abstract class Database implements DatabaseOperations
@@ -13,12 +13,10 @@ abstract class Database implements DatabaseOperations
             DATABASE_USERNAME,
             DATABASE_PASSWORD
         );
-        echo "----- ", static::class, " was instantiated -----", PHP_EOL;
+        
     }
 
-    public function __toString() {
-        return "config: " . "dbURL: " . DATABASE_URL . ", dbName: " . DATABASE_NAME . ", dbUsername: " . DATABASE_USERNAME;
-    }
+        
 }
 
 ?>

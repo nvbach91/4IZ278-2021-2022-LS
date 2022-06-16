@@ -1,19 +1,24 @@
-<?php require './config.php'; ?>
+<?php
+$title = 'Homepage';
+session_start();
+require  __DIR__ . '/db/UsersDB.php';
+require  __DIR__ . '/db/CategoriesDB.php';
+require  __DIR__ . '/db/ProductsDB.php';
+include __DIR__ . '/incl/head.php'; 
+include __DIR__ . '/incl/nav.php';
+include __DIR__ . '/components/display_categories.php';
+include __DIR__ . '/components/display_products.php';
+?>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
 <body>
-   <a href="users.php">Users</a>
-   <a href="products.php">Products</a>
-   <a href="orders.php">Orders</a>
-   <a href="register.php">Register</a>
-   <a href="login.php">Log-in</a>
+
+    
+    
+
+
+
+
+
+        
 </body>
-</html>
+<?php include __DIR__ . '/incl/footer.php' ?>
