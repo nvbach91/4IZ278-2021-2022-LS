@@ -31,8 +31,8 @@ class OrdersDB extends Database {
 
     public function create($args) {
         $sql = "INSERT INTO " . $this->tableName . " (user_id, shipping_details_id, total) " . " VALUES (
-            :userId,
-            :shippingId,
+            :user_id,
+            :shipping_id,
             :total);";
         $statement = $this->pdo->prepare($sql);
         $statement->execute($args);

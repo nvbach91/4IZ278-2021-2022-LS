@@ -13,7 +13,7 @@ if (!empty($_GET["id"])) {
 }
 
 if (!count($product) && empty($_GET["success"])) {
-    header("Location: /");
+    header("Location: ./");
     exit();
 }
 ?>

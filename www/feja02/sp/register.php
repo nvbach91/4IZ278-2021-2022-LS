@@ -2,7 +2,7 @@
 include "include/header.php";
 
 if (!empty($_SESSION["login_id"])) {
-    header("Location: /");
+    header("Location: ./");
     exit();
 }
 

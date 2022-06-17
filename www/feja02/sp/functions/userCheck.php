@@ -2,17 +2,19 @@
 
 require_once __DIR__ . "/../database/usersdb.php";
 
-if (empty($_SESSION["login_id"])) {
-    header("Location: ../login");
-    exit();
-}
-
 $usersDb = new UsersDB();
-$user = $usersDb->fetchById($_SESSION["login_id"])[0];
-if (!is_array($user)) { //Pokud byl ucet odstranen
-    session_destroy();
-    header("Location: ../");
+
+if (!empty($_SESSION["login_id"])) {
+    if ($_SESSION["login_oauth"] != 1) {
+        if(!count($usersDb->fetchById($_SESSION["login_id"]))) {
+            session_destroy();
+        header("Location: ./");
+        exit();
+        }
+    }
+}
+else {
+    header("Location: ./");
     exit();
 }
-
 ?>

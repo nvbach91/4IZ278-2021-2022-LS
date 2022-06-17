@@ -1,9 +1,10 @@
 <?php
 include "include/header.php";
 require "database/productsdb.php";
+require "database/shippingdetailsdb.php";
 require "functions/userCheck.php";
 
-if (empty($_SESSION["cart"])) header("Location: /cart");
+if (empty($_SESSION["cart"])) header("Location: ./cart");
 
 $errorList = [];
 if (!empty($_SESSION["errorList"])) {
@@ -18,6 +19,20 @@ $country = "";
 $street = "";
 $city = "";
 $zip = "";
+
+$shippingDb = new ShippingDetailsDB();
+if (count($shippingDb->fetchByUserId($_SESSION["login_id"]))) {
+    $shipping = $shippingDb->fetchByUserId($_SESSION["login_id"])[0];
+    $firstName = $shipping["first_name"];
+    $lastName = $shipping["last_name"];
+    $email = $shipping["email"];
+    $phone = $shipping["phone"];
+    $country = $shipping["country"];
+    $street = $shipping["street"];
+    $city = $shipping["city"];
+    $zip = $shipping["zip_code"];
+}
+
 if (!empty($_SESSION["errorDetails"])) {
     $firstName = $_SESSION["errorDetails"]["firstName"];
     $lastName = $_SESSION["errorDetails"]["lastName"];

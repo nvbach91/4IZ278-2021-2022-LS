@@ -23,7 +23,7 @@ $numPages = ceil($productsDb->countProducts($brandId) / $productsPerPage);
 if (!$numPages) $numPages++; //For pagination and redirection
 $index = 0; //Index for card counting
 
-if ($page > $numPages) header("Location: /");
+if ($page > $numPages) header("Location: ./");
 
 ?>
 

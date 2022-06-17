@@ -6,7 +6,7 @@ require "../database/usersdb.php";
 $errorList = [];
 
 if (!empty($_POST)) {
-    $email = $_POST["email"];
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
     $password = $_POST["password"];
     $passwordConfirm = $_POST["passwordConfirm"];
     $terms = $_POST["terms"];

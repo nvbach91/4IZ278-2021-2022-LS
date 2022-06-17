@@ -18,6 +18,13 @@ class ShippingDetailsDB extends Database {
         return $statement->fetchAll();
     }
 
+    public function fetchByUserId($id) {
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE user_id = :id ORDER BY created_at DESC;";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute(["id" => $id]);
+        return $statement->fetchAll();
+    }
+
     public function fetchLastId() {
         return $this->pdo->lastInsertId();
     }

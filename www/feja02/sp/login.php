@@ -2,7 +2,7 @@
 include "include/header.php";
 
 if (!empty($_SESSION["login_id"])) {
-    header("Location: /");
+    header("Location: ./");
     exit();
 }
 
@@ -32,6 +32,12 @@ if (isset($_GET["email"])) $email = $_GET["email"];
                     <div class="m-3">
                         <input class="form-control" name="password" type="password" placeholder="Password">
                     </div>
+                    <div class="mt-3">
+                        <input class="form-check-input" name="remember" id="remember" type="checkbox">
+                        <label class="form-check-label" for="remember">
+                            <h6>Remember me</h6>
+                        </label>
+                    </div>
                     <div class="m-3">
                         <button class="btn btn-lg btn-success m-3 w-75" type="submit" name="submit" id="submit">Login</button>
                     </div>
@@ -39,8 +45,9 @@ if (isset($_GET["email"])) $email = $_GET["email"];
                         <h6>Not registered? <a href="./register"> Create an Account</a>.</h6>
                     </div>
                 </form><hr class="w-75 mx-auto">
-                <div class="">
+                <div>
                     <h6>Or Login with:</h6>
+                    <a class="btn btn-primary btn-rounded btn-lg mx-5 mb-3" href="./facebook/fbconfig.php">Facebook</a>
                 </div>
             </div>
         </div>

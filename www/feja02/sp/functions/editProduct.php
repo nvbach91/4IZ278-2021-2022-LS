@@ -16,15 +16,16 @@ $brandsDb = new BrandsDB();
 $productsDb = new ProductsDB();
 
 $errorList = [];
+
 $editDetails = [
-    "name" => $_POST["name"],
-    "descriptionShort" => $_POST["descriptionShort"],
-    "descriptionLong" => $_POST["descriptionLong"],
-    "brand" => $_POST["brand"],
-    "nicotine" => $_POST["nicotine"],
-    "pouches" => $_POST["pouches"],
-    "price" => $_POST["price"],
-    "image" => $_POST["image"]
+    "name" => filter_var($_POST["name"], FILTER_SANITIZE_STRING),
+    "descriptionShort" => filter_var($_POST["descriptionShort"], FILTER_SANITIZE_STRING),
+    "descriptionLong" => filter_var($_POST["descriptionLong"], FILTER_SANITIZE_STRING),
+    "brand" => filter_var($_POST["brand"], FILTER_SANITIZE_STRING),
+    "nicotine" => filter_var($_POST["nicotine"], FILTER_SANITIZE_STRING),
+    "pouches" => filter_var($_POST["pouches"], FILTER_SANITIZE_STRING),
+    "price" => filter_var($_POST["price"], FILTER_SANITIZE_STRING),
+    "image" => filter_var($_POST["image"], FILTER_SANITIZE_STRING)
 ];
 
 $validBrand = false;
@@ -73,8 +74,8 @@ if (!strlen($editDetails["image"])) {
 
 if (empty($errorList)) {
     if ($editDetails["name"] != $product["name"]) $productsDb->updateById($_POST["id"], "name", $editDetails["name"]);
-    if ($editDetails["descriptionShort"] != $product["description_short"]) $productsDb->updateById($_POST["id"], "descriptionShort", $editDetails["descriptionShort"]);
-    if ($editDetails["descriptionShort"] != $product["description_long"]) $productsDb->updateById($_POST["id"], "descriptionLong", $editDetails["descriptionLong"]);
+    if ($editDetails["descriptionShort"] != $product["description_short"]) $productsDb->updateById($_POST["id"], "description_short", $editDetails["descriptionShort"]);
+    if ($editDetails["descriptionShort"] != $product["description_long"]) $productsDb->updateById($_POST["id"], "description_long", $editDetails["descriptionLong"]);
     if ($editDetails["brand"] != $product["brand_id"]) $productsDb->updateById($_POST["id"], "brand_id", $editDetails["brand"]);
     if ($editDetails["nicotine"] != $product["nicotine"]) $productsDb->updateById($_POST["id"], "nicotine", $editDetails["nicotine"]);
     if ($editDetails["pouches"] != $product["pouches"]) $productsDb->updateById($_POST["id"], "pouches", $editDetails["pouches"]);

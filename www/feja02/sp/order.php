@@ -7,15 +7,15 @@ require "database/productsdb.php";
 require "functions/userCheck.php";
 
 if (empty($_GET["id"])) {
-    header("Location: /myOrders");
+    header("Location: ./myOrders");
     exit();
 }
 
 $ordersDb = new OrdersDB();
 $order = $ordersDb->fetchById($_GET["id"])[0];
-if (!is_array($order)) header("Location: /myOrders");
+if (!is_array($order)) header("Location: ./myOrders");
 if (($order["user_id"] != $_SESSION["login_id"]) && ($_SESSION["login_role"] != 1)) {
-    header("Location: /myOrders");
+    header("Location: ./myOrders");
     exit();
 }
 

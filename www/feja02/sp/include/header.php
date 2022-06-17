@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "database/database.php";
+require "functions/rememberme.php";
 
 $numCart = 0;
 if (!isset($_SESSION["cart"])) $_SESSION["cart"] = [];
@@ -68,7 +69,7 @@ foreach ($_SESSION["cart"] as $key => $data) $numCart += $data["quantity"];
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownAccount">
                                 <?php if (!empty($_SESSION["login_role"] && $_SESSION["login_role"] == 1)) echo '<a class="dropdown-item" href="./panel">Admin Panel</a>'; ?>
                                 <a class="dropdown-item" href="./myorders">My Orders</a>
-                                <a class="dropdown-item" href="./account">Account Settings</a>
+                                <?php if ($_SESSION["login_oauth"] == 0) echo '<a class="dropdown-item" href="./account">Account Settings</a>'; ?>
                                 <a class="dropdown-item" href="./functions/logout">Logout</a>
                             </div>
                         </li>

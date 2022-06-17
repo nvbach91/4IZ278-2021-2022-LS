@@ -13,17 +13,17 @@ if (empty($_POST)) header("Location: ../");
 $errorList = [];
 
 $userId = $_SESSION["login_id"];
-$firstName = $_POST["firstName"];
-$lastName = $_POST["lastName"];
-$email = $_POST["email"];
-$phone = $_POST["phone"];
-$country = $_POST["country"];
-$street = $_POST["street"];
-$city = $_POST["city"];
-$zip = $_POST["zip"];
+$firstName = filter_var($_POST["firstName"], FILTER_SANITIZE_STRING);
+$lastName = filter_var($_POST["lastName"], FILTER_SANITIZE_STRING);
+$email = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
+$phone = filter_var($_POST["phone"], FILTER_SANITIZE_STRING);
+$country = filter_var($_POST["country"], FILTER_SANITIZE_STRING);
+$street = filter_var($_POST["street"], FILTER_SANITIZE_STRING);
+$city = filter_var($_POST["city"], FILTER_SANITIZE_STRING);
+$zip = filter_var($_POST["zip"], FILTER_SANITIZE_STRING);
 
-if (!preg_match("/^[a-zA-z]*$/", $firstName)) array_push($errorList, "Invalid first name");
-if (!preg_match("/^[a-zA-z]*$/", $lastName)) array_push($errorList, "Invalid last name");
+if (empty($firstName) || !preg_match("/^[a-zA-z]*$/", $firstName)) array_push($errorList, "Invalid first name");
+if (empty($lastName) || !preg_match("/^[a-zA-z]*$/", $lastName)) array_push($errorList, "Invalid last name");
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) array_push($errorList, "Invalid e-mail");
 if (!preg_match('/^[0-9+]{9,13}\z/', $phone)) array_push($errorList, "Invalid phone");
 if (strlen($country) < 4) array_push($errorList, "Invalid country");
@@ -50,7 +50,7 @@ if (empty($errorList)) {
     
     $total = $_SESSION["cartTotal"];
     $shippingDb->create($shippingDetails);
-    $ordersDb->create(["userId" => $_SESSION["login_id"], "shippingId" => $shippingDb->fetchLastId(), "total" => $total]);
+    $ordersDb->create(["user_id" => $_SESSION["login_id"], "shipping_id" => $shippingDb->fetchLastId(), "total" => $total]);
     $orderId = $ordersDb->fetchLastId();
 
     foreach($_SESSION["cart"] as $key => $data) {

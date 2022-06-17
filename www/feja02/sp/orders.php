@@ -3,10 +3,12 @@
 include "include/header.php";
 include "database/usersdb.php";
 require "database/ordersdb.php";
+require "database/shippingdetailsdb.php";
 require "functions/adminCheck.php";
 
 $usersDb = new UsersDB();
 $ordersDb = new OrdersDB();
+$shippingDb = new ShippingDetailsDB();
 
 if (isset($_GET["userId"])) $orders = $ordersDb->fetchByUserId($_GET["userId"]);
 else $orders = $ordersDb->fetchAll();
@@ -26,11 +28,11 @@ else $orders = $ordersDb->fetchAll();
         </thead>
         <tbody>
             <?php foreach ($orders as $order): ?>
-            <?php $user = $usersDb->fetchById($order["user_id"])[0]; ?>
+            <?php $shippingDetails = $shippingDb->fetchById($order["shipping_details_id"])[0]; ?>
             <tr class="align-middle">
                 <td><?php echo $order["id"]; ?></td>
                 <td><?php echo $order["created_at"]; ?></td>
-                <td><?php echo $user["email"]; ?></td>
+                <td><?php echo $shippingDetails["email"]; ?></td>
                 <td><?php echo $order["total"] ?></td>
                 <td><a class="btn" href="./order?id=<?php echo $order["id"]; ?>"><img src="./resources/details30.png" alt="orders" width="24"></a></td>
             </tr>

@@ -7,8 +7,8 @@ require "../database/usersdb.php";
 if (empty($_SESSION["login_id"])) header("Location: ../");
 if (empty($_POST)) header("Location: ../account");
 
-$email = $_POST["email"];
-$emailConfirm = $_POST["emailConfirm"];
+$email = filter_var($_POST["email"], FILTER_SANITIZE_STRING);
+$emailConfirm = filter_var($_POST["emailConfirm"], FILTER_SANITIZE_STRING);
 $emailStatus = 0;
 $password = $_POST["password"];
 $passwordConfirm = $_POST["passwordConfirm"];

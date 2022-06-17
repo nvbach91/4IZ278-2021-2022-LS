@@ -5,10 +5,10 @@ require "database/productsdb.php";
 $productsDb = new ProductsDB();
 
 if (!empty($_GET["id"])) $productId = $_GET["id"];
-else header('Location: /');
+else header('Location: ./');
 
 $product = $productsDb->fetchById($productId)[0];
-if (!is_array($product)) header('Location: /'); //Invalid ID check
+if (!is_array($product)) header('Location: ./'); //Invalid ID check
 ?>
 
 <div class="d-flex w-50 mx-auto text-black flex-column flex-wrap mt-4 mb-5">

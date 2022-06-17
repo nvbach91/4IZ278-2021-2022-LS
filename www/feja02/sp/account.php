@@ -1,6 +1,11 @@
 <?php
 include "include/header.php";
 require "functions/userCheck.php";
+
+if($_SESSION["login_oauth"] == 1) {
+    header("Location: ./");
+    exit();
+}
 ?>
 
 <h1 class="text-center text-black mt-5">Account Settings</h1>

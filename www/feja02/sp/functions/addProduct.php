@@ -17,14 +17,14 @@ $productsDb = new ProductsDB();
 
 $errorList = [];
 $editDetails = [
-    "name" => $_POST["name"],
-    "descriptionShort" => $_POST["descriptionShort"],
-    "descriptionLong" => $_POST["descriptionLong"],
-    "brandId" => $_POST["brandId"],
-    "nicotine" => $_POST["nicotine"],
-    "pouches" => $_POST["pouches"],
-    "price" => $_POST["price"],
-    "image" => $_POST["image"]
+    "name" => filter_var($_POST["name"], FILTER_SANITIZE_STRING),
+    "descriptionShort" => filter_var($_POST["descriptionShort"], FILTER_SANITIZE_STRING),
+    "descriptionLong" => filter_var($_POST["descriptionLong"], FILTER_SANITIZE_STRING),
+    "brandId" => filter_var($_POST["brandId"], FILTER_SANITIZE_STRING),
+    "nicotine" => filter_var($_POST["nicotine"], FILTER_SANITIZE_STRING),
+    "pouches" => filter_var($_POST["pouches"], FILTER_SANITIZE_STRING),
+    "price" => filter_var($_POST["price"], FILTER_SANITIZE_STRING),
+    "image" => filter_var($_POST["image"], FILTER_SANITIZE_STRING)
 ];
 
 $validBrand = false;

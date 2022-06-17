@@ -1,8 +1,8 @@
 <?php
 include "include/header.php";
 
-if (empty($_SESSION["login_id"])) header("Location: /");
-if ($_SESSION["login_role"] != 1) header("Location: /"); 
+if (empty($_SESSION["login_id"])) header("Location: ./");
+if ($_SESSION["login_role"] != 1) header("Location: ./"); 
 ?>
 
 <h1 class="text-center text-black mt-5">Admin Panel</h1>
