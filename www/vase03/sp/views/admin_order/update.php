@@ -41,7 +41,7 @@
                         <p>Comment</p>
                         <input type="text" name="userComment" placeholder="" value="<?php echo htmlspecialchars($order['user_comment']); ?>">
 
-                        <p>Date/p>
+                        <p>Date</p>
                         <input type="text" name="date" placeholder="" value="<?php echo $order['date']; ?>">
 
                         <p>Status</p>

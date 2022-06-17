@@ -22,7 +22,7 @@
                 <tr>
                     <th>Order ID</th>
                     <th>Customer name</th>
-                    <th>Phone/th>
+                    <th>Phone</th>
                     <th>Date</th>
                     <th>Status</th>
                     <th></th>
