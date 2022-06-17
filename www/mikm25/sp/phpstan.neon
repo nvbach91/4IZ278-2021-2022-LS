@@ -1,0 +1,23 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+parameters:
+    paths:
+        - app
+        - config
+        - database
+        - routes
+    level: 8
+    tmpDir: phpstan
+    ignoreErrors:
+        - '#Cannot call method name\(\) on array\|Illuminate\\Routing\\Route.#'
+
+        # Disable custom builder errors, maybe bug in phpstan?
+        - '#Call to private method [a-zA-Z0-9]+\(\) of parent class Illuminate\\Database\\Eloquent\\Builder#'
+
+        # Disable iterable type checks
+        - '#return type has no value type specified in iterable type array#'
+        - '#type has no value type specified in iterable type array#'
+        - '#has parameter \$[a-zA-Z0-9]+ with no value type specified in iterable type array#'
+
+        # Disable custom attribute cast error on company model
+        - '#Property App\\Models\\Company::\$size \(App\\Models\\Attributes\\CompanySizeAttribute\|null\) does not accept string\|null#'

@@ -1,0 +1,52 @@
+$nav-width: 200px;
+$nav-width-md: 150px;
+
+body {
+  // disable scroll on body
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: $nav-width 1fr;
+  grid-template-rows: 1fr;
+  gap: 0 0;
+  grid-template-areas:"nav app-content";
+
+  height: 100vh;
+  width: 100vw;
+
+  @include media-breakpoint-down(md) {
+    grid-template-columns: $nav-width-md 1fr;
+  }
+
+  // set app container to have min-width to prevent weird layout when resizing to small scale
+  min-width: map-get($grid-breakpoints, 'md');
+}
+
+#app-nav {
+  grid-area: nav;
+  overflow: hidden;
+  max-height: 100vh;
+
+  // allow scroll on menu
+  overflow-y: scroll;
+
+  padding: $spacer * .75 0 $spacer * .75 $spacer * .75;
+
+  ul.nav .nav-link {
+    &.active, &:hover {
+      background-color: $primary;
+      color: $white;
+    }
+  }
+}
+
+#app-content {
+  grid-area: app-content;
+  padding: .75 * $spacer 0 .75 * $spacer 0;
+
+  // allow scroll on body
+  overflow-y: scroll;
+}
