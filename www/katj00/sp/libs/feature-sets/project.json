@@ -1,0 +1,28 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/feature-sets/src",
+  "prefix": "project-management",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/feature-sets"
+      ],
+      "options": {
+        "jestConfig": "libs/feature-sets/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/feature-sets/**/*.ts",
+          "libs/feature-sets/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

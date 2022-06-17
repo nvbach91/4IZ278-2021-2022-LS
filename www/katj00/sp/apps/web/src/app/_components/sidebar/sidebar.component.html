@@ -1,0 +1,15 @@
+<nav [ngClass]="{mobile}">
+  <tui-scrollbar>
+    <div class="sidebar__scrollable">
+      <div class="sidebar__route">
+        <span class="sidebar__route-icon" #activeRouteIcon>&gt;</span>
+      </div>
+      <ul>
+        <li *rxFor="let item of projectTree$" [routerLink]="'/projects/' + item.name" [state]="{projectID: item.id}"
+            [attr.data-name]="item.name"
+            routerLinkActive="sidebar__active">{{item.name}}
+        </li>
+      </ul>
+    </div>
+  </tui-scrollbar>
+</nav>

@@ -1,0 +1,45 @@
+query fetchProject(
+  $today: DateRangeInput!,
+  $week: DateRangeInput!,
+  $month: DateRangeInput!,
+  $year: DateRangeInput!,
+  $yesterday: DateRangeInput!,
+  $lastWeek: DateRangeInput!,
+  $lastMonth: DateRangeInput!,
+  $id: ID!) {
+  projectInfo(id: $id) {
+    ...ProjectInfoFragment
+  }
+  activityLog(id: $id) {
+    ...LogFragment
+  }
+  totalTime(id: $id) {
+    id
+    name
+    time
+  }
+  today: workByDate(id: $id, range: $today, represents: "today") {
+    ...WorkDataFragment
+  }
+  week: workByDate(id: $id, range: $week, represents: "week") {
+    ...WorkDataFragment
+  }
+  month: workByDate(id: $id, range: $month, represents: "month") {
+    ...WorkDataFragment
+  }
+  year: workByDate(id: $id, range: $year, represents: "year") {
+    ...WorkDataFragment
+  }
+  yesterday: workByDate(id: $id, range: $yesterday, represents: "yesterday") {
+    ...WorkDataFragment
+  }
+  lastWeek: workByDate(id: $id, range: $lastWeek, represents: "lastWeek") {
+    ...WorkDataFragment
+  }
+  lastMonth: workByDate(id: $id, range: $lastMonth, represents: "lastMonth") {
+    ...WorkDataFragment
+  }
+  lastWork: lastWork(id: $id) {
+    ...WorkDataFragment
+  }
+}

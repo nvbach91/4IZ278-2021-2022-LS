@@ -1,0 +1,55 @@
+:host {
+  @apply p-4 mr-2;
+}
+
+.large {
+  .date {
+    @apply text-base;
+  }
+  .header {
+    @apply text-2xl
+  }
+
+  .value {
+    @apply text-4xl font-black;
+  }
+}
+
+.medium {
+  .date {
+    @apply text-sm;
+  }
+  .header {
+    @apply text-xl
+  }
+
+  .value {
+    @apply text-2xl font-black;
+  }
+}
+
+.small {
+  .date {
+    @apply text-xs;
+  }
+
+  .header {
+    @apply text-base;
+  }
+
+  .value {
+    @apply text-lg;
+  }
+}
+
+.date {
+  @apply font-cousine font-thin mb-[-0.4rem] whitespace-nowrap;
+}
+
+.header {
+  @apply font-cousine font-black;
+}
+
+.value {
+  @apply font-cousine font-thin whitespace-nowrap;
+}

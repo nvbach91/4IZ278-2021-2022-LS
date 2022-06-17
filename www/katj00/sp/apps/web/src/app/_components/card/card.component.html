@@ -1,0 +1,13 @@
+<section [ngClass]="size">
+  <header>
+    <div class="date">
+      <ng-content select="date"></ng-content>
+    </div>
+    <h3 class="header">
+      <ng-content select="title"></ng-content>
+    </h3>
+  </header>
+  <div class="value">
+    <ng-content select="value"></ng-content>
+  </div>
+</section>

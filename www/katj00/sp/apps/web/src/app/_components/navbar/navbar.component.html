@@ -1,0 +1,15 @@
+<div class="toolbar__container" *rxLet="user$; let user">
+  <div class="toolbar__time">
+    <ng-content select="work-time"></ng-content>
+  </div>
+  <div class="toolbar__buttons">
+    <ng-content select="control-buttons"></ng-content>
+  </div>
+  <div class="toolbar__avatar">
+    <tui-avatar
+      [avatarUrl]="user?.avatar_url ?? ''"
+      size="s"
+      [rounded]="true"
+    ></tui-avatar>
+  </div>
+</div>

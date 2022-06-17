@@ -1,0 +1,19 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/data-access/src",
+  "prefix": "project-management",
+  "targets": {
+    "generate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npx graphql-codegen --config libs/data-access/codegen.yml"
+          }
+        ]
+      }
+    }
+  },
+  "tags": []
+}

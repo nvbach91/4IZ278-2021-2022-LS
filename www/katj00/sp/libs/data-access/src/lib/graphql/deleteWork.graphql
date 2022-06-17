@@ -1,0 +1,5 @@
+mutation DeleteWork($id: ID!) {
+  deleteWork(id: $id) {
+    id
+  }
+}

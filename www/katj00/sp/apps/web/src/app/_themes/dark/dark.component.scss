@@ -1,0 +1,30 @@
+$pm: (
+  900: '#225E61',
+  800: '#2B786B',
+  700: '#358E6D',
+  600: '#40A469',
+  500: '#4BBA61',
+  400: '#61C563',
+  300: '#87CF78',
+  200: '#AAD990',
+  100: '#C8E2A8',
+);
+
+
+:root {
+  @apply font-cousine;
+  //font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --tui-primary-text: map-get($pm, 200);
+  --tui-primary: map-get($pm, 900);;
+  --tui-primary-hover: map-get($pm, 700);;
+  --tui-primary-active: map-get($pm, 700);;
+  --tui-base-01: map-get($pm, 900);
+  --tui-base-02: map-get($pm, 800);
+  --tui-base-03: map-get($pm, 700);
+  --tui-radius-m: 0.25rem;
+  --tui-text-03: #6c757d;
+  --tui-text-02: rgba(0, 0, 0, 0.6);
+
+
+}

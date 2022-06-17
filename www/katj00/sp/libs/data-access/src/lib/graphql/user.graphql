@@ -1,0 +1,11 @@
+query GetUser {
+  me {
+    id
+    node_id
+    email
+    username
+    avatar_url
+    name
+    __typename
+  }
+}

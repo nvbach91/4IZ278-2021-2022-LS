@@ -1,0 +1,54 @@
+.dashboard__container {
+  @apply flex h-full w-full px-4 py-2;
+  .dashboard__main-content {
+    @apply flex flex-1;
+
+  }
+
+  .m-dashboard__side-control {
+    @apply flex flex-col flex-1 max-h-[40px] justify-between;
+    h3 {
+      @apply flex flex-1 font-cousine font-black items-center justify-center;
+      font-size: 0.75rem;
+    }
+
+    .controls {
+      @apply flex flex-1 justify-between items-center
+    }
+  }
+
+  .dashboard__right-panel {
+    @apply grid grid-cols-1 gap-2 max-w-[464px] min-w-[464px];
+    grid-template-rows: auto repeat(2, minmax(0, 1fr));
+  }
+
+  .m-dashboard__right-panel, .m-dashboard__left-panel {
+    @apply w-full grid grid-cols-1 gap-2;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+}
+
+.hidden {
+  transition: 0.3s;
+  width: 0 !important;
+  visibility: hidden;
+  display: none !important;
+}
+
+.dashboard__right-panel ui-separator {
+  @apply text-xl font-cousine font-bold;
+  margin-bottom: 2px;
+}
+
+.page-footer {
+  @apply flex w-full justify-between fixed bottom-0 py-2 px-4 mt-2;
+  .links {
+    @apply text-sm;
+    a {
+      @apply font-cousine text-sm underline cursor-pointer;
+    }
+    ui-separator {
+      @apply text-base mx-1;
+    }
+  }
+}

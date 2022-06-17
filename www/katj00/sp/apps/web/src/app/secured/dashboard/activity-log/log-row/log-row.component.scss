@@ -1,0 +1,10 @@
+:host {
+  @apply flex font-cousine font-black text-lg;
+  .log__type {
+    @apply flex flex-1;
+  }
+
+  .log__timestamp {
+    @apply flex;
+  }
+}

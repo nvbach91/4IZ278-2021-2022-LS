@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "data-access": "libs/data-access",
+    "feature-sets": "libs/feature-sets",
+    "ui": "libs/ui",
+    "web": "apps/web",
+    "web-e2e": "apps/web-e2e"
+  }
+}

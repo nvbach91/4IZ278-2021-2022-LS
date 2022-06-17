@@ -1,0 +1,66 @@
+
+query GetStats(
+  $today: DateRangeInput!,
+  $week: DateRangeInput!,
+  $month: DateRangeInput!,
+  $year: DateRangeInput!,
+  $yesterday: DateRangeInput!,
+  $lastWeek: DateRangeInput!,
+  $lastMonth: DateRangeInput!,
+  $id: ID!) {
+  totalTime(id: $id) {
+    id
+    name
+    time
+  }
+  today: workByDate(id: $id, range: $today, represents: "today") {
+    ...WorkDataFragment
+  }
+  week: workByDate(id: $id, range: $week, represents: "week") {
+    ...WorkDataFragment
+  }
+  month: workByDate(id: $id, range: $month, represents: "month") {
+    ...WorkDataFragment
+  }
+  year: workByDate(id: $id, range: $year, represents: "year") {
+    ...WorkDataFragment
+  }
+  yesterday: workByDate(id: $id, range: $yesterday, represents: "yesterday") {
+    ...WorkDataFragment
+  }
+  lastWeek: workByDate(id: $id, range: $lastWeek, represents: "lastWeek") {
+    ...WorkDataFragment
+  }
+  lastMonth: workByDate(id: $id, range: $lastMonth, represents: "lastMonth") {
+    ...WorkDataFragment
+  }
+  lastWork: lastWork(id: $id) {
+    ...WorkDataFragment
+  }
+}
+
+
+
+mutation StartWork($id: ID!, $comment: String) {
+  startWork(id: $id, comment: $comment) {
+    ...WorkAction
+  }
+}
+
+mutation PauseWork($id: ID!, $comment: String) {
+  pauseWork(id: $id, comment: $comment) {
+    ...WorkAction
+  }
+}
+
+mutation ContinueWork($id: ID!, $comment: String) {
+  continueWork(id: $id, comment: $comment) {
+    ...WorkAction
+  }
+}
+
+mutation EndWork($id: ID!, $comment: String) {
+  endWork(id: $id, comment: $comment) {
+    ...WorkAction
+  }
+}

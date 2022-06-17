@@ -1,0 +1,228 @@
+#-------------------QUERY-------------------
+
+"Indicates what fields are available at the top level of a query operation."
+type Query {
+    "Find a single user by an identifying attribute."
+    me: User @guard
+    projectTree: [Project!] @guard
+    projectInfo(id: ID @rules(apply: ["prohibits:name", "required_without:name"])
+        name: String @rules(apply: ["prohibits:id", "required_without:id"])
+    ): ProjectInfo @guard
+    lastWork(id: ID!): WorkData! @guard
+    activityLog(
+        id: ID @rules(apply: ["prohibits:name"]),
+        name: String @rules(apply: ["prohibits:id"])
+    ): Log! @guard
+    totalTime(id: ID!): TotalTime! @guard
+    workByDate(id: ID!, range: DateRangeInput!, represents: String!): WorkData! @guard
+}
+
+type Log {
+    id: ID!
+    name: String!
+    log: [ActivityLog]!
+}
+
+#-------------------MUTATION-------------------
+
+type Mutation {
+    synchronize: SynchronizeResult! @guard
+    startWork(
+        "Project ID"
+        id: ID!
+        comment: String
+    ): Activity! @guard
+    pauseWork(
+        "Project ID"
+        id: ID!
+        comment: String
+    ): Activity! @guard
+    continueWork(
+        "Project ID"
+        id: ID!
+        comment: String
+    ): Activity! @guard
+    endWork(
+        "Project ID"
+        id: ID!
+        comment: String
+    ): Activity! @guard
+    deleteWork(id: ID): TrackedWork! @guard
+}
+
+
+input DateRangeInput {
+    from: DateTime!
+    to: DateTime!
+}
+
+type DateRange {
+    from: DateTime
+    to: DateTime
+}
+
+type WorkData {
+    id: ID!
+    name: String!
+    represents: String!
+    date: DateRange!
+    time: Int!
+}
+
+type TotalTime {
+    id: ID!
+    name: String!
+    time: Int!
+}
+
+#-------------------ACTIVITY-------------------
+
+type Activity {
+    type: ActivityType!
+    comment: String
+    work: TrackedWork!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+#-------------------USER-------------------
+"Reference of 3rd party account of a person who utilizes this application."
+type User {
+    "Unique primary key."
+    id: ID!
+
+    "Non-unique name."
+    node_id: ID!
+
+    "Unique email address."
+    email: String!
+
+    name: String!
+
+    username: String!
+
+    avatar_url: String!
+
+    projects: [Project!]! @hasMany(relation: "projects" type: CONNECTION)
+
+    "When the account reference was created."
+    created_at: DateTime!
+
+    "When the account reference was updated."
+    updated_at: DateTime!
+}
+
+
+#----------------TRACKED_WORK----------------
+
+type TrackedWork {
+    id: ID!
+    project: Project!
+    start: Activity!
+    end: Activity!
+    user: User!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+
+#-------------SYNCHRONIZE_RESULT-------------
+
+type SynchronizeResult {
+    timestamp: DateTime!
+}
+
+#-------------------PROJECT-------------------
+
+"Account of a person who utilizes this application."
+type Project {
+    "Unique primary key."
+    id: ID!
+
+    "Non-unique name."
+    node_id: String!
+
+    name: String!
+
+    user_id: String!
+
+    visible: Boolean!
+
+    pushed_at: DateTime!
+
+    "When the account reference was created."
+    created_at: DateTime!
+
+    "When the account reference was updated."
+    updated_at: DateTime!
+}
+
+#----------------PROJECT_INFO---------------
+
+type ProjectInfo {
+    id: ID!
+    name: String!
+    collaborators: Int!
+    languages: [Language]!
+    issues: Count!
+    pullRequests: Count!
+    owner: Owner!
+    isPrivate: String!
+    lastCommit: Commit!
+    status: TrackingStatus!
+}
+
+type Count {
+    totalCount: Int!
+    assignedCount: Int!
+}
+
+type Language {
+    size: Int!
+    name: String!
+}
+
+#-------------------OWNER-------------------
+
+type Owner {
+    login: String!
+    url: String!
+}
+
+#-------------------COMMIT-------------------
+
+type Commit {
+    messageHeadline: String!
+    committedDate: DateTime
+    url: String
+}
+
+#--------------TRACKING_STATUS---------------
+
+type TrackingStatus {
+    inProgress: Boolean!
+    lastAction: ActivityType
+    timeSpent: Int!
+}
+
+#----------------ACTIVITY_LOG---------------
+
+type ActivityLog {
+    id: ID!
+    date: DateTime!
+    activities: [Activity!]
+}
+
+#--------------- ACTIVITY_TYPE--------------
+"Types of activity"
+enum ActivityType {
+    START
+    END
+    PAUSE
+    CONTINUE
+}
+
+#-------------------SCALARS-------------------
+
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")

@@ -1,0 +1,46 @@
+nav {
+  &.mobile {
+    .sidebar__route-icon {
+      @apply text-lg leading-6;
+    }
+
+    li {
+      @apply font-cousine text-base mb-2 ml-4 cursor-pointer;
+    }
+  }
+
+  &:not(.mobile) {
+    .sidebar__route-icon {
+      @apply text-xl leading-8;
+    }
+
+    li {
+      @apply text-lg;
+    }
+  }
+
+  @apply flex justify-end h-full;
+  tui-scrollbar {
+    flex: 0 0 100%;
+  }
+  .sidebar__scrollable {
+    @apply flex flex-1 w-[auto] px-2 h-full;
+    .sidebar__route {
+      @apply h-auto;
+      .sidebar__route-icon {
+        @apply font-cousine font-black relative;
+        transition: 0.3s;
+      }
+    }
+
+    ul {
+      @apply list-none;
+      li {
+        @apply font-cousine mb-2 ml-4 cursor-pointer;
+        &.sidebar__active {
+          @apply font-black;
+        }
+      }
+    }
+  }
+}

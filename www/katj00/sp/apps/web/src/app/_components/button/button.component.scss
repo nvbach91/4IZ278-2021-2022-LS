@@ -1,0 +1,9 @@
+:host {
+  @apply font-cousine text-base font-black px-1 mx-1 border-b-2 border-transparent border-solid;
+  &:hover {
+    @apply border-pm-900 dark:border-pm-200;
+  }
+  span {
+    @apply uppercase font-cousine text-xl text-pm-900 dark:text-pm-200 font-black;
+  }
+}

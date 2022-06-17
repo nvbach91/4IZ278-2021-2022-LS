@@ -1,0 +1,10 @@
+<header class="auth__header">
+  <h1 class="auth__title">Project Management</h1>
+</header>
+<div class="auth__content">
+  <button tuiButton class="auth__signin" [showLoader]="loginInProgress$ | push" (click)="loginCode()"
+          appearance="custom">
+    <fa-icon [icon]="githubIcon"></fa-icon>
+    Sign in
+  </button>
+</div>

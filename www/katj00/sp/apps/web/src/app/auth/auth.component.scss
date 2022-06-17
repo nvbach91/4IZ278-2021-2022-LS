@@ -1,0 +1,49 @@
+:host {
+  @apply mx-auto xl:p-12;
+}
+
+.auth__header {
+  .auth__title {
+    @apply text-5xl font-cousine font-bold tracking-normal text-center;
+  }
+}
+
+.auth__content {
+  @apply h-full flex flex-1 justify-center items-center;
+  .auth__signin {
+    @apply font-cousine border-4 border-solid border-pm-900 dark:border-pm-200 text-pm-900 dark:text-pm-200 rounded-[12px] py-[0.75rem] px-[1.75rem] transition-colors;
+    @media(prefers-color-scheme: dark) {
+      box-shadow: 0 3px 0 0 rgb(170 217 144);
+    }
+    box-shadow: 0 3px 0 0 rgb(34 95 98);
+    height: auto !important;
+    font-size: 32px !important;
+
+    &:hover {
+      //TODO: Solve hover of login button
+      //@apply bg-pm-900/20;
+      // Colors
+      //$dot-color: rgb(34 95 98/20);
+      //$bg-color: rgb(170 217 144);
+      //
+      // Dimensions
+      //$dot-size: 10px;
+      //$dot-space: 15px;
+      //
+      //background: linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
+      //linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
+      //$dot-color;
+      //background-size: $dot-space $dot-space;
+      //color: $bg-color;
+    }
+
+    &:active {
+      top: 3px;
+      box-shadow: none;
+    }
+
+    fa-icon {
+      @apply m-2;
+    }
+  }
+}

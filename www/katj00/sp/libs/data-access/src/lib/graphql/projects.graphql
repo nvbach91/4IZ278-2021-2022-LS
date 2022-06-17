@@ -1,0 +1,20 @@
+query GetProjectTree {
+  projectTree {
+    id
+    node_id
+    name
+    pushed_at
+    __typename
+  }
+}
+
+query GetProjectInfo($id: ID, $name: String) {
+  projectInfo(id: $id, name: $name) {
+    ...ProjectInfoFragment
+    status {
+      inProgress
+      lastAction
+      timeSpent
+    }
+  }
+}

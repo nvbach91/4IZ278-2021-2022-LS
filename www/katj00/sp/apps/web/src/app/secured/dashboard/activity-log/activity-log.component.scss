@@ -1,0 +1,42 @@
+.log__wrapper {
+  @apply flex flex-col h-full;
+}
+
+.log__header {
+  @apply flex;
+  h3 {
+    @apply text-base font-cousine font-black select-none;
+    .log__heading-button {
+      @apply underline cursor-pointer;
+    }
+  }
+}
+
+.work__section {
+  &:hover {
+    .delete-button {
+      @apply opacity-100;
+    }
+  }
+}
+
+.log__container {
+  @apply flex flex-col p-4 w-full h-full;
+  h2 {
+    @apply flex font-cousine font-black text-xl;
+  }
+}
+
+.log__hidden {
+  @apply w-0 hidden;
+}
+
+.log__work-header {
+  @apply flex justify-between;
+  .delete-button {
+    @apply opacity-0 cursor-pointer uppercase transition-all;
+  }
+}
+tui-scrollbar {
+  @apply mb-[30px];
+}
