@@ -56,7 +56,7 @@
                 <div class="card bg-light border-0">
                     <div class="card-body">
                         <div class="d-flex align-items-center flex-column flex-lg-row">
-                            <a href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Enums\PositionTabEnum::detail()->getValue()]) }}" class="btn btn-primary order-1 order-lg-0">
+                            <a href="{{ route('app.positions.show', ['position' => $position->id, 'tab' => \App\Enums\PositionTabEnum::detail()->getValue()]) }}" target="_blank" class="btn btn-primary order-1 order-lg-0">
                                 {{ __('landing-page.position.app_link_button') }}
                             </a>
                             <div class="alert alert-info m-0 flex-grow-1 ms-0 ms-lg-3 mb-2 mb-lg-0 order-0 order-lg-1">

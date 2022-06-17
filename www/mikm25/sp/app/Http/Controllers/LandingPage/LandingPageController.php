@@ -30,6 +30,7 @@ class LandingPageController extends Controller
             ])
             ->valid()
             ->userHasVerifiedEmail()
+            ->orderBy('created_at', 'desc')
             ->paginate(20);
 
         return view('landing-page.index', [
