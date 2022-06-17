@@ -19,6 +19,7 @@ export type Scalars = {
 
 export type Activity = {
   __typename?: 'Activity';
+  comment?: Maybe<Scalars['String']>;
   created_at: Scalars['DateTime'];
   type: ActivityType;
   updated_at: Scalars['DateTime'];
@@ -89,6 +90,7 @@ export type Mutation = {
 
 
 export type MutationContinueWorkArgs = {
+  comment?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
 };
 
@@ -99,16 +101,19 @@ export type MutationDeleteWorkArgs = {
 
 
 export type MutationEndWorkArgs = {
+  comment?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
 };
 
 
 export type MutationPauseWorkArgs = {
+  comment?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
 };
 
 
 export type MutationStartWorkArgs = {
+  comment?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
 };
 
@@ -261,13 +266,13 @@ export type DeleteWorkMutationVariables = Exact<{
 
 export type DeleteWorkMutation = { __typename?: 'Mutation', deleteWork: { __typename?: 'TrackedWork', id: string } };
 
-export type LogFragmentFragment = { __typename?: 'Log', id: string, name: string, log: Array<{ __typename?: 'ActivityLog', id: string, date: any, activities?: Array<{ __typename?: 'Activity', type: ActivityType, created_at: any }> | null } | null> };
+export type LogFragmentFragment = { __typename?: 'Log', id: string, name: string, log: Array<{ __typename?: 'ActivityLog', id: string, date: any, activities?: Array<{ __typename?: 'Activity', type: ActivityType, comment?: string | null, created_at: any }> | null } | null> };
 
 export type ProjectInfoFragmentFragment = { __typename?: 'ProjectInfo', id: string, name: string, collaborators: number, isPrivate: string, languages: Array<{ __typename?: 'Language', size: number, name: string } | null>, issues: { __typename?: 'Count', totalCount: number, assignedCount: number }, pullRequests: { __typename?: 'Count', totalCount: number, assignedCount: number }, owner: { __typename?: 'Owner', login: string, url: string }, lastCommit: { __typename?: 'Commit', messageHeadline: string, committedDate?: any | null, url?: string | null } };
 
 export type WorkDataFragmentFragment = { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } };
 
-export type WorkActionFragment = { __typename?: 'Activity', type: ActivityType, created_at: any, work: { __typename?: 'TrackedWork', id: string, created_at: any, project: { __typename?: 'Project', id: string, name: string } } };
+export type WorkActionFragment = { __typename?: 'Activity', type: ActivityType, comment?: string | null, created_at: any, work: { __typename?: 'TrackedWork', id: string, created_at: any, project: { __typename?: 'Project', id: string, name: string } } };
 
 export type FetchProjectQueryVariables = Exact<{
   today: DateRangeInput;
@@ -281,14 +286,14 @@ export type FetchProjectQueryVariables = Exact<{
 }>;
 
 
-export type FetchProjectQuery = { __typename?: 'Query', projectInfo?: { __typename?: 'ProjectInfo', id: string, name: string, collaborators: number, isPrivate: string, languages: Array<{ __typename?: 'Language', size: number, name: string } | null>, issues: { __typename?: 'Count', totalCount: number, assignedCount: number }, pullRequests: { __typename?: 'Count', totalCount: number, assignedCount: number }, owner: { __typename?: 'Owner', login: string, url: string }, lastCommit: { __typename?: 'Commit', messageHeadline: string, committedDate?: any | null, url?: string | null } } | null, activityLog: { __typename?: 'Log', id: string, name: string, log: Array<{ __typename?: 'ActivityLog', id: string, date: any, activities?: Array<{ __typename?: 'Activity', type: ActivityType, created_at: any }> | null } | null> }, totalTime: { __typename?: 'TotalTime', id: string, name: string, time: number }, today: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, week: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, month: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, year: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, yesterday: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, lastWeek: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, lastMonth: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, lastWork: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } } };
+export type FetchProjectQuery = { __typename?: 'Query', projectInfo?: { __typename?: 'ProjectInfo', id: string, name: string, collaborators: number, isPrivate: string, languages: Array<{ __typename?: 'Language', size: number, name: string } | null>, issues: { __typename?: 'Count', totalCount: number, assignedCount: number }, pullRequests: { __typename?: 'Count', totalCount: number, assignedCount: number }, owner: { __typename?: 'Owner', login: string, url: string }, lastCommit: { __typename?: 'Commit', messageHeadline: string, committedDate?: any | null, url?: string | null } } | null, activityLog: { __typename?: 'Log', id: string, name: string, log: Array<{ __typename?: 'ActivityLog', id: string, date: any, activities?: Array<{ __typename?: 'Activity', type: ActivityType, comment?: string | null, created_at: any }> | null } | null> }, totalTime: { __typename?: 'TotalTime', id: string, name: string, time: number }, today: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, week: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, month: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, year: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, yesterday: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, lastWeek: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, lastMonth: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } }, lastWork: { __typename: 'WorkData', id: string, name: string, represents: string, time: number, date: { __typename?: 'DateRange', from?: any | null, to?: any | null } } };
 
 export type GetActivityLogQueryVariables = Exact<{
   name: Scalars['String'];
 }>;
 
 
-export type GetActivityLogQuery = { __typename?: 'Query', activityLog: { __typename?: 'Log', id: string, name: string, log: Array<{ __typename?: 'ActivityLog', id: string, date: any, activities?: Array<{ __typename?: 'Activity', type: ActivityType, created_at: any }> | null } | null> } };
+export type GetActivityLogQuery = { __typename?: 'Query', activityLog: { __typename?: 'Log', id: string, name: string, log: Array<{ __typename?: 'ActivityLog', id: string, date: any, activities?: Array<{ __typename?: 'Activity', type: ActivityType, comment?: string | null, created_at: any }> | null } | null> } };
 
 export type GetProjectTreeQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -329,31 +334,35 @@ export type GetStatsQuery = { __typename?: 'Query', totalTime: { __typename?: 'T
 
 export type StartWorkMutationVariables = Exact<{
   id: Scalars['ID'];
+  comment?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type StartWorkMutation = { __typename?: 'Mutation', startWork: { __typename?: 'Activity', type: ActivityType, created_at: any, work: { __typename?: 'TrackedWork', id: string, created_at: any, project: { __typename?: 'Project', id: string, name: string } } } };
+export type StartWorkMutation = { __typename?: 'Mutation', startWork: { __typename?: 'Activity', type: ActivityType, comment?: string | null, created_at: any, work: { __typename?: 'TrackedWork', id: string, created_at: any, project: { __typename?: 'Project', id: string, name: string } } } };
 
 export type PauseWorkMutationVariables = Exact<{
   id: Scalars['ID'];
+  comment?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type PauseWorkMutation = { __typename?: 'Mutation', pauseWork: { __typename?: 'Activity', type: ActivityType, created_at: any, work: { __typename?: 'TrackedWork', id: string, created_at: any, project: { __typename?: 'Project', id: string, name: string } } } };
+export type PauseWorkMutation = { __typename?: 'Mutation', pauseWork: { __typename?: 'Activity', type: ActivityType, comment?: string | null, created_at: any, work: { __typename?: 'TrackedWork', id: string, created_at: any, project: { __typename?: 'Project', id: string, name: string } } } };
 
 export type ContinueWorkMutationVariables = Exact<{
   id: Scalars['ID'];
+  comment?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type ContinueWorkMutation = { __typename?: 'Mutation', continueWork: { __typename?: 'Activity', type: ActivityType, created_at: any, work: { __typename?: 'TrackedWork', id: string, created_at: any, project: { __typename?: 'Project', id: string, name: string } } } };
+export type ContinueWorkMutation = { __typename?: 'Mutation', continueWork: { __typename?: 'Activity', type: ActivityType, comment?: string | null, created_at: any, work: { __typename?: 'TrackedWork', id: string, created_at: any, project: { __typename?: 'Project', id: string, name: string } } } };
 
 export type EndWorkMutationVariables = Exact<{
   id: Scalars['ID'];
+  comment?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type EndWorkMutation = { __typename?: 'Mutation', endWork: { __typename?: 'Activity', type: ActivityType, created_at: any, work: { __typename?: 'TrackedWork', id: string, created_at: any, project: { __typename?: 'Project', id: string, name: string } } } };
+export type EndWorkMutation = { __typename?: 'Mutation', endWork: { __typename?: 'Activity', type: ActivityType, comment?: string | null, created_at: any, work: { __typename?: 'TrackedWork', id: string, created_at: any, project: { __typename?: 'Project', id: string, name: string } } } };
 
 export const LogFragmentFragmentDoc = gql`
     fragment LogFragment on Log {
@@ -364,6 +373,7 @@ export const LogFragmentFragmentDoc = gql`
     date
     activities {
       type
+      comment
       created_at
     }
   }
@@ -414,6 +424,7 @@ export const WorkDataFragmentFragmentDoc = gql`
 export const WorkActionFragmentDoc = gql`
     fragment WorkAction on Activity {
   type
+  comment
   work {
     id
     created_at
@@ -646,8 +657,8 @@ export const GetStatsDocument = gql`
     }
   }
 export const StartWorkDocument = gql`
-    mutation StartWork($id: ID!) {
-  startWork(id: $id) {
+    mutation StartWork($id: ID!, $comment: String) {
+  startWork(id: $id, comment: $comment) {
     ...WorkAction
   }
 }
@@ -664,8 +675,8 @@ export const StartWorkDocument = gql`
     }
   }
 export const PauseWorkDocument = gql`
-    mutation PauseWork($id: ID!) {
-  pauseWork(id: $id) {
+    mutation PauseWork($id: ID!, $comment: String) {
+  pauseWork(id: $id, comment: $comment) {
     ...WorkAction
   }
 }
@@ -682,8 +693,8 @@ export const PauseWorkDocument = gql`
     }
   }
 export const ContinueWorkDocument = gql`
-    mutation ContinueWork($id: ID!) {
-  continueWork(id: $id) {
+    mutation ContinueWork($id: ID!, $comment: String) {
+  continueWork(id: $id, comment: $comment) {
     ...WorkAction
   }
 }
@@ -700,8 +711,8 @@ export const ContinueWorkDocument = gql`
     }
   }
 export const EndWorkDocument = gql`
-    mutation EndWork($id: ID!) {
-  endWork(id: $id) {
+    mutation EndWork($id: ID!, $comment: String) {
+  endWork(id: $id, comment: $comment) {
     ...WorkAction
   }
 }

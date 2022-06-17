@@ -6,6 +6,7 @@ fragment LogFragment on Log {
     date
     activities {
       type
+      comment
       created_at
     }
   }
@@ -52,6 +53,7 @@ fragment WorkDataFragment on WorkData {
 
 fragment WorkAction on Activity {
   type
+  comment
   work {
     id
     created_at

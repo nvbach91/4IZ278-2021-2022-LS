@@ -32,10 +32,13 @@ final class ContinueWork
             return Error::createLocatedError('You have to pause the work first!');
         }
         $continueActivity = new Activity(["type" => "CONTINUE", "work_id" => $currentWork["id"], "user_id" => $context->user()->getAuthIdentifier()]);
+        if (array_key_exists("comment", $args)) {
+            $continueActivity["comment"] = $args["comment"];
+        }
         $continueActivity->trackedWork()->associate($currentWork);
         $continueActivity->user()->associate($context->user());
         $continueActivity->save();
-        return ["type" => $continueActivity['type'], "work" => $currentWork, "created_at" => $continueActivity['created_at'], "updated_at" => $continueActivity['updated_at']];
+        return ["type" => $continueActivity['type'], "comment" => $continueActivity["comment"], "work" => $currentWork, "created_at" => $continueActivity['created_at'], "updated_at" => $continueActivity['updated_at']];
 ;
     }
 }

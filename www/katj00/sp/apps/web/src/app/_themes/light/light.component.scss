@@ -11,14 +11,14 @@ $pm: (
 );
 
 
-.theme-wrapper {
+:root {
   @apply font-cousine;
   //font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
   --tui-primary-text: map-get($pm, 900);
-  --tui-primary: map-get($pm, 900);;
-  --tui-primary-hover: map-get($pm, 700);;
-  --tui-primary-active: map-get($pm, 700);;
+  --tui-primary: map-get($pm, 300);
+  --tui-primary-hover: map-get($pm, 700);
+  --tui-primary-active: map-get($pm, 700);
   --tui-base-01: map-get($pm, 200);
   --tui-base-02: map-get($pm, 300);
   --tui-base-03: map-get($pm, 400);
@@ -27,17 +27,5 @@ $pm: (
   --tui-text-02: rgba(0, 0, 0, 0.6);
 
 
-  tui-button {
-    //.transition(box-shadow);
-    text-transform: uppercase;
-    font-weight: bold;
-    box-shadow: 0 0.1875rem 0.0625rem -0.125rem rgba(0, 0, 0, 0.2), 0 0.125rem 0.125rem rgba(0, 0, 0, 0.14),
-    0 0.0625rem 0.3125rem rgba(0, 0, 0, 0.12);
-
-    &._pressed {
-      box-shadow: 0 0.3125rem 0.3125rem -0.1875rem rgba(0, 0, 0, 0.2),
-      0 0.5rem 0.625rem 0.0625rem rgba(0, 0, 0, 0.14), 0 0.1875rem 0.875rem 0.125rem rgba(0, 0, 0, 0.12);
-    }
-  }
 }
 

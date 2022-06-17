@@ -10,11 +10,16 @@
           <div class="work__section">
             <div class="log__work-header">
               <div>{{work?.date | date: "dd/MM/yyyy"}}</div>
-              <div class="delete-button" *ngIf="activitiesCount(work?.activities); else deleted" (click)="deleteWork(work?.id)">delete</div>
+              <div class="delete-button" *ngIf="activitiesCount(work?.activities); else deleted"
+                   (click)="deleteWork(work?.id)">delete
+              </div>
               <ng-template #deleted>DELETED</ng-template>
             </div>
             <pm-log-row *rxFor="let row of work?.activities">
-              <ng-container ngProjectAs="log-type">{{row.type}}</ng-container>
+              <ng-container ngProjectAs="log-type">
+                <span [tuiHint]="row.comment ? row.comment : 'No comment left'"
+                      [tuiHintDirection]="'right'">{{row.type}}</span>
+              </ng-container>
               <ng-container ngProjectAs="log-timestamp">
                 - {{row.created_at  | date: "dd/MM/yyyy HH:mm:ss":"+4"}}</ng-container>
             </pm-log-row>

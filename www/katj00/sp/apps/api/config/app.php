@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Facade;
 
 return [
+    'GITHUB_OAUTH' => env('GITHUB_OAUTH', 'https://github.com/login/oauth'),
+    'GITHUB_API' => env('GITHUB_API', '1d8d4fcf6b7ee4524b7d'),
+    'GITHUB_CLIENT_ID' => env('GITHUB_CLIENT_ID', '7d1550d533afd9620f0fbe40895879b48018fc96'),
+    'GITHUB_CLIENT_SECRET' => env('GITHUB_CLIENT_SECRET', 'https://api.github.com/graphql'),
 
     /*
     |--------------------------------------------------------------------------

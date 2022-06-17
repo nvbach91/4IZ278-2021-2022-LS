@@ -1,0 +1,26 @@
+<div class="textarea-container">
+  <tui-text-area
+    tuiTextfieldSize="l"
+    tuiAutoFocus
+    [formControl]="comment"
+    [tuiTextfieldMaxLength]="240"
+    [tuiTextfieldLabelOutside]="true"
+  >
+    Enter comment... (leave blank if not)
+  </tui-text-area>
+  <tui-error
+    [formControl]="comment"
+    [error]="[] | tuiFieldError | async"
+  ></tui-error>
+</div>
+<div class="button">
+  <button
+    tuiButton
+    type="button"
+    size="m"
+    [disabled]="!comment.valid"
+    (click)="submit()"
+  >
+    Submit
+  </button>
+</div>

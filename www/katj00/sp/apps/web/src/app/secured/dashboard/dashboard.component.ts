@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnDestroy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, Injector, OnDestroy} from '@angular/core';
 import {
   GetUserGQL,
   GetUserQuery,
@@ -26,6 +26,9 @@ import {ActivatedRoute, ChildActivationEnd, EventType, Router} from "@angular/ro
 import {CacheService} from "../../_services";
 import {RxEffects} from "@rx-angular/state/effects";
 import {ApolloCache} from "@apollo/client";
+import {TuiDialogService} from "@taiga-ui/core";
+import {CommentDialogComponent} from "./comment-dialog/comment-dialog.component";
+import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
 
 interface DashboardState {
   user: GetUserQuery['me'];
@@ -76,21 +79,31 @@ export class DashboardComponent implements OnDestroy {
   private _logVisible = false;
   private _sidebarVisible = false;
   private intervalEffect$ = interval(1000).pipe(switchMap(() => this.inProgress$), takeWhile((value) => !!value));
+  private readonly dialog = this._dialogService.open<string | null>(
+    new PolymorpheusComponent(CommentDialogComponent),
+    {
+      dismissible: true,
+      label: 'Do you want to add some comment to this action?',
+    },
+  );
 
-  constructor(private _state: RxState<DashboardState>,
-              private _effects: RxEffects,
-              private _responsive: BreakpointObserver,
-              private _route: ActivatedRoute,
-              private _router: Router,
-              private _cacheService: CacheService,
-              private _getUserGQL: GetUserGQL,
-              private _projectTreeGQL: GetProjectTreeGQL,
-              private _startWorkGQL: StartWorkGQL,
-              private _pauseWorkGQL: PauseWorkGQL,
-              private _continueWorkGQL: ContinueWorkGQL,
-              private _endWorkGQL: EndWorkGQL,
-              private _getProjectGQL: GetProjectInfoGQL,
-              private _synchronizeGQL: SynchronizeGQL
+  constructor(
+    @Inject(Injector) private readonly injector: Injector,
+    private _state: RxState<DashboardState>,
+    private _effects: RxEffects,
+    private _responsive: BreakpointObserver,
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _cacheService: CacheService,
+    private _getUserGQL: GetUserGQL,
+    private _projectTreeGQL: GetProjectTreeGQL,
+    private _startWorkGQL: StartWorkGQL,
+    private _pauseWorkGQL: PauseWorkGQL,
+    private _continueWorkGQL: ContinueWorkGQL,
+    private _endWorkGQL: EndWorkGQL,
+    private _getProjectGQL: GetProjectInfoGQL,
+    private _synchronizeGQL: SynchronizeGQL,
+    private _dialogService: TuiDialogService
   ) {
 
     const userResponse$ = this._getUserGQL.watch().valueChanges.pipe(pluck('data', 'me'));
@@ -118,30 +131,50 @@ export class DashboardComponent implements OnDestroy {
 
   startWork(id: string | undefined) {
     if (!id) return;
-    return this._startWorkGQL.mutate({id}, {
-      update: (proxy, {data}) => this.update(proxy, data?.startWork, id),
-    }).subscribe();
+    this.dialog.subscribe({
+        next: comment => {
+          this._startWorkGQL.mutate({id, comment}, {
+            update: (proxy, {data}) => this.update(proxy, data?.startWork, id),
+          }).subscribe();
+        }
+      }
+    );
   }
 
   pauseWork(id: string | undefined) {
     if (!id) return;
-    return this._pauseWorkGQL.mutate({id}, {
-      update: (proxy, {data}) => this.update(proxy, data?.pauseWork, id),
-    }).subscribe();
+    this.dialog.subscribe({
+        next: comment => {
+          this._pauseWorkGQL.mutate({id, comment}, {
+            update: (proxy, {data}) => this.update(proxy, data?.pauseWork, id),
+          }).subscribe();
+        }
+      }
+    );
   }
 
   continueWork(id: string | undefined) {
     if (!id) return;
-    return this._continueWorkGQL.mutate({id}, {
-      update: (proxy, {data}) => this.update(proxy, data?.continueWork, id),
-    }).subscribe();
+    this.dialog.subscribe({
+        next: comment => {
+          this._continueWorkGQL.mutate({id, comment}, {
+            update: (proxy, {data}) => this.update(proxy, data?.continueWork, id),
+          }).subscribe();
+        }
+      }
+    );
   }
 
   endWork(id: string | undefined) {
     if (!id) return;
-    return this._endWorkGQL.mutate({id}, {
-      update: (proxy, {data}) => this.update(proxy, data?.endWork, id),
-    }).subscribe();
+    this.dialog.subscribe({
+        next: comment => {
+          this._endWorkGQL.mutate({id, comment}, {
+            update: (proxy, {data}) => this.update(proxy, data?.endWork, id),
+          }).subscribe();
+        }
+      }
+    );
   }
 
   update(proxy: ApolloCache<any>,
@@ -155,7 +188,7 @@ export class DashboardComponent implements OnDestroy {
           id: proxy.identify({__typename: 'Log', id: work.project.id}),
           fields: {
             log(cachedStatus: Log[]) {
-              return [{id: work.id, date: new Date(), activities: {used}}, ...cachedStatus];
+              return [{id: work.id, date: new Date(), activities: [{used}]}, ...cachedStatus];
             }
           }
         });
@@ -164,7 +197,6 @@ export class DashboardComponent implements OnDestroy {
           id: proxy.identify({__typename: "ActivityLog", id: data.work.id}),
           fields: {
             activities(cachedStatus: Activity[]) {
-              console.log({data, cachedStatus})
               return [used, ...cachedStatus];
             }
           }

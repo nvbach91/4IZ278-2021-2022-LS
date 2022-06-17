@@ -37,7 +37,7 @@ class TrackedWorkHelper
                 return $query->select(['id', 'name']);
             }])
             ->with(['activities' => function ($query) {
-                return $query->select(['id', 'work_id', 'type', 'created_at'])->orderBy('created_at', 'DESC');
+                return $query->select(['id', 'work_id', 'type', 'created_at', 'comment'])->orderBy('created_at', 'DESC');
             }])->get();
     }
 

@@ -33,9 +33,12 @@ final class PauseWork
             return Error::createLocatedError('This work is already paused!');
         }
         $pauseActivity = new Activity(["type" => "PAUSE", "work_id" => $currentWork["id"], "user_id" => $context->user()->getAuthIdentifier()]);
+        if (array_key_exists("comment", $args)) {
+            $pauseActivity["comment"] = $args["comment"];
+        }
         $pauseActivity->trackedWork()->associate($currentWork);
         $pauseActivity->user()->associate($context->user());
         $pauseActivity->save();
-        return ["type" => $pauseActivity['type'], "work" => $currentWork, "created_at" => $pauseActivity['created_at'], "updated_at" => $pauseActivity['updated_at']];
+        return ["type" => $pauseActivity['type'], "comment" => $pauseActivity["comment"], "work" => $currentWork, "created_at" => $pauseActivity['created_at'], "updated_at" => $pauseActivity['updated_at']];
     }
 }

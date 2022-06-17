@@ -30,18 +30,22 @@ type Mutation {
     startWork(
         "Project ID"
         id: ID!
+        comment: String
     ): Activity! @guard
     pauseWork(
         "Project ID"
         id: ID!
+        comment: String
     ): Activity! @guard
     continueWork(
         "Project ID"
         id: ID!
+        comment: String
     ): Activity! @guard
     endWork(
         "Project ID"
         id: ID!
+        comment: String
     ): Activity! @guard
     deleteWork(id: ID): TrackedWork! @guard
 }
@@ -75,6 +79,7 @@ type TotalTime {
 
 type Activity {
     type: ActivityType!
+    comment: String
     work: TrackedWork!
     created_at: DateTime!
     updated_at: DateTime!

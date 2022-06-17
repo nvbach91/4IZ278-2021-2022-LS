@@ -33,11 +33,14 @@ final class StartWork
         $trackedWork->project()->associate($project);
         $trackedWork->save();
         $action = new Activity(["type" => "START", "work_id" => $trackedWork["id"], "user_id" => $context->user()->getAuthIdentifier()]);
+        if (array_key_exists("comment", $args)) {
+            $action["comment"] = $args["comment"];
+        }
         $action->user()->associate($context->user());
         $action->trackedWork()->associate($trackedWork);
         $action->save();
         $trackedWork['start_id'] = $action['id'];
         $trackedWork->save();
-        return ["type" => $action['type'], "work" => $trackedWork, "created_at" => $action['created_at'], "updated_at" => $action['updated_at']];
+        return ["type" => $action['type'], "comment" => $action["comment"], "work" => $trackedWork, "created_at" => $action['created_at'], "updated_at" => $action['updated_at']];
     }
 }
