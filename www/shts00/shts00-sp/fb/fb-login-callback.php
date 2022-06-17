@@ -36,19 +36,62 @@ $accessTokenMetadata = $oAuth2Client->debugToken($accessToken);
 $fbUserId = $accessTokenMetadata->getUserId();
 
 $response=$fb->get('/me?fields=email', $accessToken);
+
 $graphUser=$response->getGraphUser();
 
 $fbEmail=$graphUser->getEmail();
 
 $privilege = "user";
-$userDB = new UserDB();
+//var_dump($fbEmail);
+if (isset($fbEmail)) { 
+    $userDB = new UserDB();
 
-$user = $userDB->fetchByEmail($fbEmail)[0];
+    $existingUserArr = $userDB->fetchByEmail($fbEmail);
+    //var_dump($existingUserArr);
+    if(!empty($existingUserArr)){
+        
+        $existingUser = $userDB->fetchByEmail($fbEmail)[0];
+        var_dump($existingUser);
 
-$_SESSION['user_id'] = $user['user_id'];
-$_SESSION['email'] = $user['email'];
-$_SESSION['privilege'] = $user['privilege'];
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
-header('Location: ../index.php');
+        setcookie("user_id", $existingUser['user_id'], time()+3600);
+        setcookie("email", $existingUser['email'], time()+3600);
+        setcookie("privilege", $existingUser['privilege'], time()+3600);
+
+        // $_SESSION['user_id'] = $existingUser['user_id'];
+        // $_SESSION['email'] = $existingUser['email'];
+        // $_SESSION['privilege'] = $existingUser['privilege'];
+
+        header('Location: ../index.php?success=1');
+    } else {
+
+        $args=[
+            'email'=>$fbEmail,
+            'hashedPassword'=>"fromFB",
+            'privilege'=>$privilege
+            ];
+        $userDB->create($args);
+
+        $newUserFromFB = $userDB->fetchMaxId()[0];
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        setcookie("user_id", $newUserFromFB['user_id'], time()+3600);
+        setcookie("email", $newUserFromFB['email'], time()+3600);
+        setcookie("privilege", $newUserFromFB['privilege'], time()+3600);
+
+        // $_SESSION['user_id'] = $newUserFromFB['user_id'];
+        // $_SESSION['email'] = $newUserFromFB['email'];
+        // $_SESSION['privilege'] = $newUserFromFB['privilege'];
+
+        header('Location: ../index.php?success=1');
+    }
+    exit;
+}
 
 ?> 
