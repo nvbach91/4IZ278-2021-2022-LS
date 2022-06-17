@@ -26,7 +26,9 @@ $loggedUser = $usersDB->fetchById($_SESSION['user_id'])[0];
 
 if (!empty($_POST)) {
     $value = (int)$_POST['value'];
+    //ADDED
     $description = strip_tags($_POST['description']);
+    //END ADDED
     if($value < 1 || $value > $loggedUser['credit']){
         array_push($alerts,'Tato částka nelze darovat.');
     }

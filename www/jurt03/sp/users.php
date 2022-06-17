@@ -29,6 +29,7 @@ $allUsers= $usersDB -> fetchAll();
                             <p class="card-text">Kredit: <?php echo $user['credit'];?> ,-Kč</p>                
                         </div>
                     </div>
+                    
                     <?php endforeach; ?>                  
             </div>
         </div>

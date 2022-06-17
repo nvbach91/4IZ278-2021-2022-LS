@@ -16,12 +16,13 @@ class DonationsDB extends Database{
         $statement->execute(['donation_id' => $id]);
         return $statement->fetchAll();
     }
-
+    //ADDED
     public function fetchByUser($id){
         $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE user_id = :user_id ORDER BY donation_id DESC");
         $statement->execute(['user_id' => $id]);
         return $statement->fetchAll();
     }
+    //END OF ADDED
 
 
     public function updateById($id, $field, $newValue){
