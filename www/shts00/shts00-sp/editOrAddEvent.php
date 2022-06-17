@@ -1,7 +1,22 @@
 <?php require_once __DIR__ . '/includes/header.php'; ?>
+<?php require_once __DIR__ . '/db/UserDB.php'; ?>
 <?php require_once __DIR__ . '/db/CategoryDB.php'; ?>
 <?php require_once __DIR__ . '/db/VenueDB.php'; ?>
 <?php require_once __DIR__ . '/controllers/createEventController.php'; ?>
+
+<?php
+if(empty($_SESSION['user_id'])){
+    header('Location: index.php');
+    exit();
+} else { 
+    $userDB = new UserDB();
+    $user = $userDB->fetchById($_SESSION['user_id'])[0];
+    if($user['privilege'] != 'admin') {
+        header('Location: index.php');
+        exit();
+    }
+}
+?>
 
 <?php 
 $categoryDB = new CategoryDB();

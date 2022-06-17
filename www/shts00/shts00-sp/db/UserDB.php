@@ -14,14 +14,21 @@ class UserDB extends DBConnection implements IEntityDB {
     }
 
     public function fetchById($user_id){
-        $sql = "SELECT * FROM user WHERE user_id = " . $user_id .";";
+        $sql = "SELECT * FROM `user` WHERE `user_id` = " . $user_id .";";
         $statement = $this -> pdo -> prepare($sql);
         $statement->execute();
         return $ticket = $statement->fetchAll();
     }
 
+    public function fetchMaxId(){
+        $sql = "SELECT * from user ORDER BY user_id DESC LIMIT 1";
+        $statement = $this -> pdo -> prepare($sql);
+        $statement->execute();
+        return $event = $statement->fetchAll();
+    }
+
     public function fetchByEmail($email){
-        $sql = 'SELECT * FROM user WHERE email = :email';
+        $sql = 'SELECT * FROM user WHERE email like :email';
         $statement = $this->pdo->prepare($sql);
         $statement->execute([
             'email'=>$email

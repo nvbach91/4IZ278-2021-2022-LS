@@ -1,6 +1,11 @@
 <?php require_once __DIR__ . '/../db/CategoryDB.php'; ?>
+<?php require_once __DIR__ . '/../db/UserDB.php'; ?>
 
 <?php 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $categoryDB = new CategoryDB();
 $categories = $categoryDB->fetchAll();
 ?>
@@ -25,7 +30,24 @@ $categories = $categoryDB->fetchAll();
             </div>
         </li>
         </ul>
-        <a href="https://eso.vse.cz/~shts00/shts00-sp/signin.php" class="btn btn-success">Přihlásit se</a>
+        <?php
+
+        if(!isset($_COOKIE['user_id'])) {
+            echo '<a href="https://eso.vse.cz/~shts00/shts00-sp/signin.php" class="btn btn-success">Přihlásit se</a>';
+        }
+
+        if(isset($_COOKIE['user_id'])){
+            $userDB = new UserDB();
+            $user = $userDB->fetchById($_COOKIE['user_id'])[0];
+            if($user['privilege'] == 'admin') {
+                echo '<a class="btn btn-success" href="https://eso.vse.cz/~shts00/shts00-sp/adminPanel.php" >Admin panel</a>';
+            }
+            else if($user['privilege'] == 'user') {
+                echo '<a class="btn btn-success" href="https://eso.vse.cz/~shts00/shts00-sp/ticketsHistory.php" >Moje vstupenky</a>';
+            }
+            echo '<a class="btn btn-link" href="https://eso.vse.cz/~shts00/shts00-sp/index.php?status=1" >Odhlásit se</a>';
+        }
+        ?>
     </div>
     </nav>
 </header>

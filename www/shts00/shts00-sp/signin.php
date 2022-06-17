@@ -1,6 +1,7 @@
 <?php 
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/controllers/signinController.php';
+//require_once __DIR__ . '/fb/fb-login-button.php';
 ?>
 
 <?php if (!empty($_GET['error']) && ($_GET['error'] == 1)): ?>
@@ -8,7 +9,7 @@ require_once __DIR__ . '/controllers/signinController.php';
 <?php endif;?>
 
 <?php if (!empty($_GET['error']) && ($_GET['error'] == 2)): ?>
-    <div class="alert alert-primary col-md-4" role="alert">Pro nákup vstupenek se musíte přihlásit</div>
+    <div class="alert alert-primary col-md-4" role="alert">Nejdřív se musíte přihlásit</div>
 <?php endif;?>
 
 <div class="container">
@@ -27,7 +28,7 @@ require_once __DIR__ . '/controllers/signinController.php';
             </div>
             <button type="submit" class="btn btn-primary">Přihlásit se</button>
         </form>
-        //include fb button zde 
+        <?php require __DIR__ . '/fb/fb-login-button.php'; ?>
         <a href="signup.php" class="btn btn-link">Ještě nemám účet</a>
     </div>
   </div>

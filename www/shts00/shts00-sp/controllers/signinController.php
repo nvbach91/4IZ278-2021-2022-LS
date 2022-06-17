@@ -2,8 +2,10 @@
 
 <?php
 
-session_start();
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+//setcookie("test", "test", time()+3600);
 if(!empty($_POST)){
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -12,11 +14,16 @@ if(!empty($_POST)){
     $user = $usersDB->fetchByEmail($email)[0];
 
     if (password_verify($password,$user['password'])){
-        $_SESSION['user_id'] = $user['user_id'];
-        $_SESSION['user_email'] = $user['email'];
-        $_SESSION['user_privilege'] = $user['privilege'];
+        // $_SESSION['user_id'] = $user['user_id'];
+        // $_SESSION['user_email'] = $user['email'];
+        // $_SESSION['user_privilege'] = $user['privilege'];
 
-        if($_SESSION['user_privilege'] == 'admin') {
+        setcookie("user_id", $user['user_id'], time()+3600);
+        setcookie("email", $user['email'], time()+3600);
+        setcookie("privilege", $user['privilege'], time()+3600);
+
+
+        if($_COOKIE['privilege'] == 'admin') {
             header('Location: ../adminPanel.php');
         } else {
             header('Location: ../index.php?success=1');

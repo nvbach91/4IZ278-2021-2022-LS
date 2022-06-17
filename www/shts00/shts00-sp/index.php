@@ -1,8 +1,13 @@
 <?php require_once __DIR__ . '/db/EventDB.php'; ?>
 <?php require_once __DIR__ . '/db/CategoryDB.php'; ?>
+<?php require_once __DIR__ . '/db/UserDB.php'; ?>
 <?php require_once __DIR__ . '/includes/header.php'; ?>
 
-<?php 
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $eventDB = new EventDB();
 $events = $eventDB->fetchAll();
 
@@ -18,10 +23,8 @@ if(!empty($_GET['category'])) {
     };
 }
 
-if(!empty($_GET['success']))
-    echo '<div class="alert alert-warning" role="alert">
-            Nyní jste přihlášen
-            </div>';
+if(!empty($_GET['status']) && $_GET['status'] == 1)
+    unset($_SESSION['user_id']);
 ?>
 
 <?php if (!empty($_GET['success'])): ?>

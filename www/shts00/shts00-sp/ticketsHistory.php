@@ -1,28 +1,25 @@
 <?php require_once __DIR__ . '/includes/header.php'; ?>
 <?php require_once __DIR__ . '/db/EventDB.php'; ?>
+<?php require_once __DIR__ . '/db/UserDB.php'; ?>
 
 <?php
-session_start();
-$orders = [];
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 
-$userId = intval($_SESSION['user_id']);
+$events = [];
+
+if(!empty($_SESSION['user_id'])){
+  $userId = $_SESSION['user_id'];
 
   $eventDB = new EventDB();
   $events = $eventDB->fetchByUserId($userId);
-
-// if(!empty($_SESSION['user_id'])){
-//   $userId = $_SESSION['user_id'];
-
-//   $eventDB = new EventDB();
-//   $events = $eventDB->fetchByUserId($userId);
-// }
+}
 ?>
 <h2>Zakoupené vstupenky</h2>
-<?php echo $userId; ?>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Datum nákupu</th>
       <th scope="col">Konference</th>
       <th scope="col">Místo konání</th>
@@ -31,7 +28,7 @@ $userId = intval($_SESSION['user_id']);
   <tbody>
   <?php foreach($events as $event) : ?>
       <tr>
-        <td><?php echo $userId; ?></td>
+        <td><?php echo $event['name']; ?></td>
         <td><?php echo $event['date']; ?></td>
       </tr>
   <?php endforeach; ?>

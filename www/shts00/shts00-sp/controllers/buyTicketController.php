@@ -4,13 +4,17 @@
 <?php require_once __DIR__ . '/../db/TicketDB.php'; ?>
 
 <?php 
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $errors = [];
 
 if(!empty($_POST))
 {
     if(!empty($_SESSION['user_id'])){
-        $userId = intval($_SESSION['user_id']);
+        $userId = $_SESSION['user_id'];
     } else {
         header('Location: ../signin.php?error=2');
         exit();
@@ -95,7 +99,7 @@ if(!empty($_POST))
                 }   
             
             $_SESSION['buyticket_errors'] = [];
-            header('Location: ../ticketsHistory.php');
+            header('Location: ../succeedPayment.php');
             exit();
         }  
         catch(Exception $ex) {

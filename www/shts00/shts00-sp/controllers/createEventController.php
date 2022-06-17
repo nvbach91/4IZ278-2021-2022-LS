@@ -5,7 +5,11 @@
 <?php require_once __DIR__ . '/../db/CategoryToEventDB.php'; ?>
 
 <?php 
-session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $errors = [];
 
 if(!empty($_POST))
@@ -45,7 +49,7 @@ if(!empty($_POST))
         array_push($errors, "Zvolte pořadatele");
     }
 
-    if ($date && $date > date('Y-m-d')) {
+    if ($date && ($date > date('Y-m-d'))) {
         $date = date('Y-m-d', $date);
     } 
     else {
