@@ -35,17 +35,24 @@ class Order
     }
 
     public static function getOrdersList()
-    {
+    {   
+        $default_timezone = date_default_timezone_get();
+        $localTimeZone = new DateTimeZone($default_timezone);
         $db = Db::getConnection();
 
-        $result = $db->query('SELECT id, user_name, user_phone, date, status FROM product_order ORDER BY id DESC');
+        $result = $db->query('SELECT id, user_name, user_phone, date, status FROM product_order ORDER BY date DESC');
         $ordersList = array();
         $i = 0;
         while ($row = $result->fetch()) {
             $ordersList[$i]['id'] = $row['id'];
             $ordersList[$i]['user_name'] = $row['user_name'];
             $ordersList[$i]['user_phone'] = $row['user_phone'];
-            $ordersList[$i]['date'] = $row['date'];
+
+            $dateFromDB = $row['date'];
+            $date = new DateTime($dateFromDB, new DateTimeZone('Europe/Moscow'));
+            $date->setTimezone($localTimeZone);
+            $newDate = $date->format("Y-m-d H:i:s");
+            $ordersList[$i]['date'] = $newDate;
             $ordersList[$i]['status'] = $row['status'];
             $i++;
         }
@@ -54,6 +61,7 @@ class Order
 
     public static function getUserOrdersListById($id)
     {
+        $default_timezone = date_default_timezone_get();
         $db = Db::getConnection();
 
         $result = $db->query('SELECT id, user_name, user_phone, date, status FROM product_order WHERE user_id = ' . $id . ' ORDER BY id DESC');
@@ -63,7 +71,9 @@ class Order
             $ordersList[$i]['id'] = $row['id'];
             $ordersList[$i]['user_name'] = $row['user_name'];
             $ordersList[$i]['user_phone'] = $row['user_phone'];
-            $ordersList[$i]['date'] = $row['date'];
+            $date = new DateTime($row['date'], new DateTimeZone('Europe/Moscow'));
+            $date = $date->setTimezone(new DateTimeZone($default_timezone));
+            $ordersList[$i]['date'] = $date->format($row['date']);
             $ordersList[$i]['status'] = $row['status'];
             $i++;
         }
@@ -80,6 +90,7 @@ class Order
         $result->bindParam(':id', $id, PDO::PARAM_INT);
 
         $result->setFetchMode(PDO::FETCH_ASSOC);
+        
 
         $result->execute();
 

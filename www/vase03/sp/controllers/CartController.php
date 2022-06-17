@@ -62,7 +62,7 @@ class CartController
             $userName = $user['name'];
             $userEmail = $user['email'];
         } else {
-            $userId = false;
+            $userId = 999;
         }
 
         if (isset($_POST['submit'])) {
@@ -83,6 +83,11 @@ class CartController
 
             if (!User::checkPhone($userPhone)) {
                 $errors[] = 'Wrong phone';
+            }
+
+            if (!User::checkEmail($userEmail)) {
+                $errors[] = 'Wrong email';
+
             }
 
             if ($errors == false) {
