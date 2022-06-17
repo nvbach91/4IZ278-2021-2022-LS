@@ -72,11 +72,24 @@ if (!count($errors)) {
                 <button type="submit" class="btn btn-secondary" name="login">Log in</button>
             </div>
         </div>
-            <p>
-                Not a member? <a href="register.php">Register</a>
-            </p>
-            
+        <p>
+            Not a member? <a href="register.php">Register</a>
+        </p>
+
     </form>
 </body>
 
 <?php include __DIR__ . '/incl/footer.php' ?>
+
+<script>
+window.fbAsyncInit = function() {
+    FB.init({
+        appId: '{your-app-id}',
+        cookie: true,
+        xfbml: true,
+        version: '{api-version}'
+    });
+
+    FB.AppEvents.logPageView();
+
+};

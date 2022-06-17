@@ -72,7 +72,7 @@ class ProductsDB extends Database
         $stmt = $this->pdo->prepare("DELETE FROM $this->tableName WHERE product_id = ?;");
         $stmt->bindValue(1, $id, PDO::PARAM_INT);
         $stmt->execute();
-    }
+    }   
 
     public function updateById($id, $field, $newValue) {
         $statement = $this -> pdo -> prepare("UPDATE " . $this -> tableName . " SET " . $field . "= '" . $newValue . "' WHERE product_id = " . $id . ";");

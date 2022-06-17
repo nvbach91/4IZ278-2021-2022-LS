@@ -8,7 +8,4 @@ $headers = 'From: vanv08@vse.cz'       . "\r\n" .
 
 mail($to, $subject, $message, $headers);
 echo $to; 
-echo $subject;
-echo $message;
-echo $headers;
 ?>

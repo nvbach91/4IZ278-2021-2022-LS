@@ -12,5 +12,5 @@ $city = $userInfo['city'];
 $street = $userInfo['street'];
 $postalCode = $userInfo['postal'];
 
-$adress = $city . " " . $street . " " . $postalCode;
+$full_name = $userInfo['first_name'] . '' . $last_name = $userInfo['last_name'];
 ?>

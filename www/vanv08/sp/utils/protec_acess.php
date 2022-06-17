@@ -2,6 +2,9 @@
 session_start();
 session_regenerate_id(true);
 $errors = [];
+define('FP_GRAPH_VERSION', 'v6.0');
+define('FP_GRAPH_DOMAIN', 'https://graph.facebook.com/');
+define('FP_APP_STATE', 'eciphp');
 ?>
 
 <?

@@ -21,4 +21,6 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style2.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <? date_default_timezone_set("Europe/Prague"); ?>
 </head>

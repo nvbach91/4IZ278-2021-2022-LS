@@ -17,6 +17,6 @@ if(empty($phone)) :
 <?
 // check for adress. All fields must be filled or else empty
 if(empty($city) && empty($street) && empty($postalCode)) :
-    $city = 'Your adress is not set'
+    $city = 'Your adress is properly not set'
 ?>
 <? endif; ?>

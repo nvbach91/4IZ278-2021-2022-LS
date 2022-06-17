@@ -23,7 +23,7 @@ if (!empty($_GET)) {
     require __DIR__ . '/utils/login_user_info.php';
     require __DIR__ . '/utils/user_email_fr_id.php';
 
-    echo $first_name;
+
 }   
     ?>
     <?php

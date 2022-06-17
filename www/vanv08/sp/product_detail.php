@@ -20,7 +20,7 @@ if (!empty($_GET)) {
     $product = $result->fetchAll()[0];
     
     ?>
-<?php require __DIR__ . '/utils/user_email_fr_id.php' ?>
+<?php include __DIR__ . '/utils/user_email_fr_id.php' ?>
 <?php
     $price = $product['price'];
 } else {

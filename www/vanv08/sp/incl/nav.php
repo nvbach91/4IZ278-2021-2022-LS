@@ -31,7 +31,6 @@
                 <a href="index.php" class="nav-item nav-link">Home</a>
                 <a href="profile.php" class="nav-item nav-link">Profile</a>
                 <a href="product_form.php" class="nav-item  nav-link">Sell</a>
-                <a href="user_orders.php" class="nav-item  nav-link">Active orders</a>
                 <a href="user_offers.php" class="nav-item  nav-link">Active offers</a>
                 <a href="./utils/logout.php" class="nav-item nav-link">Log out</a>
                 <?endif ?>

@@ -3,7 +3,7 @@ $ideal_phone = '/^(\+[0-9]{3})?\s?([0-9]{3})\s?([0-9]{3})\s?([0-9]{3})$/';
 $ideal_postal = '/^([0-9]{5})|([1-9][0-9]{2}\s[0-9]{2})$/';
 $ideal_steet = '/^[\w\s]{2,}\s([0-9]{1,6}(\/[0-9]{1,5})?)$/';
 
-
+// incl folder 
 if (strlen($first_name) < 2) {
     array_push($errors, 'First name is too short');
 }
