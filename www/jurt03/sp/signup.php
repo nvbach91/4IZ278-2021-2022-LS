@@ -6,6 +6,7 @@ require_once __DIR__ . '/db/UsersDB.php';
 $alerts = [];
 
 if (!empty($_POST)) {
+  $usersDB = new UsersDB();
   $firstName = $_POST['firstName'];
   $lastName = $_POST['lastName'];
   $address = $_POST['address'];
@@ -15,7 +16,11 @@ if (!empty($_POST)) {
   $email = $_POST['email'];
   $password = $_POST['password'];
   $passwordConfirm = $_POST['passwordConfirm'];
-  
+  $isUserRegisteredYet= $usersDB->fetchByEmail($email)[0];
+
+  if(!$isUserRegisteredYet['user_id'] == ""){
+    array_push($alerts, 'Uživatel je již registrován.');
+  }
   //check first and last name
   if (strlen($firstName) < 2 ){
     array_push($alerts, 'Jméno je příliš krátké');
@@ -65,7 +70,7 @@ if(!count($alerts)){
   $credit = 100;
   $donated = 0;
   $isAdmin= 0;
-  $usersDB = new UsersDB();
+  
   $newUser=$usersDB->create([
   'first_name' => $firstName,
   'last_name' => $lastName,

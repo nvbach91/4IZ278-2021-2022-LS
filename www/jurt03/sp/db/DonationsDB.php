@@ -6,7 +6,7 @@ class DonationsDB extends Database{
     protected $tableName = 'sp_donation';
 
     public function fetchAll(){
-        $statement = $this->pdo->prepare("SELECT * FROM $this->tableName");
+        $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY donation_id DESC");
         $statement->execute();
         return $statement->fetchAll();
     }
@@ -18,7 +18,7 @@ class DonationsDB extends Database{
     }
 
     public function fetchByUser($id){
-        $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE user_id = :user_id ");
+        $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE user_id = :user_id ORDER BY donation_id DESC");
         $statement->execute(['user_id' => $id]);
         return $statement->fetchAll();
     }

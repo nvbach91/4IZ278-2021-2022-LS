@@ -50,6 +50,12 @@ class AnimalsDB extends Database{
     }
 
 
+    public function getLatestRecord(){
+        $statement = $this->pdo->prepare("SELECT * FROM $this->tableName ORDER BY animal_id DESC LIMIT 1");
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
     public function create($args){
         //TODO
     }

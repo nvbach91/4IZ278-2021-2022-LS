@@ -12,9 +12,10 @@ if (isset($_GET['animal_id'])) {
 } else {
     $animal_id = 0;
 }
-
-if($animal_id > 0) {
-    $animalsDB = new AnimalsDB();
+$animalsDB = new AnimalsDB();
+$latestAnimal= $animalsDB->getLatestRecord()[0];
+if($animal_id > 0 && $animal_id<=$latestAnimal['animal_id']) {
+    
     $animal =  $animalsDB->fetchById($animal_id)[0];
     } else {
         header('Location: animals.php');
@@ -25,7 +26,7 @@ $loggedUser = $usersDB->fetchById($_SESSION['user_id'])[0];
 
 if (!empty($_POST)) {
     $value = (int)$_POST['value'];
-    $description = $_POST['description'];
+    $description = strip_tags($_POST['description']);
     if($value < 1 || $value > $loggedUser['credit']){
         array_push($alerts,'Tato částka nelze darovat.');
     }
@@ -34,6 +35,7 @@ if (!empty($_POST)) {
         //uloz transakci do historie transakci
         $date = date('Y-m-d H:i:s');
         $donationsDB = new DonationsDB();
+        
         $createDonation= $donationsDB->create([
             'animal_id' => $animal_id,
             'user_id' => $loggedUser['user_id'],
@@ -45,7 +47,7 @@ if (!empty($_POST)) {
         $addValueToAnimal = $animalsDB->changeMoney($animal_id, $value);
         //odeber kredit uzivateli a tuto hodnotu pricti k jeho attributu donated
         $minusCredit = $usersDB->minusCreditAndAddToDonated($loggedUser['user_id'], $value);
-        mail($loggedUser['email'],"Děkujeme za darování",'Děkujeme, že jsi daroval' . ' ' . $value .' ,-Kč na našem webu Zoonation');
+        mail($loggedUser['email'],"Děkujeme za $value darování",'Děkujeme, že jsi daroval' . ' ' . $value .' ,-Kč na našem webu Zoonation');
         header('Location: animals.php?thankYou=1');
     }
 
