@@ -1,0 +1,3720 @@
+{
+	"info": {
+		"_postman_id": "15c80f84-9cb0-4f3c-9f8a-e0838463730a",
+		"name": "haos.store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "product - get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "product - get all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/product",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"product"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "product - get one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/product/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"product",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "product - get one",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/product/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"product",
+										"1"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "product - store - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|bm7QuTlq7SXmmrC8hjKQrzsHPa6K4w05Jj6txW7G",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/product?product_name=Černý pásek&price=500&color=červená&category_id=2&description=Nejlepší černý pásek&sizes[0]=5&sizes[1]=3&sizes[2]=5&sizes[3]=5&sizes[4]=2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"product"
+							],
+							"query": [
+								{
+									"key": "product_name",
+									"value": "Černý pásek"
+								},
+								{
+									"key": "price",
+									"value": "500"
+								},
+								{
+									"key": "color",
+									"value": "červená"
+								},
+								{
+									"key": "category_id",
+									"value": "2"
+								},
+								{
+									"key": "description",
+									"value": "Nejlepší černý pásek"
+								},
+								{
+									"key": "sizes[0]",
+									"value": "5"
+								},
+								{
+									"key": "sizes[1]",
+									"value": "3"
+								},
+								{
+									"key": "sizes[2]",
+									"value": "5"
+								},
+								{
+									"key": "sizes[3]",
+									"value": "5"
+								},
+								{
+									"key": "sizes[4]",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "product - store - admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/product?product_name=Černý pásek&price=500&color=černý&category_id=2&description=Nejlepší černý pásek&sizes[0]=5&sizes[1]=3&sizes[2]=5&sizes[3]=5&sizes[4]=2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"product"
+									],
+									"query": [
+										{
+											"key": "product_name",
+											"value": "Černý pásek"
+										},
+										{
+											"key": "price",
+											"value": "500"
+										},
+										{
+											"key": "color",
+											"value": "černý"
+										},
+										{
+											"key": "category_id",
+											"value": "2"
+										},
+										{
+											"key": "description",
+											"value": "Nejlepší černý pásek"
+										},
+										{
+											"key": "sizes[0]",
+											"value": "5"
+										},
+										{
+											"key": "sizes[1]",
+											"value": "3"
+										},
+										{
+											"key": "sizes[2]",
+											"value": "5"
+										},
+										{
+											"key": "sizes[3]",
+											"value": "5"
+										},
+										{
+											"key": "sizes[4]",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "product - update - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/product/6?product_name=Černý pásek V2&price=666&category_id=3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"product",
+								"6"
+							],
+							"query": [
+								{
+									"key": "product_name",
+									"value": "Černý pásek V2"
+								},
+								{
+									"key": "price",
+									"value": "666"
+								},
+								{
+									"key": "category_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "product - update - admin",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/product/6?product_name=Černý pásek V2&price=666&category_id=3",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"product",
+										"6"
+									],
+									"query": [
+										{
+											"key": "product_name",
+											"value": "Černý pásek V2"
+										},
+										{
+											"key": "price",
+											"value": "666"
+										},
+										{
+											"key": "category_id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "product - delete - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/product/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"product",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "product - delete - admin",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/product/6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"product",
+										"6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "category - get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/category",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "category - get all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/category",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"category"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "category - get one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/category/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"category",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "category - get one",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/category/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"category",
+										"5"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "category - store - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/category?name=Nová kategorie",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"category"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Nová kategorie"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "category - store - admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/category?name=Nová kategorie",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"category"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Nová kategorie"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "category - put - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/category/7?name=PásekV2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"category",
+								"7"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "PásekV2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "category - put - admin",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/category/5?name=Pásek",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"category",
+										"5"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Pásek"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "category - delete",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/category/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"category",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "category - delete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/category/6",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"category",
+										"6"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "size",
+			"item": [
+				{
+					"name": "size - get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/size",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"size"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "size - get all",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/size",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"size"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "size - get one",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/size/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"size",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "size - get one",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/size/10",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"size",
+										"10"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "size - store - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/size?size_type=XXXXL",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"size"
+							],
+							"query": [
+								{
+									"key": "size_type",
+									"value": "XXXXL"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "size - store - admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/size?size_type=prceke2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"size"
+									],
+									"query": [
+										{
+											"key": "size_type",
+											"value": "prceke2"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "size - put - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/size/12?size_type=XXL",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"size",
+								"12"
+							],
+							"query": [
+								{
+									"key": "size_type",
+									"value": "XXL"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "size - put - admin",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/size/12?size_type=XXL",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"size",
+										"12"
+									],
+									"query": [
+										{
+											"key": "size_type",
+											"value": "XXL"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "size - delete - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/size/12",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"size",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "user - get all - admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "user - get all - admin",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/user",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"user"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "user - get one - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/user/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "user - get one - admin",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/user/user/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"user",
+										"user",
+										"5"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "user - get one - user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|Q3nWx0vx1nWiCerLexL8jMpS0Ss5dD4tiPh2IdYx",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/user/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"user",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "user - get one - admin",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/user/user/5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"user",
+										"user",
+										"5"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "user - store",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user?first_name=Dan&last_name=Hejna&email=hejna@yeetzone.com&password=xxxxx&phone=774416609&region=kv kraj&town=cheb&street=šeříková&street_number=5&zip=35002",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "Dan"
+								},
+								{
+									"key": "last_name",
+									"value": "Hejna"
+								},
+								{
+									"key": "email",
+									"value": "hejna@yeetzone.com"
+								},
+								{
+									"key": "password",
+									"value": "xxxxx"
+								},
+								{
+									"key": "phone",
+									"value": "774416609"
+								},
+								{
+									"key": "region",
+									"value": "kv kraj"
+								},
+								{
+									"key": "town",
+									"value": "cheb"
+								},
+								{
+									"key": "street",
+									"value": "šeříková"
+								},
+								{
+									"key": "street_number",
+									"value": "5"
+								},
+								{
+									"key": "zip",
+									"value": "35002"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "user - store",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/user?first_name=Dan&last_name=Hejna&email=hejna@yeetzone.com&password=xxxxx&phone=774416609&region=kv kraj&town=cheb&street=šeříková&street_number=5&zip=35002",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"user"
+									],
+									"query": [
+										{
+											"key": "first_name",
+											"value": "Dan"
+										},
+										{
+											"key": "last_name",
+											"value": "Hejna"
+										},
+										{
+											"key": "email",
+											"value": "hejna@yeetzone.com"
+										},
+										{
+											"key": "password",
+											"value": "xxxxx"
+										},
+										{
+											"key": "phone",
+											"value": "774416609"
+										},
+										{
+											"key": "region",
+											"value": "kv kraj"
+										},
+										{
+											"key": "town",
+											"value": "cheb"
+										},
+										{
+											"key": "street",
+											"value": "šeříková"
+										},
+										{
+											"key": "street_number",
+											"value": "5"
+										},
+										{
+											"key": "zip",
+											"value": "35002"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "user - update - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|CauEWdCaYtwBqptJTqNnbP0e5OXKdlQDnIq01HYx",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/user/5?first_name=Dan&last_name=Hejna&email=hejna@yeetzone.cz&password=yyyyy&phone=774416609&role=user&region=kv kraj&town=cheb&street=šeříková&street_number=5&zip=35002",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"user",
+								"5"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "Dan"
+								},
+								{
+									"key": "last_name",
+									"value": "Hejna"
+								},
+								{
+									"key": "email",
+									"value": "hejna@yeetzone.cz"
+								},
+								{
+									"key": "password",
+									"value": "yyyyy"
+								},
+								{
+									"key": "phone",
+									"value": "774416609"
+								},
+								{
+									"key": "role",
+									"value": "user"
+								},
+								{
+									"key": "region",
+									"value": "kv kraj"
+								},
+								{
+									"key": "town",
+									"value": "cheb"
+								},
+								{
+									"key": "street",
+									"value": "šeříková"
+								},
+								{
+									"key": "street_number",
+									"value": "5"
+								},
+								{
+									"key": "zip",
+									"value": "35002"
+								},
+								{
+									"key": "role",
+									"value": "admin",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "user - update - admin",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/user/5?first_name=Dan&last_name=Hejna&email=hejna@yeetzone.cz&password=yyyyy&phone=774416609&role=user&region=kv kraj&town=cheb&street=šeříková&street_number=5&zip=35002",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"user",
+										"5"
+									],
+									"query": [
+										{
+											"key": "first_name",
+											"value": "Dan"
+										},
+										{
+											"key": "last_name",
+											"value": "Hejna"
+										},
+										{
+											"key": "email",
+											"value": "hejna@yeetzone.cz"
+										},
+										{
+											"key": "password",
+											"value": "yyyyy"
+										},
+										{
+											"key": "phone",
+											"value": "774416609"
+										},
+										{
+											"key": "role",
+											"value": "user"
+										},
+										{
+											"key": "region",
+											"value": "kv kraj"
+										},
+										{
+											"key": "town",
+											"value": "cheb"
+										},
+										{
+											"key": "street",
+											"value": "šeříková"
+										},
+										{
+											"key": "street_number",
+											"value": "5"
+										},
+										{
+											"key": "zip",
+											"value": "35002"
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "user - update - user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|Q3nWx0vx1nWiCerLexL8jMpS0Ss5dD4tiPh2IdYx",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/user/6?first_name=DanUser&last_name=Hejna&email=hejna@yeetzone.cz&password=xxxxx&phone=774416609&region=kv kraj&town=cheb&street=šeříková&street_number=5&zip=35002",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"user",
+								"6"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "DanUser"
+								},
+								{
+									"key": "last_name",
+									"value": "Hejna"
+								},
+								{
+									"key": "email",
+									"value": "hejna@yeetzone.cz"
+								},
+								{
+									"key": "password",
+									"value": "xxxxx"
+								},
+								{
+									"key": "phone",
+									"value": "774416609"
+								},
+								{
+									"key": "region",
+									"value": "kv kraj"
+								},
+								{
+									"key": "town",
+									"value": "cheb"
+								},
+								{
+									"key": "street",
+									"value": "šeříková"
+								},
+								{
+									"key": "street_number",
+									"value": "5"
+								},
+								{
+									"key": "zip",
+									"value": "35002"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "user - update - user",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/user/user/5?first_name=DanUser&last_name=Hejna&email=hejna@yeetzone.cz&password=xxxxx&phone=774416609&region=kv kraj&town=cheb&street=šeříková&street_number=5&zip=35002",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"user",
+										"user",
+										"5"
+									],
+									"query": [
+										{
+											"key": "first_name",
+											"value": "DanUser"
+										},
+										{
+											"key": "last_name",
+											"value": "Hejna"
+										},
+										{
+											"key": "email",
+											"value": "hejna@yeetzone.cz"
+										},
+										{
+											"key": "password",
+											"value": "xxxxx"
+										},
+										{
+											"key": "phone",
+											"value": "774416609"
+										},
+										{
+											"key": "region",
+											"value": "kv kraj"
+										},
+										{
+											"key": "town",
+											"value": "cheb"
+										},
+										{
+											"key": "street",
+											"value": "šeříková"
+										},
+										{
+											"key": "street_number",
+											"value": "5"
+										},
+										{
+											"key": "zip",
+											"value": "35002"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "user - delete - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "6|1PH9OjjNZIZlos3wAD7ejIoyNIwDUzwoJYFfT0IQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/admin/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"admin",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user - delete - user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "2|Q3nWx0vx1nWiCerLexL8jMpS0Ss5dD4tiPh2IdYx",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/user/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"user",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user - login",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|8fpsdHHnyyGTBgfh64kDkbmPnjVmSEkS20GGA5lZ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|0mZiILIwrdaWBlZMnnv2Zp1ciz1UYRRk6UJ6imds",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user-login?email=hejna@yeetzone.com&password=xxxxx",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user-login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "hejna@yeetzone.com"
+								},
+								{
+									"key": "password",
+									"value": "xxxxx"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "user - login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer 1|0mZiILIwrdaWBlZMnnv2Zp1ciz1UYRRk6UJ6imds",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/user-login?email=hejna@yeetzone.com&password=xxxxx",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"user-login"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "hejna@yeetzone.com"
+										},
+										{
+											"key": "password",
+											"value": "xxxxx"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "user - auth",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|pmfJ33j9G8FvE2yHJYbRQPj9psJIYrr7VrvTZOxb",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|BkQGd4N7Sc3InbocRt3BU7nmfVOq8TjlF5jz6KFm",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user-auth",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user-auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "address",
+			"item": [
+				{
+					"name": "address - get all - user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|EeQXmXyQPfvA6GjTngsDSoitAGzkzTHygSJhQReH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "address - get all - admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7|915Db5gW9KnZvbQxFGOVXvbwPCdQAlDGwvnxUW22",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/address",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"address"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "address - get one - user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|EeQXmXyQPfvA6GjTngsDSoitAGzkzTHygSJhQReH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/address/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"address",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "address - get one - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7|915Db5gW9KnZvbQxFGOVXvbwPCdQAlDGwvnxUW22",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/address/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"address",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "address - store - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|cW3luSeWADJEyDp3ykMJdNpoaXFz3RC9ugPXILIF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/address?region=praha&town=cheb&street=šeříková&street_number=5&zip=35002&user_id=4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"address"
+							],
+							"query": [
+								{
+									"key": "region",
+									"value": "praha"
+								},
+								{
+									"key": "town",
+									"value": "cheb"
+								},
+								{
+									"key": "street",
+									"value": "šeříková"
+								},
+								{
+									"key": "street_number",
+									"value": "5"
+								},
+								{
+									"key": "zip",
+									"value": "35002"
+								},
+								{
+									"key": "user_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "address - store - admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/address?region=praha&town=cheb&street=šeříková&street_number=5&zip=35002&user_id=7",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"address"
+									],
+									"query": [
+										{
+											"key": "region",
+											"value": "praha"
+										},
+										{
+											"key": "town",
+											"value": "cheb"
+										},
+										{
+											"key": "street",
+											"value": "šeříková"
+										},
+										{
+											"key": "street_number",
+											"value": "5"
+										},
+										{
+											"key": "zip",
+											"value": "35002"
+										},
+										{
+											"key": "user_id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "address - store - user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|EeQXmXyQPfvA6GjTngsDSoitAGzkzTHygSJhQReH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/address?region=kv kraj2&town=cheb&street=šeříková&street_number=5&zip=35002&user_id=7",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"address"
+							],
+							"query": [
+								{
+									"key": "region",
+									"value": "kv kraj2"
+								},
+								{
+									"key": "town",
+									"value": "cheb"
+								},
+								{
+									"key": "street",
+									"value": "šeříková"
+								},
+								{
+									"key": "street_number",
+									"value": "5"
+								},
+								{
+									"key": "zip",
+									"value": "35002"
+								},
+								{
+									"key": "user_id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "address - store - user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/user/address?region=kv kraj&town=cheb&street=šeříková&street_number=5&zip=35002&user_id=4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"user",
+										"address"
+									],
+									"query": [
+										{
+											"key": "region",
+											"value": "kv kraj"
+										},
+										{
+											"key": "town",
+											"value": "cheb"
+										},
+										{
+											"key": "street",
+											"value": "šeříková"
+										},
+										{
+											"key": "street_number",
+											"value": "5"
+										},
+										{
+											"key": "zip",
+											"value": "35002"
+										},
+										{
+											"key": "user_id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "address - update - user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|EeQXmXyQPfvA6GjTngsDSoitAGzkzTHygSJhQReH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/address/10?region=ústecký&town=cheb&street=šeříková&street_number=5&zip=35002&user_id=5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"address",
+								"10"
+							],
+							"query": [
+								{
+									"key": "region",
+									"value": "ústecký"
+								},
+								{
+									"key": "town",
+									"value": "cheb"
+								},
+								{
+									"key": "street",
+									"value": "šeříková"
+								},
+								{
+									"key": "street_number",
+									"value": "5"
+								},
+								{
+									"key": "zip",
+									"value": "35002"
+								},
+								{
+									"key": "user_id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "address - update - user",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/user/address/1?region=ústecký&town=cheb&street=šeříková&street_number=5&zip=35002&user_id=5",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"user",
+										"address",
+										"1"
+									],
+									"query": [
+										{
+											"key": "region",
+											"value": "ústecký"
+										},
+										{
+											"key": "town",
+											"value": "cheb"
+										},
+										{
+											"key": "street",
+											"value": "šeříková"
+										},
+										{
+											"key": "street_number",
+											"value": "5"
+										},
+										{
+											"key": "zip",
+											"value": "35002"
+										},
+										{
+											"key": "user_id",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "address - update - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|cW3luSeWADJEyDp3ykMJdNpoaXFz3RC9ugPXILIF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/address/4?region=ústecký&town=cheb&street=šeříková&street_number=5&zip=35002&user_id=4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"address",
+								"4"
+							],
+							"query": [
+								{
+									"key": "region",
+									"value": "ústecký"
+								},
+								{
+									"key": "town",
+									"value": "cheb"
+								},
+								{
+									"key": "street",
+									"value": "šeříková"
+								},
+								{
+									"key": "street_number",
+									"value": "5"
+								},
+								{
+									"key": "zip",
+									"value": "35002"
+								},
+								{
+									"key": "user_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "address - update - admin",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/address/4?region=ústecký&town=cheb&street=šeříková&street_number=5&zip=35002&user_id=4",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"address",
+										"4"
+									],
+									"query": [
+										{
+											"key": "region",
+											"value": "ústecký"
+										},
+										{
+											"key": "town",
+											"value": "cheb"
+										},
+										{
+											"key": "street",
+											"value": "šeříková"
+										},
+										{
+											"key": "street_number",
+											"value": "5"
+										},
+										{
+											"key": "zip",
+											"value": "35002"
+										},
+										{
+											"key": "user_id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "address - delete - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|cW3luSeWADJEyDp3ykMJdNpoaXFz3RC9ugPXILIF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/address/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"address",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "address - delete - user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|EeQXmXyQPfvA6GjTngsDSoitAGzkzTHygSJhQReH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/address/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"address",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "message",
+			"item": [
+				{
+					"name": "message - store",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/message?name=Daniel&email=hejnadaniel07@gmail.com&subject=Dotaz k produktu&message=Otázka po smyslu života znamená problém cíle lidského snažení nebo přístupu jednotlivce. V širším kontextu můžeme tento problém formulovat jako soubor otázek jako: Jaký má můj život smysl či cíl?",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"message"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Daniel"
+								},
+								{
+									"key": "email",
+									"value": "hejnadaniel07@gmail.com"
+								},
+								{
+									"key": "subject",
+									"value": "Dotaz k produktu"
+								},
+								{
+									"key": "message",
+									"value": "Otázka po smyslu života znamená problém cíle lidského snažení nebo přístupu jednotlivce. V širším kontextu můžeme tento problém formulovat jako soubor otázek jako: Jaký má můj život smysl či cíl?"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "message - store",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/message?name=Daniel&email=hejnadaniel07@gmail.com&subject=Dotaz k produktu&message= MySQL vrátil prázdný výsledek (tj. nulový počet řádků). (Dotaz trval 0,0005 sekund.)\n",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"message"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "Daniel"
+										},
+										{
+											"key": "email",
+											"value": "hejnadaniel07@gmail.com"
+										},
+										{
+											"key": "subject",
+											"value": "Dotaz k produktu"
+										},
+										{
+											"key": "message",
+											"value": " MySQL vrátil prázdný výsledek (tj. nulový počet řádků). (Dotaz trval 0,0005 sekund.)\n"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [
+								{}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "message - get one - admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|cW3luSeWADJEyDp3ykMJdNpoaXFz3RC9ugPXILIF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/message/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"message",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "message - get all - admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|cW3luSeWADJEyDp3ykMJdNpoaXFz3RC9ugPXILIF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/message",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"message"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "order - get all - admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|cW3luSeWADJEyDp3ykMJdNpoaXFz3RC9ugPXILIF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/order",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order - get all - user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|EeQXmXyQPfvA6GjTngsDSoitAGzkzTHygSJhQReH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/order",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order - get one - admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|EeQXmXyQPfvA6GjTngsDSoitAGzkzTHygSJhQReH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/order/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"order",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order - get one - user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|EeQXmXyQPfvA6GjTngsDSoitAGzkzTHygSJhQReH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/order/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"order",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order - store - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|cW3luSeWADJEyDp3ykMJdNpoaXFz3RC9ugPXILIF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/order?user_id=6&products[0]=1&note=Prosím dodání až ke dveřím&products[1]=1&products[2]=3&products[3]=2&address_id=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"order"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "6"
+								},
+								{
+									"key": "products[0]",
+									"value": "1"
+								},
+								{
+									"key": "note",
+									"value": "Prosím dodání až ke dveřím"
+								},
+								{
+									"key": "products[1]",
+									"value": "1"
+								},
+								{
+									"key": "products[2]",
+									"value": "3"
+								},
+								{
+									"key": "products[3]",
+									"value": "2"
+								},
+								{
+									"key": "address_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "order - store - admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/order?user_id=6&products[0]=1&note=Prosím dodání až ke dveřím&products[1]=1&products[2]=3&products[3]=2&address_id=1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"order"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "6"
+										},
+										{
+											"key": "products[0]",
+											"value": "1"
+										},
+										{
+											"key": "note",
+											"value": "Prosím dodání až ke dveřím"
+										},
+										{
+											"key": "products[1]",
+											"value": "1"
+										},
+										{
+											"key": "products[2]",
+											"value": "3"
+										},
+										{
+											"key": "products[3]",
+											"value": "2"
+										},
+										{
+											"key": "address_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "order - store - user",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|EeQXmXyQPfvA6GjTngsDSoitAGzkzTHygSJhQReH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/user/order?user_id=7&products[0]=1&note=Prosím dodání až ke dveřím&products[1]=1&products[2]=3&products[3]=2&address_id=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"user",
+								"order"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "7"
+								},
+								{
+									"key": "products[0]",
+									"value": "1"
+								},
+								{
+									"key": "note",
+									"value": "Prosím dodání až ke dveřím"
+								},
+								{
+									"key": "products[1]",
+									"value": "1"
+								},
+								{
+									"key": "products[2]",
+									"value": "3"
+								},
+								{
+									"key": "products[3]",
+									"value": "2"
+								},
+								{
+									"key": "address_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "order - store - admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8000/api/admin/order?user_id=6&products[0]=1&note=Prosím dodání až ke dveřím&products[1]=1&products[2]=3&products[3]=2&address_id=1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"admin",
+										"order"
+									],
+									"query": [
+										{
+											"key": "user_id",
+											"value": "6"
+										},
+										{
+											"key": "products[0]",
+											"value": "1"
+										},
+										{
+											"key": "note",
+											"value": "Prosím dodání až ke dveřím"
+										},
+										{
+											"key": "products[1]",
+											"value": "1"
+										},
+										{
+											"key": "products[2]",
+											"value": "3"
+										},
+										{
+											"key": "products[3]",
+											"value": "2"
+										},
+										{
+											"key": "address_id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "order - done - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "3|EeQXmXyQPfvA6GjTngsDSoitAGzkzTHygSJhQReH",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/order/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"order",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order - delete - admin",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|cW3luSeWADJEyDp3ykMJdNpoaXFz3RC9ugPXILIF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/order/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"order",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "order - invoice - admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|cW3luSeWADJEyDp3ykMJdNpoaXFz3RC9ugPXILIF",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/admin/order/invoice/5",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"admin",
+								"order",
+								"invoice",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
