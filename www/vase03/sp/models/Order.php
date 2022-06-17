@@ -53,6 +53,7 @@ class Order
             $date->setTimezone($localTimeZone);
             $newDate = $date->format("Y-m-d H:i:s");
             $ordersList[$i]['date'] = $newDate;
+
             $ordersList[$i]['status'] = $row['status'];
             $i++;
         }
@@ -62,6 +63,7 @@ class Order
     public static function getUserOrdersListById($id)
     {
         $default_timezone = date_default_timezone_get();
+        $localTimeZone = new DateTimeZone($default_timezone);
         $db = Db::getConnection();
 
         $result = $db->query('SELECT id, user_name, user_phone, date, status FROM product_order WHERE user_id = ' . $id . ' ORDER BY id DESC');
@@ -71,9 +73,11 @@ class Order
             $ordersList[$i]['id'] = $row['id'];
             $ordersList[$i]['user_name'] = $row['user_name'];
             $ordersList[$i]['user_phone'] = $row['user_phone'];
-            $date = new DateTime($row['date'], new DateTimeZone('Europe/Moscow'));
-            $date = $date->setTimezone(new DateTimeZone($default_timezone));
-            $ordersList[$i]['date'] = $date->format($row['date']);
+            $dateFromDB = $row['date'];
+            $date = new DateTime($dateFromDB, new DateTimeZone('Europe/Moscow'));
+            $date->setTimezone($localTimeZone);
+            $newDate = $date->format("Y-m-d H:i:s");
+            $ordersList[$i]['date'] = $newDate;
             $ordersList[$i]['status'] = $row['status'];
             $i++;
         }
