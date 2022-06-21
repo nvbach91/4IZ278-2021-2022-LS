@@ -6,7 +6,6 @@
       >Overview</router-link>
       <router-link
       to="/upload"
-      v-if="hasRole('admin')"
       >Upload</router-link>
       <router-link
       to="/admin"
@@ -35,7 +34,6 @@
   export default {
     name: 'Navbar',
     mounted(){
-      //console.log(store.state.token)
     },
     methods: {
       logout(){

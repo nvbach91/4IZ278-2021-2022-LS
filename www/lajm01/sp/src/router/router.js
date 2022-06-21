@@ -36,7 +36,7 @@ const routes = [
     name: 'Upload',
     meta: {
       requiresAuth: true,
-      requiredRoles: ['admin']
+    //   requiredRoles: ['admin']
     },
     component: Upload
   },
@@ -56,6 +56,14 @@ const routes = [
       requiresGuest: true
     },
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    meta: {
+      requiresGuest: true
+    },
+    component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue')
   }
 ]
 
@@ -74,6 +82,10 @@ router.beforeEach((to, from, next) => {
   let userData = {};
   if(hasToken)
     userData = Vue.prototype.parseJwt(localStorage.token)
+
+	if(userData.exp - parseInt(new Date().valueOf().toString().substring(0,10)) <= 0)
+		localStorage.removeItem("token");
+	
   
   //TODO check if token is not expired
   if (requiresAuth && !hasToken) {

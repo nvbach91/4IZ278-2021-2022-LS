@@ -16,18 +16,30 @@ class RequestHelper {
     public function __destruct(){
     }
 
+    public function setHeader(){
+        header("Access-Control-Allow-Origin: http://localhost:8080");
+        header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, PATCH');
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+        header('Content-Type: application/json; charset=utf-8');
+    }
+
     public function checkMethod($wantedMethod){
         if($_SERVER['REQUEST_METHOD'] != $wantedMethod)
             $this->reject($wantedMethod."_REQUEST_REQUIRED");
     }
 
-    public function getParam($paramName, $required = false){
+    public function getRequestData(){
         $request_body = file_get_contents('php://input');
         $request_data = json_decode($request_body);
 
         if($_SERVER['REQUEST_METHOD'] === "GET"){
             $request_data = (object) $_GET;
         }
+        return $request_data;
+    }
+    
+    public function getParam($paramName, $required = false){
+        $request_data = $this->getRequestData();
 
         if(!is_null($request_data) && property_exists($request_data,$paramName)){
             return $request_data->$paramName;
@@ -48,6 +60,11 @@ class RequestHelper {
         if(is_string($error)){   
             die($this->encodeJson([
                 "error" => $error
+            ]));
+        }
+        if(is_object($error) && get_class($error) == "Exception"){
+            die($this->encodeJson([
+                "error" => $error->getMessage()
             ]));
         }
         die($this->encodeJson([

@@ -8,27 +8,24 @@
     require_once("../../php/logHelper.php");
 
     RequestHelper::getInstance()->setHeader();
-    RequestHelper::getInstance()->checkMethod("PUT");
+    RequestHelper::getInstance()->checkMethod("POST");
     $userData = AuthHelper::getInstance()->auth(["admin"]);
 
     $file_id = RequestHelper::getInstance()->getParam("idFile", true);
-    $filename = RequestHelper::getInstance()->getParam("filename", true);
-    $description = RequestHelper::getInstance()->getParam("description", true);
-    $tags = RequestHelper::getInstance()->getParam("tags", true);
     
     LogHelper::getInstance()->log();
 
     try {
         Database::getInstance()->beginTransaction();
+		
+		$file_tags = Database::getInstance()->assocQuery("SELECT idTag FROM filetags WHERE idFile = {0}", [$file_id]);
+		foreach ($file_tags as &$tag) {
+			Database::getInstance()->normalQuery("UPDATE Tags SET isTemporary = 0 WHERE idTag = {0}", [$tag["idTag"]]);
+			
+			
+		}
 
-        //TODO dont update extension redundency
-        Database::getInstance()->normalQuery("UPDATE Files SET filename = '{0}', description = '{1}' WHERE idFile = {2}", [$filename, $description, $file_id]);
-
-        Database::getInstance()->normalQuery("DELETE FROM FileTags WHERE idFile = {0}", [$file_id]);
-
-        foreach ($tags as &$tag) {
-            Database::getInstance()->insertQuery("INSERT INTO FileTags (idFile, idTag) VALUES ({0}, {1})", [$file_id, $tag->idTag]);
-        }
+        Database::getInstance()->normalQuery("UPDATE Files SET isTemporary = 0 WHERE idFile = {0}", [$file_id]);
 
         Database::getInstance()->commitTransaction();
 
