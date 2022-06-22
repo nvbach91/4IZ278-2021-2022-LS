@@ -1,0 +1,24 @@
+{block #title}
+Přehled oznámení
+{/block}
+
+{block #content}
+    <h1>Oznámení</h1>
+    <div>
+        <div n:foreach="$announcements as $announcement">
+            <div class="card">
+{*                <div class="card-header">*}
+{*                    {$announcement->getTitle()}*}
+{*                    {var $author = $announcement->getUser()}*}
+{*                    <span class="text-muted float-end">{$author->getName()} {$author->getSurname()} ({$announcement->getCreatedAt()|date:"j. n. Y"})</span>*}
+{*                </div>*}
+                <div class="card-body">
+                    <h2>{$announcement->getTitle()}</h2>
+                    {var $author = $announcement->getUser()}
+                    <h5 class="text-secondary">{$author->getName()} {$author->getSurname()} ({$announcement->getCreatedAt()|date:"j. n. Y"})</h5>
+                    {$announcement->getContent()}
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

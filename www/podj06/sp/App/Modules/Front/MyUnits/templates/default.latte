@@ -1,0 +1,25 @@
+{block #content}
+<h1>Moje jednotky</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Číslo jednotky</th>
+            <th>Podlaží</th>
+            <th>Plocha</th>
+            <th>Počet hlasovacích jednotek</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr n:foreach="$myUnits as $unit">
+            <td>{$unit->getNumber()}</td>
+            <td>{$unit->getFloor()}</td>
+            <td>{$unit->getArea()}</td>
+            <td>{$unit->getVotesShare()}</td>
+            <td>
+                <a n:href="detail, $unit->getId()" class="btn btn-primary btn-sm">Detail</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

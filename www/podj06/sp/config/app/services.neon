@@ -35,15 +35,25 @@ services:
 
 
 	# Domain =================
-	- App\Domain\User\CreateUserFacade
-#	- App\Domain\Order\OrderLogSubscriber
-#	- App\Domain\Http\RequestLoggerSubscriber
+
+
+	# UI ====================
+	- App\UI\Grid\GridFactory
 
 
 	# Console ================
 	- {class: App\Model\Console\HelloCommand, tags: {console.command: hello}}
 
-
+search:
+    services:
+        in: %appDir%/Domain/Service
+        classes: *Service
+    formFactories:
+        in: %appDir%/UI/Form
+        classes: *FormFactory
+    gridBuilders:
+        in: %appDir%/UI/Grid
+        classes: *GridBuilder
 
 latte:
 	macros:

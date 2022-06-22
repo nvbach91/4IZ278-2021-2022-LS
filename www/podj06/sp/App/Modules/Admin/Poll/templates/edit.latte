@@ -1,0 +1,49 @@
+{block #content}
+    <h1 class="mb-3">{$poll === null ? 'Vytvořit' : 'Upravit'} hlasování</h1>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Základní informace
+                </div>
+                <div class="card-body">
+                    {control editBasicPollInfoForm}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Hlasovací možnosti
+                </div>
+                <div class="card-body">
+                    {if $poll === null}
+                        <p>Možnosti lze nastavovat pouze u uložených hlasování.</p>
+                        <p>Před pokračováním hlasování uložte.</p>
+                    {elseif $poll->getType() === App\Model\Database\Entity\PollEntity::TYPE_FREETYPE}
+                        <p>Možnosti nelze nastavovat u typu volné možnosti.</p>
+                    {else}
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Volba</th>
+                                    <th scope="col">Akce</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr n:foreach="$poll->getOptions() as $option">
+                                    <td>{$option->getDescription()}</td>
+                                    <td>
+                                        <a class="btn btn-sm btn-danger" n:href="deleteOption!, $option->getId(), $poll->getId()">Smazat</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2>Přidat volbu</h2>
+                        {control addPollOptionForm}
+                    {/if}
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

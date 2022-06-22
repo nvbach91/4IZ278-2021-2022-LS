@@ -4,7 +4,7 @@
 //require '.maintenance.php';
 
 // Let bootstrap create Dependency Injection container.
-$container = require_once __DIR__ . '/../app/bootstrap.php';
+$container = require_once __DIR__ . '/../App/bootstrap.php';
 
 // Run application.
 $container->getByType(Nette\Application\Application::class)->run();

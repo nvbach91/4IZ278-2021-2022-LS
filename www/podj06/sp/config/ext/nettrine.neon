@@ -36,7 +36,7 @@ nettrine.orm:
 
 nettrine.orm.annotations:
 	mapping:
-		App\Model\Database\Entity: %appDir%/model/Database/Entity
+		App\Model\Database\Entity: %appDir%/Model/Database/Entity
 
 nettrine.orm.cache:
 
