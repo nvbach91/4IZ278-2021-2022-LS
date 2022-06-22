@@ -25,6 +25,9 @@ class User extends DB
         return $this->id;
     }
 
+    /**
+     * @param $email
+     */
     public function __construct($email = null)
     {
         parent::__construct();
@@ -39,6 +42,10 @@ class User extends DB
             $this->id = $ids["user_id"];
     }
 
+    /**
+     * @param $session_pwd
+     * @return bool
+     */
     public function auth($session_pwd)
     {
         $ssid = hash("sha1", $session_pwd);
@@ -51,8 +58,15 @@ class User extends DB
         return true;
     }
 
-    public function login($email, $password)
+    /**
+     * @param $req
+     * @return bool
+     */
+    public function login($req)
     {
+        $email = $req["email"];
+        $password = $req["password"];
+
         $escaped_email = $this->escape($email);
 
         $res = $this->query("SELECT user_id,password FROM user WHERE email='$escaped_email'");
@@ -73,6 +87,48 @@ class User extends DB
         return false;
     }
 
+    /**
+     * @param $req
+     * @return bool
+     */
+    public function FBlogin($req)
+    {
+
+        $escaped_email = $this->escape($req["email"]);
+        $auth_token = $req["access_token"];
+        $nickname = $req["nickname"];
+
+
+        $_COOKIE["session_id"] = $auth_token;
+
+        $query_string = "SELECT user_id,password from user where email='$escaped_email'";
+        $res = $this->query($query_string);
+        $hashed = hash("sha1", $auth_token);
+
+        if (empty($res)) {
+            $this->non_return_query("INSERT INTO user (email, nickname, password,session_pwd) VALUES
+                                                   ('$escaped_email','$nickname','no pwd','$hashed')");
+            $this->commit();
+        }
+
+        $res = $this->query($query_string);
+
+        if (empty($res))
+            return false;
+
+        $this->id = $res["user_id"];
+        $this->setSessionPWD($auth_token);
+
+        return true;
+
+    }
+
+    /**
+     * @param $email
+     * @param $nickname
+     * @param $password
+     * @return array|false|null
+     */
     public function register($email, $nickname, $password)
     {
         $escaped_email = $this->escape($email);
@@ -84,30 +140,20 @@ class User extends DB
         $res = $this->non_return_query("INSERT INTO user (email, nickname, password,session_pwd) VALUES
                                                    ('$escaped_email', '$escaped_nickname', '$hashed_pwd','$randomPassword')");
 
-        if ($res == false)
+        if (!$res)
             return false;
 
         return $this->getIdOfEmail($escaped_email);
     }
 
-    protected final function escapeCarParams($name, $brand, $hp, $vehicle_type, $img_url = null)
-    {
-        $escaped_name = $this->escape($name);
-        $escaped_brand = $this->escape($brand);
-        $escaped_hp = $this->escape($hp);
-        $escaped_vehicle_type = $this->escape($vehicle_type);
-        $escaped_img_url = $this->escape($img_url);
-
-        $escaped = array();
-        $escaped["name"] = $escaped_name;
-        $escaped["brand"] = $escaped_brand;
-        $escaped["hp"] = $escaped_hp;
-        $escaped["vehicle_type"] = $escaped_vehicle_type;
-        $escaped["img_url"] = $escaped_img_url;
-
-        return $escaped;
-    }
-
+    /**
+     * @param $name
+     * @param $brand
+     * @param $hp
+     * @param $vehicle_type
+     * @param $img_url
+     * @return bool|mysqli_result
+     */
     public function addCar($name, $brand, $hp, $vehicle_type, $img_url = null)
     {
         $escaped_name = $this->escape($name);
@@ -120,12 +166,25 @@ class User extends DB
                 VALUES ('$this->id', '$escaped_name', '$escaped_brand', '$escaped_hp', '$escaped_car_type','$escaped_img_url')");
     }
 
+    /**
+     * @param $id
+     * @return bool|mysqli_result
+     */
     public function deleteCar($id)
     {
         $escaped_id = $this->escape($id);
         return $this->non_return_query("DELETE FROM car WHERE id='$escaped_id'");
     }
 
+    /**
+     * @param $car_id
+     * @param $name
+     * @param $brand
+     * @param $hp
+     * @param $vehicle_type
+     * @param $img_url
+     * @return bool|mysqli_result
+     */
     public function modifyCar($car_id, $name, $brand, $hp, $vehicle_type, $img_url = null)
     {
         $escaped_id = $this->escape($car_id);
@@ -140,6 +199,11 @@ class User extends DB
                img_url='$escaped_img_url' WHERE id='$escaped_id'");
     }
 
+    /**
+     * @param $latitude
+     * @param $longitude
+     * @return bool|mysqli_result
+     */
     public function addLocation($latitude, $longitude)
     {
         $escaped_lat = $latitude;
@@ -151,18 +215,29 @@ class User extends DB
                 VALUES ('$this->id','$escaped_lat','$escaped_lng')");
     }
 
+    /**
+     * @param $race_id
+     * @return array|false|null
+     */
     public function getNextWaypoint($race_id)
     {
+        $user_id = $this->id;
         $escaped_race_id = $this->escape($race_id);
+        $step = $this->query("SELECT step from user_race_fk where user_id='$user_id' and race_id='$escaped_race_id'")["step"] + 1;
+
 
         return $this->query("SELECT w.* FROM user_race_fk 
-            JOIN waypoint w on user_race_fk.step = w.step WHERE w.race_id='$escaped_race_id' AND user_id='$this->id'");
+            JOIN waypoint w on user_race_fk.race_id = w.race_id WHERE user_id='$user_id' AND w.step='$step'");
     }
 
+    /**
+     * @param $race_id
+     * @return array|false|null
+     */
     public function getUserLocations($race_id)
     {
         $escaped_race_id = $this->escape($race_id);
-        return $this->query("SELECT user_location.*, u2.nickname,u.step
+        return $this->query("SELECT user_location.*, u2.nickname,u.step, u.lap
             FROM user_location
                      RIGHT JOIN user_race_fk u on user_location.user_id = u.user_id
                      JOIN user u2 on u.user_id = u2.user_id WHERE race_id='$escaped_race_id' 
@@ -170,6 +245,9 @@ class User extends DB
             HAVING MAX(time) ORDER BY step DESC");
     }
 
+    /**
+     * @return array|null
+     */
     public function getCars()
     {
         if ($this->id == null)
@@ -184,6 +262,10 @@ class User extends DB
         return null;
     }
 
+    /**
+     * @param $car_id
+     * @return array|null
+     */
     public function getCar($car_id)
     {
         if ($this->id == null)
@@ -199,11 +281,16 @@ class User extends DB
         return null;
     }
 
+    /**
+     * @param $sessionPwd
+     * @return bool|mysqli_result
+     */
     public function setSessionPWD($sessionPwd)
     {
         $this->sessionPWD = $sessionPwd;
         $ssid = hash("sha1", $sessionPwd);
-        return $this->non_return_query("UPDATE user SET session_pwd='$ssid' WHERE user_id='$this->id'");
+        $this->non_return_query("UPDATE user SET session_pwd='$ssid' WHERE user_id='$this->id'");
+        return $ssid;
     }
 
     /**
@@ -215,7 +302,9 @@ class User extends DB
         return $this->query("SELECT user_id FROM user WHERE email='$escaped_email'");
     }
 
-
+    /**
+     * @return array|null
+     */
     public function getProfile()
     {
         if ($this->id == null)
@@ -228,6 +317,9 @@ class User extends DB
         return null;
     }
 
+    /**
+     * @return array|null
+     */
     public function getRaces()
     {
         if ($this->id == null)

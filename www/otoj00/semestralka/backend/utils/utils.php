@@ -1,4 +1,8 @@
 <?php
+/**
+ * @param $length
+ * @return string
+ */
 function randomPassword($length)
 {
     $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
@@ -11,6 +15,14 @@ function randomPassword($length)
     return implode($pass); //turn the array into a string
 }
 
+/**
+ * @param $lat1
+ * @param $lng1
+ * @param $lat2
+ * @param $lng2
+ * @param $radius
+ * @return float|int
+ */
 function gps2m($lat1, $lng1, $lat2, $lng2, $radius = 6378137)
 {
     static $x = M_PI / 180;
@@ -21,6 +33,10 @@ function gps2m($lat1, $lng1, $lat2, $lng2, $radius = 6378137)
     return $distance * $radius;
 }
 
+/**
+ * @param $msg
+ * @return array
+ */
 function fail($msg = "Login Failed")
 {
     $response = array();
@@ -29,6 +45,9 @@ function fail($msg = "Login Failed")
     return $response;
 }
 
+/**
+ * @return void
+ */
 function prepareJsonAPI()
 {
     header("Access-Control-Allow-Origin: *");

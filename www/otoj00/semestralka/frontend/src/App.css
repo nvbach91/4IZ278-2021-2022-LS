@@ -1,0 +1,115 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+.hakio-font {
+    font-family: "Hakio";
+}
+
+.register-href {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #f5f5f5dd;
+}
+
+.sign-href {
+    margin-top: -10%;
+    font-size: 18px;
+    color: #f5f5f5ff;
+}
+
+.title {
+    font-family: "Hakio";
+    font-size: 10vh;
+    font-weight: bold;
+    text-align: center;
+}
+
+.dock-up {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.text-normal {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+
+.loginBox {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+    background: radial-gradient(ellipse, rgba(150, 24, 28, 1) 50%, rgba(200, 0, 0, 0) 72%);
+    z-index: 9;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.menu-field {
+    width: 100%;
+    margin-bottom: 12px !important;
+}
+
+.App-bg {
+    background-image: url("./resources/gifs/drift-cars.gif");
+}
+
+.App-bg2 {
+    background-image: url("./resources/gifs/drift-cars2.gif");
+}
+
+.MarkerColor {
+    color: rgba(255,0,0,0);
+    background: rgba(255, 0, 0, 0) radial-gradient(circle, rgba(255, 0, 0, 1) 10%, rgba(255, 255, 255, 0) 60%);
+}
+.my-facebook-button-class{
+    width: 50%;
+    height: 75%;
+    font-size: 10px;
+    justify-content: center;
+    background: cornflowerblue;
+    color: white;
+}
+
+.App-header {
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: darken;
+    background-repeat: no-repeat;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -33,6 +33,11 @@ class Race extends DB
         return $results;
     }
 
+    /**
+     * Get Waypoints
+     * @param $race_id
+     * @return array|false|null
+     */
     public function getWaypoints($race_id)
     {
         $escaped_race_id = $this->escape($race_id);
@@ -42,6 +47,10 @@ class Race extends DB
 
     }
 
+    /**
+     * @param $user_id
+     * @return array|false|null
+     */
     public function getJoined($user_id)
     {
         $escaped_id = $this->escape($user_id);
@@ -50,6 +59,12 @@ class Race extends DB
             user_race_fk urf on race.race_id = urf.race_id WHERE user_id='$escaped_id' ORDER BY start_time ASC");
     }
 
+    /**
+     * @param $user_id
+     * @param $car_id
+     * @param $race_id
+     * @return bool|mysqli_result
+     */
     public function join($user_id, $car_id, $race_id)
     {
         $escaped_id = $this->escape($user_id);
@@ -61,6 +76,11 @@ class Race extends DB
 
     }
 
+    /**
+     * @param $user_id
+     * @param $race_id
+     * @return bool|mysqli_result
+     */
     public function leave($user_id, $race_id)
     {
         $escaped_id = $this->escape($user_id);
@@ -78,12 +98,87 @@ class Race extends DB
     {
         $escaped_id = $this->escape($user_id);
         $escaped_race_id = $this->escape($race_id);
+
+
         return $this->non_return_query("UPDATE user_race_fk SET step=IFNULL(step, 0) + 1 WHERE user_id='$escaped_id' AND race_id='$escaped_race_id'");
     }
 
+    /**
+     * Increment laps
+     *
+     * if true lap incremented
+     * if false race is over
+     * @param $user_id
+     * @param $race_id
+     * @return bool
+     */
+    public function nextLap($user_id, $race_id)
+    {
+        $escaped_id = $this->escape($user_id);
+        $escaped_race_id = $this->escape($race_id);
+
+        $user_stats = $this->getUserRaceInfo($user_id, $race_id);
+        $race_info = $this->getRaceInfo($race_id);
+
+        /**
+         * Return false if try to increment last lap
+         */
+        if ($race_info["laps"] == $user_stats["lap"])
+            return false;
+
+
+        $this->non_return_query("UPDATE user_race_fk SET step=1 WHERE user_id='$escaped_id' AND race_id='$escaped_race_id'");
+        $this->non_return_query("UPDATE user_race_fk SET lap=IFNULL(lap, 0) + 1 WHERE user_id='$escaped_id' AND race_id='$escaped_race_id'");
+
+        return true;
+    }
+
+    /**
+     * @param $user_id
+     * @param $race_id
+     * @return array|false|null
+     */
+    public function getUserRaceInfo($user_id, $race_id)
+    {
+        $escaped_id = $this->escape($user_id);
+        $escaped_race_id = $this->escape($race_id);
+        return $this->query("SELECT step,lap from user_race_fk where user_id='$escaped_id' and race_id='$escaped_race_id'");
+    }
+
+
+    public function isRaceStarted($race_id)
+    {
+        $escaped_race_id = $this->escape($race_id);
+        return !empty($this->query("SELECT race_id from race where race_id='$escaped_race_id' and start_time<=NOW()"));
+    }
+
+    /**
+     * @param $race_id
+     * @return mixed
+     */
+    public function getRaceSteps($race_id)
+    {
+        $escaped_race_id = $this->escape($race_id);
+        return $this->query("SELECT MAX(step) AS steps from waypoint where race_id='$escaped_race_id'")["steps"];
+    }
+
+    /**
+     * @param $race_id
+     * @return array|false|null
+     */
+    public function getRaceInfo($race_id)
+    {
+        $escaped_race_id = $this->escape($race_id);
+        return $this->query("SELECT * from race where race_id='$escaped_race_id'");
+    }
+
+    /**
+     * @param $id
+     * @return array|null
+     */
     public function getRace($id)
     {
-        if ($id == null)
+        if ($id == null || $id == "")
             return null;
 
         $escaped_id = $this->escape($id);
@@ -95,6 +190,10 @@ class Race extends DB
         return null;
     }
 
+    /**
+     * @param $raceId
+     * @return bool|mysqli_result
+     */
     public function clearWaypoints($raceId)
     {
         $escaped_raceId = $this->escape($raceId);
@@ -103,6 +202,13 @@ class Race extends DB
         return $this->non_return_query("DELETE FROM waypoint WHERE race_id='$raceId'");
     }
 
+    /**
+     * @param $raceId
+     * @param $step
+     * @param $lat
+     * @param $lng
+     * @return bool|mysqli_result
+     */
     public function addWaypoint($raceId, $step, $lat, $lng)
     {
         //TODO: Secure owner_id
@@ -116,6 +222,27 @@ class Race extends DB
                                                                  ('$escaped_raceId','$escaped_step','$escaped_lat','$escaped_lng')");
     }
 
+    /**
+     * @param $query_string
+     * @param $type_string
+     * @param $rid
+     * @param $name
+     * @param $start_time
+     * @param $lat
+     * @param $lng
+     * @param $owner_id
+     * @param $min_r
+     * @param $max_r
+     * @param $max_hp
+     * @param $password
+     * @param $heat_grade
+     * @param $min_karma
+     * @param $chat_link
+     * @param $img_url
+     * @param $laps
+     * @param $where_id
+     * @return bool
+     */
     public function bindForEdit($query_string, $type_string, $rid, $name, $start_time, $lat, $lng, $owner_id, $min_r, $max_r, $max_hp, $password, $heat_grade, $min_karma, $chat_link, $img_url = null, $laps = 1, $where_id = null)
     {
         $escaped_rid = $this->escape($rid);
@@ -151,6 +278,23 @@ class Race extends DB
         return $prepared->execute();
     }
 
+    /**
+     * @param $name
+     * @param $start_time
+     * @param $lat
+     * @param $lng
+     * @param $owner_id
+     * @param $min_r
+     * @param $max_r
+     * @param $max_hp
+     * @param $password
+     * @param $heat_grade
+     * @param $min_karma
+     * @param $chat_link
+     * @param $laps
+     * @param $img_url
+     * @return bool
+     */
     public function add($name, $start_time, $lat, $lng, $owner_id, $min_r, $max_r, $max_hp, $password, $heat_grade, $min_karma, $chat_link, $laps = 1, $img_url = null)
     {
         $query_string = "INSERT INTO race (name, start_time, latitude, longitude, owner_id, min_racers, max_racers, max_hp, password, heat_grade, min_req_karma, chat_link, laps, img_url)
@@ -160,6 +304,24 @@ class Race extends DB
         return $this->bindForEdit($query_string, $types, null, $name, $start_time, $lat, $lng, $owner_id, $min_r, $max_r, $max_hp, $password, $heat_grade, $min_karma, $chat_link, $laps, $img_url);
     }
 
+    /**
+     * @param $race_id
+     * @param $name
+     * @param $start_time
+     * @param $lat
+     * @param $lng
+     * @param $owner_id
+     * @param $min_r
+     * @param $max_r
+     * @param $max_hp
+     * @param $password
+     * @param $heat_grade
+     * @param $min_karma
+     * @param $chat_link
+     * @param $img_url
+     * @param $laps
+     * @return bool
+     */
     public function modifyRace($race_id, $name, $start_time, $lat, $lng, $owner_id, $min_r, $max_r, $max_hp, $password, $heat_grade, $min_karma, $chat_link, $img_url = null, $laps = 1)
     {
         $query_string = "UPDATE race SET  
@@ -175,6 +337,11 @@ class Race extends DB
             $max_r, $max_hp, $password, $heat_grade, $min_karma, $chat_link, $laps, $img_url, $race_id);
     }
 
+    /**
+     * @param $id
+     * @param $user_id
+     * @return bool|mysqli_result
+     */
     public function deleteRace($id, $user_id)
     {
         $escaped_user_id = $this->escape($user_id);

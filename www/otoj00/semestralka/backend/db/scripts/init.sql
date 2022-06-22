@@ -89,7 +89,7 @@ CREATE TABLE `user`
     nickname    VARCHAR(50)        NOT NULL,
     password    LONGTEXT           NOT NULL,
     karma       SMALLINT DEFAULT 0 NOT NULL,
-    session_pwd VARCHAR(40)        NOT NULL,
+    session_pwd VARCHAR(500)           NOT NULL,
     PRIMARY KEY (user_id),
     UNIQUE (session_pwd)
 ) AUTO_INCREMENT = 1;
@@ -153,8 +153,8 @@ CREATE TABLE user_race_fk
     race_id   INTEGER NOT NULL,
     user_id   INTEGER NOT NULL,
     car_id    INTEGER NOT NULL,
-    step      INTEGER DEFAULT 1,
-    lap       INTEGER,
+    step      INTEGER DEFAULT 0,
+    lap       INTEGER NOT NULL DEFAULT 1,
     pass_time TIMESTAMP DEFAULT NOW()
 );
 
@@ -218,7 +218,7 @@ ALTER TABLE user_race_fk
         ON DELETE CASCADE;
 
 ALTER TABLE waypoint
-    ADD CONSTRAINT waypoint_race_fk FOREIGN KEY (race_id)
+    ADD CONSTRAINT waypoint__race_fk FOREIGN KEY (race_id)
         REFERENCES race (race_id)
         ON DELETE CASCADE;
 

@@ -11,17 +11,12 @@ if (($session_id = $_POST["session_id"]) === null) {
     return;
 }
 
-function checkIfEmpty($var)
-{
-    if (empty($var))
-        return null;
-    return $var;
-}
-
 $user = new User();
 $res = $user->auth($session_id);
 
-
+/**
+ * Check for valid response
+ */
 if ($res) {
     $response = array();
     $race = new Race();
@@ -69,6 +64,10 @@ if ($res) {
             if ($car_id == null)
                 $response["hint"] = "Missing car"; //TODO alert user
             $response["message"] = "Failed " . $race->connection->error;
+            if (strpos(strtolower($response["message"]), "duplicate")) {
+                $response["status"] = "OK";
+                $response["message"] .= " join";
+            }
         }
 
     } else if (!isset($_POST["race_id"]) && !isset($_POST["waypoints"]) && !isset($_POST["delete"])) {
@@ -107,6 +106,7 @@ if ($res) {
         $min_karma = $_POST["min_req_karma"];
         $chat_link = $_POST["chat_link"];
         $laps = $_POST["laps"];
+
         $owner_id = $user->getId();
 
         $operation = null;

@@ -15,7 +15,9 @@ $user = new User();
 $res = $user->auth($session_id);
 
 $response = array();
-
+/**
+ * Check for valid response
+ */
 if ($res && isset($_POST["race_id"]) && isset($_POST["latitude"]) && isset($_POST["longitude"])) {
     $race_id = $_POST["race_id"];
     $lat = $_POST["latitude"];
@@ -25,13 +27,31 @@ if ($res && isset($_POST["race_id"]) && isset($_POST["latitude"]) && isset($_POS
 
     $next_waypoint = $user->getNextWaypoint($race_id);
     $dtw = gps2m($lat, $lng, $next_waypoint["latitude"], $next_waypoint["longitude"]);
+
+    /**
+     * Collect Waypoints on radius intersect
+     */
+
     if ($dtw <= METERS_TO_WAYPOINT) {
         $race = new Race();
-        $race->nextWaypoint($user->getId(), $race_id);
-        $response["collect"] = true;
-        //TODO: Increment lap
+        $user_id = $user->getId();
+
+        $steps_max = $race->getRaceSteps($race_id);
+        $user_info = $race->getUserRaceInfo($user_id, $race_id);
+        //$response["started"] = $race->isRaceStarted($race_id);
+
+        if ((int)$user_info["step"] == (int)$next_waypoint["step"] - 1) {
+
+            if ($steps_max == $user_info["step"])
+                $race->nextLap($user_id, $race_id);
+            else
+                $race->nextWaypoint($user_id, $race_id);
+
+            $response["collect"] = true;
+        }
     }
 
+    $response["step"] = $next_waypoint["step"];
     $response["lat"] = $next_waypoint["latitude"];
     $response["lng"] = $next_waypoint["longitude"];
     $response["dtw"] = $dtw;
