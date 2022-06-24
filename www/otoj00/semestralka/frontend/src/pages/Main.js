@@ -306,7 +306,7 @@ const Main = () => {
     }
 
     function updateRaceOnChangeCallback(data) {
-        if (data["status"] === "OK") {
+        if (data != null && data["status"] === "OK") {
             console.log("Calling Update Races");
             callApi("/backend/race.php", handleRacesUpdate);
             callApi("/backend/car.php", handleCarsUpdate);
@@ -343,7 +343,7 @@ const Main = () => {
         console.log("Draw route coords", coords);
         if (coords == null)
             setGeoJson({});
-        if (coords.length >= 1) {
+        if (coords != null && coords.length >= 1) {
             const url = getInterpolatedPathRequestFromWaypoints(coords);
             renderRoute(url, false).then(r => function () {
             });
@@ -665,17 +665,18 @@ const Main = () => {
         updateRaceOnChangeCallback();
         let races = [];
 
-        races_storage.current.forEach(race => {
+        for (const [i, race] of (Object.keys(races_storage.current).includes("race_id") ? Object.entries([races_storage.current])
+            : Object.entries(races_storage.current))) {
             races.push(<Marker longitude={race.longitude} latitude={race.latitude}>
-                <Flag sx={{fontSize: '1.5rem'}} style={{color: "white"}}/><b
+                <Flag sx={{fontSize: '2.5rem'}} style={{color: "white"}}/><b
                 style={{
-                    color: "black",
+                    color: "darkred",
                     fontSize: "1.5rem",
                     backgroundColor: "rgb(255,255,255,0.75)",
                     borderRadius: "6px"
-                }}>race.name</b>
+                }}>{race.name}</b>
             </Marker>)
-        })
+        }
 
         setRaceMarkers(races);
     }
