@@ -1,0 +1,8 @@
+<?php
+
+DEFINE('DATABASE_URL', 'localhost');
+DEFINE('DATABASE_NAME', 'ploa00');
+DEFINE('DATABASE_USERNAME', 'root');
+DEFINE('DATABASE_PASSWORD', '');
+
+?>
