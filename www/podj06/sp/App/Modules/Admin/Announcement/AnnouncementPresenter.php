@@ -29,6 +29,22 @@ class AnnouncementPresenter extends BaseAdminPresenter
         $this->entity = $id === null ? null : $this->entityManager->getAnnouncementRepository()->find($id);
     }
 
+	public function actionDelete(int $id): void
+	{
+		$announcement = $this->entityManager->getAnnouncementRepository()->find($id);
+
+		if ($announcement === null) {
+			$this->flashError(sprintf('Oznámení s id %s nenalezeno', $id));
+			$this->redirect(':Admin:Announcement:');
+		}
+
+		$this->entityManager->remove($announcement);
+		$this->entityManager->flush();
+
+		$this->flashSuccess('Oznámení úspěšně smazáno');
+		$this->redirect(':Admin:Announcement:');
+	}
+
     public function createComponentAnnouncementGrid(): DataGrid
     {
         return $this->announcementGridBuilder->build($this);

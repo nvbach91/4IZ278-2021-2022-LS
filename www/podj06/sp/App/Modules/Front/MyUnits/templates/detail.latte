@@ -21,7 +21,7 @@ Detail jednotky
                     <div class="text-secondary">{$unit->getArea()} m²</div>
 
                     <div class="fw-bolder mt-3">Počet hlasovacích práv</div>
-                    {var $percentage = $unit->getVotesShare()/$totalVoteShares}
+                    {var $percentage = ($unit->getVotesShare()/$totalVoteShares) * 100}
                     <div class="text-secondary">{$unit->getVotesShare()}/{$totalVoteShares} ({$percentage|number:2, ',', ''}%)</div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ use App\Model\Database\Entity\HousingUnitEntity;
 use App\Model\Database\EntityManager;
 use App\Modules\Admin\BaseAdminPresenter;
 use App\UI\Form\Admin\HousingUnit\EditHousingUnitFormFactory;
+use App\UI\Form\Admin\HousingUnit\ImportHousingUnitFormFactory;
 use App\UI\Grid\Admin\HousingUnitGridBuilder;
 use Nette\ComponentModel\IComponent;
 
@@ -18,6 +19,7 @@ class HousingUnitPresenter extends BaseAdminPresenter
         private EntityManager $entityManager,
         private EditHousingUnitFormFactory $editHousingUnitFormFactory,
         private HousingUnitGridBuilder $housingUnitGridBuilder,
+		private ImportHousingUnitFormFactory $importHousingUnitFormFactory,
     )
     {
         parent::__construct();
@@ -54,6 +56,11 @@ class HousingUnitPresenter extends BaseAdminPresenter
     {
         return $this->housingUnitGridBuilder->build($this);
     }
+
+	public function createComponentImportHousingUnitsForm(): IComponent
+	{
+		return $this->importHousingUnitFormFactory->create();
+	}
 
 
 }

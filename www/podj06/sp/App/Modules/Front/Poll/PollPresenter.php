@@ -6,6 +6,7 @@ namespace App\Modules\Front\Poll;
 use App\Domain\Service\Front\DeleteVoteService;
 use App\Domain\Service\Front\PreparePollResultsService;
 use App\Model\Database\Entity\PollEntity;
+use App\Model\Database\Entity\UserEntity;
 use App\Model\Database\EntityManager;
 use App\Modules\Front\BaseFrontPresenter;
 use App\UI\Form\Front\Poll\VoteFormFactory;
@@ -65,7 +66,6 @@ class PollPresenter extends BaseFrontPresenter
 
         $this->template->poll = $poll;
         $this->template->result = $this->preparePollResultsService->createResult($poll);
-        bdump($this->template->result);
     }
 
     public function renderDefault(): void

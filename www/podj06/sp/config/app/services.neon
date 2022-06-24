@@ -35,6 +35,7 @@ services:
 
 
 	# Domain =================
+	- App\Domain\Service\Admin\ImportHousingUnitsService(%rootDir%/var/upload)
 
 
 	# UI ====================

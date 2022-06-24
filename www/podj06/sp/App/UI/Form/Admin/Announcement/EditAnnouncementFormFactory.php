@@ -27,9 +27,11 @@ class EditAnnouncementFormFactory
         $form = $this->formFactory->forBackend();
 
         $form->addText('title', 'Titulek')
-            ->setDefaultValue($entity?->getTitle());
+            ->setDefaultValue($entity?->getTitle())
+			->setRequired();
         $form->addTextArea('content', 'Obsah', rows: 15)
-            ->setDefaultValue($entity?->getContent());
+            ->setDefaultValue($entity?->getContent())
+			->setRequired();
 
         $form->addSubmit('send', 'Uložit');
         $form->addSubmit('cancel', 'Zpět')
@@ -42,6 +44,10 @@ class EditAnnouncementFormFactory
 
     public function save(Form $form, $data): void
     {
+		if ($form['cancel']->isSubmittedBy()) {
+			$form->getPresenter()->redirect(':Admin:Announcement:');
+		}
+
         $entity = $this->announcementEntity;
 
         if ($this->announcementEntity === null) {
@@ -49,7 +55,7 @@ class EditAnnouncementFormFactory
         }
 
         $entity->setTitle($data->title);
-        $entity->setContent($data->title);
+        $entity->setContent($data->content);
 
         $user = $this->entityManager->getUserRepository()->find($this->user->getId());
         $entity->setUser($user);
