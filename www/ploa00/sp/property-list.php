@@ -17,8 +17,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $categories = $categoryDB->fetchAll();
 }
 
-if (empty($_GET)) {
-    $properties = $propertyDB->fetchAll();
+$nItemsPerPagination = 4;
+
+$count = $propertyDB->fetchCount();
+
+if (isset($_GET['offset'])) {
+    $offset = (int)$_GET['offset'];
+} else {
+    $offset = 0;
+}
+
+
+if (empty($_GET) || isset($_GET['offset'])) {
+    $properties = $propertyDB->fetchPagination($nItemsPerPagination, $offset);
 } else {
     if (isset($_GET['category'])) {
         $properties = $propertyDB->searchByCategory($_GET['category']);
@@ -88,6 +99,16 @@ if (empty($_GET)) {
                 <p>Přidej svoje!</p>
             <?php endif ?>
         </div>
+        <?php if ($count > $nItemsPerPagination && (isset($_GET['offset']) || empty($_GET))) : ?>
+            <div class="pagination m-3">
+                <?php for ($i = 1; $i <= ceil($count / $nItemsPerPagination); $i++) : ?>
+                    <li class="page-item<?php echo $offset / $nItemsPerPagination + 1 == $i ? " active" : ""; ?>"><a class="page-link" href="property-list.php?offset=<?php echo ($i - 1) * $nItemsPerPagination; ?>">
+                            <?php echo $i; ?>
+                        </a>
+                    </li>
+                <?php endfor ?>
+            </div>
+        <?php endif ?>
     </div>
 </main>
 

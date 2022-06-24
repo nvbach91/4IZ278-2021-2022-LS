@@ -29,6 +29,12 @@ class CommentsDB extends DB
         return isset($result[0]) ? $result[0] : '';
     }
 
+    public function countRaiting()
+    {
+        $statement = $this->pdo->query("SELECT COUNT(comment_id) FROM $this->tableName");
+        return $statement->fetchColumn();
+    }
+
     public function insert($propertyId, $content, $username, $rating)
     {
         $statement = $this->pdo->prepare("INSERT INTO

@@ -14,13 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 if (!empty($_POST)) {
 
     $category = $_POST['category'];
-    $description = $_POST['description'];
-    $price = $_POST['price'];
-    $owner = $_POST['owner'];
+    $description = htmlspecialchars($_POST['description']);
+    $price = htmlspecialchars($_POST['price']);
+    $owner = htmlspecialchars($_POST['owner']);
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $photo = $_POST['photo'];
-    $address = $_POST['address'];
+    $address = htmlspecialchars($_POST['address']);
 
     $description = ($description == '') ? null : $description;
 
@@ -28,6 +28,7 @@ if (!empty($_POST)) {
     $validate = new Validate();
 
     $err['email'] = $validate->email($email);
+    $err['phone'] = $validate->phone($phone);
     $err['category'] = $validate->category($category);
     $err['photo'] = $validate->image($photo);
     $err['owner'] = $validate->name($owner);

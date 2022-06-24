@@ -1,7 +1,4 @@
 <form method="POST">
-    <?php if (isset($err['form'])) : ?>
-        <p class="text-danger"><?php echo $err['form']; ?></p>
-    <?php endif ?>
     <div class="row">
         <div class="col m-3">
             <div class="mb-3">
@@ -38,7 +35,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="photo">Photo</label>
-                <input class="form-control<?php echo (isset($err) && isset($err['photo'])) ? ' border border-danger' : '' ?>" name="photo" value="<?php echo isset($photo) ? $photo : '' ?>" required>
+                <input class="form-control<?php echo (isset($err) && isset($err['photo'])) ? ' border border-danger' : '' ?>" name="photo" value="<?php echo isset($photo) ? htmlspecialchars($photo) : '' ?>" required>
                 <?php if (isset($err) && isset($err['photo'])) : ?>
                     <small class="text-danger"><?php echo $err['photo'] ?></small>
                 <?php endif ?>
@@ -55,8 +52,8 @@
             <div class="mb-3">
                 <label class="form-label" for="phone">Phone</label>
                 <input class="form-control<?php echo (isset($err) && isset($err['phone'])) ? ' border border-danger' : '' ?>" type="text" name="phone" value="<?php echo isset($phone) ? $phone : '' ?>" required>
-                <?php if (isset($err) && isset($err['name'])) : ?>
-                    <small class="text-danger"><?php echo $err['name'] ?></small>
+                <?php if (isset($err) && isset($err['phone'])) : ?>
+                    <small class="text-danger"><?php echo $err['phone'] ?></small>
                 <?php endif ?>
             </div>
             <div class="mb-3">

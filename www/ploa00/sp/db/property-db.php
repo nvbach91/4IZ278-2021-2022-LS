@@ -50,6 +50,21 @@ class PropertyDB extends DB
         return $statement->fetchAll();
     }
 
+    public function fetchCount()
+    {
+        $statement = $this->pdo->query("SELECT COUNT(property_id) FROM $this->tableName");
+        return $statement->fetchColumn();
+    }
+
+    public function fetchPagination($limit, $offset)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM $this->tableName WHERE property_id > 0 ORDER BY property_id ASC LIMIT ? OFFSET ?");
+        $statement->bindParam(1, $limit, PDO::PARAM_INT);
+        $statement->bindParam(2, $offset, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
     public function insert($userId, $category, $description, $price, $owner, $phone, $email, $photo, $address)
     {
         $statement = $this->pdo->prepare("INSERT INTO

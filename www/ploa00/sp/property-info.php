@@ -1,4 +1,5 @@
 <?php
+
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 $pageName = 'BookInPrague | Property Information';
@@ -37,6 +38,22 @@ $favouritesDB = new FavouritesDB();
 require_once __DIR__ . '/db/comments-db.php';
 $commentsDB = new CommentsDB();
 $comments = $commentsDB->fetchAll();
+$commentCount = 0;
+$ratings = [];
+$ratingsSum = 0;
+
+
+foreach ($comments as $comment) {
+  if ($property['property_id'] === $comment['fk_property_id']) {
+
+    $ratings[] = $comment['rating'];
+    $commentCount = $commentCount + 1;
+  }
+}
+
+$ratingsSum = array_sum($ratings);
+$average = $ratingsSum / $commentCount;
+$formattedAverage = number_format((float)$average, 2, '.', '');
 
 if (isset($_POST['favourites-button'])) {
   $favouritesDB->insert($user['user_id'], $property['property_id']);
@@ -59,6 +76,7 @@ if (isset($_POST['delete-button'])) {
         <?php if (isset($owner['name'])) : ?>
           <div>Majitel:
             <p class="single-item"><?php echo $owner['name'] ?></p>
+
           </div>
         <?php endif ?>
         <?php if (isset($property['description'])) : ?>
@@ -86,6 +104,9 @@ if (isset($_POST['delete-button'])) {
             <p class="single-item"><?php echo $property['address'] ?></p>
           </div>
         <?php endif ?>
+        <div>Průměr hodnocení:
+          <p class="single-item"><?php echo  $formattedAverage; ?></p>
+        </div>
       </div>
       <div class="col">
         <img src="<?php echo isset($property['photo']) ? $property['photo']
@@ -103,12 +124,12 @@ if (isset($_POST['delete-button'])) {
         <button class="btn btn-primary ms-3" type="submit" name="delete-button">Smazát nabídku</button>
       </form>
     <?php endif ?>
-      <?php if (isset($user)) : ?>
-        <form method="POST">
-          <button class="btn btn-primary m-3" type="submit" name="favourites-button">Přidát do zajímavých</button>
-          <a href="comment-form.php" class="btn btn-primary m-3">Přidat kommentář</a>
-        </form>
-      <?php endif ?>
+    <?php if (isset($user)) : ?>
+      <form method="POST">
+        <button class="btn btn-primary m-3" type="submit" name="favourites-button">Přidát do zajímavých</button>
+        <a href="comment-form.php" class="btn btn-primary m-3">Přidat kommentář</a>
+      </form>
+    <?php endif ?>
     <a href="property-list.php" class="btn btn-primary m-3">Zpatky</a>
     <?php if (!empty($comments)) : ?>
       <?php require __DIR__ . '/comments.php' ?>
