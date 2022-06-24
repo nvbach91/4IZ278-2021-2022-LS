@@ -1,0 +1,67 @@
+{block #title}
+    Výsledky hlasování
+{/block}
+{block #content}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h1>{$poll->getTitle()}</h1>
+                <div>
+                    {$poll->getDescription()}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">Stav hlasování</div>
+            <div class="card-body">
+                {var $resultStatus = $result['result']}
+                <h2>{$resultStatus['completed'] ? 'Odhlasováno' : 'Neodhlasováno'}</h2>
+                <h3 n:if="isset($resultStatus['winner'])">{$resultStatus['winner']}</h3>
+                <h3>{isset($resultStatus['withNumberOfVotes']) ? $resultStatus['withNumberOfVotes'] : '?'}/{$result['totalShares']}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">Jednotlivé hlasy</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Vlastník</th>
+                            <th>Podíl</th>
+                            <th>Hlas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr n:foreach="$result['voters'] as $voter">
+                            <td>{$voter['fullName']}</td>
+                            <td>{$voter['totalShares']}</td>
+                            <td>
+                                {var $votes = $voter['votes']}
+                                {if $poll->getType() === App\Model\Database\Entity\PollEntity::TYPE_FREETYPE}
+                                    {$votes[0]}
+                                {elseif $poll->getType() === App\Model\Database\Entity\PollEntity::TYPE_MULTISELECT}
+                                    <ul>
+                                        <li n:foreach="$votes as $vote">
+                                            {$vote}
+                                        </li>
+                                    </ul>
+                                {else}
+                                    {$votes[0]}
+                                {/if}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

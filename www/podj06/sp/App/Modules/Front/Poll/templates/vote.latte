@@ -1,0 +1,25 @@
+{block #title}
+Hlasovat
+{/block}
+{block #content}
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h1>{$poll->getTitle()}</h1>
+                <div>
+                    {$poll->getDescription()}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="card">
+            <div class="card-header">Vaše hlasování</div>
+            <div class="card-body">
+                <h2>Váš počet hlasů: {$userShares}/{$totalVoteShares}</h2>
+                {control voteForm}
+            </div>
+        </div>
+    </div>
+</div>

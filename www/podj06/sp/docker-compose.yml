@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./:/var/www/html/
+      - ./.docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./.docker/nginx/sites/:/etc/nginx/sites-available
+      - ./.docker/nginx/conf.d/:/etc/nginx/conf.d
+    depends_on:
+      - php
+    ports:
+      - "8000:80"
+      #- "443:443"
+  php:
+    image: thecodingmachine/php:8.0-v4-fpm
+    working_dir: "/var/www/html/"
+    volumes:
+      - ./:/var/www/html/
+    depends_on:
+      - database
+    environment:
+      NETTE_DEBUG: 1
+      NETTE_ENV: "dev"
+      PHP_EXTENSION_XDEBUG: 1
+      PHP_EXTENSION_PGSQL: 1
+      PHP_EXTENSION_PDO_PGSQL: 1
+      PHP_EXTENSION_MYSQLI: 0
+      PHP_EXTENSION_GD: 1
+      PHP_EXTENSION_INTL: 1
+      PHP_INI_XDEBUG__MODE: develop,debug
+      PHP_INI_XDEBUG__START_WITH_REQUEST: yes
+#      STARTUP_COMMAND_1: composer install
+#      STARTUP_COMMAND_2: NETTE_DEBUG=1 php bin/console migrations:migrate --no-interaction --allow-no-migration
+#      STARTUP_COMMAND_3: NETTE_DEBUG=1 php bin/console doctrine:fixtures:load --no-interaction
+  database:
+    image: dockette/postgres:10
+    environment:
+      - POSTGRES_PASSWORD=webapp
+      - POSTGRES_USER=webapp
+      - POSTGRES_DB=webapp
+    volumes:
+      - database-volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  database-volume:

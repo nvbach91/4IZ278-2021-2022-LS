@@ -1,0 +1,13 @@
+# Nette
+config/local.neon
+
+# Composer
+vendor
+
+# NodeJS
+node_modules
+
+# Assets
+www/dist
+
+.idea

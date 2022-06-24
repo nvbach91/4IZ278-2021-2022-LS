@@ -1,0 +1,61 @@
+{block #title}
+Detail jednotky
+{/block}
+{block #content}
+<h1>Detail jednotky</h1>
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="card">
+            <div class="card-header">
+                Základní informace
+            </div>
+            <div class="card-body">
+                <div class="py-1 fs-6">
+                    <div class="fw-bolder">Číslo jednotky</div>
+                    <div class="text-secondary">{$unit->getNumber()}</div>
+
+                    <div class="fw-bolder mt-3">Podlaží</div>
+                    <div class="text-secondary">{$unit->getFloor()}</div>
+
+                    <div class="fw-bolder mt-3">Plocha</div>
+                    <div class="text-secondary">{$unit->getArea()} m²</div>
+
+                    <div class="fw-bolder mt-3">Počet hlasovacích práv</div>
+                    {var $percentage = ($unit->getVotesShare()/$totalVoteShares) * 100}
+                    <div class="text-secondary">{$unit->getVotesShare()}/{$totalVoteShares} ({$percentage|number:2, ',', ''}%)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Hodnoty měření od poskytovatelů energií
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Společnost</th>
+                            <th>Datum a čas měření</th>
+                            <th>Typ</th>
+                            <th>Hodnota</th>
+                            <th>Číslo měřáku</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr n:foreach="$unit->getExternalMeasurements() as $measurement">
+                            <td>{$measurement->getCompany()}</td>
+                            <td>{$measurement->getMeasuredAt()|date:'d.m.Y'}</td>
+                            <td>{App\Model\Database\Entity\ExternalMeasurementEntity::translateType($measurement->getType())}</td>
+                            <td>{$measurement->getValue()} {$measurement->getUnit()}</td>
+                            <td>{$measurement->getSensorSN() ?? '-'}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
